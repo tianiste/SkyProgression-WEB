@@ -217,10 +217,13 @@ browser -> api.skyprogression.dev (Worker: name to UUID, caching, rate limits)
      other methods say no confirmed tree yet. The API does not say which ability is selected or which Loadouts tree is
      active; each tree can be picked.
    - The 3D model: skin from Mojang's session server (through the relay, cached an hour; Steve when unreadable), loaded
-     through the Worker's `/texture/` proxy. Armor is painted onto the skin's outer layer: dyed leather in its API
-     colour, player-head helmets with their head texture, chainmail, iron, gold and diamond in a material colour.
-     FurfSky Reborn armor textures are not applied yet (the 1.9.2 pack is not in the repository; its CIT armor rules
-     still have to be imported). skinview3d and three.js (517 KB, about 130 KB compressed) load only when the model is
+     through the Worker's `/texture/` proxy. Armor is drawn on the skin's outer layer (slightly larger than the body,
+     close to the game's armor): FurfSky Reborn's armor texture when the pack has one for the item (513 items, 308
+     textures in `public/armor/`, imported by `scripts/import-armor.mjs` from the pack's Firmament armor model files),
+     else player-head helmets with their head texture, dyed leather in its API colour, chainmail, iron, gold and
+     diamond in a material colour. Variants the pack picks by lore (such as Adaptive's class) and its one tinted set use
+     the set's base texture. The outer layer is thinner than real armor, and the left limbs mirror the right ones, as
+     in the game. skinview3d and three.js (517 KB, about 130 KB compressed) load only when the model is
      shown: on screen and idle, or on "Show in 3D" with reduced motion; without WebGL a flat front view stays.
    - **3D player model in their gear.** The player pages show the looked-up player's skin as a rotatable 3D model
      (skinview3d, MIT) wearing their armor: dyed leather from the API colour, player-head helmets from their skull

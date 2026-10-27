@@ -5,9 +5,11 @@ their own terms.
 
 ## FurfSky Reborn textures
 
-Files: `public/icons/items/*.png`, `public/icons/hotm/*.png`
+Files: `public/icons/items/*.png`, `public/icons/hotm/*.png`, `public/armor/*.png` (armor layers for the 3D player
+model; `public/armor/map.json` lists which SkyBlock items use them, taken from the pack's armor model files by
+`scripts/import-armor.mjs`)
 
-Item textures by the FurfSky Reborn team, used with permission (granted to the SkyProgression project on 2026-10-27).
+Item and armor textures by the FurfSky Reborn team, used with permission (granted to the SkyProgression project on 2026-10-27).
 Taken from the FurfSky Reborn resource pack, version 1.9.2 "New Leaf"
 (<https://modrinth.com/resourcepack/furfsky-reborn>, Modrinth version `8DzcDe5O`). The pack's credits read: art and pack
 compilation by the Reborn Team; other contributors are listed at <https://furfsky.net>.

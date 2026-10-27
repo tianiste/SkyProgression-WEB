@@ -1,8 +1,9 @@
 /**
  * Builds the texture for the 3D player model: the player's skin with the worn armor painted onto the skin's outer layer
- * (hat, jacket, sleeves, trousers), which skinview3d draws slightly larger than the body, like armor. Player-head helmets
- * use the head texture; dyed leather uses the API colour; other armor gets its material colour. Also draws the flat
- * front view used when WebGL is unavailable or motion is reduced.
+ * (hat, jacket, sleeves, trousers), which skinview3d draws slightly larger than the body, like armor. Pieces with a
+ * FurfSky Reborn armor texture use it (Minecraft's 64x32 armor layers); player-head helmets use the head texture; dyed
+ * leather uses the API colour; other armor gets its material colour. Also draws the flat front view used when WebGL is
+ * unavailable or motion is reduced.
  */
 import type { ArmorPiece } from "./player";
 
@@ -85,37 +86,81 @@ function clear(g: CanvasRenderingContext2D, box: Box) {
   g.clearRect(u, v, 2 * (d + w), d + h);
 }
 
+/** Loaded armor layers of one piece: layer 1 (helmet, chestplate, boots) or layer 2 (leggings). */
+export interface ArmorTexture { layer1?: HTMLImageElement; layer2?: HTMLImageElement }
+
+/** Copies a region, mirrored left to right when flip is set (the game mirrors the right limb's texture for the left). */
+function copy(g: CanvasRenderingContext2D, img: CanvasImageSource, sx: number, sy: number, w: number, h: number, tx: number, ty: number, flip = false) {
+  if (!flip) { g.drawImage(img, sx, sy, w, h, tx, ty, w, h); return; }
+  g.save();
+  g.translate(tx + w, ty);
+  g.scale(-1, 1);
+  g.drawImage(img, sx, sy, w, h, 0, 0, w, h);
+  g.restore();
+}
+
 /**
- * The skin with armor on its outer layer. heads: loaded player-head textures by hash. Pieces without a known look
- * (no material, no head texture) are left off rather than guessed.
+ * Draws a 64x32 armor layer onto the outer layer. Armor layers use the old skin layout: head (0,0), right leg (0,16),
+ * body (16,16), right arm (40,16); the left limbs mirror the right ones.
  */
-export function compose(skin: HTMLImageElement | null, armor: ArmorPiece[], heads: Map<string, HTMLImageElement>): HTMLCanvasElement {
+function layer(g: CanvasRenderingContext2D, img: HTMLImageElement, part: "head" | "body" | "arms" | "legs") {
+  if (part === "head") copy(g, img, 0, 0, 32, 16, 32, 0);
+  if (part === "body") copy(g, img, 16, 16, 24, 16, 16, 32);
+  if (part === "arms") { copy(g, img, 40, 16, 16, 16, 40, 32); copy(g, img, 40, 16, 16, 16, 48, 48, true); }
+  if (part === "legs") { copy(g, img, 0, 16, 16, 16, 0, 32); copy(g, img, 0, 16, 16, 16, 0, 48, true); }
+}
+
+/**
+ * The skin with armor on its outer layer. heads: loaded player-head textures by hash; textures: FurfSky armor layers
+ * by item ID. Pieces without a known look (no texture, no material) are left off rather than guessed.
+ */
+export function compose(skin: HTMLImageElement | null, armor: ArmorPiece[], heads: Map<string, HTMLImageElement>,
+                        textures = new Map<string, ArmorTexture>()): HTMLCanvasElement {
   const c = normalized(skin);
   const g = c.getContext("2d")!;
   const color = (p: ArmorPiece) => (p.material === "leather" ? p.color ?? MATERIAL.leather : p.material ? MATERIAL[p.material] : undefined);
-  for (const p of armor) {
-    if (p.slot === "helmet") {
-      const head = p.texture ? heads.get(p.texture) : undefined;
-      if (head) {
-        // A player head: its head and hat drawn as the helmet.
-        clear(g, HAT);
-        g.drawImage(head, 0, 0, 32, 16, 32, 0, 32, 16);
-        g.drawImage(head, 32, 0, 32, 16, 32, 0, 32, 16);
-      } else if (color(p)) {
-        clear(g, HAT);
-        paint(g, HAT, color(p)!, undefined, p.material === "chainmail");
-      }
-    } else if (p.slot === "chestplate" && color(p)) {
-      for (const b of [JACKET, RIGHT_SLEEVE, LEFT_SLEEVE]) { clear(g, b); paint(g, b, color(p)!, undefined, p.material === "chainmail"); }
-    } else if (p.slot === "leggings" && color(p)) {
-      for (const b of [RIGHT_PANTS, LEFT_PANTS]) { clear(g, b); paint(g, b, color(p)!, [0, 9], p.material === "chainmail"); }
+  const slot = (name: ArmorPiece["slot"]) => armor.find((p) => p.slot === name);
+  const chain = (p: ArmorPiece) => p.material === "chainmail";
+  // Each worn piece replaces the skin's outer layer where it sits, in the order the game layers armor.
+  const legs = slot("leggings"), boots = slot("boots"), chest = slot("chestplate"), helmet = slot("helmet");
+  if (legs || boots) for (const b of [RIGHT_PANTS, LEFT_PANTS]) clear(g, b);
+  if (legs || chest) clear(g, JACKET);
+  if (chest) for (const b of [RIGHT_SLEEVE, LEFT_SLEEVE]) clear(g, b);
+  if (legs) {
+    const t = textures.get(legs.id)?.layer2;
+    if (t) { layer(g, t, "legs"); layer(g, t, "body"); }
+    else if (color(legs)) {
+      for (const b of [RIGHT_PANTS, LEFT_PANTS]) paint(g, b, color(legs)!, [0, 9], chain(legs));
       // The waistband sits on the bottom of the jacket.
-      paint(g, JACKET, color(p)!, [9, 12]);
+      paint(g, JACKET, color(legs)!, [9, 12]);
     }
   }
-  // Boots last, over the bottom of the trousers.
-  const boots = armor.find((p) => p.slot === "boots");
-  if (boots && color(boots)) for (const b of [RIGHT_PANTS, LEFT_PANTS]) paint(g, b, color(boots)!, [8, 12], boots.material === "chainmail");
+  if (boots) {
+    const t = textures.get(boots.id)?.layer1;
+    if (t) layer(g, t, "legs");
+    else if (color(boots)) for (const b of [RIGHT_PANTS, LEFT_PANTS]) paint(g, b, color(boots)!, [8, 12], chain(boots));
+  }
+  if (chest) {
+    const t = textures.get(chest.id)?.layer1;
+    if (t) { layer(g, t, "body"); layer(g, t, "arms"); }
+    else if (color(chest)) for (const b of [JACKET, RIGHT_SLEEVE, LEFT_SLEEVE]) paint(g, b, color(chest)!, undefined, chain(chest));
+  }
+  if (helmet) {
+    const head = helmet.texture ? heads.get(helmet.texture) : undefined;
+    const t = textures.get(helmet.id)?.layer1;
+    if (head) {
+      // A player head: its head and hat drawn as the helmet.
+      clear(g, HAT);
+      g.drawImage(head, 0, 0, 32, 16, 32, 0, 32, 16);
+      g.drawImage(head, 32, 0, 32, 16, 32, 0, 32, 16);
+    } else if (t) {
+      clear(g, HAT);
+      layer(g, t, "head");
+    } else if (color(helmet)) {
+      clear(g, HAT);
+      paint(g, HAT, color(helmet)!, undefined, chain(helmet));
+    }
+  }
   return c;
 }
 

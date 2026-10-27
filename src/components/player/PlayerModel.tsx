@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import { SITE } from "../../config";
-import { compose, frontView, loadImage } from "../../lib/skin";
+import { compose, frontView, loadImage, type ArmorTexture } from "../../lib/skin";
 import type { Common } from "../../lib/player";
 
 /** Minecraft's default Steve skin, for players whose skin could not be read. */
@@ -44,7 +44,19 @@ export function PlayerModel({ data }: { data: Common }) {
           if (img) heads.set(a.texture, img);
         }
       }
-      if (live) setTex(compose(skin, data.model.armor, heads));
+      // FurfSky Reborn armor textures by item ID ("name", or "name:1" when the set has one layer); see scripts/import-armor.mjs.
+      const textures = new Map<string, ArmorTexture>();
+      const map = data.model.armor.length === 0 ? {} : await fetch("/armor/map.json").then((r) => (r.ok ? (r.json() as Promise<Record<string, string>>) : {})).catch(() => ({}));
+      for (const a of data.model.armor) {
+        const entry = (map as Record<string, string>)[a.id];
+        if (!entry) continue;
+        const [name, only] = entry.split(":");
+        const n = a.slot === "leggings" ? 2 : 1;
+        if (only && Number(only) !== n) continue;
+        const img = await loadImage(`/armor/${name}_layer_${n}.png`).catch(() => null);
+        if (img) textures.set(a.id, n === 2 ? { layer2: img } : { layer1: img });
+      }
+      if (live) setTex(compose(skin, data.model.armor, heads, textures));
     })();
     return () => { live = false; };
   }, [key]);
@@ -120,7 +132,7 @@ export function PlayerModel({ data }: { data: Common }) {
             {spin ? "Stop turning" : "Turn"}
           </button>
         )}
-        <p class="muted small">{mode === "3d" ? "Drag to turn. " : ""}Armor is drawn in its material colour, leather in its dye colour, player-head helmets with their head.</p>
+        <p class="muted small">{mode === "3d" ? "Drag to turn. " : ""}Armor textures by the FurfSky Reborn team; pieces without one are drawn in their material or dye colour.</p>
       </figcaption>
     </figure>
   );
