@@ -84,19 +84,20 @@ const current = (href: string, match?: string) => {
     <footer class="site-footer">
       <div class="inner">
         <p>
-          Guides are written by the Mining Cult community and published here with the authors' permission. See
-          <a href="/about/">About</a> for every author and source.
+          Guides by the Mining Cult community, credited on each guide. <a href="/about/#credits">Credits and licenses</a>.
         </p>
         <p>
-          SkyProgression is a fan project. It is not affiliated with Hypixel or Mojang. Get the mod on
-          <a href={SITE.modrinth}>Modrinth</a> or <a href={SITE.github}>GitHub</a>.
-          Site source on <a href={SITE.webGithub}>GitHub</a>, MIT License.
+          Item textures by the <a href={SITE.furfsky}>FurfSky Reborn team</a>, used with permission. Other textures © Hypixel
+          Inc. and © Mojang Studios.
         </p>
         <p>
-          Item textures by the <a href={SITE.furfsky}>FurfSky Reborn team</a>, used with permission. Other item textures
-          © Hypixel Inc., from the Hypixel SkyBlock Resource Pack and Hypixel's public API, used under Hypixel's license.
-          Block textures © Mojang Studios. Not an official Minecraft product; not approved by or associated with Mojang or
+          Not affiliated with Hypixel. Not an official Minecraft product; not approved by or associated with Mojang or
           Microsoft.
+        </p>
+        <p class="links">
+          <a href={SITE.modrinth}>Mod on Modrinth</a>
+          <a href={SITE.github}>Mod source</a>
+          <a href={SITE.webGithub}>Site source (MIT)</a>
         </p>
       </div>
     </footer>
@@ -228,9 +229,17 @@ const current = (href: string, match?: string) => {
   .site-footer .inner {
     max-width: var(--page);
     margin: 0 auto;
-    padding: 1.5rem 16px 2rem;
+    padding: 1.25rem 16px 1.5rem;
+    line-height: 1.5;
   }
   .site-footer p {
-    max-width: 52rem;
+    max-width: none;
+    margin: 0 0 0.25rem;
+  }
+  .site-footer .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    margin-top: 0.75rem;
   }
 </style>

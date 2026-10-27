@@ -57,28 +57,46 @@ const people = [...credits.entries()]
     format described by the <a href="/schema/guide.json">guide schema</a>.
   </p>
 
-  <h2>License</h2>
+  <h2 id="credits">Credits and licenses</h2>
   <p>
     The site's code is under the MIT License; the source is on <a href={SITE.webGithub}>GitHub</a>. Guide text belongs to
-    its authors. The SkyProgression logo, the stat symbols and the fallback icons are the project's own pixel art.
-    Headings use Pixelify Sans under the SIL Open Font License.
+    its authors. The SkyProgression logo, the stat symbols and the fallback icons are the project's own pixel art. None
+    of the textures below are covered by the MIT License.
   </p>
+  <dl class="sources">
+    <div>
+      <dt>Item textures</dt>
+      <dd>
+        By the <a href={SITE.furfsky}>FurfSky Reborn team</a>, used with permission. From the
+        <a href={SITE.furfskyModrinth}>FurfSky Reborn resource pack</a>, version 1.9.2.
+      </dd>
+    </div>
+    <div>
+      <dt>Hypixel's own art</dt>
+      <dd>
+        Items FurfSky Reborn does not retexture use textures from the official
+        <a href="https://hypixel.net/threads/hypixel-skyblock-0-26-skyblock-resource-pack-loadouts-security-quest-and-more.6117801/">Hypixel SkyBlock Resource Pack</a>
+        and item and pet heads from Hypixel's API. © Hypixel Inc., used under the pack's license. Heads are drawn as small
+        cubes the way <a href="https://github.com/SkyCryptWebsite/SkyCrypt">SkyCrypt</a> draws them, with pet skins found
+        through SkyCrypt's MIT-licensed pet table.
+      </dd>
+    </div>
+    <div>
+      <dt>Block textures</dt>
+      <dd>
+        Plain blocks and materials (Coal, Cobblestone, End Stone, Obsidian and similar) use Minecraft's own textures,
+        © Mojang Studios, following Minecraft's usage guidelines.
+      </dd>
+    </div>
+    <div>
+      <dt>Font</dt>
+      <dd>Headings use Pixelify Sans under the SIL Open Font License.</dd>
+    </div>
+  </dl>
   <p>
-    Item textures by the <a href={SITE.furfsky}>FurfSky Reborn team</a>, used with permission. They come from the
-    <a href={SITE.furfskyModrinth}>FurfSky Reborn resource pack</a> (version 1.9.2) and are not covered by the site's
-    MIT License.
+    SkyProgression is a free fan project. It is not affiliated with or endorsed by Hypixel. It is not an official
+    Minecraft product and is not approved by or associated with Mojang or Microsoft.
   </p>
-  <p>
-    A few items FurfSky Reborn does not retexture use Hypixel's own art instead: textures from the official
-    <a href="https://hypixel.net/threads/hypixel-skyblock-0-26-skyblock-resource-pack-loadouts-security-quest-and-more.6117801/">Hypixel SkyBlock Resource Pack</a>
-    and item and pet heads (drawn as small cubes the way <a href="https://github.com/SkyCryptWebsite/SkyCrypt">SkyCrypt</a>
-    draws them, with pet skins found through SkyCrypt's MIT-licensed pet table). They are © Hypixel Inc., used under the pack's license, and
-    are not covered by the site's MIT License. Plain blocks and materials (Coal, Cobblestone, End Stone, Obsidian and
-    similar) use Minecraft's own textures, © Mojang Studios, following Minecraft's usage guidelines. Anything without a
-    texture shows one of our own icons.
-  </p>
-  <p>SkyProgression is not an official Minecraft product and is not approved by or associated with Mojang or Microsoft.</p>
-  <p>SkyProgression is not affiliated with Hypixel or Mojang.</p>
 
   <h2>Privacy</h2>
   <p>
@@ -98,5 +116,19 @@ const people = [...credits.entries()]
     padding: 0.55rem 0;
     border-top: 1px solid var(--line);
     display: grid;
+  }
+  .sources {
+    max-width: var(--measure);
+    margin: 0 0 1rem;
+  }
+  .sources > div {
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .sources dt {
+    font-weight: 650;
+  }
+  .sources dd {
+    margin: 0.15rem 0 0;
   }
 </style>
