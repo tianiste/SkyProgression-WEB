@@ -27,7 +27,7 @@ export default function OverviewPage() {
                   <p class="big-number">
                     <strong>{d.rate.lowerBound ? "≥ " : ""}{num(d.rate.perHour, d.rate.perHour < 100 ? 2 : 0)}</strong> {d.rate.unit} per hour
                   </p>
-                  <p>{d.rate.coinsPerHour === null ? <span class="muted">Coins per hour unknown: no price for {d.rate.unit}.</span> : <>About <strong class="coins">{coins(d.rate.coinsPerHour)}</strong> coins per hour at {num(d.rate.coinsEach, 0)} each.</>}</p>
+                  <p>{d.rate.coinsPerHour === null ? <span class="muted">Coins per hour unknown: no price for {d.rate.unit}.</span> : <>About <strong class="coins">{coins(d.rate.coinsPerHour)}</strong> coins per hour at {num(d.rate.coinsEach, (d.rate.coinsEach ?? 0) >= 100 ? 0 : 2)} each.</>}</p>
                   <p class="muted small">{num(d.efficiency)}% efficiency, {d.rate.model}. {d.rate.window[0]?.toUpperCase()}{d.rate.window.slice(1)}. <a href={pageUrl({ ...q, view: "methods" })}>Rate details</a></p>
                 </>
               )}

@@ -490,3 +490,32 @@
 .step-total {
   margin: -0.35rem 0 0.4rem calc(24px + 0.75rem);
 }
+.sources li.current > span:first-child,
+.table tr.current td:first-child {
+  color: var(--gold);
+  font-weight: 650;
+}
+.table.compact {
+  font-size: var(--step--1);
+}
+.pieces {
+  list-style: none;
+  margin: 0.75rem 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+.pieces li {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--line);
+}
+.pieces li.fetch {
+  border-left-color: var(--accent);
+}
+.pieces li > span {
+  display: grid;
+  min-width: 0;
+}
