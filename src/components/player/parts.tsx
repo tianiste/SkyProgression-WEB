@@ -62,7 +62,7 @@ export function UpgradeLine({ u, rank, unit, focus }: { u: Upgrade; rank?: numbe
       <summary>
         <ItemIcon id={icon.startsWith("profile:") ? undefined : icon} />
         <span class="upgrade-name">
-          {rank !== undefined && <span class="muted">{rank}. </span>}{u.item.name}
+          <span>{rank !== undefined && <span class="muted">{rank}. </span>}{u.item.name}</span>
           <span class="muted small">{sub}</span>
         </span>
         <span class="upgrade-gain">{focus ?? `+${num(u.gain)}%`}</span>

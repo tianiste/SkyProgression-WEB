@@ -483,3 +483,10 @@
   width: 16px;
   height: 16px;
 }
+.gain,
+.notes .owned {
+  color: var(--xp);
+}
+.step-total {
+  margin: -0.35rem 0 0.4rem calc(24px + 0.75rem);
+}
