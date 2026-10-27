@@ -345,3 +345,141 @@
   display: grid;
   min-width: 0;
 }
+
+/* Filters (same look as the guide list's category chips). */
+.player .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1rem;
+}
+.player .chips button {
+  font: inherit;
+  font-size: var(--step--1);
+  min-height: 2.25rem;
+  padding: 0.3rem 0.8rem;
+  color: var(--text);
+  background: transparent;
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.player .chips button[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--surface);
+}
+.player .chips button:hover {
+  border-color: var(--accent);
+}
+.grid-2 + .chips {
+  margin-top: 1.5rem;
+}
+
+/* Gear: one card per stat, the bar split by where the total comes from. */
+.ledgers {
+  display: grid;
+  gap: 1.25rem;
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .ledgers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.stat-card.relevant {
+  border-top: 3px solid var(--gold);
+}
+.stat-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0 1rem;
+}
+.stat-head h3 {
+  margin: 0;
+  font-size: var(--step-1);
+}
+.stat-head p {
+  margin: 0;
+}
+.split {
+  display: flex;
+  height: 12px;
+  margin: 0.5rem 0 0.6rem;
+  background: var(--slot-bg);
+  box-shadow: inset 1px 1px 0 var(--slot-dark);
+  overflow: hidden;
+}
+.split > span {
+  display: block;
+  height: 100%;
+}
+.b-gear {
+  background: var(--gold);
+}
+.b-hotm {
+  background: var(--accent);
+}
+.b-skill {
+  background: var(--xp);
+}
+.b-pet {
+  background: var(--stat-purple);
+}
+.b-other {
+  background: var(--stone);
+}
+.legend {
+  list-style: none;
+  margin: 0.5rem 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.swatch,
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  flex: none;
+}
+.dot {
+  width: 6px;
+  height: 6px;
+  margin: 0 0.45rem 0.15rem 0;
+  vertical-align: middle;
+}
+.warn {
+  color: var(--core);
+}
+.num.maxed {
+  color: var(--xp);
+}
+.hidden-sources {
+  border-top: 1px solid var(--line);
+  padding: 0.4rem 0 0.2rem;
+}
+.hidden-sources > summary {
+  cursor: pointer;
+  color: var(--muted);
+  min-height: 1.75rem;
+}
+.hidden-sources .state-missing > span:first-child {
+  color: var(--muted);
+}
+.notes {
+  margin: 0.25rem 0 0.5rem;
+  padding-left: 1.1rem;
+}
+.player .slot:empty::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+}
