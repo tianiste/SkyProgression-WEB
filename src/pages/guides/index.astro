@@ -12,12 +12,33 @@ const used = CATEGORIES.filter((c) => guides.some((g) => g.data.category === c.i
 <Base title="Guides" description="Every mining guide on SkyProgression, grouped by what you mine.">
   <h1>Guides</h1>
   <p class="lead">Pick what you want to mine. Each guide lists gear for a budget and a max setup, the HOTM tree, attributes and how to mine.</p>
+  <p class="picking" id="picking" hidden></p>
   <div class="seam" aria-hidden="true"></div>
   <CategoryFilter client:idle categories={used} />
   <GuideList />
+  <script>
+    // From the home page lookup: open each guide checked for that player.
+    const player = new URLSearchParams(location.search).get("player")?.trim() ?? "";
+    if (/^[A-Za-z0-9_]{1,16}$/.test(player)) {
+      document.querySelectorAll<HTMLAnchorElement>('a[href^="/guides/"]').forEach((a) => {
+        const url = new URL(a.href);
+        if (url.pathname !== "/guides/" && !url.pathname.endsWith(".json")) {
+          url.searchParams.set("player", player);
+          a.href = url.toString();
+        }
+      });
+      const note = document.getElementById("picking")!;
+      note.textContent = `Pick a guide to see what ${player} already has.`;
+      note.hidden = false;
+    }
+  </script>
 </Base>
 
 <style>
+  .picking {
+    font-weight: 600;
+    color: var(--xp);
+  }
   :global(.chips) {
     display: flex;
     flex-wrap: wrap;

@@ -17,18 +17,19 @@ interface Props {
 }
 
 const { r, attributeNames, rarityOf, showTier = false } = Astro.props;
-const mods = modifiersOf(r);
-const chips: { icon: IconT; text: string }[] = mods
-  .filter((m) => m.kind !== "enchant" && m.kind !== "note")
-  .map((m) => ({ icon: modifierIcon(m), text: modifierText(m) }));
+const mods = modifiersOf(r).map((m, i) => ({ m, i }));
+// data-mod is the modifier's index in the requirement, so player lookup can mark the upgrades still needed.
+const chips: { icon: IconT; text: string; mod?: number }[] = mods
+  .filter(({ m }) => m.kind !== "enchant" && m.kind !== "note")
+  .map(({ m, i }) => ({ icon: modifierIcon(m), text: modifierText(m), mod: i }));
 if (r.kind === "pet" && r.pet.item) chips.push({ icon: itemIcon(r.pet.item), text: itemName(r.pet.item) });
-const enchants = mods.filter((m) => m.kind === "enchant").map(modifierText);
-const notes = mods.filter((m) => m.kind === "note").map(modifierText);
+const enchants = mods.filter(({ m }) => m.kind === "enchant").map(({ m, i }) => ({ text: modifierText(m), mod: i }));
+const notes = mods.filter(({ m }) => m.kind === "note").map(({ m }) => modifierText(m));
 const options = r.kind === "any_of" ? r.options : [];
 ---
 
-<li class="req" data-requirement={r.id}>
-  <span class="box" aria-hidden="true"></span>
+<li class="req" data-requirement={r.id} data-tier={r.tier}>
+  <span class="box" data-box aria-hidden="true"></span>
   <span class="slot"><Icon icon={requirementIcon(r, rarityOf)} size={32} class="main" /></span>
   <div class="body">
     <span class="name">{title(r, attributeNames)}</span>
@@ -37,8 +38,8 @@ const options = r.kind === "any_of" ? r.options : [];
     {
       options.length > 0 && (
         <ul class="chips options" aria-label="Any one of">
-          {options.map((o) => (
-            <li class="chip">
+          {options.map((o, i) => (
+            <li class="chip" data-option={i}>
               <Icon icon={requirementIcon(o, rarityOf)} size={16} />
               {title(o, attributeNames)}
             </li>
@@ -50,7 +51,7 @@ const options = r.kind === "any_of" ? r.options : [];
       chips.length > 0 && (
         <ul class="chips" aria-label="Upgrades">
           {chips.map((c) => (
-            <li class="chip">
+            <li class="chip" data-mod={c.mod}>
               <Icon icon={c.icon} size={16} />
               {c.text}
             </li>
@@ -62,12 +63,13 @@ const options = r.kind === "any_of" ? r.options : [];
       enchants.length > 0 && (
         <p class="enchants">
           <Icon icon={{ kind: "glyph", glyph: "book", color: "var(--stat-purple)" }} size={16} />
-          <span><span class="visually-hidden">Enchantments: </span>{enchants.join(", ")}</span>
+          <span><span class="visually-hidden">Enchantments: </span>{enchants.map((e, i) => <>{i > 0 && ", "}<span data-mod={e.mod}>{e.text}</span></>)}</span>
         </p>
       )
     }
     {notes.length > 0 && <p class="note">{notes.join(". ")}</p>}
     {r.note && <p class="note">{r.note}</p>}
+    <p class="status" data-status hidden></p>
   </div>
 </li>
 
@@ -90,10 +92,7 @@ const options = r.kind === "any_of" ? r.options : [];
     border-top: 0;
   }
   .box {
-    width: 1rem;
-    height: 1rem;
     margin-top: 0.75rem;
-    border: 2px solid var(--muted);
   }
   .body {
     padding-top: 0.45rem;

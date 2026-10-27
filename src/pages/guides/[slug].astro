@@ -6,6 +6,7 @@ import HotmTree from "../../components/HotmTree.astro";
 import Credit from "../../components/Credit.astro";
 import Icon from "../../components/Icon.astro";
 import ModrinthButton from "../../components/ModrinthButton.astro";
+import PlayerLookup from "../../components/islands/PlayerLookup.tsx";
 import { SITE } from "../../config";
 import { categoryIcon, groupIcon, guideIcon, powderIcon, shardIcon, type Icon as IconT } from "../../lib/icons";
 import { CATEGORIES } from "../../lib/categories";
@@ -83,11 +84,9 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
       <div class="seam" aria-hidden="true"></div>
 
       <section class="progress" aria-labelledby="progress-title">
+        <h2 id="progress-title" class="visually-hidden">Check a player</h2>
         <div class="xp" aria-hidden="true"><span></span></div>
-        <p id="progress-title">
-          <strong>0 of {reqs.length} checked.</strong>{" "}
-          <span class="muted">Player lookup will tick off what you already have. Coming soon.</span>
-        </p>
+        <PlayerLookup client:idle guide={guide.id} total={reqs.length} />
       </section>
 
       <details class="toc-mobile">
@@ -136,8 +135,8 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
       <div class="gear-hotm">
         {
           (g.hotm.length > 0 || hotmReqs.length > 0) && (
-            <section id="hotm" class="hotm-col" aria-labelledby="hotm-title">
-              <h2 id="hotm-title">Heart of the Mountain</h2>
+            <section id="hotm" class="hotm-col" aria-labelledby="hotm-title" data-progress-scope>
+              <h2 id="hotm-title">Heart of the Mountain <span class="section-progress" data-progress hidden /></h2>
               {g.hotm.map((h) => (
                 <div class="preset">
                   <p class="preset-name">
@@ -193,26 +192,27 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
           </p>
           {
             gear.map((s) => (
-              <details class="gear-group" open>
+              <details class="gear-group" open data-progress-scope>
                 <summary>
                   <h3 id={`g-${s.id}`} class="with-icon">
                     <span class="slot"><Icon icon={groupIcon(s.id)} size={32} /></span>
                     {s.label}
                     <span class="count">{tierCount(s.budget.length + s.max.length + s.both.length)}</span>
+                    <span class="section-progress" data-progress hidden />
                   </h3>
                 </summary>
                 {(s.budget.length > 0 || s.max.length > 0) && (
                   <div class="tiers">
-                    <div class="tier">
-                      <h4 class="tier-title budget">Budget setup</h4>
+                    <div class="tier" data-progress-scope>
+                      <h4 class="tier-title budget">Budget setup <span class="section-progress" data-progress hidden /></h4>
                       {s.budget.length ? (
                         <ul class="reqs">{s.budget.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>
                       ) : (
                         <p class="muted small">Nothing extra for this tier.</p>
                       )}
                     </div>
-                    <div class="tier">
-                      <h4 class="tier-title max">Max setup</h4>
+                    <div class="tier" data-progress-scope>
+                      <h4 class="tier-title max">Max setup <span class="section-progress" data-progress hidden /></h4>
                       {s.max.length ? (
                         <ul class="reqs">{s.max.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>
                       ) : (
@@ -235,8 +235,8 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
 
       {
         attributeReqs.length > 0 && (
-          <section id="attributes" aria-labelledby="attributes-title">
-            <h2 id="attributes-title">Attributes</h2>
+          <section id="attributes" aria-labelledby="attributes-title" data-progress-scope>
+            <h2 id="attributes-title">Attributes <span class="section-progress" data-progress hidden /></h2>
             <p class="muted">
               Level 10 values. See the <a href="/reference/attributes/">attribute reference</a> for every mining attribute.
             </p>
@@ -253,8 +253,11 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
                 {attributeReqs.map((r) => {
                   const a = r.kind === "attribute" ? attrById.get(r.attribute) : undefined;
                   return (
-                    <tr data-requirement={r.id}>
-                      <td data-label="Attribute"><span class="attr"><Icon icon={shardIcon(a?.rarity)} size={16} /><strong>{a?.name ?? (r.kind === "attribute" ? r.attribute : r.id)}</strong></span></td>
+                    <tr data-requirement={r.id} data-tier={r.tier}>
+                      <td data-label="Attribute">
+                        <span class="attr"><span class="box" data-box aria-hidden="true" /><Icon icon={shardIcon(a?.rarity)} size={16} /><strong>{a?.name ?? (r.kind === "attribute" ? r.attribute : r.id)}</strong></span>
+                        <p class="status" data-status hidden></p>
+                      </td>
                       <td data-label="Shard">{a ? `${a.shard} (${a.rarity})` : "–"}</td>
                       <td data-label="Effect">{a?.effect}{r.note && <span class="muted"> {r.note}</span>}</td>
                       <td data-label="Priority">{r.priority ? PRIORITY[r.priority] : "–"}</td>
@@ -466,6 +469,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
   }
   .progress {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 0.5rem;
     margin: 1.5rem 0 2rem;
     padding: 1rem;

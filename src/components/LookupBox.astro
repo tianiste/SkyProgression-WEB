@@ -1,14 +1,14 @@
 ---
-/** Player lookup. Shown now so people know it is coming; enabled once the checklist API is live. */
+/** Player lookup on the home page: a plain form to the guide list, which carries the name into every guide link. */
 ---
 
-<form class="lookup" aria-describedby="lookup-note" onsubmit="return false">
-  <label for="player">Minecraft name</label>
+<form class="lookup" action="/guides/" method="get" aria-describedby="lookup-note">
+  <label for="player">Check a player's progress</label>
   <div class="row">
-    <input id="player" name="player" type="text" autocomplete="off" spellcheck="false" placeholder="Player name" disabled />
-    <button type="submit" disabled>Check profile</button>
+    <input id="player" name="player" type="text" autocomplete="off" spellcheck="false" placeholder="Minecraft name" maxlength="16" pattern="[A-Za-z0-9_]{1,16}" required />
+    <button type="submit">Pick a guide</button>
   </div>
-  <p id="lookup-note">Coming soon: enter a name to see every guide as that player's to-do list, plus their stats, rates and best upgrades.</p>
+  <p id="lookup-note">Then open a guide: it ticks off the gear, perks and attributes that player already has. Stats, rates and upgrades come later.</p>
 </form>
 
 <style>
@@ -47,13 +47,11 @@
     border: 0;
     border-radius: var(--radius);
   }
-  input:disabled,
-  button:disabled {
-    cursor: not-allowed;
+  button {
+    cursor: pointer;
   }
-  button:disabled {
-    background: var(--surface-2);
-    color: var(--muted);
+  button:hover {
+    background: var(--accent-hover);
   }
   p {
     margin: 0.6rem 0 0;

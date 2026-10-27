@@ -387,3 +387,229 @@ img {
     animation: none !important;
   }
 }
+
+/*
+ * The to-do square in front of every requirement. Player lookup sets data-state on the row; each state has its own
+ * shape as well as colour (filled with a tick, half filled, empty, dashed with a question mark, dotted), and the row's
+ * status line says it in words.
+ */
+.box {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--muted);
+}
+[data-state="owned"] > .box,
+[data-state="owned"] .box[data-box] {
+  background: var(--xp);
+  border-color: var(--xp);
+  box-shadow: inset 0 -3px 0 var(--xp-deep);
+}
+[data-state="owned"] .box[data-box]::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 0;
+  width: 4px;
+  height: 8px;
+  border: solid var(--bg);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+[data-state="partial"] .box[data-box] {
+  border-color: var(--gold);
+  background: linear-gradient(to top, var(--gold) 50%, transparent 50%);
+}
+[data-state="missing"] .box[data-box] {
+  border-color: var(--text);
+}
+[data-state="unknown"] .box[data-box],
+[data-state="manual"] .box[data-box] {
+  border-style: dashed;
+}
+[data-state="unknown"] .box[data-box]::after {
+  content: "?";
+  position: absolute;
+  inset: -2px 0 0;
+  font: 700 0.6875rem/1rem var(--font-text);
+  text-align: center;
+  color: var(--muted);
+}
+[data-state="manual"] .box[data-box] {
+  border-style: dotted;
+  border-color: var(--accent);
+}
+
+/* The lookup's verdict under a requirement. */
+.status {
+  margin: 0.4rem 0 0;
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+.status b {
+  font-weight: 650;
+}
+[data-state="owned"] .status b {
+  color: var(--xp);
+}
+[data-state="partial"] .status b {
+  color: var(--gold);
+}
+[data-state="missing"] .status b {
+  color: var(--text);
+}
+[data-state="manual"] .status b {
+  color: var(--accent);
+}
+/* An upgrade the player's copy still lacks, and the option of an "any of" entry that counted. */
+.chip[data-unmet] {
+  outline: 1px dashed var(--gold);
+  outline-offset: -1px;
+}
+[data-unmet]:not(.chip) {
+  text-decoration: underline dashed var(--gold);
+  text-underline-offset: 3px;
+}
+.chip[data-chosen] {
+  outline: 1px solid var(--xp);
+  outline-offset: -1px;
+}
+
+/* Done count beside a section or tier heading, with a thin XP bar. */
+.section-progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font: 400 var(--step--1) / 1.3 var(--font-text);
+  color: var(--muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.section-progress[hidden] {
+  display: none;
+}
+.section-progress .bar {
+  width: 3rem;
+  height: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+}
+.section-progress .bar span {
+  display: block;
+  height: 100%;
+  background: var(--xp);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .xp span,
+  .section-progress .bar span {
+    transition: width 0.6s steps(12, end);
+  }
+}
+
+/* Player lookup on a guide page (PlayerLookup island). */
+.lookup-island {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.6rem;
+}
+.lookup-island p {
+  margin: 0;
+  font-size: var(--step--1);
+}
+.lookup-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+.lookup-row {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 30rem;
+}
+.lookup-row input,
+.lookup-who select {
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+}
+.lookup-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0.7rem;
+}
+.lookup-row button {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: var(--radius);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.lookup-row button:hover {
+  background: var(--accent-hover);
+}
+.lookup-row button:disabled {
+  background: var(--surface-2);
+  color: var(--muted);
+  cursor: progress;
+}
+.lookup-who {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+.lookup-who select {
+  min-width: 0;
+  max-width: 100%;
+  padding: 0.2rem 0.4rem;
+}
+.link-button {
+  font: inherit;
+  margin-left: auto;
+  padding: 0.2rem 0;
+  color: var(--accent);
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.lookup-counts {
+  font-variant-numeric: tabular-nums;
+}
+.lookup-tiers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+}
+.lookup-age,
+.lookup-hint {
+  color: var(--muted);
+}
+.lookup-hint strong {
+  color: var(--text);
+}
+.lookup-error {
+  padding: 0.5rem 0.7rem;
+  border-left: 3px solid var(--gold);
+  background: var(--surface-2);
+}
+.api-help {
+  display: grid;
+  gap: 0.4rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+}
+/* In a gear group heading the count moves under the title when the row is full (phones). */
+.with-icon:has(.section-progress:not([hidden])) {
+  flex-wrap: wrap;
+  row-gap: 0.25rem;
+}
