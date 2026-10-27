@@ -174,6 +174,7 @@ export default function PlayerLookup({ guide, total }: Props) {
               ) : (
                 <> on {profileLabel(answer.profile)}</>
               )}
+              <a href={`/player/${encodeURIComponent(answer.player ?? name)}/`}>Stats and upgrades</a>
               <button type="button" class="link-button" onClick={clear}>Clear</button>
             </p>
             <p class="lookup-counts">
