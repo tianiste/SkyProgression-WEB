@@ -60,6 +60,14 @@ Files: `public/icons/minecraft/*.png`, taken from the official Minecraft 26.3 cl
 Minecraft Usage Guidelines. SkyProgression is not an official Minecraft product and is not approved by or associated
 with Mojang or Microsoft. These textures are not covered by the MIT License.
 
+## skinview3d and three.js
+
+The player pages' 3D model uses skinview3d 3.4.2 (<https://github.com/bs-community/skinview3d>, MIT License, copyright
+the skinview3d contributors) and three.js 0.156.1 (<https://github.com/mrdoob/three.js>, MIT License, copyright the
+three.js authors), bundled into the site's JavaScript and loaded only when the model is shown. Player skins and
+player-head textures are loaded at view time from Mojang's texture server through the SkyProgression API; they are not
+stored in this repository.
+
 ## Pixelify Sans
 
 File: `public/fonts/pixelify-sans-600.woff2`

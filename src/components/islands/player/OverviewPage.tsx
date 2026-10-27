@@ -1,6 +1,7 @@
 import { Shell, usePlayer } from "../../player/Shell";
 import { ItemIcon } from "../../player/ItemIcon";
 import { Meter, UpgradeLine, MethodChart } from "../../player/parts";
+import { PlayerModel } from "../../player/PlayerModel";
 import { coins, num, pageUrl, type Overview } from "../../../lib/player";
 
 /** The mod's Home tab: the method's stats against what this gear can reach, the rate now, the best next upgrade and coins / hour by method. */
@@ -18,6 +19,10 @@ export default function OverviewPage() {
           </section>
 
           <div class="stack">
+            <section class="panel" aria-labelledby="model-title">
+              <h2 id="model-title" class="visually-hidden">{d.player} in their armor</h2>
+              <PlayerModel data={d} />
+            </section>
             <section class="panel" aria-labelledby="rate-title">
               <h2 id="rate-title">Rate now</h2>
               {d.rate.perHour === null ? (

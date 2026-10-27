@@ -10,4 +10,6 @@ export default defineConfig({
   build: { inlineStylesheets: "always" },
   // Keep source whitespace: compression drops the space between text and a following link on a new line.
   compressHTML: false,
+  // The 3D player model is imported on demand; prebundle it so the dev server serves it on the first request.
+  vite: { optimizeDeps: { include: ["skinview3d"] } },
 });
