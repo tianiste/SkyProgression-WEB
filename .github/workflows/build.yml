@@ -16,3 +16,11 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Lighthouse on a guide page
+        run: |
+          npx astro preview --port 4400 &
+          npx wait-on@8.0.3 -t 60000 http://localhost:4400/
+          url=http://localhost:4400/guides/mineshaft-gemstones/
+          npx -y lighthouse@12.8.2 $url --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless=new --no-sandbox" --output=json --output-path=mobile.json --quiet
+          npx -y lighthouse@12.8.2 $url --preset=desktop --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless=new --no-sandbox" --output=json --output-path=desktop.json --quiet
+          node scripts/lighthouse-check.mjs mobile.json desktop.json
