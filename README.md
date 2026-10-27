@@ -91,7 +91,8 @@ The site is static and hosted on Cloudflare Pages: build command `npm run build`
 
 Item and HOTM textures come from the [FurfSky Reborn](https://furfsky.net) resource pack, used with the FurfSky Reborn
 team's permission. Items FurfSky does not retexture use the official Hypixel SkyBlock Resource Pack (Hypixel API
-`/v2/resources/packs`) or the face of the item's head skin from the Hypixel API, under Hypixel's license. Plain blocks
+`/v2/resources/packs`) or the item's head skin from the Hypixel API, under Hypixel's license; pets use their head
+skins from SkyCrypt's pet table. Heads are drawn as small 3D cubes, as SkyCrypt does. Plain blocks
 and materials use Minecraft's own textures from the official client. Icons are keyed by Hypixel IDs in `src/data/icon-map.json` and `src/data/icons.generated.json`, so
 guide data never names an icon. To add or change icons, edit `icon-map.json` (or add items to a guide), download the
 pack from [Modrinth](https://modrinth.com/resourcepack/furfsky-reborn) and the Hypixel pack from the URL that

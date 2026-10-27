@@ -83,21 +83,58 @@ function copyTexture(src, dest) {
   return size;
 }
 
-/** The 8x8 face of a player head skin: the front of the head with the hat layer drawn over it. */
-function headFace(skin, dest) {
+/**
+ * A player head skin drawn as a small isometric cube (top, front and left side, with the hat layer and simple shading),
+ * the way SkyCrypt draws heads (its renderer builds on Crafatar's). Rendered at 32x32 with 4x4 supersampling.
+ */
+function headIso(skin, dest) {
   const { png } = readPng(skin);
-  const face = new PNG({ width: 8, height: 8 });
-  for (let y = 0; y < 8; y++)
-    for (let x = 0; x < 8; x++) {
-      const o = (y * 8 + x) * 4;
-      const base = ((8 + y) * png.width + 8 + x) * 4;
-      const hat = ((8 + y) * png.width + 40 + x) * 4;
-      const a = png.data[hat + 3] / 255;
-      for (let c = 0; c < 3; c++) face.data[o + c] = Math.round(png.data[hat + c] * a + png.data[base + c] * (1 - a));
-      face.data[o + 3] = 255;
+  const S = 32, L = 15, c = Math.cos(Math.PI / 6), s = 0.5, ox = 16, oy = L + 1, SS = 4;
+  const texel = (tx, ty) => {
+    const i = (Math.min(ty, png.height - 1) * png.width + Math.min(tx, png.width - 1)) * 4;
+    return [png.data[i], png.data[i + 1], png.data[i + 2], png.data[i + 3]];
+  };
+  // Faces: [skin x, skin y] of the 8x8 region, shade, and how a screen point maps to (u, v) in 0..1.
+  const faces = [
+    // Top (y = L): p = O + x(c,s) + z(-c,s) - (0,L)
+    { at: [8, 0], shade: 1, uv: (px, py) => { const a = px / c, b = (py + L) / s; const x = (a + b) / 2, z = (b - a) / 2; return [x / L, z / L]; } },
+    // Front (z = L): p = O + x(c,s) + L(-c,s) - (0,y)
+    { at: [8, 8], shade: 0.86, uv: (px, py) => { const x = px / c + L; const y = x * s + L * s - py; return [x / L, (L - y) / L]; } },
+    // Left side (x = L): p = O + L(c,s) + z(-c,s) - (0,y)
+    { at: [16, 8], shade: 0.7, uv: (px, py) => { const z = L - px / c; const y = L * s + z * s - py; return [(L - z) / L, (L - y) / L]; } },
+  ];
+  const sample = (px, py) => {
+    let out = null;
+    for (const f of faces) {
+      const [u, v] = f.uv(px, py);
+      if (u < 0 || u >= 1 || v < 0 || v >= 1) continue;
+      const tx = f.at[0] + Math.floor(u * 8), ty = f.at[1] + Math.floor(v * 8);
+      const base = texel(tx, ty), hat = texel(tx + 32, ty);
+      const a = hat[3] / 255;
+      const rgb = [0, 1, 2].map((k) => (hat[k] * a + base[k] * (1 - a)) * f.shade);
+      out = [...rgb, 255];
+      if (f !== faces[0]) break;
+      // The top face is drawn under the sides only where a side does not cover the point.
     }
-  writePng(face, dest);
-  return 8;
+    return out;
+  };
+  const img = new PNG({ width: S, height: S });
+  for (let y = 0; y < S; y++)
+    for (let x = 0; x < S; x++) {
+      const acc = [0, 0, 0, 0];
+      for (let sy = 0; sy < SS; sy++)
+        for (let sx = 0; sx < SS; sx++) {
+          const c4 = sample(x + (sx + 0.5) / SS - ox, y + (sy + 0.5) / SS - oy);
+          if (!c4) continue;
+          for (let k = 0; k < 3; k++) acc[k] += c4[k];
+          acc[3] += 1;
+        }
+      const o = (y * S + x) * 4;
+      if (acc[3]) for (let k = 0; k < 3; k++) img.data[o + k] = Math.round(acc[k] / acc[3]);
+      img.data[o + 3] = Math.round((acc[3] / (SS * SS)) * 255);
+    }
+  writePng(img, dest);
+  return S;
 }
 
 // FurfSky Reborn: firmskyblock/models/item/<id>.json per SkyBlock ID.
@@ -149,12 +186,21 @@ for (const item of items.items ?? []) {
   } catch {}
 }
 
+// Pet heads: SkyCrypt's pet table (MIT) lists the head skin of every pet type; pinned to one commit.
+const SKYCRYPT_COMMIT = "48fc9bfb4b774768ef9aee1ff7a1002fd3a254e0";
+const petsSource = await (await fetch(`https://raw.githubusercontent.com/SkyCryptWebsite/SkyCrypt/${SKYCRYPT_COMMIT}/src/constants/pets.js`)).text();
+const petHead = (type) => {
+  const at = petsSource.indexOf(`\n  ${type}: {`);
+  const m = at < 0 ? null : /\/head\/([0-9a-f]+)/.exec(petsSource.slice(at, at + 2000));
+  return m ? `https://textures.minecraft.net/texture/${m[1]}` : null;
+};
+
 fs.rmSync(outDir, { recursive: true, force: true });
 const manifest = {
   sources: {
     furfsky: "FurfSky Reborn v1.9.2 (Modrinth version 8DzcDe5O)",
     hypixel: "Hypixel SkyBlock Resource Pack (Hypixel API /v2/resources/packs)",
-    head: "Player head skins from the Hypixel API items resource (/v2/resources/skyblock/items)",
+    head: "Player head skins from the Hypixel API items resource (/v2/resources/skyblock/items); pet heads from SkyCrypt's pet table",
     minecraft: "Minecraft 26.3 client textures",
   },
   items: {},
@@ -180,14 +226,14 @@ for (const id of wantedItems()) {
     const source = furf ? "furfsky" : "hypixel";
     const file = `${source === "furfsky" ? "items" : "hypixel"}/${name}`;
     manifest.items[id] = { file, size: copyTexture(furf ?? hyp, path.join(outDir, file)), source };
-  } else if (skins.has(id)) {
+  } else if (skins.has(id) || petHead(id)) {
     const file = `heads/${name}`;
-    const res = await fetch(skins.get(id));
+    const res = await fetch(skins.get(id) ?? petHead(id));
     if (!res.ok) {
       missing.push(id);
       continue;
     }
-    manifest.items[id] = { file, size: headFace(Buffer.from(await res.arrayBuffer()), path.join(outDir, file)), source: "head" };
+    manifest.items[id] = { file, size: headIso(Buffer.from(await res.arrayBuffer()), path.join(outDir, file)), source: "head" };
   } else if (fromMinecraft(map.vanilla?.[id])) {
     const file = `minecraft/${map.vanilla[id].slice("minecraft:".length).replace("/", "_")}.png`;
     manifest.items[id] = { file, size: copyTexture(fromMinecraft(map.vanilla[id]), path.join(outDir, file)), source: "minecraft" };

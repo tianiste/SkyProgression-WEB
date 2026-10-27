@@ -2,7 +2,7 @@
  "sources": {
   "furfsky": "FurfSky Reborn v1.9.2 (Modrinth version 8DzcDe5O)",
   "hypixel": "Hypixel SkyBlock Resource Pack (Hypixel API /v2/resources/packs)",
-  "head": "Player head skins from the Hypixel API items resource (/v2/resources/skyblock/items)",
+  "head": "Player head skins from the Hypixel API items resource (/v2/resources/skyblock/items); pet heads from SkyCrypt's pet table",
   "minecraft": "Minecraft 26.3 client textures"
  },
  "items": {
@@ -31,10 +31,20 @@
    "size": 16,
    "source": "furfsky"
   },
+  "BAL": {
+   "file": "heads/bal.png",
+   "size": 32,
+   "source": "head"
+  },
   "BEJEWELED_COLLAR": {
    "file": "items/bejeweled_collar.png",
    "size": 16,
    "source": "furfsky"
+  },
+  "BLACK_CAT": {
+   "file": "heads/black_cat.png",
+   "size": 32,
+   "source": "head"
   },
   "BLAZEN_SPHERE": {
    "file": "items/blazen_sphere.png",
@@ -126,6 +136,11 @@
    "size": 16,
    "source": "furfsky"
   },
+  "ENDERMITE": {
+   "file": "heads/endermite.png",
+   "size": 32,
+   "source": "head"
+  },
   "FILET_O_FORTUNE": {
    "file": "items/filet_o_fortune.png",
    "size": 16,
@@ -163,7 +178,7 @@
   },
   "FRIED_FROZEN_CHICKEN": {
    "file": "heads/fried_frozen_chicken.png",
-   "size": 8,
+   "size": 32,
    "source": "head"
   },
   "FRIGID_HUSK": {
@@ -183,7 +198,7 @@
   },
   "GEMSTONE_GAUNTLET": {
    "file": "heads/gemstone_gauntlet.png",
-   "size": 8,
+   "size": 32,
    "source": "head"
   },
   "GLACITE": {
@@ -191,9 +206,14 @@
    "size": 16,
    "source": "furfsky"
   },
+  "GLACITE_GOLEM": {
+   "file": "heads/glacite_golem.png",
+   "size": 32,
+   "source": "head"
+  },
   "GLACITE_LANTERN": {
    "file": "heads/glacite_lantern.png",
-   "size": 8,
+   "size": 32,
    "source": "head"
   },
   "GLEAMING_CRYSTAL": {
@@ -216,6 +236,11 @@
    "size": 16,
    "source": "furfsky"
   },
+  "GOBLIN": {
+   "file": "heads/goblin.png",
+   "size": 32,
+   "source": "head"
+  },
   "GOBLIN_OMELETTE_BLUE_CHEESE": {
    "file": "items/goblin_omelette_blue_cheese.png",
    "size": 16,
@@ -233,7 +258,7 @@
   },
   "HEPHAESTUS_RELIC": {
    "file": "heads/hephaestus_relic.png",
-   "size": 8,
+   "size": 32,
    "source": "head"
   },
   "HOT_STUFF": {
@@ -261,10 +286,20 @@
    "size": 16,
    "source": "furfsky"
   },
+  "KUUDRA": {
+   "file": "heads/kuudra.png",
+   "size": 32,
+   "source": "head"
+  },
   "MAGIC_8_BALL": {
    "file": "items/magic_8_ball.png",
    "size": 16,
    "source": "furfsky"
+  },
+  "MAMMOTH": {
+   "file": "heads/mammoth.png",
+   "size": 32,
+   "source": "head"
   },
   "MINERAL_CHESTPLATE": {
    "file": "items/mineral_chestplate.png",
@@ -396,9 +431,19 @@
    "size": 16,
    "source": "furfsky"
   },
+  "SCATHA": {
+   "file": "heads/scatha.png",
+   "size": 32,
+   "source": "head"
+  },
+  "SNAIL": {
+   "file": "heads/snail.png",
+   "size": 32,
+   "source": "head"
+  },
   "SPEED_RELIC": {
    "file": "heads/speed_relic.png",
-   "size": 8,
+   "size": 32,
    "source": "head"
   },
   "TITANIUM_DRILL_1": {
@@ -448,7 +493,7 @@
   },
   "UNALLOYED_SPEED": {
    "file": "heads/unalloyed_speed.png",
-   "size": 8,
+   "size": 32,
    "source": "head"
   },
   "WEIRDER_TUBA": {
@@ -458,7 +503,7 @@
   },
   "WILL_O_WISP": {
    "file": "heads/will_o_wisp.png",
-   "size": 8,
+   "size": 32,
    "source": "head"
   },
   "minecraft:block/coal_ore": {

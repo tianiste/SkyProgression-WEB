@@ -53,7 +53,7 @@ const shown = icon.kind === "texture" ? (icon.size > size ? size : icon.size * s
 {
   icon.kind === "texture" ? (
     <img
-      class:list={["icon", "pixelated", cls]}
+      class:list={["icon", !icon.smooth && "pixelated", cls]}
       src={icon.src}
       width={shown}
       height={shown}

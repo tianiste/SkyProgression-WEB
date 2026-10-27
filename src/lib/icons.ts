@@ -10,18 +10,19 @@ import { perkById } from "../data/perks";
 export type Glyph = "item" | "pet" | "shard" | "book" | "note" | "skill" | "fortune" | "speed" | "pristine" | "spread" | "heat" | "cold" | "wisdom";
 
 export type Icon =
-  | { kind: "texture"; src: string; size: number }
+  | { kind: "texture"; src: string; size: number; smooth?: boolean }
   | { kind: "swatch"; color: string }
   | { kind: "glyph"; glyph: Glyph; color?: string };
 
-const items = generated.items as Record<string, { file: string; size: number }>;
+const items = generated.items as Record<string, { file: string; size: number; source?: string }>;
 const hotm = generated.hotm as Record<string, string>;
 
 export const FALLBACK: Icon = { kind: "glyph", glyph: "item" };
 
 export function itemIcon(id: string | undefined, fallback: Icon = FALLBACK): Icon {
   const t = id ? items[id] : undefined;
-  return t ? { kind: "texture", src: `/icons/${t.file}`, size: t.size } : fallback;
+  // Heads are rendered 3D cubes with smooth edges, not pixel art.
+  return t ? { kind: "texture", src: `/icons/${t.file}`, size: t.size, smooth: t.source === "head" } : fallback;
 }
 
 /** An icon-map value: an item ID or a #hex colour. */
@@ -35,7 +36,7 @@ export const categoryIcon = (id: string) => mapped((map.category as Record<strin
 export const powderIcon = (id: string) => mapped((map.powder as Record<string, string>)[id]);
 
 export function groupIcon(group: string): Icon {
-  if (group === "pet") return { kind: "glyph", glyph: "pet" };
+  if (group === "pet") return itemIcon("SCATHA", { kind: "glyph", glyph: "pet" });
   if (group === "attributes") return { kind: "glyph", glyph: "shard" };
   return mapped((map.group as Record<string, string>)[group]);
 }
@@ -91,7 +92,7 @@ export function requirementIcon(r: Requirement | LeafRequirement, rarityOf?: (at
     case "consumable":
       return itemIcon(r.item);
     case "pet":
-      return { kind: "glyph", glyph: "pet" };
+      return itemIcon(r.pet.type, { kind: "glyph", glyph: "pet" });
     case "attribute":
       return shardIcon(rarityOf?.(r.attribute));
     case "hotm": {
