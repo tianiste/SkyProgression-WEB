@@ -1,8 +1,35 @@
 ---
+import { getCollection } from "astro:content";
 import PlayerLayout from "../../layouts/PlayerLayout.astro";
 import Page from "../../components/islands/player/HotmPage";
+import { perkById } from "../../data/perks";
+
+// The guides' confirmed trees, with "max" resolved to each perk's level, keyed by the methods each guide covers.
+const trees = await getCollection("trees");
+const guides = await getCollection("guides");
+const recommended = guides.flatMap((g) =>
+  g.data.hotm.flatMap((preset) => {
+    const t = trees.find((x) => x.id === preset.tree && x.data.status === "published");
+    if (!t) return [];
+    const levels: Record<string, number> = {};
+    for (const [perk, v] of Object.entries(t.data.perks)) levels[perk] = v === "max" ? (perkById.get(perk)?.max ?? 1) : (v as number);
+    return [{
+      id: `${g.id}/${t.id}`,
+      label: preset.label,
+      guide: g.data.title,
+      slug: g.id,
+      methods: g.data.method,
+      ability: t.data.ability ?? null,
+      cotm: preset.cotm ?? null,
+      tier: preset.hotm,
+      powder: preset.powder,
+      levels,
+      disabled: t.data.disabled,
+    }];
+  }),
+);
 ---
 
 <PlayerLayout title="HOTM">
-  <Page client:load />
+  <Page client:load trees={recommended} />
 </PlayerLayout>

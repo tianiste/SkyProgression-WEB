@@ -70,10 +70,10 @@ export function Shell<T extends Common>({ view, state, prices = false, god = fal
                 </select>
               </label>
             )}
-            {view !== "hotm" && (
+            {(
               <label>
                 <span>Method</span>
-                <select value={data.method} disabled={busy} onChange={(e) => update({ method: (e.target as HTMLSelectElement).value })}>
+                <select value={view === "hotm" ? q?.method || "MF_GEMS" : data.method} disabled={busy} onChange={(e) => update({ method: (e.target as HTMLSelectElement).value })}>
                   {data.methods.map((m) => <option value={m.id} key={m.id}>{m.label}</option>)}
                 </select>
               </label>

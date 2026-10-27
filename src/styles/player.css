@@ -519,3 +519,98 @@
   display: grid;
   min-width: 0;
 }
+
+/* HOTM: the player's tree with a ring per perk for how it compares with the guide's tree. */
+.hotm-compare {
+  margin: 0.5rem 0 0;
+}
+.hotm-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 36px);
+  grid-template-rows: repeat(10, 36px);
+  width: max-content;
+  max-width: 100%;
+  padding: 10px;
+  background: #1c1e26;
+  border: 2px solid #3a3e4c;
+  border-radius: var(--radius);
+}
+.hcell {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 2px solid transparent;
+}
+.hcell:not(.taken) img {
+  opacity: 0.45;
+}
+.hcell.off img {
+  filter: grayscale(1);
+}
+.hcell .glyph {
+  width: 12px;
+  height: 12px;
+  background: #3a3e4c;
+}
+.hcell.done,
+.ring.done {
+  border-color: #8ef04a;
+}
+.hcell.short,
+.ring.short {
+  border-color: #ffc766;
+  border-style: solid;
+}
+.hcell.extra,
+.ring.extra {
+  border-color: #a4a9b8;
+  border-style: dashed;
+}
+.ring {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid transparent;
+  margin-right: 0.35rem;
+  vertical-align: -2px;
+}
+@media (max-width: 380px) {
+  .hotm-grid {
+    grid-template-columns: repeat(7, 34px);
+    grid-template-rows: repeat(10, 34px);
+    padding: 6px;
+  }
+  .hcell {
+    width: 34px;
+    height: 34px;
+  }
+  .hcell img {
+    width: 28px;
+    height: 28px;
+  }
+}
+.hcell .glyph {
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: 2px solid #3a3e4c;
+}
+.hcell .glyph.part {
+  background: linear-gradient(0deg, #4fe3ec 0 50%, transparent 50%);
+  border-color: #1c9aa6;
+}
+.hcell .glyph.max {
+  background: #4fe3ec;
+  border-color: #4fe3ec;
+  transform: rotate(45deg) scale(0.8);
+}
+.hcell .glyph.ability {
+  border-radius: 50%;
+}
+.hcell .glyph.ability.part,
+.hcell .glyph.ability.max {
+  background: #ffc766;
+  border-color: #ffc766;
+  transform: none;
+}
