@@ -29,7 +29,7 @@ const options = r.kind === "any_of" ? r.options : [];
 
 <li class="req" data-requirement={r.id}>
   <span class="box" aria-hidden="true"></span>
-  <Icon icon={requirementIcon(r, rarityOf)} size={32} class="main" />
+  <span class="slot"><Icon icon={requirementIcon(r, rarityOf)} size={32} class="main" /></span>
   <div class="body">
     <span class="name">{title(r, attributeNames)}</span>
     {r.priority === "optional" && <span class="tag">optional</span>}
@@ -74,12 +74,17 @@ const options = r.kind === "any_of" ? r.options : [];
 <style>
   .req {
     display: grid;
-    grid-template-columns: 1rem 32px minmax(0, 1fr);
+    grid-template-columns: 1rem 40px minmax(0, 1fr);
     align-items: start;
     gap: 0.75rem;
     padding: 0.75rem 0;
     border-top: 1px solid var(--line);
     max-width: none;
+  }
+  @media (max-width: 480px) {
+    .req {
+      gap: 0.5rem;
+    }
   }
   .req:first-child {
     border-top: 0;
@@ -87,11 +92,11 @@ const options = r.kind === "any_of" ? r.options : [];
   .box {
     width: 1rem;
     height: 1rem;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
     border: 2px solid var(--muted);
   }
   .body {
-    padding-top: 0.2rem;
+    padding-top: 0.45rem;
   }
   .name {
     font-weight: 600;

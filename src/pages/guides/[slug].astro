@@ -5,7 +5,7 @@ import Requirement from "../../components/Requirement.astro";
 import HotmTree from "../../components/HotmTree.astro";
 import Credit from "../../components/Credit.astro";
 import Icon from "../../components/Icon.astro";
-import { groupIcon, guideIcon, powderIcon, shardIcon } from "../../lib/icons";
+import { categoryIcon, groupIcon, guideIcon, powderIcon, shardIcon, type Icon as IconT } from "../../lib/icons";
 import { CATEGORIES } from "../../lib/categories";
 import { GEAR_GROUPS, GROUP_LABELS } from "../../lib/requirements";
 import { formatDate, formatPowder } from "../../lib/format";
@@ -43,15 +43,17 @@ const PRIORITY = { required: "Required", recommended: "Recommended", optional: "
 const treeIds = [...new Set(g.hotm.map((h) => h.tree).filter(Boolean))] as string[];
 const trees = (await Promise.all(treeIds.map((id) => getEntry("trees", id)))).filter((t) => t !== undefined);
 
-const toc = [
-  { id: "glance", label: "At a glance" },
-  g.hotm.length || hotmReqs.length ? { id: "hotm", label: "Heart of the Mountain" } : null,
-  { id: "gear", label: "Gear" },
-  attributeReqs.length ? { id: "attributes", label: "Attributes" } : null,
-  ...headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, label: h.text })),
-  g.videos.length ? { id: "videos", label: "Videos" } : null,
-  { id: "credits", label: "Credits and sources" },
+const note: IconT = { kind: "glyph", glyph: "note" };
+const toc: { id: string; label: string; icon: IconT }[] = [
+  { id: "glance", label: "At a glance", icon: { kind: "glyph", glyph: "pin", color: "var(--accent)" } },
+  g.hotm.length || hotmReqs.length ? { id: "hotm", label: "Heart of the Mountain", icon: powderIcon("mithril") } : null,
+  { id: "gear", label: "Gear", icon: groupIcon("drill") },
+  attributeReqs.length ? { id: "attributes", label: "Attributes", icon: shardIcon("Epic") } : null,
+  ...headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, label: h.text, icon: note })),
+  g.videos.length ? { id: "videos", label: "Videos", icon: note } : null,
+  { id: "credits", label: "Credits and sources", icon: { kind: "glyph", glyph: "book", color: "var(--stat-purple)" } },
 ].filter((t) => t !== null);
+const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
 ---
 
 <Base title={`${g.title} guide`} description={g.summary}>
@@ -59,8 +61,11 @@ const toc = [
     <article>
       <header class="guide-head">
         <p class="crumbs"><a href="/guides/">Guides</a> / <a href={`/guides/#${category.id}`}>{category.label}</a></p>
-        <h1 class="title"><Icon icon={guideIcon(guide.id)} size={64} />{g.title}</h1>
-        <p class="lead">{g.summary}</p>
+        <div class="head-row">
+          <span class="slot lg"><Icon icon={guideIcon(guide.id)} size={64} /></span>
+          <h1 class="title">{g.title}</h1>
+          <p class="lead">{g.summary}</p>
+        </div>
         <p class="byline">
           {
             g.authors.some((a) => a.id !== "mining-cult") ? (
@@ -71,6 +76,7 @@ const toc = [
           }{g.source.posted && <> on {formatDate(g.source.posted)}</>}. Checked {formatDate(g.updated)}.
         </p>
       </header>
+      <div class="seam" aria-hidden="true"></div>
 
       <section class="progress" aria-labelledby="progress-title">
         <div class="xp" aria-hidden="true"><span></span></div>
@@ -80,17 +86,22 @@ const toc = [
         </p>
       </section>
 
+      <details class="toc-mobile">
+        <summary>On this page</summary>
+        <ul>{toc.map((t) => <li><a href={`#${t.id}`}><Icon icon={t.icon} size={16} />{t.label}</a></li>)}</ul>
+      </details>
+
       <section id="glance" aria-labelledby="glance-title">
         <h2 id="glance-title" class="visually-hidden">At a glance</h2>
         <dl class="glance">
-          <div>
-            <dt>Where</dt>
+          <div class="where">
+            <dt><Icon icon={{ kind: "glyph", glyph: "pin", color: "var(--accent)" }} size={16} />Where</dt>
             <dd>{g.where}</dd>
           </div>
           {
             g.blocks.length > 0 && (
-              <div>
-                <dt>Key blocks</dt>
+              <div class="blocks">
+                <dt><Icon icon={categoryIcon(g.category)} size={16} />Key blocks</dt>
                 <dd>
                   <ul>{g.blocks.map((b) => <li>{b}</li>)}</ul>
                 </dd>
@@ -99,13 +110,13 @@ const toc = [
           }
           {
             (g.rates.length > 0 || g.ratesMeasured) && (
-              <div>
-                <dt>Rates</dt>
+              <div class="rates-box">
+                <dt><Icon icon={{ kind: "glyph", glyph: "coin" }} size={16} />Rates</dt>
                 <dd>
                   {g.rates.length > 0 && <ul class="rates">
                     {g.rates.map((r) => (
                       <li>
-                        <span class="rate-label">{r.label}</span> <span class="rate-value">{r.value}</span>
+                        <span class="rate-label">{r.label}</span> <strong class="rate-value">{r.value}</strong>
                         {r.note && <span class="muted small"> {r.note}</span>}
                       </li>
                     ))}
@@ -173,17 +184,23 @@ const toc = [
         <section id="gear" aria-labelledby="gear-title">
           <h2 id="gear-title">Gear</h2>
           <p class="muted">
-            <span class="tag budget">budget</span> is the cheapest setup the guide recommends, <span class="tag max">max</span> the
-            best one. Everything else applies to both.
+            <span class="tier-key budget">Budget</span> is the cheapest setup the guide recommends and
+            <span class="tier-key max">max</span> the best one. Items not marked apply to both.
           </p>
           {
             gear.map((s) => (
-              <section class="gear-group" aria-labelledby={`g-${s.id}`}>
-                <h3 id={`g-${s.id}`} class="with-icon"><Icon icon={groupIcon(s.id)} size={32} />{s.label}</h3>
+              <details class="gear-group" open>
+                <summary>
+                  <h3 id={`g-${s.id}`} class="with-icon">
+                    <span class="slot"><Icon icon={groupIcon(s.id)} size={32} /></span>
+                    {s.label}
+                    <span class="count">{tierCount(s.budget.length + s.max.length + s.both.length)}</span>
+                  </h3>
+                </summary>
                 {(s.budget.length > 0 || s.max.length > 0) && (
                   <div class="tiers">
                     <div class="tier">
-                      <h4><span class="tag budget">budget</span></h4>
+                      <h4 class="tier-title budget">Budget setup</h4>
                       {s.budget.length ? (
                         <ul class="reqs">{s.budget.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>
                       ) : (
@@ -191,7 +208,7 @@ const toc = [
                       )}
                     </div>
                     <div class="tier">
-                      <h4><span class="tag max">max</span></h4>
+                      <h4 class="tier-title max">Max setup</h4>
                       {s.max.length ? (
                         <ul class="reqs">{s.max.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>
                       ) : (
@@ -200,8 +217,13 @@ const toc = [
                     </div>
                   </div>
                 )}
-                {s.both.length > 0 && <ul class="reqs">{s.both.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>}
-              </section>
+                {s.both.length > 0 && (
+                  <>
+                    {(s.budget.length > 0 || s.max.length > 0) && <h4 class="tier-title both">Both setups</h4>}
+                    <ul class="reqs">{s.both.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>
+                  </>
+                )}
+              </details>
             ))
           }
         </section>
@@ -279,7 +301,7 @@ const toc = [
 
     <aside class="toc" aria-label="On this page">
       <p class="toc-title">On this page</p>
-      <ul>{toc.map((t) => <li><a href={`#${t.id}`}>{t.label}</a></li>)}</ul>
+      <ul>{toc.map((t) => <li><a href={`#${t.id}`}><Icon icon={t.icon} size={16} />{t.label}</a></li>)}</ul>
     </aside>
   </div>
 </Base>
@@ -316,19 +338,90 @@ const toc = [
     font-size: var(--step--1);
     border-left: 2px solid var(--line);
   }
-  .toc li a {
-    display: block;
-    padding: 0.25rem 0 0.25rem 0.75rem;
+  .toc li a,
+  .toc-mobile li a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0 0.3rem 0.75rem;
+    line-height: 1.35;
     color: var(--muted);
     text-decoration: none;
   }
   .toc li a:hover {
     color: var(--accent);
   }
-  .title {
-    display: flex;
+  .toc-mobile {
+    margin: 0 0 2rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .toc-mobile summary {
+    padding: 0.7rem 1rem;
+    font-weight: 650;
+    cursor: pointer;
+  }
+  .toc-mobile ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 1rem 0.75rem 0.25rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  }
+  .toc-mobile li a {
+    color: var(--text);
+    text-decoration: none;
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
+  }
+  @media (min-width: 1000px) {
+    .toc-mobile {
+      display: none;
+    }
+  }
+  /* Guide icon in a large slot beside the title; the summary runs under both on narrow screens. */
+  .head-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.5rem 1.25rem;
     align-items: center;
-    gap: 0.75rem;
+  }
+  .head-row .slot {
+    grid-row: span 2;
+    align-self: start;
+  }
+  .title {
+    margin: 0;
+  }
+  .head-row .lead {
+    margin: 0;
+  }
+  @media (max-width: 560px) {
+    .head-row .slot {
+      grid-row: auto;
+      padding: 4px;
+    }
+    .head-row .slot :global(.icon) {
+      width: 32px;
+      height: 32px;
+    }
+    .title {
+      font-size: var(--step-3);
+    }
+    .head-row .lead {
+      grid-column: 1 / -1;
+      font-size: var(--step-0);
+    }
+  }
+  .guide-head .seam,
+  .seam {
+    margin: 1.25rem 0 0;
+  }
+  section[id],
+  .prose :global(h2),
+  .gear-group h3 {
+    scroll-margin-top: 1rem;
   }
   .with-icon {
     display: flex;
@@ -353,6 +446,8 @@ const toc = [
   .byline {
     font-size: var(--step--1);
     color: var(--muted);
+    margin: 1rem 0 0;
+    max-width: none;
   }
   .progress {
     display: grid;
@@ -380,24 +475,29 @@ const toc = [
     background: var(--xp);
     box-shadow: inset 0 -3px 0 var(--xp-deep);
   }
+  /* Where and rates side by side, key blocks across the full width under them. */
   .glance {
     display: grid;
-    gap: 1rem;
-    margin: 0;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 0.75rem;
+    margin: 0 0 1rem;
   }
   .glance > div {
-    display: grid;
-    grid-template-columns: 7rem minmax(0, 1fr);
-    gap: 1rem;
+    padding: 0.85rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
   }
-  @media (max-width: 560px) {
-    .glance > div {
-      grid-template-columns: 1fr;
-      gap: 0.15rem;
-    }
+  .glance > .blocks {
+    grid-column: 1 / -1;
+    order: 2;
   }
   .glance dt {
-    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 650;
+    margin-bottom: 0.35rem;
   }
   .glance dd {
     margin: 0;
@@ -406,11 +506,25 @@ const toc = [
     margin: 0;
     padding-left: 1.1rem;
   }
+  .glance li + li {
+    margin-top: 0.2rem;
+  }
+  .glance dd > p {
+    margin: 0.4rem 0 0;
+  }
+  .rates {
+    list-style: none;
+  }
+  .glance .rates {
+    padding: 0;
+  }
   .rate-label {
+    display: block;
     color: var(--muted);
+    font-size: var(--step--1);
   }
   .rate-value {
-    font-weight: 400;
+    font-weight: 650;
   }
   /* HOTM sits beside the gear on wide screens and above it on narrow ones. */
   .gear-hotm {
@@ -481,9 +595,9 @@ const toc = [
     flex: none;
     width: 42px;
     height: 60px;
-    background-image: radial-gradient(circle, #3a3e4c 2px, transparent 2.5px);
+    background-image: radial-gradient(circle, var(--line) 2px, transparent 2.5px);
     background-size: 6px 6px;
-    background-color: #1c1e26;
+    background-color: var(--slot-bg);
     border-radius: 2px;
   }
   .tiers {
@@ -491,9 +605,7 @@ const toc = [
     grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
     gap: 0 2rem;
   }
-  .tier h4 {
-    margin: 0.5rem 0 0;
-  }
+
   .reqs {
     list-style: none;
     padding: 0;
@@ -502,8 +614,65 @@ const toc = [
   .gear-group + .gear-group {
     border-top: 1px solid var(--line);
   }
-  .prose :global(h2) {
-    scroll-margin-top: 1rem;
+  .gear-group summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  .gear-group summary::-webkit-details-marker {
+    display: none;
+  }
+  /* A pixel caret after the heading, pointing down when open. */
+  .gear-group summary::after {
+    content: "";
+    margin-left: auto;
+    width: 10px;
+    height: 6px;
+    background: var(--muted);
+    clip-path: polygon(0 0, 100% 0, 100% 34%, 80% 34%, 80% 67%, 60% 67%, 60% 100%, 40% 100%, 40% 67%, 20% 67%, 20% 34%, 0 34%);
+  }
+  .gear-group:not([open]) summary::after {
+    transform: rotate(-90deg);
+  }
+  .gear-group summary:hover h3 {
+    color: var(--accent);
+  }
+  .gear-group h3 {
+    margin: 1.25rem 0 0.75rem;
+  }
+  .gear-group:not([open]) h3 {
+    margin-bottom: 1.25rem;
+  }
+  .count {
+    font-family: var(--font-text);
+    font-size: var(--step--1);
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .tier-title {
+    margin: 0.75rem 0 0.25rem;
+    padding-left: 0.6rem;
+    border-left: 4px solid var(--line);
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+  .tier-title.budget {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .tier-title.max {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .tier-key {
+    font-weight: 650;
+  }
+  .tier-key.budget {
+    color: var(--accent);
+  }
+  .tier-key.max {
+    color: var(--gold);
   }
   .prose :global(ul) {
     padding-left: 1.25rem;

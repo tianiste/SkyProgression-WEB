@@ -24,6 +24,11 @@
   --gold: #ffc766;
   --core: #d4524a;
   --grid-line: rgb(255 255 255 / 0.035);
+  /* Inventory slot behind icons: a sunken square like Minecraft's item slots. */
+  --slot-bg: #171920;
+  --slot-dark: rgb(0 0 0 / 0.55);
+  --slot-light: rgb(255 255 255 / 0.09);
+  --stone: #4d5263;
   /* Hypixel stat and rarity colours, used for icons. */
   --stat-gold: #ffaa00;
   --stat-purple: #d36bff;
@@ -69,6 +74,10 @@
     --gold: #8a5a00;
     --core: #b23a33;
     --grid-line: rgb(28 30 38 / 0.04);
+    --slot-bg: #dde1e8;
+    --slot-dark: rgb(28 30 38 / 0.24);
+    --slot-light: #ffffff;
+    --stone: #aeb5c2;
     --stat-gold: #b06f00;
     --stat-purple: #8a2bb0;
     --stat-yellow: #8f7f00;
@@ -96,6 +105,10 @@
   --gold: #8a5a00;
   --core: #b23a33;
   --grid-line: rgb(28 30 38 / 0.04);
+  --slot-bg: #dde1e8;
+  --slot-dark: rgb(28 30 38 / 0.24);
+  --slot-light: #ffffff;
+  --stone: #aeb5c2;
   --stat-gold: #b06f00;
   --stat-purple: #8a2bb0;
   --stat-yellow: #8f7f00;
@@ -323,6 +336,36 @@ img {
 .tag.budget {
   color: var(--accent);
   border-color: currentColor;
+}
+
+/* An icon set in an inventory slot. Padding is a quarter of a 16 px pixel grid so textures stay on whole pixels. */
+.slot {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  padding: 4px;
+  background: var(--slot-bg);
+  box-shadow:
+    inset 2px 2px 0 var(--slot-dark),
+    inset -2px -2px 0 var(--slot-light);
+  line-height: 0;
+}
+.slot.lg {
+  padding: 8px;
+}
+
+/*
+ * A seam of stone with the odd diamond and gold pixel, used under page headers and above the footer. Pure CSS: two
+ * 4 px rows of hard colour stops.
+ */
+.seam {
+  height: 8px;
+  margin: 1.5rem 0 2rem;
+  background:
+    linear-gradient(90deg, var(--line) 0 12px, var(--stone) 12px 24px, var(--line) 24px 40px, var(--accent) 40px 44px, var(--stone) 44px 64px, var(--line) 64px 84px, var(--stone) 84px 104px, var(--line) 104px 128px) 0 0 / 128px 4px repeat-x,
+    linear-gradient(90deg, var(--stone) 0 16px, var(--line) 16px 36px, var(--stone) 36px 56px, var(--line) 56px 76px, var(--gold) 76px 80px, var(--line) 80px 96px, var(--stone) 96px 128px) 0 4px / 128px 4px repeat-x;
+  -webkit-mask-image: linear-gradient(90deg, #000 60%, transparent);
+  mask-image: linear-gradient(90deg, #000 60%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {

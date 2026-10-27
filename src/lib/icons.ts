@@ -7,7 +7,7 @@ import map from "../data/icon-map.json";
 import type { LeafRequirement, Modifier, Requirement } from "../schema/guide";
 import { perkById } from "../data/perks";
 
-export type Glyph = "item" | "pet" | "shard" | "book" | "note" | "skill" | "fortune" | "speed" | "pristine" | "spread" | "heat" | "cold" | "wisdom";
+export type Glyph = "item" | "pet" | "shard" | "book" | "note" | "skill" | "fortune" | "speed" | "pristine" | "spread" | "heat" | "cold" | "wisdom" | "pin" | "coin";
 
 export type Icon =
   | { kind: "texture"; src: string; size: number; smooth?: boolean }
