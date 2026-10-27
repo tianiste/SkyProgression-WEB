@@ -15,6 +15,17 @@ compilation by the Reborn Team; other contributors are listed at <https://furfsk
 These textures are not covered by the MIT License. All rights remain with the FurfSky Reborn team; do not reuse them
 outside this site without their permission.
 
+## Hypixel SkyBlock textures
+
+Files: `public/icons/hypixel/*.png` (from the Hypixel SkyBlock Resource Pack, downloaded from the Hypixel API endpoint
+`/v2/resources/packs`) and `public/icons/heads/*.png` (the 8x8 face of the item's player head skin, from the Hypixel
+API items resource `/v2/resources/skyblock/items`).
+
+Copyright © 2026 Hypixel Inc. Used under the Hypixel SkyBlock Resource Pack License 1.0, which allows Hypixel-related
+websites to use the pack's assets as long as access is not sold or charged for. The head skins are Hypixel's art served
+through its public API rather than files in the pack. SkyProgression does not claim these textures as its own, is free,
+and is not affiliated with or endorsed by Hypixel. These textures are not covered by the MIT License.
+
 ## Pixelify Sans
 
 File: `public/fonts/pixelify-sans-600.woff2`

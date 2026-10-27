@@ -90,12 +90,14 @@ The site is static and hosted on Cloudflare Pages: build command `npm run build`
 ## Icons
 
 Item and HOTM textures come from the [FurfSky Reborn](https://furfsky.net) resource pack, used with the FurfSky Reborn
-team's permission. Icons are keyed by Hypixel IDs in `src/data/icon-map.json` and `src/data/icons.generated.json`, so
+team's permission. Items FurfSky does not retexture use the official Hypixel SkyBlock Resource Pack (Hypixel API
+`/v2/resources/packs`) or the face of the item's head skin from the Hypixel API, under Hypixel's license. Icons are keyed by Hypixel IDs in `src/data/icon-map.json` and `src/data/icons.generated.json`, so
 guide data never names an icon. To add or change icons, edit `icon-map.json` (or add items to a guide), download the
-pack from [Modrinth](https://modrinth.com/resourcepack/furfsky-reborn), unzip it outside the repo and run:
+pack from [Modrinth](https://modrinth.com/resourcepack/furfsky-reborn) and the Hypixel pack from the URL that
+`https://api.hypixel.net/v2/resources/packs` lists, unzip both outside the repo and run:
 
 ```sh
-node scripts/import-icons.mjs <path to the unzipped pack>
+node scripts/import-icons.mjs <unzipped FurfSky pack> <unzipped Hypixel pack>
 ```
 
 The script copies only the textures the site uses into `public/icons/` and lists the IDs that fall back to the site's
@@ -104,6 +106,6 @@ own icons.
 ## License
 
 The [MIT License](LICENSE) covers the code and the project's own content (logo, stat symbols, fallback icons). It does
-not cover the FurfSky Reborn textures in `public/icons/`, which belong to the FurfSky Reborn team, or the guide text,
+not cover the textures in `public/icons/`, which belong to the FurfSky Reborn team and Hypixel Inc., or the guide text,
 which belongs to its authors and is published with their permission. Pixelify Sans is under the SIL Open Font License
 (`public/fonts/OFL.txt`). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Not affiliated with Hypixel or Mojang.

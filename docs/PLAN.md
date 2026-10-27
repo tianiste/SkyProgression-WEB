@@ -24,7 +24,8 @@ Design: **minimalist and responsive.** Mobile first, readable on a phone at 360 
   and `/uuid`.
 - **Guides are data, not prose,** so they can become a checklist (see "Guide data model").
 - **License MIT,** README, CONTRIBUTING, no AI attribution anywhere, small commits pushed straight away, no secrets, no
-  Hypixel/Mojang textures (our own icons and drawings; Minecraft-style pixel art of our own is fine).
+  Mojang textures. Item icons come from FurfSky Reborn (with permission) and Hypixel's own SkyBlock pack and API
+  (under Hypixel's license); everything else uses our own pixel icons.
 
 ## Design
 

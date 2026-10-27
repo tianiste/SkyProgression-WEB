@@ -1,517 +1,473 @@
 {
- "source": "FurfSky Reborn v1.9.2 (Modrinth version 8DzcDe5O)",
+ "sources": {
+  "furfsky": "FurfSky Reborn v1.9.2 (Modrinth version 8DzcDe5O)",
+  "hypixel": "Hypixel SkyBlock Resource Pack (Hypixel API /v2/resources/packs)",
+  "head": "Player head skins from the Hypixel API items resource (/v2/resources/skyblock/items)"
+ },
  "items": {
-  "AMBER_MATERIAL": {
-   "file": "items/amber_material.png",
-   "size": 16
-  },
   "AMBER_POLISHED_DRILL_ENGINE": {
    "file": "items/amber_polished_drill_engine.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "AMBER_POWER_SCROLL": {
    "file": "items/amber_power_scroll.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "AMETHYST_GAUNTLET": {
    "file": "items/amethyst_gauntlet.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "ANCIENT_CLOAK": {
    "file": "items/ancient_cloak.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "ASPECT_OF_THE_VOID": {
    "file": "items/aspect_of_the_void.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "BEJEWELED_COLLAR": {
    "file": "items/bejeweled_collar.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "BLAZEN_SPHERE": {
    "file": "items/blazen_sphere.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "DIAMONITE": {
    "file": "items/diamonite.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "DIVAN_CHESTPLATE": {
    "file": "items/divan_chestplate.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "DIVAN_DRILL": {
    "file": "items/divan_drill.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "DIVAN_PENDANT": {
    "file": "items/divan_pendant.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "DIVAN_POWDER_COATING": {
    "file": "items/divan_powder_coating.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
+  },
+  "DRAGONFADE_CLOAK": {
+   "file": "hypixel/dragonfade_cloak.png",
+   "size": 16,
+   "source": "hypixel"
   },
   "DWARF_TURTLE_SHELMET": {
    "file": "items/dwarf_turtle_shelmet.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "DWARVEN_HANDWARMERS": {
    "file": "items/dwarven_handwarmers.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "DWARVEN_METAL": {
    "file": "items/dwarven_metal.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "DWARVEN_OS_BLOCK_BRAN": {
    "file": "items/dwarven_os_block_bran.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "DWARVEN_OS_GEMSTONE_GRAHAMS": {
    "file": "items/dwarven_os_gemstone_grahams.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "DWARVEN_OS_METALLIC_MINIS": {
    "file": "items/dwarven_os_metallic_minis.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "DWARVEN_OS_ORE_OATS": {
    "file": "items/dwarven_os_ore_oats.png",
-   "size": 16
-  },
-  "DWARVEN_TREASURE": {
-   "file": "items/dwarven_treasure.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "ENCHANTED_GLACITE": {
    "file": "items/enchanted_glacite.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "ENCHANTED_MYCELIUM_CUBE": {
    "file": "items/enchanted_mycelium_cube.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "ENCHANTED_TUNGSTEN": {
    "file": "items/enchanted_tungsten.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "ENCHANTED_UMBER": {
    "file": "items/enchanted_umber.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "FILET_O_FORTUNE": {
    "file": "items/filet_o_fortune.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "FLAWLESS_AMBER_GEM": {
    "file": "items/flawless_amber_gem.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "FLAWLESS_JADE_GEM": {
    "file": "items/flawless_jade_gem.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "FLAWLESS_JASPER_GEM": {
    "file": "items/flawless_jasper_gem.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "FLAWLESS_OPAL_GEM": {
    "file": "items/flawless_opal_gem.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "FLAWLESS_RUBY_GEM": {
    "file": "items/flawless_ruby_gem.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "FLINT_SHOVEL": {
    "file": "items/flint_shovel.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
+  },
+  "FRIED_FROZEN_CHICKEN": {
+   "file": "heads/fried_frozen_chicken.png",
+   "size": 8,
+   "source": "head"
   },
   "FRIGID_HUSK": {
    "file": "items/frigid_husk.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "GEMSTONE_DRILL_4": {
    "file": "items/gemstone_drill_4.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "GEMSTONE_FUEL_TANK": {
    "file": "items/gemstone_fuel_tank.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
+  },
+  "GEMSTONE_GAUNTLET": {
+   "file": "heads/gemstone_gauntlet.png",
+   "size": 8,
+   "source": "head"
   },
   "GLACITE": {
    "file": "items/glacite.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
+  },
+  "GLACITE_LANTERN": {
+   "file": "heads/glacite_lantern.png",
+   "size": 8,
+   "source": "head"
   },
   "GLEAMING_CRYSTAL": {
    "file": "items/gleaming_crystal.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "GLOOMLOCK_GRIMOIRE": {
    "file": "items/gloomlock_grimoire.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "GLOSSY_MINERAL_CHESTPLATE": {
    "file": "items/glossy_mineral_chestplate.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "GLOSSY_MINERAL_TALISMAN": {
    "file": "items/glossy_mineral_talisman.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "GOBLIN_OMELETTE_BLUE_CHEESE": {
    "file": "items/goblin_omelette_blue_cheese.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "GOBLIN_OMELETTE_SUNNY_SIDE": {
    "file": "items/goblin_omelette_sunny_side.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "HASTE_ARTIFACT": {
    "file": "items/haste_artifact.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
+  },
+  "HEPHAESTUS_RELIC": {
+   "file": "heads/hephaestus_relic.png",
+   "size": 8,
+   "source": "head"
   },
   "HOT_STUFF": {
    "file": "items/hot_stuff.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "JADERALD": {
    "file": "items/jaderald.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "JADE_BELT": {
    "file": "items/jade_belt.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "JUNGLE_AMULET": {
    "file": "items/jungle_amulet.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "JUNGLE_PICKAXE": {
    "file": "items/jungle_pickaxe.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "MAGIC_8_BALL": {
    "file": "items/magic_8_ball.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "MINERAL_CHESTPLATE": {
    "file": "items/mineral_chestplate.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "MINERAL_TALISMAN": {
    "file": "items/mineral_talisman.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "MITHRIL_DRILL_1": {
    "file": "items/mithril_drill_1.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "MITHRIL_DRILL_2": {
    "file": "items/mithril_drill_2.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "MITHRIL_ORE": {
    "file": "items/mithril_ore.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "PERFECTLY_CUT_FUEL_TANK": {
    "file": "items/perfectly_cut_fuel_tank.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "PERFECT_AMBER_GEM": {
    "file": "items/perfect_amber_gem.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "PERFECT_JADE_GEM": {
    "file": "items/perfect_jade_gem.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "PERFECT_RUBY_GEM": {
    "file": "items/perfect_ruby_gem.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "PERFECT_TOPAZ_GEM": {
    "file": "items/perfect_topaz_gem.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "PERSONAL_COMPACTOR_7000": {
    "file": "items/personal_compactor_7000.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "PETRIFIED_STARFALL": {
    "file": "items/petrified_starfall.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "PET_ITEM_QUICK_CLAW": {
    "file": "items/pet_item_quick_claw.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "POLARVOID_BOOK": {
    "file": "items/polarvoid_book.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "POWER_ARTIFACT": {
    "file": "items/power_artifact.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "POWER_RELIC": {
    "file": "items/power_relic.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "PROMISING_SPADE": {
    "file": "items/promising_spade.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "REAPER_PEPPER": {
    "file": "items/reaper_pepper.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "RECOMBOBULATOR_3000": {
    "file": "items/recombobulator_3000.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "ROCK_GEMSTONE": {
    "file": "items/rock_gemstone.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "ROGUE_SWORD": {
    "file": "items/rogue_sword.png",
-   "size": 16
-  },
-  "ROUGH_AMETHYST_GEM": {
-   "file": "items/rough_amethyst_gem.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "RUBY_POLISHED_DRILL_ENGINE": {
    "file": "items/ruby_polished_drill_engine.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "SAPPHIRE_CLOAK": {
    "file": "items/sapphire_cloak.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "SAPPHIRE_POLISHED_DRILL_ENGINE": {
    "file": "items/sapphire_polished_drill_engine.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
+  },
+  "SPEED_RELIC": {
+   "file": "heads/speed_relic.png",
+   "size": 8,
+   "source": "head"
   },
   "TITANIUM_DRILL_1": {
    "file": "items/titanium_drill_1.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "TITANIUM_DRILL_2": {
    "file": "items/titanium_drill_2.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "TITANIUM_DRILL_3": {
    "file": "items/titanium_drill_3.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "TITANIUM_DRILL_4": {
    "file": "items/titanium_drill_4.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "TITANIUM_DRILL_ENGINE": {
    "file": "items/titanium_drill_engine.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "TITANIUM_FUEL_TANK": {
    "file": "items/titanium_fuel_tank.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "TITANIUM_RELIC": {
    "file": "items/titanium_relic.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "TUNGSTEN": {
    "file": "items/tungsten.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
   },
   "UMBER": {
    "file": "items/umber.png",
-   "size": 16
+   "size": 16,
+   "source": "furfsky"
+  },
+  "UNALLOYED_SPEED": {
+   "file": "heads/unalloyed_speed.png",
+   "size": 8,
+   "source": "head"
+  },
+  "WEIRDER_TUBA": {
+   "file": "hypixel/weirder_tuba.png",
+   "size": 16,
+   "source": "hypixel"
+  },
+  "WILL_O_WISP": {
+   "file": "heads/will_o_wisp.png",
+   "size": 8,
+   "source": "head"
   }
  },
  "hotm": {
-  "10_1_disabled": "hotm/hotm_10_1_disabled.png",
   "10_1_locked": "hotm/hotm_10_1_locked.png",
-  "10_1_maxed": "hotm/hotm_10_1_maxed.png",
-  "10_2_disabled": "hotm/hotm_three_fork_disabled.png",
-  "10_2_locked": "hotm/hotm_three_fork_locked.png",
-  "10_2_maxed": "hotm/hotm_three_fork_maxed.png",
-  "10_2_unlocked": "hotm/hotm_three_fork_glacite.png",
-  "10_3_disabled": "hotm/hotm_horizontal_disabled.png",
-  "10_3_locked": "hotm/hotm_horizontal_locked.png",
-  "10_3_maxed": "hotm/hotm_horizontal_maxed.png",
-  "10_3_unlocked": "hotm/hotm_horizontal_glacite.png",
-  "10_4_disabled": "hotm/hotm_three_fork_disabled.png",
-  "10_4_locked": "hotm/hotm_three_fork_locked.png",
-  "10_4_maxed": "hotm/hotm_three_fork_maxed.png",
-  "10_4_unlocked": "hotm/hotm_three_fork_glacite.png",
-  "10_5_disabled": "hotm/hotm_horizontal_disabled.png",
-  "10_5_locked": "hotm/hotm_horizontal_locked.png",
-  "10_5_maxed": "hotm/hotm_horizontal_maxed.png",
-  "10_5_unlocked": "hotm/hotm_horizontal_glacite.png",
-  "10_6_disabled": "hotm/hotm_three_fork_disabled.png",
-  "10_6_locked": "hotm/hotm_three_fork_locked.png",
-  "10_6_maxed": "hotm/hotm_three_fork_maxed.png",
-  "10_6_unlocked": "hotm/hotm_three_fork_glacite.png",
-  "10_7_disabled": "hotm/hotm_10_7_disabled.png",
   "10_7_locked": "hotm/hotm_10_7_locked.png",
-  "10_7_maxed": "hotm/hotm_10_7_maxed.png",
-  "1_4_disabled": "hotm/hotm_1_4_disabled.png",
-  "1_4_locked": "hotm/hotm_1_4_locked.png",
   "1_4_maxed": "hotm/hotm_1_4_maxed.png",
-  "1_4_unlocked": "hotm/hotm_1_4_unlocked.png",
-  "2_2_disabled": "hotm/hotm_2_2_disabled.png",
   "2_2_locked": "hotm/hotm_2_2_locked.png",
   "2_2_maxed": "hotm/hotm_2_2_maxed.png",
-  "2_3_disabled": "hotm/hotm_horizontal_disabled.png",
-  "2_3_locked": "hotm/hotm_horizontal_locked.png",
-  "2_3_maxed": "hotm/hotm_horizontal_maxed.png",
-  "2_4_disabled": "hotm/hotm_four_fork_disabled.png",
-  "2_4_locked": "hotm/hotm_four_fork_locked.png",
-  "2_4_maxed": "hotm/hotm_four_fork_maxed.png",
-  "2_4_unlocked": "hotm/hotm_four_fork_mithril.png",
-  "2_5_disabled": "hotm/hotm_horizontal_disabled.png",
-  "2_5_locked": "hotm/hotm_horizontal_locked.png",
-  "2_5_maxed": "hotm/hotm_horizontal_maxed.png",
-  "2_5_unlocked": "hotm/hotm_horizontal_mithril.png",
-  "2_6_disabled": "hotm/hotm_2_6_disabled.png",
   "2_6_locked": "hotm/hotm_2_6_locked.png",
-  "2_6_maxed": "hotm/hotm_2_6_maxed.png",
-  "3_2_disabled": "hotm/hotm_vertical_disabled.png",
-  "3_2_locked": "hotm/hotm_vertical_locked.png",
-  "3_2_maxed": "hotm/hotm_vertical_maxed.png",
-  "3_2_unlocked": "hotm/hotm_vertical_mithril_blend.png",
-  "3_4_disabled": "hotm/hotm_vertical_disabled.png",
-  "3_4_locked": "hotm/hotm_vertical_locked.png",
-  "3_4_maxed": "hotm/hotm_vertical_maxed.png",
-  "3_4_unlocked": "hotm/hotm_vertical_mithril_blend.png",
-  "3_6_disabled": "hotm/hotm_vertical_disabled.png",
-  "3_6_locked": "hotm/hotm_vertical_locked.png",
-  "3_6_maxed": "hotm/hotm_vertical_maxed.png",
-  "3_6_unlocked": "hotm/hotm_vertical_mithril_blend.png",
-  "4_1_disabled": "hotm/hotm_horizontal_disabled_left.png",
-  "4_1_locked": "hotm/hotm_horizontal_locked_left.png",
-  "4_1_maxed": "hotm/hotm_horizontal_maxed_left.png",
-  "4_2_disabled": "hotm/hotm_four_fork_disabled.png",
-  "4_2_locked": "hotm/hotm_four_fork_locked.png",
-  "4_2_maxed": "hotm/hotm_four_fork_maxed.png",
-  "4_2_unlocked": "hotm/hotm_four_fork_gemstone.png",
-  "4_3_disabled": "hotm/hotm_horizontal_disabled.png",
-  "4_3_locked": "hotm/hotm_horizontal_locked.png",
-  "4_3_maxed": "hotm/hotm_horizontal_maxed.png",
-  "4_3_unlocked": "hotm/hotm_horizontal_gemstone.png",
-  "4_4_disabled": "hotm/hotm_four_fork_disabled.png",
-  "4_4_locked": "hotm/hotm_four_fork_locked.png",
-  "4_4_maxed": "hotm/hotm_four_fork_maxed.png",
-  "4_4_unlocked": "hotm/hotm_four_fork_gemstone.png",
-  "4_5_disabled": "hotm/hotm_horizontal_disabled.png",
-  "4_5_locked": "hotm/hotm_horizontal_locked.png",
-  "4_5_maxed": "hotm/hotm_horizontal_maxed.png",
-  "4_5_unlocked": "hotm/hotm_horizontal_gemstone.png",
-  "4_6_disabled": "hotm/hotm_four_fork_disabled.png",
-  "4_6_locked": "hotm/hotm_four_fork_locked.png",
-  "4_6_maxed": "hotm/hotm_four_fork_maxed.png",
-  "4_6_unlocked": "hotm/hotm_four_fork_gemstone.png",
-  "4_7_disabled": "hotm/hotm_horizontal_disabled_right.png",
-  "4_7_locked": "hotm/hotm_horizontal_locked_right.png",
-  "4_7_maxed": "hotm/hotm_horizontal_maxed_right.png",
-  "5_2_disabled": "hotm/hotm_vertical_disabled.png",
-  "5_2_locked": "hotm/hotm_vertical_locked.png",
-  "5_2_maxed": "hotm/hotm_vertical_maxed.png",
-  "5_4_eight": "hotm/hotm_core_eight.png",
   "5_4_five": "hotm/hotm_core_five.png",
-  "5_4_four": "hotm/hotm_core_four.png",
-  "5_4_locked": "hotm/hotm_core_locked.png",
-  "5_4_nine": "hotm/hotm_core_nine.png",
-  "5_4_one": "hotm/hotm_core_one.png",
   "5_4_seven": "hotm/hotm_core_seven.png",
-  "5_4_six": "hotm/hotm_core_six.png",
   "5_4_ten": "hotm/hotm_core_ten.png",
-  "5_4_three": "hotm/hotm_core_three.png",
-  "5_4_two": "hotm/hotm_core_two.png",
-  "5_6_disabled": "hotm/hotm_vertical_disabled.png",
-  "5_6_locked": "hotm/hotm_vertical_locked.png",
-  "5_6_maxed": "hotm/hotm_vertical_maxed.png",
-  "6_1_disabled": "hotm/hotm_6_1_disabled.png",
   "6_1_locked": "hotm/hotm_6_1_locked.png",
-  "6_1_maxed": "hotm/hotm_6_1_maxed.png",
-  "6_2_disabled": "hotm/hotm_four_fork_disabled.png",
-  "6_2_locked": "hotm/hotm_four_fork_locked.png",
-  "6_2_maxed": "hotm/hotm_four_fork_maxed.png",
-  "6_2_unlocked": "hotm/hotm_four_fork_gemstone.png",
-  "6_3_disabled": "hotm/hotm_horizontal_disabled.png",
-  "6_3_locked": "hotm/hotm_horizontal_locked.png",
-  "6_3_maxed": "hotm/hotm_horizontal_maxed.png",
-  "6_3_unlocked": "hotm/hotm_horizontal_gemstone.png",
-  "6_4_disabled": "hotm/hotm_four_fork_disabled.png",
-  "6_4_locked": "hotm/hotm_four_fork_locked.png",
-  "6_4_maxed": "hotm/hotm_four_fork_maxed.png",
-  "6_4_unlocked": "hotm/hotm_four_fork_gemstone.png",
-  "6_5_disabled": "hotm/hotm_horizontal_disabled.png",
-  "6_5_locked": "hotm/hotm_horizontal_locked.png",
-  "6_5_maxed": "hotm/hotm_horizontal_maxed.png",
-  "6_5_unlocked": "hotm/hotm_horizontal_gemstone.png",
-  "6_6_disabled": "hotm/hotm_four_fork_disabled.png",
-  "6_6_locked": "hotm/hotm_four_fork_locked.png",
-  "6_6_maxed": "hotm/hotm_four_fork_maxed.png",
-  "6_6_unlocked": "hotm/hotm_four_fork_gemstone.png",
-  "6_7_disabled": "hotm/hotm_6_7_disabled.png",
   "6_7_locked": "hotm/hotm_6_7_locked.png",
   "6_7_maxed": "hotm/hotm_6_7_maxed.png",
-  "7_2_disabled": "hotm/hotm_7_2_disabled.png",
-  "7_2_locked": "hotm/hotm_7_2_locked.png",
   "7_2_maxed": "hotm/hotm_7_2_maxed.png",
-  "7_2_unlocked": "hotm/hotm_7_2_unlocked.png",
-  "7_4_disabled": "hotm/hotm_7_4_disabled.png",
   "7_4_locked": "hotm/hotm_7_4_locked.png",
   "7_4_maxed": "hotm/hotm_7_4_maxed.png",
   "7_4_unlocked": "hotm/hotm_7_4_unlocked.png",
-  "7_6_disabled": "hotm/hotm_7_6_disabled.png",
-  "7_6_locked": "hotm/hotm_7_6_locked.png",
-  "7_6_maxed": "hotm/hotm_7_6_maxed.png",
-  "7_6_unlocked": "hotm/hotm_7_6_unlocked.png",
-  "8_1_disabled": "hotm/hotm_horizontal_disabled_left.png",
-  "8_1_locked": "hotm/hotm_horizontal_locked_left.png",
-  "8_1_maxed": "hotm/hotm_horizontal_maxed_left.png",
-  "8_2_disabled": "hotm/hotm_four_fork_disabled.png",
-  "8_2_locked": "hotm/hotm_four_fork_locked.png",
-  "8_2_maxed": "hotm/hotm_four_fork_maxed.png",
-  "8_2_unlocked": "hotm/hotm_four_fork_glacite.png",
-  "8_3_disabled": "hotm/hotm_horizontal_disabled.png",
-  "8_3_locked": "hotm/hotm_horizontal_locked.png",
-  "8_3_maxed": "hotm/hotm_horizontal_maxed.png",
-  "8_3_unlocked": "hotm/hotm_horizontal_glacite.png",
-  "8_4_disabled": "hotm/hotm_four_fork_disabled.png",
-  "8_4_locked": "hotm/hotm_four_fork_locked.png",
-  "8_4_maxed": "hotm/hotm_four_fork_maxed.png",
-  "8_4_unlocked": "hotm/hotm_four_fork_glacite.png",
-  "8_5_disabled": "hotm/hotm_horizontal_disabled.png",
-  "8_5_locked": "hotm/hotm_horizontal_locked.png",
-  "8_5_maxed": "hotm/hotm_horizontal_maxed.png",
-  "8_5_unlocked": "hotm/hotm_horizontal_glacite.png",
-  "8_6_disabled": "hotm/hotm_four_fork_disabled.png",
-  "8_6_locked": "hotm/hotm_four_fork_locked.png",
-  "8_6_maxed": "hotm/hotm_four_fork_maxed.png",
-  "8_6_unlocked": "hotm/hotm_four_fork_glacite.png",
-  "8_7_disabled": "hotm/hotm_horizontal_disabled_right.png",
-  "8_7_locked": "hotm/hotm_horizontal_locked_right.png",
-  "8_7_maxed": "hotm/hotm_horizontal_maxed_right.png",
-  "9_2_disabled": "hotm/hotm_vertical_disabled.png",
-  "9_2_locked": "hotm/hotm_vertical_locked.png",
-  "9_2_maxed": "hotm/hotm_vertical_maxed.png",
-  "9_2_unlocked": "hotm/hotm_vertical_glacite.png",
-  "9_4_disabled": "hotm/hotm_vertical_disabled.png",
-  "9_4_locked": "hotm/hotm_vertical_locked.png",
-  "9_4_maxed": "hotm/hotm_vertical_maxed.png",
-  "9_4_unlocked": "hotm/hotm_vertical_glacite.png",
-  "9_6_disabled": "hotm/hotm_vertical_disabled.png",
-  "9_6_locked": "hotm/hotm_vertical_locked.png",
-  "9_6_maxed": "hotm/hotm_vertical_maxed.png",
-  "9_6_unlocked": "hotm/hotm_vertical_glacite.png"
+  "7_6_maxed": "hotm/hotm_7_6_maxed.png"
  }
 }
