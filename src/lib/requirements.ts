@@ -66,42 +66,46 @@ export function subtitle(r: Requirement | LeafRequirement): string | undefined {
 
 export interface ModifierLine {
   label: string;
-  values: string[];
+  values: { text: string; mod: Modifier }[];
 }
+
+/** The text for one item upgrade. */
+export function modifierText(m: Modifier): string {
+  switch (m.kind) {
+    case "recomb":
+      return "Recombobulated";
+    case "reforge": {
+      const stone = reforgeStone(m.id, m.stone);
+      return `${titleCase(m.id)} reforge${stone ? ` (${stone})` : ""}`;
+    }
+    case "applied":
+      return (m.count > 1 ? `${m.count}x ` : "") + itemName(m.item);
+    case "gem":
+      return `${m.count > 1 ? `${m.count} ` : ""}${quality(m.quality)} ${quality(m.gem)}`;
+    case "drill_part":
+      return itemName(m.item);
+    case "enchant":
+      return `${titleCase(m.id)} ${ROMAN[m.level] ?? m.level}`;
+    case "note":
+      return m.text;
+  }
+}
+
+const LINE: Record<Modifier["kind"], string> = {
+  recomb: "Upgrades",
+  reforge: "Upgrades",
+  applied: "Upgrades",
+  gem: "Gemstones",
+  drill_part: "Parts",
+  enchant: "Enchants",
+  note: "Notes",
+};
 
 /** Item upgrades grouped into short labelled lines. */
 export function modifierLines(mods: Modifier[]): ModifierLine[] {
-  const lines: Record<string, string[]> = { Upgrades: [], Gemstones: [], Parts: [], Enchants: [], Notes: [] };
-  for (const m of mods) {
-    switch (m.kind) {
-      case "recomb":
-        lines.Upgrades!.push("Recombobulated");
-        break;
-      case "reforge": {
-        const stone = reforgeStone(m.id, m.stone);
-        lines.Upgrades!.push(`${titleCase(m.id)} reforge${stone ? ` (${stone})` : ""}`);
-        break;
-      }
-      case "applied":
-        lines.Upgrades!.push((m.count > 1 ? `${m.count}x ` : "") + itemName(m.item));
-        break;
-      case "gem":
-        lines.Gemstones!.push(`${m.count > 1 ? `${m.count} ` : ""}${quality(m.quality)} ${quality(m.gem)}`);
-        break;
-      case "drill_part":
-        lines.Parts!.push(itemName(m.item));
-        break;
-      case "enchant":
-        lines.Enchants!.push(`${titleCase(m.id)} ${ROMAN[m.level] ?? m.level}`);
-        break;
-      case "note":
-        lines.Notes!.push(m.text);
-        break;
-    }
-  }
-  return Object.entries(lines)
-    .filter(([, v]) => v.length)
-    .map(([label, values]) => ({ label, values }));
+  const lines = new Map<string, ModifierLine["values"]>(["Upgrades", "Gemstones", "Parts", "Enchants", "Notes"].map((l) => [l, []]));
+  for (const m of mods) lines.get(LINE[m.kind])!.push({ text: modifierText(m), mod: m });
+  return [...lines].filter(([, v]) => v.length).map(([label, values]) => ({ label, values }));
 }
 
 export function modifiersOf(r: Requirement | LeafRequirement): Modifier[] {

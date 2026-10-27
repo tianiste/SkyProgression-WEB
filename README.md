@@ -87,7 +87,23 @@ Create `src/content/trees/<tree-id>.yaml` with `status: published`, the `author`
 The site is static and hosted on Cloudflare Pages: build command `npm run build`, output directory `dist`.
 `public/_redirects` holds the redirects. CI builds every push and runs Lighthouse on a guide page.
 
+## Icons
+
+Item and HOTM textures come from the [FurfSky Reborn](https://furfsky.net) resource pack, used with the FurfSky Reborn
+team's permission. Icons are keyed by Hypixel IDs in `src/data/icon-map.json` and `src/data/icons.generated.json`, so
+guide data never names an icon. To add or change icons, edit `icon-map.json` (or add items to a guide), download the
+pack from [Modrinth](https://modrinth.com/resourcepack/furfsky-reborn), unzip it outside the repo and run:
+
+```sh
+node scripts/import-icons.mjs <path to the unzipped pack>
+```
+
+The script copies only the textures the site uses into `public/icons/` and lists the IDs that fall back to the site's
+own icons.
+
 ## License
 
-Code: [MIT](LICENSE). Guide text belongs to its authors and is published with their permission. Pixelify Sans is
-under the SIL Open Font License (`public/fonts/OFL.txt`). Not affiliated with Hypixel or Mojang.
+The [MIT License](LICENSE) covers the code and the project's own content (logo, stat symbols, fallback icons). It does
+not cover the FurfSky Reborn textures in `public/icons/`, which belong to the FurfSky Reborn team, or the guide text,
+which belongs to its authors and is published with their permission. Pixelify Sans is under the SIL Open Font License
+(`public/fonts/OFL.txt`). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Not affiliated with Hypixel or Mojang.

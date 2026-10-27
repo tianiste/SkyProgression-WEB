@@ -2,6 +2,8 @@
 /** Guides grouped by category, each category marked with the colour of its material. */
 import { getCollection } from "astro:content";
 import { CATEGORIES } from "../lib/categories";
+import { categoryIcon, guideIcon } from "../lib/icons";
+import Icon from "./Icon.astro";
 
 interface Props {
   headingLevel?: 2 | 3;
@@ -19,14 +21,17 @@ const groups = CATEGORIES.map((c) => ({ ...c, guides: guides.filter((g) => g.dat
     groups.map((c) => (
       <section class="category" id={c.id} data-category={c.id} aria-labelledby={`cat-${c.id}`}>
         <H id={`cat-${c.id}`} class="cat-title">
-          <span class="swatch" style={`--swatch:${c.swatch}`} aria-hidden="true" />
+          <Icon icon={categoryIcon(c.id)} size={32} />
           {c.label}
         </H>
         <ul>
           {c.guides.map((g) => (
             <li>
-              <a href={`/guides/${g.id}/`}>{g.data.title}</a>
-              {showSummary && <span class="summary">{g.data.summary}</span>}
+              <Icon icon={guideIcon(g.id)} size={32} />
+              <div>
+                <a href={`/guides/${g.id}/`}>{g.data.title}</a>
+                {showSummary && <span class="summary">{g.data.summary}</span>}
+              </div>
             </li>
           ))}
         </ul>
@@ -50,21 +55,20 @@ const groups = CATEGORIES.map((c) => ({ ...c, guides: guides.filter((g) => g.dat
     font-size: var(--step-2);
     margin: 1.5rem 0 0.5rem;
   }
-  .swatch {
-    width: 14px;
-    height: 14px;
-    background: var(--swatch);
-    box-shadow: inset -3px -3px 0 rgb(0 0 0 / 0.3), inset 3px 3px 0 rgb(255 255 255 / 0.3);
-    flex: none;
-  }
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
     padding: 0.55rem 0;
     border-top: 1px solid var(--line);
+  }
+  li > div {
+    padding-top: 0.2rem;
   }
   li a {
     font-weight: 600;

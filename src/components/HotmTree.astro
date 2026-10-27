@@ -1,10 +1,11 @@
 ---
 /**
- * A Heart of the Mountain tree drawn from data: 7 columns x 10 tiers, tier 10 at the top. Each perk is a button that
- * opens a popover with its name and level (works with mouse, keyboard and touch, no script). The same information is
- * listed as text below the grid.
+ * A Heart of the Mountain tree drawn from data with the FurfSky Reborn HOTM pieces: 7 columns x 10 tiers, tier 10 at
+ * the top, each perk drawn with the piece for its position and state. Each perk is a button that opens a popover with
+ * its name and level (mouse, keyboard and touch, no script); the same information is listed as text below.
  */
 import { PERKS, tierOf, type Perk } from "../data/perks";
+import { hotmPiece } from "../lib/icons";
 
 interface Props {
   id: string;
@@ -39,39 +40,62 @@ const STATE_TEXT: Record<State, string> = {
   core: "Core of the Mountain",
 };
 
+const WORDS = ["locked", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+const coreLevel = typeof perks.core_of_the_mountain === "number" ? perks.core_of_the_mountain : perks.core_of_the_mountain === "max" ? 10 : 0;
+
+/** FurfSky piece states to try, best first. */
+const PIECE: Record<State, string> = {
+  max: "maxed",
+  bridge: "unlocked|maxed",
+  level: "unlocked|maxed",
+  none: "locked",
+  selected: "maxed|unlocked",
+  ability: "locked",
+  disabled: "disabled",
+  core: WORDS[coreLevel] ?? "locked",
+};
+
 function levelText(p: Perk, s: State): string {
   const v = perks[p.id];
   if (s === "max") return `${p.max} / ${p.max}`;
   if (s === "level" && typeof v === "number") return `${v} / ${p.max}`;
   if (s === "bridge") return `low level, max ${p.max}`;
   if (s === "none") return `max ${p.max}`;
-  if (s === "core") return "level not shown in the picture";
+  if (s === "core") return coreLevel > 1 ? `level ${coreLevel} / 10` : "level not shown in the picture";
   return "";
 }
 
-const cells = PERKS.map((p) => ({ perk: p, state: stateOf(p) }));
+const cells = PERKS.map((p) => ({ perk: p, state: stateOf(p), src: hotmPiece(p.id, PIECE[stateOf(p)]) }));
 const groups: State[] = ["selected", "max", "level", "bridge", "disabled"];
+const legend: { state: State; perk: string; text: string }[] = [
+  { state: "max", perk: "strong_arm", text: "Maxed" },
+  { state: "bridge", perk: "strong_arm", text: "Unlocked to reach others" },
+  { state: "none", perk: "strong_arm", text: "Not taken" },
+  { state: "selected", perk: "mining_speed_boost", text: "Selected ability (lit)" },
+  { state: "ability", perk: "mining_speed_boost", text: "Other ability (dark)" },
+];
 ---
 
 <figure class="hotm" aria-label={label}>
   <div class="grid" role="group" aria-label={`${label}, perk grid`}>
     {
-      cells.map(({ perk, state }) => {
+      cells.map(({ perk, state, src }) => {
         const pid = `${id}-${perk.id}`;
+        const text = `${STATE_TEXT[state]}${levelText(perk, state) ? `, ${levelText(perk, state)}` : ""}`;
         return (
           <>
             <button
-              class={`cell ${state}`}
+              class={`cell ${state}${src ? " piece" : ""}`}
               style={`grid-column:${perk.x + 1};grid-row:${perk.y + 1}`}
               popovertarget={pid}
-              aria-label={`${perk.name}: ${STATE_TEXT[state]}`}
+              aria-label={`${perk.name}: ${text}`}
               title={perk.name}
             >
-              <span class="glyph" aria-hidden="true" />
+              {src ? <img class="pixelated" src={src} width="32" height="32" alt="" loading="lazy" decoding="async" /> : <span class="glyph" aria-hidden="true" />}
             </button>
             <div id={pid} popover class="tip">
               <strong>{perk.name}</strong>
-              <span>{`Tier ${tierOf(perk)}. ${STATE_TEXT[state]}${levelText(perk, state) ? `, ${levelText(perk, state)}` : ""}.`}</span>
+              <span>{`Tier ${tierOf(perk)}. ${text}.`}</span>
             </div>
           </>
         );
@@ -80,13 +104,22 @@ const groups: State[] = ["selected", "max", "level", "bridge", "disabled"];
   </div>
   <figcaption>
     <ul class="legend">
-      <li><span class="cell max" aria-hidden="true"><span class="glyph"></span></span>Maxed</li>
-      <li><span class="cell bridge" aria-hidden="true"><span class="glyph"></span></span>Unlocked to reach others</li>
-      <li><span class="cell none" aria-hidden="true"><span class="glyph"></span></span>Not taken</li>
-      <li><span class="cell selected" aria-hidden="true"><span class="glyph"></span></span>Selected ability</li>
-      <li><span class="cell ability" aria-hidden="true"><span class="glyph"></span></span>Other ability</li>
-      <li><span class="cell core" aria-hidden="true"><span class="glyph"></span></span>Core of the Mountain</li>
+      {
+        legend.map((l) => (
+          <li>
+            <span class="swatch-box">
+              {hotmPiece(l.perk, PIECE[l.state]) ? (
+                <img class="pixelated" src={hotmPiece(l.perk, PIECE[l.state])} width="32" height="32" alt="" />
+              ) : (
+                <span class={`cell ${l.state}`} aria-hidden="true"><span class="glyph" /></span>
+              )}
+            </span>
+            {l.text}
+          </li>
+        ))
+      }
     </ul>
+    <p class="muted">Round tiles are the FurfSky Reborn HOTM icons for abilities, Core of the Mountain and key perks.</p>
     <details class="perk-list">
       <summary>Perks as a list</summary>
       <dl>
@@ -101,6 +134,8 @@ const groups: State[] = ["selected", "max", "level", "bridge", "disabled"];
             ) : null;
           })
         }
+        <dt>Core of the Mountain</dt>
+        <dd>{coreLevel > 1 ? `Level ${coreLevel}` : "Level not shown in the picture"}</dd>
       </dl>
     </details>
   </figcaption>
@@ -111,96 +146,82 @@ const groups: State[] = ["selected", "max", "level", "bridge", "disabled"];
     margin: 1rem 0 1.5rem;
     max-width: 24rem;
   }
+  /* The pieces are drawn for a dark menu, so the panel stays dark in both themes. */
   .grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(10, auto);
-    gap: 4px;
-    padding: 8px;
-    background: var(--surface);
-    border: 1px solid var(--line);
+    grid-template-columns: repeat(7, 32px);
+    grid-template-rows: repeat(10, 32px);
+    width: max-content;
+    padding: 12px;
+    background: #1c1e26;
+    border: 2px solid #3a3e4c;
     border-radius: var(--radius);
   }
   .cell {
-    aspect-ratio: 1;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+  }
+  .cell img {
+    display: block;
+  }
+  .cell:hover {
+    background: rgb(255 255 255 / 0.12);
+  }
+  .cell:focus-visible {
+    outline: 2px solid #4fe3ec;
+    outline-offset: -2px;
+  }
+  /* Ordinary perks: a square whose colour and shape both show the state. */
+  .cell:not(.piece) {
+    margin: 4px;
+    width: 24px;
+    height: 24px;
     display: grid;
     place-items: center;
-    padding: 0;
-    border: 2px solid var(--line);
-    border-radius: 0;
-    background: var(--surface-2);
-    cursor: pointer;
-    min-width: 0;
-  }
-  .grid .cell:hover {
-    border-color: var(--text);
+    border: 2px solid #3a3e4c;
+    background: #2b2f3c;
   }
   .glyph {
     display: block;
     width: 50%;
     height: 50%;
   }
-  /* Shape and colour both carry the state. */
-  .cell.max {
-    background: var(--accent);
-    border-color: var(--accent);
+  .cell.max:not(.piece) {
+    background: #4fe3ec;
+    border-color: #4fe3ec;
   }
   .cell.max .glyph {
-    background: var(--accent-ink);
+    background: #1c1e26;
     clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-    width: 40%;
-    height: 40%;
   }
-  .cell.level,
-  .cell.bridge {
-    border-color: var(--xp);
+  .cell.bridge:not(.piece),
+  .cell.level:not(.piece) {
+    border-color: #8ef04a;
   }
   .cell.bridge .glyph {
     width: 30%;
     height: 30%;
-    background: var(--xp);
+    background: #8ef04a;
   }
   .cell.level .glyph {
-    background: var(--xp);
     width: 60%;
     height: 60%;
+    background: #8ef04a;
   }
-  .cell.none {
+  .cell.none:not(.piece) {
     border-style: dashed;
     background: transparent;
   }
-  .cell.selected {
-    background: var(--gold);
-    border-color: var(--gold);
-  }
-  .cell.selected .glyph {
-    border: 3px solid var(--accent-ink);
-    border-radius: 50%;
-  }
-  .cell.ability {
-    border-color: var(--gold);
-    background: transparent;
-  }
-  .cell.ability .glyph {
-    border: 2px solid var(--gold);
-    border-radius: 50%;
-    width: 40%;
-    height: 40%;
-  }
-  .cell.disabled {
-    border-color: var(--core);
+  .cell.disabled:not(.piece) {
+    border-color: #d4524a;
   }
   .cell.disabled .glyph {
-    background: linear-gradient(45deg, transparent 42%, var(--core) 42% 58%, transparent 58%);
-  }
-  .cell.core {
-    background: var(--core);
-    border-color: var(--core);
-  }
-  .cell.core .glyph {
-    background: var(--bg);
-    width: 30%;
-    height: 30%;
+    background: linear-gradient(45deg, transparent 42%, #d4524a 42% 58%, transparent 58%);
   }
   .tip {
     margin: auto;
@@ -223,22 +244,32 @@ const groups: State[] = ["selected", "max", "level", "bridge", "disabled"];
     margin-top: 0.75rem;
     font-size: var(--step--1);
   }
+  figcaption p {
+    margin: 0 0 0.5rem;
+  }
   .legend {
     list-style: none;
     padding: 0;
     margin: 0 0 0.5rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
-    gap: 0.35rem 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+    gap: 0.25rem 1rem;
   }
   .legend li {
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
-  .legend .cell {
-    width: 1.1rem;
+  .swatch-box {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
     flex: none;
+    background: #1c1e26;
+    border-radius: 2px;
+  }
+  .swatch-box .cell {
     cursor: default;
   }
   .perk-list summary {

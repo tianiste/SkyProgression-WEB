@@ -3,6 +3,12 @@ import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import ReferenceNav from "../../components/ReferenceNav.astro";
 import Credit from "../../components/Credit.astro";
+import Icon from "../../components/Icon.astro";
+import { STAT_GLYPHS, groupIcon, type Icon as IconT } from "../../lib/icons";
+
+/** The stat sheet groups sources by a word; map it to the guide gear groups for an icon. */
+const SOURCE_GROUP: Record<string, string> = { Gear: "drill", Equipment: "equipment", Pets: "pet", HOTM: "hotm", Accessories: "accessories", Attributes: "attributes", Temporary: "consumables", Consumables: "consumables", Other: "progress" };
+const sourceIcon = (g: string): IconT => (g === "HOTM" ? { kind: "glyph", glyph: "skill" } : groupIcon(SOURCE_GROUP[g] ?? "other"));
 
 const stats = (await getCollection("stats")).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -17,14 +23,14 @@ const stats = (await getCollection("stats")).sort((a, b) => a.data.order - b.dat
   </p>
   <nav aria-label="Stats on this page">
     <ul class="jump">
-      {stats.map((s) => <li><a href={`#${s.id}`}>{s.data.name}</a></li>)}
+      {stats.map((s) => <li><Icon icon={{ kind: "glyph", glyph: (STAT_GLYPHS[s.id] ?? ["fortune"])[0]! }} size={16} /><a href={`#${s.id}`}>{s.data.name}</a></li>)}
     </ul>
   </nav>
 
   {
     stats.map((s) => (
       <section id={s.id} aria-labelledby={`${s.id}-title`}>
-        <h2 id={`${s.id}-title`}>{s.data.name}</h2>
+        <h2 id={`${s.id}-title`} class="stat-title">{(STAT_GLYPHS[s.id] ?? []).map((g) => <Icon icon={{ kind: "glyph", glyph: g }} size={32} />)}{s.data.name}</h2>
         {s.data.summary && <p class="muted">{s.data.summary}</p>}
         {s.data.totals.length > 0 && (
           <dl class="totals">
@@ -48,7 +54,7 @@ const stats = (await getCollection("stats")).sort((a, b) => a.data.order - b.dat
           <tbody>
             {s.data.sources.map((r) => (
               <tr>
-                <td data-label="Type" class="muted">{r.group}</td>
+                <td data-label="Type" class="muted type"><Icon icon={sourceIcon(r.group)} size={16} />{r.group}</td>
                 <td data-label="Source">{r.source}</td>
                 <td data-label="Value" class="num"><strong>{r.value}</strong></td>
                 <td data-label="Notes" class="muted">{r.note ?? ""}</td>
@@ -70,6 +76,22 @@ const stats = (await getCollection("stats")).sort((a, b) => a.data.order - b.dat
     flex-wrap: wrap;
     gap: 0.25rem 1.25rem;
     font-size: var(--step--1);
+  }
+  .stat-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .jump li {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .type {
+    white-space: nowrap;
+  }
+  .type :global(.icon) {
+    margin-right: 0.35rem;
   }
   .totals {
     display: grid;

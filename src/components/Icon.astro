@@ -1,0 +1,104 @@
+---
+/**
+ * One icon: a FurfSky texture, a plain block in a material colour, or one of the site's own 8x8 pixel glyphs.
+ * Textures scale by whole numbers only. Icons sit next to visible text, so they are hidden from screen readers unless
+ * a label is given.
+ */
+import type { Glyph, Icon } from "../lib/icons";
+
+interface Props {
+  icon: Icon;
+  /** Display size in CSS pixels, a whole multiple of 16. */
+  size?: 16 | 32 | 48 | 64;
+  label?: string;
+  class?: string;
+}
+
+const { icon, size = 32, label, class: cls } = Astro.props;
+
+/** 8x8 glyphs, "#" = filled. Drawn for this site. */
+const GLYPHS: Record<Glyph, string[]> = {
+  item: ["........", ".######.", ".#....#.", ".######.", ".#.##.#.", ".#....#.", ".######.", "........"],
+  pet: [".##..##.", ".##..##.", "........", "#..##..#", "#..##..#", "..####..", ".######.", ".######."],
+  shard: ["....##..", "...####.", "...####.", "..####..", "..###...", ".####...", ".###....", "..#....."],
+  book: [".######.", ".#....##", ".#.##.##", ".#....##", ".#.##.##", ".#....##", ".######.", "..######"],
+  note: ["..####..", ".#....#.", ".#.##.#.", ".#....#.", ".#.##.#.", ".#....#.", ".######.", "........"],
+  skill: [".######.", "#..##..#", "...##...", "...##...", "...##...", "...##...", "...##...", "...##..."],
+  fortune: [".##..##.", "####.###", "####.###", ".##.##..", "...###..", "..##.##.", ".#..###.", "#....#.."],
+  speed: ["..####..", ".#....#.", "#..#...#", "#..#...#", "#..###.#", "#......#", ".#....#.", "..####.."],
+  pristine: ["...#....", "...#....", "..###...", "#######.", "..###...", "...#....", "...#....", "........"],
+  spread: ["####....", "####....", "####....", "####....", "....####", "....####", "....####", "....####"],
+  heat: [".#..#...", "#..#..#.", ".#..#..#", "#..#..#.", "........", "########", ".######.", "..####.."],
+  cold: ["...#....", ".#.#.#..", "..###...", "#######.", "..###...", ".#.#.#..", "...#....", "........"],
+  wisdom: ["..####..", ".##...#.", "####...#", "###.#..#", "##....##", "#....###", ".#..###.", "..####.."],
+};
+const STAT_COLOR: Partial<Record<Glyph, string>> = {
+  fortune: "var(--stat-gold)",
+  speed: "var(--stat-gold)",
+  pristine: "var(--stat-purple)",
+  spread: "var(--stat-yellow)",
+  heat: "var(--stat-red)",
+  cold: "var(--stat-aqua)",
+  wisdom: "var(--stat-aqua)",
+};
+
+const toPath = (rows: string[]) =>
+  rows.flatMap((row, y) => [...row].map((c, x) => (c === "#" ? `M${x} ${y}h1v1h-1z` : ""))).join("");
+
+const hidden = label ? undefined : "true";
+const scale = icon.kind === "texture" ? Math.max(1, Math.round(size / icon.size)) : 1;
+const shown = icon.kind === "texture" ? (icon.size > size ? size : icon.size * scale) : size;
+---
+
+{
+  icon.kind === "texture" ? (
+    <img
+      class:list={["icon", "pixelated", cls]}
+      src={icon.src}
+      width={shown}
+      height={shown}
+      alt={label ?? ""}
+      loading="lazy"
+      decoding="async"
+    />
+  ) : icon.kind === "swatch" ? (
+    <span class:list={["icon", "swatch", cls]} style={`--swatch:${icon.color};--s:${size}px`} role={label ? "img" : undefined} aria-label={label} aria-hidden={hidden} />
+  ) : (
+    <svg
+      class:list={["icon", "glyph", cls]}
+      width={size}
+      height={size}
+      viewBox="-1 -1 10 10"
+      shape-rendering="crispEdges"
+      style={`color:${icon.color ?? STAT_COLOR[icon.glyph] ?? "var(--muted)"}`}
+      role={label ? "img" : undefined}
+      aria-label={label}
+      aria-hidden={hidden}
+    >
+      <path fill="currentColor" d={toPath(GLYPHS[icon.glyph])} />
+    </svg>
+  )
+}
+
+<style>
+  .icon {
+    display: inline-block;
+    flex: none;
+    vertical-align: middle;
+  }
+  .swatch {
+    width: var(--s);
+    height: var(--s);
+    padding: calc(var(--s) / 8);
+    background: var(--swatch) content-box;
+    position: relative;
+  }
+  .swatch::after {
+    content: "";
+    position: absolute;
+    inset: calc(var(--s) / 8);
+    box-shadow:
+      inset -2px -2px 0 rgb(0 0 0 / 0.35),
+      inset 2px 2px 0 rgb(255 255 255 / 0.35);
+  }
+</style>

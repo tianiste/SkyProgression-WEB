@@ -1,0 +1,57 @@
+{
+  "_note": "Which texture stands for each guide, category, gear group, reforge, powder and modifier. A value is a Hypixel item ID (a FurfSky texture) or a #hex colour for a plain block icon. Change icons here, never in guide data. After editing, run: node scripts/import-icons.mjs <unzipped FurfSky Reborn pack>",
+  "guide": {
+    "coal": "#3b3d45",
+    "gold": "#f2c94c",
+    "fairy-grotto": "FLAWLESS_JASPER_GEM",
+    "magma-fields-gemstones": "FLAWLESS_RUBY_GEM",
+    "mineshaft-gemstones": "FLAWLESS_OPAL_GEM",
+    "dwarven-metals": "ENCHANTED_UMBER",
+    "ores": "#4fe3ec",
+    "dwarven-diamond": "#7fe9f0",
+    "mithril": "MITHRIL_ORE",
+    "flint": "FLINT_SHOVEL",
+    "netherrack": "#8a3232",
+    "cobblestone": "#8c8f99",
+    "end-stone": "#e6e2a8",
+    "obsidian": "#3a2a52",
+    "mycelium-red-sand": "ENCHANTED_MYCELIUM_CUBE"
+  },
+  "category": {
+    "gemstones": "PERFECT_RUBY_GEM",
+    "dwarven-metals": "ENCHANTED_TUNGSTEN",
+    "ores": "#f2c94c",
+    "blocks": "#8c8f99",
+    "other": "MITHRIL_ORE"
+  },
+  "group": {
+    "drill": "DIVAN_DRILL",
+    "tools": "ASPECT_OF_THE_VOID",
+    "armor": "DIVAN_CHESTPLATE",
+    "equipment": "DIVAN_PENDANT",
+    "accessories": "POWER_RELIC",
+    "consumables": "FILET_O_FORTUNE",
+    "progress": "ENCHANTED_GLACITE"
+  },
+  "reforgeStone": {
+    "lustrous": "GLEAMING_CRYSTAL",
+    "stellar": "PETRIFIED_STARFALL",
+    "auspicious": "ROCK_GEMSTONE",
+    "heated": "HOT_STUFF",
+    "glacial": "FRIGID_HUSK",
+    "fleet": "DIAMONITE",
+    "ambered": "AMBER_MATERIAL",
+    "jaded": "JADERALD",
+    "blazing": "BLAZEN_SPHERE",
+    "royal": "DWARVEN_TREASURE"
+  },
+  "applied": {
+    "recomb": "RECOMBOBULATOR_3000"
+  },
+  "powder": {
+    "mithril": "MITHRIL_ORE",
+    "gemstone": "ROUGH_AMETHYST_GEM",
+    "glacite": "GLACITE"
+  },
+  "extra": []
+}

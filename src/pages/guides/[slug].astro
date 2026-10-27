@@ -4,6 +4,8 @@ import Base from "../../layouts/Base.astro";
 import Requirement from "../../components/Requirement.astro";
 import HotmTree from "../../components/HotmTree.astro";
 import Credit from "../../components/Credit.astro";
+import Icon from "../../components/Icon.astro";
+import { groupIcon, guideIcon, shardIcon } from "../../lib/icons";
 import { CATEGORIES } from "../../lib/categories";
 import { GEAR_GROUPS, GROUP_LABELS } from "../../lib/requirements";
 import { formatDate, formatPowder } from "../../lib/format";
@@ -21,6 +23,7 @@ const category = CATEGORIES.find((c) => c.id === g.category)!;
 const attributes = await getCollection("attributes");
 const attrById = new Map(attributes.map((a) => [a.id, a.data]));
 const attributeNames = new Map(attributes.map((a) => [a.id, a.data.name]));
+const rarityOf = (id: string) => attrById.get(id)?.rarity;
 
 const reqs = g.requirements;
 const gear = GEAR_GROUPS.map((id) => {
@@ -57,7 +60,7 @@ const toc = [
     <article>
       <header class="guide-head">
         <p class="crumbs"><a href="/guides/">Guides</a> / <a href={`/guides/#${category.id}`}>{category.label}</a></p>
-        <h1>{g.title}</h1>
+        <h1 class="title"><Icon icon={guideIcon(guide.id)} size={64} />{g.title}</h1>
         <p class="lead">{g.summary}</p>
         <p class="byline">
           {
@@ -125,13 +128,13 @@ const toc = [
         {
           gear.map((s) => (
             <section class="gear-group" aria-labelledby={`g-${s.id}`}>
-              <h3 id={`g-${s.id}`}>{s.label}</h3>
+              <h3 id={`g-${s.id}`} class="with-icon"><Icon icon={groupIcon(s.id)} size={32} />{s.label}</h3>
               {(s.budget.length > 0 || s.max.length > 0) && (
                 <div class="tiers">
                   <div class="tier">
                     <h4><span class="tag budget">budget</span></h4>
                     {s.budget.length ? (
-                      <ul class="reqs">{s.budget.map((r) => <Requirement r={r} attributeNames={attributeNames} />)}</ul>
+                      <ul class="reqs">{s.budget.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>
                     ) : (
                       <p class="muted small">Nothing extra for this tier.</p>
                     )}
@@ -139,14 +142,14 @@ const toc = [
                   <div class="tier">
                     <h4><span class="tag max">max</span></h4>
                     {s.max.length ? (
-                      <ul class="reqs">{s.max.map((r) => <Requirement r={r} attributeNames={attributeNames} />)}</ul>
+                      <ul class="reqs">{s.max.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>
                     ) : (
                       <p class="muted small">Same as budget.</p>
                     )}
                   </div>
                 </div>
               )}
-              {s.both.length > 0 && <ul class="reqs">{s.both.map((r) => <Requirement r={r} attributeNames={attributeNames} />)}</ul>}
+              {s.both.length > 0 && <ul class="reqs">{s.both.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>}
             </section>
           ))
         }
@@ -202,7 +205,7 @@ const toc = [
             {hotmReqs.length > 0 && (
               <>
                 <h3>Key perks</h3>
-                <ul class="reqs">{hotmReqs.map((r) => <Requirement r={r} attributeNames={attributeNames} showTier />)}</ul>
+                <ul class="reqs">{hotmReqs.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} showTier />)}</ul>
               </>
             )}
           </section>
@@ -230,7 +233,7 @@ const toc = [
                   const a = r.kind === "attribute" ? attrById.get(r.attribute) : undefined;
                   return (
                     <tr data-requirement={r.id}>
-                      <td data-label="Attribute"><strong>{a?.name ?? (r.kind === "attribute" ? r.attribute : r.id)}</strong></td>
+                      <td data-label="Attribute" class="attr"><Icon icon={shardIcon(a?.rarity)} size={16} /><strong>{a?.name ?? (r.kind === "attribute" ? r.attribute : r.id)}</strong></td>
                       <td data-label="Shard">{a ? `${a.shard} (${a.rarity})` : "–"}</td>
                       <td data-label="Effect">{a?.effect}{r.note && <span class="muted"> {r.note}</span>}</td>
                       <td data-label="Priority">{r.priority ? PRIORITY[r.priority] : "–"}</td>
@@ -326,6 +329,26 @@ const toc = [
   }
   .toc li a:hover {
     color: var(--accent);
+  }
+  .title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .with-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .attr {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  @media (max-width: 640px) {
+    .attr {
+      display: block;
+    }
   }
   .crumbs {
     font-size: var(--step--1);

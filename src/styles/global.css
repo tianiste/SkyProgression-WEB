@@ -24,6 +24,17 @@
   --gold: #ffc766;
   --core: #d4524a;
   --grid-line: rgb(255 255 255 / 0.035);
+  /* Hypixel stat and rarity colours, used for icons. */
+  --stat-gold: #ffaa00;
+  --stat-purple: #d36bff;
+  --stat-yellow: #ffff55;
+  --stat-red: #ff5555;
+  --stat-aqua: #55ffff;
+  --r-common: #e6e8ef;
+  --r-uncommon: #55ff55;
+  --r-rare: #5577ff;
+  --r-epic: #c040ff;
+  --r-legendary: #ffaa00;
 
   --font-text: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-pixel: "Pixelify Sans", var(--font-text);
@@ -58,6 +69,16 @@
     --gold: #8a5a00;
     --core: #b23a33;
     --grid-line: rgb(28 30 38 / 0.04);
+    --stat-gold: #b06f00;
+    --stat-purple: #8a2bb0;
+    --stat-yellow: #8f7f00;
+    --stat-red: #c22f2f;
+    --stat-aqua: #0b7f86;
+    --r-common: #5a5f6e;
+    --r-uncommon: #1f8a1f;
+    --r-rare: #2f4fd0;
+    --r-epic: #8a2bb0;
+    --r-legendary: #b06f00;
   }
 }
 :root[data-theme="light"] {
@@ -75,6 +96,16 @@
   --gold: #8a5a00;
   --core: #b23a33;
   --grid-line: rgb(28 30 38 / 0.04);
+  --stat-gold: #b06f00;
+  --stat-purple: #8a2bb0;
+  --stat-yellow: #8f7f00;
+  --stat-red: #c22f2f;
+  --stat-aqua: #0b7f86;
+  --r-common: #5a5f6e;
+  --r-uncommon: #1f8a1f;
+  --r-rare: #2f4fd0;
+  --r-epic: #8a2bb0;
+  --r-legendary: #b06f00;
 }
 
 *,
