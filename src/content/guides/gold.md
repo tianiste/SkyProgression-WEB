@@ -48,7 +48,7 @@ requirements:
       - { kind: drill_part, slot: tank, item: PERFECTLY_CUT_FUEL_TANK }
       - { kind: drill_part, slot: engine, item: AMBER_POLISHED_DRILL_ENGINE }
       - { kind: drill_part, slot: module, item: GOBLIN_OMELETTE_SUNNY_SIDE }
-      - { kind: enchant, id: flowstate, level: 3 }
+      - { kind: enchant, id: ultimate_flowstate, level: 3 }
       - { kind: enchant, id: efficiency, level: 10 }
       - { kind: enchant, id: compact, level: 10 }
       - { kind: enchant, id: fortune, level: 4 }

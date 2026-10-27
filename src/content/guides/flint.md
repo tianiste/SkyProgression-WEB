@@ -23,8 +23,8 @@ hotm:
 requirements:
   - { id: shovel, group: tools, kind: item, item: FLINT_SHOVEL, modifiers: [{ kind: recomb }, { kind: enchant, id: efficiency, level: 5 }, { kind: enchant, id: ultimate_wise, level: 5 }] }
   - { id: ability-drill, group: drill, kind: manual, label: Any drill for the ability, note: Perfectly-Cut Fuel Tank and a Blue Cheese omelette. }
-  - { id: armor-budget, tier: budget, group: armor, kind: item, item: MINERAL_CHESTPLATE, label: 4/4 Mineral, modifiers: [{ kind: recomb }, { kind: reforge, id: jaded }, { kind: enchant, id: wisdom, level: 5 }] }
-  - { id: armor-max, tier: max, group: armor, kind: item, item: GLOSSY_MINERAL_CHESTPLATE, label: 4/4 Glossy Mineral, modifiers: [{ kind: recomb }, { kind: reforge, id: jaded }, { kind: enchant, id: wisdom, level: 5 }] }
+  - { id: armor-budget, tier: budget, group: armor, kind: item, item: MINERAL_CHESTPLATE, label: 4/4 Mineral, modifiers: [{ kind: recomb }, { kind: reforge, id: jaded }, { kind: enchant, id: ultimate_wisdom, level: 5 }] }
+  - { id: armor-max, tier: max, group: armor, kind: item, item: GLOSSY_MINERAL_CHESTPLATE, label: 4/4 Glossy Mineral, modifiers: [{ kind: recomb }, { kind: reforge, id: jaded }, { kind: enchant, id: ultimate_wisdom, level: 5 }] }
   - { id: equipment-budget, tier: budget, group: equipment, kind: manual, label: 2/4 Titanium, Ancient Cloak and Dwarven Handwarmers, note: Blazing, Quantum V. }
   - { id: equipment-max, tier: max, group: equipment, kind: manual, label: Pendant of Divan, Ancient Cloak, Jade Belt and Dwarven Handwarmers, note: Blazing, Quantum V. }
   - id: bal

@@ -69,6 +69,11 @@ export interface ModifierLine {
   values: { text: string; mod: Modifier }[];
 }
 
+/** In-game enchant name. Ultimate enchants carry an ultimate_ prefix in the API; most names drop it (Flowstate, Wisdom). */
+export function enchantName(id: string): string {
+  return titleCase(id === "ultimate_wise" || id === "ultimate_jerry" ? id : id.replace(/^ultimate_/, ""));
+}
+
 /** The text for one item upgrade. */
 export function modifierText(m: Modifier): string {
   switch (m.kind) {
@@ -85,7 +90,7 @@ export function modifierText(m: Modifier): string {
     case "drill_part":
       return itemName(m.item);
     case "enchant":
-      return `${titleCase(m.id)} ${ROMAN[m.level] ?? m.level}`;
+      return `${enchantName(m.id)} ${ROMAN[m.level] ?? m.level}`;
     case "note":
       return m.text;
   }

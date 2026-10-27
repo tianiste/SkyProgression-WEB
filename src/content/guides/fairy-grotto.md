@@ -79,7 +79,7 @@ requirements:
       - { kind: drill_part, slot: engine, item: AMBER_POLISHED_DRILL_ENGINE }
       - { kind: drill_part, slot: module, item: GOBLIN_OMELETTE_SUNNY_SIDE }
       - { kind: enchant, id: lapidary, level: 5 }
-      - { kind: enchant, id: flowstate, level: 3 }
+      - { kind: enchant, id: ultimate_flowstate, level: 3 }
       - { kind: enchant, id: efficiency, level: 10 }
       - { kind: enchant, id: compact, level: 10 }
       - { kind: enchant, id: experience, level: 5 }
@@ -102,7 +102,7 @@ requirements:
       - { kind: drill_part, slot: engine, item: SAPPHIRE_POLISHED_DRILL_ENGINE }
       - { kind: drill_part, slot: module, item: GOBLIN_OMELETTE_BLUE_CHEESE }
       - { kind: enchant, id: lapidary, level: 5 }
-      - { kind: enchant, id: flowstate, level: 3 }
+      - { kind: enchant, id: ultimate_flowstate, level: 3 }
       - { kind: enchant, id: efficiency, level: 10 }
       - { kind: enchant, id: experience, level: 3 }
       - { kind: enchant, id: fortune, level: 4 }

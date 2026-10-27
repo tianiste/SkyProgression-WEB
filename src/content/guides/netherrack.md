@@ -28,8 +28,8 @@ requirements:
     options:
       - { id: dr-x655, group: drill, kind: item, item: TITANIUM_DRILL_4, modifiers: [{ kind: reforge, id: fleet }] }
       - { id: divan-drill, group: drill, kind: item, item: DIVAN_DRILL, modifiers: [{ kind: reforge, id: fleet }] }
-  - { id: armor-budget, tier: budget, group: armor, kind: item, item: MINERAL_CHESTPLATE, label: 4/4 Mineral, modifiers: [{ kind: reforge, id: jaded }, { kind: enchant, id: wisdom, level: 5 }] }
-  - { id: armor-max, tier: max, group: armor, kind: item, item: GLOSSY_MINERAL_CHESTPLATE, label: 4/4 Glossy Mineral, modifiers: [{ kind: reforge, id: jaded }, { kind: enchant, id: wisdom, level: 5 }] }
+  - { id: armor-budget, tier: budget, group: armor, kind: item, item: MINERAL_CHESTPLATE, label: 4/4 Mineral, modifiers: [{ kind: reforge, id: jaded }, { kind: enchant, id: ultimate_wisdom, level: 5 }] }
+  - { id: armor-max, tier: max, group: armor, kind: item, item: GLOSSY_MINERAL_CHESTPLATE, label: 4/4 Glossy Mineral, modifiers: [{ kind: reforge, id: jaded }, { kind: enchant, id: ultimate_wisdom, level: 5 }] }
   - { id: equipment, group: equipment, kind: manual, label: Equipment as in the Flint guide }
   - { id: bal, group: pet, kind: pet, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "Autopet: rod cast to Bal, Mining XP gain to the fortune pet." }
   - { id: black-cat, group: pet, kind: pet, pet: { type: BLACK_CAT, minTier: LEGENDARY, level: 100, item: PET_ITEM_QUICK_CLAW }, note: Start with a Bejeweled Collar. }

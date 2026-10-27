@@ -23,7 +23,7 @@ requirements:
     kind: item
     item: GLOSSY_MINERAL_CHESTPLATE
     label: 4/4 Glossy Mineral
-    modifiers: [{ kind: recomb }, { kind: reforge, id: jaded }, { kind: enchant, id: wisdom, level: 5 }]
+    modifiers: [{ kind: recomb }, { kind: reforge, id: jaded }, { kind: enchant, id: ultimate_wisdom, level: 5 }]
   - { id: pendant, group: equipment, kind: item, item: DIVAN_PENDANT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: gem, gem: JADE, quality: PERFECT }, { kind: applied, item: DIVAN_POWDER_COATING }] }
   - id: cloak
     group: equipment
