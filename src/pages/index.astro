@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import LookupBox from "../components/LookupBox.astro";
 import GuideList from "../components/GuideList.astro";
 import { SITE } from "../config";
+import ModrinthButton from "../components/ModrinthButton.astro";
 ---
 
 <Base>
@@ -14,6 +15,11 @@ import { SITE } from "../config";
         Gear, Heart of the Mountain trees, attributes and rates for each mining method, written by miners from the
         Mining Cult community.
       </p>
+      <p class="cta">
+        <ModrinthButton />
+        <a href={SITE.github}>Source on GitHub</a>
+      </p>
+      <p class="cta-note muted small">The free Fabric mod shows your mining stats, rates and best next upgrade in game.</p>
     </div>
   </section>
   <div class="seam" aria-hidden="true"></div>
@@ -31,7 +37,10 @@ import { SITE } from "../config";
       rate for each method and the upgrade that helps most for the coins. The website will get the same features
       through player lookup.
     </p>
-    <p><a href={SITE.modrinth}>Download on Modrinth</a> or <a href={SITE.github}>read the source on GitHub</a>.</p>
+    <p class="cta">
+      <ModrinthButton />
+      <a href={SITE.github}>Source on GitHub</a>
+    </p>
   </section>
 </Base>
 
@@ -48,6 +57,16 @@ import { SITE } from "../config";
   }
   .hero .lead {
     margin: 0;
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin: 1.5rem 0 0;
+  }
+  .cta-note {
+    margin: 0.85rem 0 0;
   }
   @media (max-width: 560px) {
     .hero {

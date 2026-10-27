@@ -5,6 +5,8 @@ import Requirement from "../../components/Requirement.astro";
 import HotmTree from "../../components/HotmTree.astro";
 import Credit from "../../components/Credit.astro";
 import Icon from "../../components/Icon.astro";
+import ModrinthButton from "../../components/ModrinthButton.astro";
+import { SITE } from "../../config";
 import { categoryIcon, groupIcon, guideIcon, powderIcon, shardIcon, type Icon as IconT } from "../../lib/icons";
 import { CATEGORIES } from "../../lib/categories";
 import { GEAR_GROUPS, GROUP_LABELS } from "../../lib/requirements";
@@ -298,6 +300,21 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
           </li>
         </ul>
         <p class="muted small">Found a mistake? Tell the author in the Mining Cult Discord, or open an issue on <a href="https://github.com/tianiste/SkyProgression-WEB/issues">GitHub</a>.</p>
+      </section>
+
+      <section class="get-mod" aria-labelledby="get-mod-title">
+        <span class="slot lg"><img class="pixelated" src="/brand/mark.svg" width="64" height="64" alt="" loading="lazy" /></span>
+        <div>
+          <h2 id="get-mod-title">Get the mod</h2>
+          <p>
+            SkyProgression for Fabric shows where every mining stat comes from, your rate for each method and the upgrade
+            that helps most for the coins, right in the game.
+          </p>
+          <p class="cta">
+            <ModrinthButton />
+            <a href={SITE.github}>Source on GitHub</a>
+          </p>
+        </div>
       </section>
     </article>
 
@@ -603,6 +620,37 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
     background-size: 6px 6px;
     background-color: var(--slot-bg);
     border-radius: 2px;
+  }
+  .get-mod {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+    margin-top: 3rem;
+    padding: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--accent);
+    border-radius: var(--radius);
+  }
+  .get-mod h2 {
+    margin: 0 0 0.5rem;
+    font-size: var(--step-2);
+  }
+  .get-mod .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin: 1.25rem 0 0.25rem;
+  }
+  @media (max-width: 560px) {
+    .get-mod {
+      grid-template-columns: 1fr;
+    }
+    .get-mod .slot {
+      display: none;
+    }
   }
   .tiers {
     display: grid;

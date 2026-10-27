@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { SITE } from "../config";
+import ModrinthButton from "../components/ModrinthButton.astro";
 
 interface Props {
   title?: string;
@@ -68,12 +69,15 @@ const current = (href: string, match?: string) => {
             }
           </ul>
         </nav>
-        <button class="theme-toggle" type="button" aria-label="Switch to light theme" data-theme-toggle>
+        <div class="actions">
+          <ModrinthButton size="compact" />
+          <button class="theme-toggle" type="button" aria-label="Switch to light theme" data-theme-toggle>
           <svg width="20" height="20" viewBox="0 0 10 10" aria-hidden="true" shape-rendering="crispEdges">
             <path class="sun" fill="currentColor" d="M4 0h2v2H4zM4 8h2v2H4zM0 4h2v2H0zM8 4h2v2H8zM3 3h4v4H3zM1 1h1v1H1zM8 1h1v1H8zM1 8h1v1H1zM8 8h1v1H8z"></path>
             <path class="moon" fill="currentColor" d="M3 1h4v1H3zM2 2h2v1H2zM1 3h2v4H1zM2 7h2v1H2zM3 8h4v1H3zM6 7h2v1H6zM7 6h2v1H7z"></path>
           </svg>
         </button>
+        </div>
       </div>
     </header>
 
@@ -179,6 +183,11 @@ const current = (href: string, match?: string) => {
   nav a[aria-current="page"] {
     border-bottom-color: var(--xp);
   }
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
   .theme-toggle {
     width: 2.75rem;
     height: 2.75rem;
@@ -209,6 +218,19 @@ const current = (href: string, match?: string) => {
     }
     :global(:root:not([data-theme="dark"])) .theme-toggle .moon {
       display: none;
+    }
+  }
+  /* On phones the logo crops to its pickaxe mark so the download button fits beside it. */
+  @media (max-width: 480px) {
+    .brand {
+      width: 32px;
+      overflow: hidden;
+    }
+    .brand img {
+      max-width: none;
+    }
+    .actions {
+      gap: 0.5rem;
     }
   }
   @media (max-width: 720px) {
