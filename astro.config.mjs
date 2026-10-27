@@ -6,4 +6,6 @@ export default defineConfig({
   output: "static",
   integrations: [preact()],
   build: { inlineStylesheets: "always" },
+  // Keep source whitespace: compression drops the space between text and a following link on a new line.
+  compressHTML: false,
 });

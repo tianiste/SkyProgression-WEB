@@ -60,8 +60,13 @@ const toc = [
         <h1>{g.title}</h1>
         <p class="lead">{g.summary}</p>
         <p class="byline">
-          Guide by {g.authors.map((a, i) => <>{i > 0 && " and "}<Credit id={a.id} /></>)}, posted in the{" "}
-          <Credit id="mining-cult" />{g.source.posted && <> on {formatDate(g.source.posted)}</>}. Checked {formatDate(g.updated)}.
+          {
+            g.authors.some((a) => a.id !== "mining-cult") ? (
+              <>Guide by {g.authors.map((a, i) => <>{i > 0 && " and "}<Credit id={a.id} /></>)}, posted in the <Credit id="mining-cult" /></>
+            ) : (
+              <>Posted in the <Credit id="mining-cult" /> without a named author</>
+            )
+          }{g.source.posted && <> on {formatDate(g.source.posted)}</>}. Checked {formatDate(g.updated)}.
         </p>
       </header>
 
@@ -91,18 +96,18 @@ const toc = [
             )
           }
           {
-            g.rates.length > 0 && (
+            (g.rates.length > 0 || g.ratesMeasured) && (
               <div>
                 <dt>Rates</dt>
                 <dd>
-                  <ul class="rates">
+                  {g.rates.length > 0 && <ul class="rates">
                     {g.rates.map((r) => (
                       <li>
                         <span class="rate-label">{r.label}</span> <span class="rate-value">{r.value}</span>
                         {r.note && <span class="muted small"> {r.note}</span>}
                       </li>
                     ))}
-                  </ul>
+                  </ul>}
                   {g.ratesMeasured && <p class="muted small">{g.ratesMeasured}</p>}
                 </dd>
               </div>
@@ -387,7 +392,7 @@ const toc = [
     color: var(--muted);
   }
   .rate-value {
-    font-weight: 500;
+    font-weight: 400;
   }
   .tiers {
     display: grid;

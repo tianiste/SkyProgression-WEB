@@ -71,10 +71,7 @@ const groups: State[] = ["selected", "max", "level", "bridge", "disabled"];
             </button>
             <div id={pid} popover class="tip">
               <strong>{perk.name}</strong>
-              <span>
-                Tier {tierOf(perk)}. {STATE_TEXT[state]}
-                {levelText(perk, state) && <>, {levelText(perk, state)}</>}.
-              </span>
+              <span>{`Tier ${tierOf(perk)}. ${STATE_TEXT[state]}${levelText(perk, state) ? `, ${levelText(perk, state)}` : ""}.`}</span>
             </div>
           </>
         );
