@@ -187,8 +187,44 @@ browser -> api.skyprogression.dev (Worker: name to UUID, caching, rate limits)
      minutes (up to 30 while a refresh runs). Data age is when the Worker's copy was fetched. Limits: 20 lookups per minute per IP.
 3. **Mod features on the web,** one page at a time in the order Overview, Gear, Upgrades, Methods, Start with, HOTM. Done
    per page when it matches the mod's numbers for the same profile.
+
+   **Status (2026-10-27): all six pages and the model built, not deployed.** Backend: the relay's `POST /web`
+   (mod repo, `service/.../WebViews.java`) and the Worker's `GET /player` and `GET /texture/<hash>` (API repo). Site:
+   `/player/` (look up a name), `/player/<name>/` Overview, `/gear/`, `/upgrades/`, `/methods/`, `/start/`, `/hotm/`;
+   profile, method, price mode and God Potion in the query. Cloudflare Pages serves each from a static shell under
+   `/player-page/` (`public/_redirects`, 200 rewrites; `src/middleware.ts` does the same in `astro dev`). Until the relay
+   and Worker are deployed, the pages say "Player pages are not available yet".
+
+   Verified: on the committed fixture (`core/src/test/resources/fixtures/debotes-zucchini.json`) with a live price
+   bundle, a runner calling the engine the way the mod's `ClientData` does gives the same numbers as the pages (MF Gems:
+   Mining Fortune 1,767 of ≥ 1,893.25, Mining Speed 8,000 of ≥ 8,352, Pristine 16.31, 12.06 Flawless Amber per hour,
+   24.3m coins per hour, plan 12 steps +21.24% for 855.1m, 24 ranked upgrades; Coal: 3,899,885 per hour, plan first step
+   Mineral Boots +14.83%, 36 ranked; all 14 methods' coins per hour). Pages checked in `astro dev` against `wrangler dev`
+   and a fixture companion, at 360 px in both themes. Lighthouse: the Overview shell is in CI; not run locally.
+
+   Exact limitations:
+   - The pages use the mod's defaults: best owned gear (Gear can switch to worn), the method's usual zone and default
+     efficiency, God Potion on unless turned off. There is no Type Stats (manual stat overrides), no held-tool or zone
+     choice, and no "rank by stat points" view.
+   - Upgrade costs are the cash outlay. The mod subtracts the replaced item's sale value (Coflnet resale quotes); the web
+     does not fetch those, so the plan's "net after selling" figures are absent.
+   - The session tracker stays in the mod (it reads chat and the inventory live).
+   - Results are cached 2 minutes per player, profile, page and options on the Worker; the profile copy is reused for 5
+     minutes. Uncached pages share the checklist's limit of 20 per minute per IP.
+   - Item icons exist only for the items the guides use (the import script keeps those), so many gear rows show an empty
+     slot.
+   - HOTM compares with the guides' confirmed trees only (MF Gems MSB and Maniac Miner, Dwarven Metals MSB, Gold MSB);
+     other methods say no confirmed tree yet. The API does not say which ability is selected or which Loadouts tree is
+     active; each tree can be picked.
+   - The 3D model: skin from Mojang's session server (through the relay, cached an hour; Steve when unreadable), loaded
+     through the Worker's `/texture/` proxy. Armor is painted onto the skin's outer layer: dyed leather in its API
+     colour, player-head helmets with their head texture, chainmail, iron, gold and diamond in a material colour.
+     FurfSky Reborn armor textures are not applied yet (the 1.9.2 pack is not in the repository; its CIT armor rules
+     still have to be imported). skinview3d and three.js (517 KB, about 130 KB compressed) load only when the model is
+     shown: on screen and idle, or on "Show in 3D" with reduced motion; without WebGL a flat front view stays.
    - **3D player model in their gear.** The player pages show the looked-up player's skin as a rotatable 3D model
      (skinview3d, MIT) wearing their armor: dyed leather from the API colour, player-head helmets from their skull
      texture, then FurfSky Reborn armor textures by applying the pack's item-to-texture rules per piece. The relay
      returns the worn pieces' render data (item ID, dye colour, skull texture URL). Lazy-loaded, with a static fallback
-     for no WebGL and for reduced motion. Done when a looked-up player shows their skin and worn armor.
+     for no WebGL and for reduced motion. Done when a looked-up player shows their skin and worn armor. (Built; see the
+     status above.)
