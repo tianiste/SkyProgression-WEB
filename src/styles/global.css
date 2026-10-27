@@ -169,11 +169,12 @@ h2 {
   font-weight: 600;
   letter-spacing: 0.01em;
 }
+/* Headings step down one size on phones so long titles keep to two lines. */
 h1 {
-  font-size: var(--step-4);
+  font-size: clamp(var(--step-3), 1.5rem + 2vw, var(--step-4));
 }
 h2 {
-  font-size: var(--step-3);
+  font-size: clamp(var(--step-2), 1.3rem + 1.2vw, var(--step-3));
   margin-top: 2.5rem;
 }
 h3 {
@@ -257,7 +258,7 @@ img {
 
 /* Lead paragraph under page titles. */
 .lead {
-  font-size: var(--step-1);
+  font-size: clamp(1.125rem, 1rem + 0.6vw, var(--step-1));
   line-height: 1.45;
   color: var(--muted);
   max-width: 38rem;
@@ -267,7 +268,8 @@ img {
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-size: var(--step--1);
+  font-size: 0.9375rem;
+  line-height: 1.5;
   margin-bottom: 1.5rem;
 }
 .table th,
@@ -279,7 +281,12 @@ img {
 }
 .table th {
   font-weight: 650;
+  font-size: var(--step--1);
   color: var(--muted);
+  border-bottom: 2px solid var(--line);
+}
+.table tbody tr:hover {
+  background: var(--surface);
 }
 .table td.num,
 .table th.num {

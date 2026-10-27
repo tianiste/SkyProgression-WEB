@@ -22,6 +22,7 @@ const usedBy = (id: string) => guides.filter((g) => g.data.requirements.some((r)
   <ReferenceNav />
   <h1>Mining attributes</h1>
   <p class="lead">Every mining attribute, the shard it comes from and its effect at level 10.</p>
+  <div class="seam" aria-hidden="true"></div>
   <p class="muted">
     Shards needed to reach level 10: {RARITY.map((r, i) => <>{i > 0 && ", "}{r} {SHARDS[r]}</>)}. Echo attributes make
     their family stronger: Echo of Boxes and Echo of Echoes together turn Mossy Box and Gold Box into +65 Fortune each.

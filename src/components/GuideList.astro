@@ -21,13 +21,14 @@ const groups = CATEGORIES.map((c) => ({ ...c, guides: guides.filter((g) => g.dat
     groups.map((c) => (
       <section class="category" id={c.id} data-category={c.id} aria-labelledby={`cat-${c.id}`}>
         <H id={`cat-${c.id}`} class="cat-title">
-          <Icon icon={categoryIcon(c.id)} size={32} />
+          <span class="slot"><Icon icon={categoryIcon(c.id)} size={32} /></span>
           {c.label}
+          <span class="count">{c.guides.length} {c.guides.length === 1 ? "guide" : "guides"}</span>
         </H>
         <ul>
           {c.guides.map((g) => (
             <li>
-              <Icon icon={guideIcon(g.id)} size={32} />
+              <span class="slot"><Icon icon={guideIcon(g.id)} size={32} /></span>
               <div>
                 <a href={`/guides/${g.id}/`}>{g.data.title}</a>
                 {showSummary && <span class="summary">{g.data.summary}</span>}
@@ -44,16 +45,32 @@ const groups = CATEGORIES.map((c) => ({ ...c, guides: guides.filter((g) => g.dat
   .categories {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
-    gap: 0.5rem 2.5rem;
+    align-items: start;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  /* Each category is a panel; its rows are the guides, each with its icon in a slot. */
+  .category {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0.25rem 1rem 0.5rem;
   }
   .cat-title {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.75rem;
     font-family: var(--font-pixel);
     font-weight: 600;
     font-size: var(--step-2);
-    margin: 1.5rem 0 0.5rem;
+    margin: 0.75rem 0 0.5rem;
+  }
+  .count {
+    margin-left: auto;
+    font-family: var(--font-text);
+    font-size: var(--step--1);
+    font-weight: 400;
+    color: var(--muted);
   }
   ul {
     list-style: none;
@@ -62,13 +79,11 @@ const groups = CATEGORIES.map((c) => ({ ...c, guides: guides.filter((g) => g.dat
   }
   li {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.75rem;
-    padding: 0.55rem 0;
+    padding: 0.5rem 0;
     border-top: 1px solid var(--line);
-  }
-  li > div {
-    padding-top: 0.2rem;
+    max-width: none;
   }
   li a {
     font-weight: 600;
@@ -78,5 +93,6 @@ const groups = CATEGORIES.map((c) => ({ ...c, guides: guides.filter((g) => g.dat
     color: var(--muted);
     font-size: var(--step--1);
     line-height: 1.5;
+    margin-top: 0.1rem;
   }
 </style>

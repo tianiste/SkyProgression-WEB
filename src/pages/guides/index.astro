@@ -12,6 +12,7 @@ const used = CATEGORIES.filter((c) => guides.some((g) => g.data.category === c.i
 <Base title="Guides" description="Every mining guide on SkyProgression, grouped by what you mine.">
   <h1>Guides</h1>
   <p class="lead">Pick what you want to mine. Each guide lists gear for a budget and a max setup, the HOTM tree, attributes and how to mine.</p>
+  <div class="seam" aria-hidden="true"></div>
   <CategoryFilter client:idle categories={used} />
   <GuideList />
 </Base>

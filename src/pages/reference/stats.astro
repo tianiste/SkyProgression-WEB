@@ -17,6 +17,7 @@ const stats = (await getCollection("stats")).sort((a, b) => a.data.order - b.dat
   <ReferenceNav />
   <h1>Mining stat sources</h1>
   <p class="lead">Where each mining stat comes from, with the best totals you can reach.</p>
+  <div class="seam" aria-hidden="true"></div>
   <p class="muted">
     "With Blue Cheese" is the extra from a Blue Cheese Goblin Omelette on your drill, which adds one level to every HOTM
     perk. Sources that are random or only work in one place are marked.
@@ -71,11 +72,17 @@ const stats = (await getCollection("stats")).sort((a, b) => a.data.order - b.dat
 <style>
   .jump {
     list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 1.25rem;
-    font-size: var(--step--1);
+    padding: 0.5rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    gap: 0 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .jump li {
+    max-width: none;
+    padding: 0.3rem 0;
   }
   .stat-title {
     display: flex;
@@ -84,8 +91,8 @@ const stats = (await getCollection("stats")).sort((a, b) => a.data.order - b.dat
   }
   .jump li {
     display: flex;
+    gap: 0.5rem;
     align-items: center;
-    gap: 0.35rem;
   }
   .type {
     white-space: nowrap;
