@@ -44,14 +44,16 @@ const treeIds = [...new Set(g.hotm.map((h) => h.tree).filter(Boolean))] as strin
 const trees = (await Promise.all(treeIds.map((id) => getEntry("trees", id)))).filter((t) => t !== undefined);
 
 const note: IconT = { kind: "glyph", glyph: "note" };
+const pin: IconT = { kind: "glyph", glyph: "pin", color: "var(--accent)" };
+const book: IconT = { kind: "glyph", glyph: "book", color: "var(--stat-purple)" };
 const toc: { id: string; label: string; icon: IconT }[] = [
-  { id: "glance", label: "At a glance", icon: { kind: "glyph", glyph: "pin", color: "var(--accent)" } },
+  { id: "glance", label: "At a glance", icon: pin },
   g.hotm.length || hotmReqs.length ? { id: "hotm", label: "Heart of the Mountain", icon: powderIcon("mithril") } : null,
   { id: "gear", label: "Gear", icon: groupIcon("drill") },
   attributeReqs.length ? { id: "attributes", label: "Attributes", icon: shardIcon("Epic") } : null,
   ...headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, label: h.text, icon: note })),
   g.videos.length ? { id: "videos", label: "Videos", icon: note } : null,
-  { id: "credits", label: "Credits and sources", icon: { kind: "glyph", glyph: "book", color: "var(--stat-purple)" } },
+  { id: "credits", label: "Credits and sources", icon: book },
 ].filter((t) => t !== null);
 const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
 ---
@@ -95,7 +97,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
         <h2 id="glance-title" class="visually-hidden">At a glance</h2>
         <dl class="glance">
           <div class="where">
-            <dt><Icon icon={{ kind: "glyph", glyph: "pin", color: "var(--accent)" }} size={16} />Where</dt>
+            <dt><Icon icon={pin} size={16} />Where</dt>
             <dd>{g.where}</dd>
           </div>
           {
