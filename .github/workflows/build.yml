@@ -21,9 +21,12 @@ jobs:
           npx astro preview --port 4400 &
           npx wait-on@8.0.3 -t 60000 http://localhost:4400/
           # The player page shell (its data comes from the live API, or it shows why it can't).
+          # Three runs per page and form; the check uses the median.
           for page in "guide http://localhost:4400/guides/mineshaft-gemstones/" "player http://localhost:4400/player-page/overview/?name=Debotes"; do
             set -- $page
-            npx -y lighthouse@12.8.2 "$2" --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless=new --no-sandbox" --output=json --output-path=$1-mobile.json --quiet
-            npx -y lighthouse@12.8.2 "$2" --preset=desktop --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless=new --no-sandbox" --output=json --output-path=$1-desktop.json --quiet
+            for run in 1 2 3; do
+              npx -y lighthouse@12.8.2 "$2" --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless=new --no-sandbox" --output=json --output-path=$1-mobile-$run.json --quiet
+              npx -y lighthouse@12.8.2 "$2" --preset=desktop --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless=new --no-sandbox" --output=json --output-path=$1-desktop-$run.json --quiet
+            done
           done
-          node scripts/lighthouse-check.mjs guide-mobile.json guide-desktop.json player-mobile.json player-desktop.json
+          node scripts/lighthouse-check.mjs guide-*.json player-*.json
