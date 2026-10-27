@@ -127,9 +127,9 @@ browser -> api.skyprogression.dev (Worker: name to UUID, caching, rate limits)
 - Phase 2 endpoint: `POST /checklist` with the player and the guide's requirements (the site serves each guide's
   requirements as JSON); the engine returns owned / partial (with what is missing) / missing / unknown / manual for each.
   A generic evaluator keeps the server independent of guide wording.
-- Phase 3: add engine endpoints on the relay the same way as `/checklist` (`POST` with `uuid`/`ign` and `profile`; the
-  relay reuses its profile cache and answers JSON with the profile list and `fetchedAt`; the Worker resolves the name,
-  rate-limits, caches per profile and adds CORS for the site): stats, compare, start, upgrades, and the worn pieces'
+- Phase 3: add engine endpoints on the relay the same way as `/checklist` (the Worker resolves the name, gets the profile
+  as for `/profile` and posts it with the request to the relay, which only runs the engine and answers JSON with the
+  profile list and `fetchedAt`; the Worker rate-limits, caches per profile and adds CORS for the site): stats, compare, start, upgrades, and the worn pieces'
   render data for the 3D model. The mod computes these itself today (`core/` `PlayerData`), so the relay would call the
   same classes. The relay does not fetch prices today; it would take them from the Worker's price bundle. Cache results per
   profile, bound response sizes, rate-limit per visitor.
@@ -181,8 +181,10 @@ browser -> api.skyprogression.dev (Worker: name to UUID, caching, rate limits)
      Fixed: Flowstate and Wisdom are `ultimate_flowstate` and `ultimate_wisdom`. Unverified: the `prismatic` enchant (not
      on the Bazaar) and the `heroic` reforge (a sword reforge outside the engine's mining reforge table; the check
      compares the item's reforge name, so it works if the name is right).
-   - Results are cached 2 minutes per player, profile and requirements hash on the Worker; the relay reuses a profile for
-     5 minutes. Data age is the relay's fetch time. Limits: 20 lookups per minute per IP.
+   - The Worker fetches the profile the same way as `/profile` (cache, relay, then its own key) and sends it with the
+     requirements; the relay only evaluates (it never calls Hypixel for a checklist). Results are cached 2 minutes per
+     player, profile and requirements hash on the Worker; the Worker reuses a profile for 5
+     minutes (up to 30 while a refresh runs). Data age is when the Worker's copy was fetched. Limits: 20 lookups per minute per IP.
 3. **Mod features on the web,** one page at a time in the order Overview, Gear, Upgrades, Methods, Start with, HOTM. Done
    per page when it matches the mod's numbers for the same profile.
    - **3D player model in their gear.** The player pages show the looked-up player's skin as a rotatable 3D model
