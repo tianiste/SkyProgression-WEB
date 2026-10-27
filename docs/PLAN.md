@@ -23,9 +23,9 @@ Design: **minimalist and responsive.** Mobile first, readable on a phone at 360 
   `/stats`, `/compare`, `/start` and `/prices` endpoints; in relay mode it currently only answers `/health`, `/profile`
   and `/uuid`.
 - **Guides are data, not prose,** so they can become a checklist (see "Guide data model").
-- **License MIT,** README, CONTRIBUTING, no AI attribution anywhere, small commits pushed straight away, no secrets, no
-  Mojang textures. Item icons come from FurfSky Reborn (with permission) and Hypixel's own SkyBlock pack and API
-  (under Hypixel's license); everything else uses our own pixel icons.
+- **License MIT,** README, CONTRIBUTING, no AI attribution anywhere, small commits pushed straight away, no secrets, item
+  icons from FurfSky Reborn (with permission), then Hypixel's own SkyBlock pack and API (under Hypixel's license), then
+  Minecraft's textures for plain blocks (under Mojang's usage guidelines); everything else uses our own pixel icons.
 
 ## Design
 

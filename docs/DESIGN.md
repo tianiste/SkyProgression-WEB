@@ -55,5 +55,5 @@ rows, the gear columns stack, and the navigation moves under the logo.
   information.
 - **Fast and accessible.** Static HTML, one font file, JavaScript only for the theme button and the guide filter.
   Visible focus, AA contrast in both themes, no information only on hover.
-- **Icons carry meaning, text stays.** Item icons (FurfSky Reborn first, then Hypixel's own art, then our pixel glyphs) sit
+- **Icons carry meaning, text stays.** Item icons (FurfSky Reborn first, then Hypixel's own art, Minecraft blocks, then our pixel glyphs) sit
   next to their names, at whole-number scales. Stat symbols use the Hypixel stat colours.

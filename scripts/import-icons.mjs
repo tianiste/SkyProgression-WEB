@@ -1,7 +1,8 @@
 // Copies the item textures the site uses into public/icons and writes src/data/icons.generated.json.
-// Usage: node scripts/import-icons.mjs <unzipped FurfSky Reborn pack> [<unzipped Hypixel SkyBlock pack>]
-// Sources, in order: FurfSky Reborn, the official Hypixel SkyBlock Resource Pack, then the face of the item's player
-// head skin from Hypixel's public items resource; anything else gets the site's own fallback icon. Files keep their
+// Usage: node scripts/import-icons.mjs <FurfSky Reborn pack> [<Hypixel SkyBlock pack>] [<Minecraft client jar contents>]
+// (each unzipped). Sources, in order: FurfSky Reborn, the official Hypixel SkyBlock Resource Pack, the face of the item's
+// player head skin from Hypixel's public items resource, then Minecraft's own texture where icon-map.json names one;
+// anything else gets the site's own fallback icon. Files keep their
 // native size (animated textures keep their first frame). After copying, the script builds the site and removes every
 // texture the built pages do not use, so the repo holds only used files.
 import fs from "node:fs";
@@ -9,9 +10,9 @@ import path from "node:path";
 import { execSync } from "node:child_process";
 import { PNG } from "pngjs";
 
-const [furfsky, hypixel] = process.argv.slice(2);
+const [furfsky, hypixel, minecraft] = process.argv.slice(2);
 if (!furfsky || !fs.existsSync(path.join(furfsky, "assets"))) {
-  console.error("Usage: node scripts/import-icons.mjs <unzipped FurfSky Reborn pack> [<unzipped Hypixel SkyBlock pack>]");
+  console.error("Usage: node scripts/import-icons.mjs <FurfSky Reborn pack> [<Hypixel SkyBlock pack>] [<Minecraft client jar contents>]");
   process.exit(1);
 }
 const root = path.resolve(import.meta.dirname, "..");
@@ -130,6 +131,13 @@ if (hypixel) {
   };
 }
 
+// Minecraft textures, named in icon-map.json as minecraft:<path> (for example minecraft:block/cobblestone).
+const fromMinecraft = (ref) => {
+  if (!minecraft || !ref?.startsWith("minecraft:")) return null;
+  const file = path.join(minecraft, "assets/minecraft/textures", `${ref.slice("minecraft:".length)}.png`);
+  return fs.existsSync(file) ? file : null;
+};
+
 // Player head skins from Hypixel's public items resource (no API key needed).
 const skins = new Map();
 const items = await (await fetch("https://api.hypixel.net/v2/resources/skyblock/items")).json();
@@ -147,6 +155,7 @@ const manifest = {
     furfsky: "FurfSky Reborn v1.9.2 (Modrinth version 8DzcDe5O)",
     hypixel: "Hypixel SkyBlock Resource Pack (Hypixel API /v2/resources/packs)",
     head: "Player head skins from the Hypixel API items resource (/v2/resources/skyblock/items)",
+    minecraft: "Minecraft 26.3 client textures",
   },
   items: {},
   hotm: {},
@@ -154,6 +163,16 @@ const manifest = {
 const missing = [];
 
 for (const id of wantedItems()) {
+  if (id.startsWith("minecraft:")) {
+    const tex = fromMinecraft(id);
+    if (!tex) {
+      missing.push(id);
+      continue;
+    }
+    const file = `minecraft/${id.slice("minecraft:".length).replace("/", "_")}.png`;
+    manifest.items[id] = { file, size: copyTexture(tex, path.join(outDir, file)), source: "minecraft" };
+    continue;
+  }
   const name = `${id.toLowerCase()}.png`;
   const furf = fromFurfsky(id);
   const hyp = furf ? null : fromHypixel(id);
@@ -169,6 +188,9 @@ for (const id of wantedItems()) {
       continue;
     }
     manifest.items[id] = { file, size: headFace(Buffer.from(await res.arrayBuffer()), path.join(outDir, file)), source: "head" };
+  } else if (fromMinecraft(map.vanilla?.[id])) {
+    const file = `minecraft/${map.vanilla[id].slice("minecraft:".length).replace("/", "_")}.png`;
+    manifest.items[id] = { file, size: copyTexture(fromMinecraft(map.vanilla[id]), path.join(outDir, file)), source: "minecraft" };
   } else missing.push(id);
 }
 
@@ -203,6 +225,6 @@ const files = fs.readdirSync(outDir, { recursive: true }).filter((f) => f.endsWi
 const bytes = files.reduce((n, f) => n + fs.statSync(path.join(outDir, f)).size, 0);
 const count = (s) => Object.values(manifest.items).filter((t) => t.source === s).length;
 console.log(
-  `Used: ${count("furfsky")} FurfSky, ${count("hypixel")} Hypixel pack, ${count("head")} head skins, ${Object.keys(manifest.hotm).length} HOTM tiles; ${files.length} files, ${bytes} bytes`,
+  `Used: ${count("furfsky")} FurfSky, ${count("hypixel")} Hypixel pack, ${count("head")} head skins, ${count("minecraft")} Minecraft, ${Object.keys(manifest.hotm).length} HOTM tiles; ${files.length} files, ${bytes} bytes`,
 );
 console.log(`In no source (fallback icon): ${missing.join(", ")}`);

@@ -2,7 +2,8 @@
  "sources": {
   "furfsky": "FurfSky Reborn v1.9.2 (Modrinth version 8DzcDe5O)",
   "hypixel": "Hypixel SkyBlock Resource Pack (Hypixel API /v2/resources/packs)",
-  "head": "Player head skins from the Hypixel API items resource (/v2/resources/skyblock/items)"
+  "head": "Player head skins from the Hypixel API items resource (/v2/resources/skyblock/items)",
+  "minecraft": "Minecraft 26.3 client textures"
  },
  "items": {
   "AMBER_POLISHED_DRILL_ENGINE": {
@@ -290,6 +291,11 @@
    "size": 16,
    "source": "furfsky"
   },
+  "OBSIDIAN": {
+   "file": "minecraft/block_obsidian.png",
+   "size": 16,
+   "source": "minecraft"
+  },
   "PERFECTLY_CUT_FUEL_TANK": {
    "file": "items/perfectly_cut_fuel_tank.png",
    "size": 16,
@@ -454,6 +460,56 @@
    "file": "heads/will_o_wisp.png",
    "size": 8,
    "source": "head"
+  },
+  "minecraft:block/coal_ore": {
+   "file": "minecraft/block_coal_ore.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "minecraft:block/cobblestone": {
+   "file": "minecraft/block_cobblestone.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "minecraft:block/diamond_block": {
+   "file": "minecraft/block_diamond_block.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "minecraft:block/diamond_ore": {
+   "file": "minecraft/block_diamond_ore.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "minecraft:block/end_stone": {
+   "file": "minecraft/block_end_stone.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "minecraft:block/gold_block": {
+   "file": "minecraft/block_gold_block.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "minecraft:block/gold_ore": {
+   "file": "minecraft/block_gold_ore.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "minecraft:block/netherrack": {
+   "file": "minecraft/block_netherrack.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "minecraft:block/obsidian": {
+   "file": "minecraft/block_obsidian.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "minecraft:item/flint": {
+   "file": "minecraft/item_flint.png",
+   "size": 16,
+   "source": "minecraft"
   }
  },
  "hotm": {

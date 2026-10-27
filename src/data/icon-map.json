@@ -1,27 +1,27 @@
 {
-  "_note": "Which texture stands for each guide, category, gear group, reforge, powder and modifier. A value is a Hypixel item ID (a FurfSky texture) or a #hex colour for a plain block icon. Change icons here, never in guide data. After editing, run: node scripts/import-icons.mjs <unzipped FurfSky Reborn pack>",
+  "_note": "Which texture stands for each guide, category, gear group, reforge, powder and modifier. A value is a Hypixel item ID (FurfSky Reborn, then Hypixel textures), a minecraft:<path> Minecraft texture, or a #hex colour for a plain block. \"vanilla\" maps item IDs that SkyBlock shows with a Minecraft texture. Change icons here, never in guide data. After editing, run scripts/import-icons.mjs (see the README).",
   "guide": {
-    "coal": "#3b3d45",
-    "gold": "#f2c94c",
+    "coal": "minecraft:block/coal_ore",
+    "gold": "minecraft:block/gold_block",
     "fairy-grotto": "FLAWLESS_JASPER_GEM",
     "magma-fields-gemstones": "FLAWLESS_RUBY_GEM",
     "mineshaft-gemstones": "FLAWLESS_OPAL_GEM",
     "dwarven-metals": "ENCHANTED_UMBER",
-    "ores": "#4fe3ec",
-    "dwarven-diamond": "#7fe9f0",
+    "ores": "minecraft:block/diamond_ore",
+    "dwarven-diamond": "minecraft:block/diamond_block",
     "mithril": "MITHRIL_ORE",
-    "flint": "FLINT_SHOVEL",
-    "netherrack": "#8a3232",
-    "cobblestone": "#8c8f99",
-    "end-stone": "#e6e2a8",
-    "obsidian": "#3a2a52",
+    "flint": "minecraft:item/flint",
+    "netherrack": "minecraft:block/netherrack",
+    "cobblestone": "minecraft:block/cobblestone",
+    "end-stone": "minecraft:block/end_stone",
+    "obsidian": "minecraft:block/obsidian",
     "mycelium-red-sand": "ENCHANTED_MYCELIUM_CUBE"
   },
   "category": {
     "gemstones": "PERFECT_RUBY_GEM",
     "dwarven-metals": "ENCHANTED_TUNGSTEN",
-    "ores": "#f2c94c",
-    "blocks": "#8c8f99",
+    "ores": "minecraft:block/gold_ore",
+    "blocks": "minecraft:block/cobblestone",
     "other": "MITHRIL_ORE"
   },
   "group": {
@@ -53,5 +53,8 @@
     "gemstone": "ROUGH_AMETHYST_GEM",
     "glacite": "GLACITE"
   },
-  "extra": []
+  "extra": [],
+  "vanilla": {
+    "OBSIDIAN": "minecraft:block/obsidian"
+  }
 }

@@ -26,6 +26,14 @@ websites to use the pack's assets as long as access is not sold or charged for. 
 through its public API rather than files in the pack. SkyProgression does not claim these textures as its own, is free,
 and is not affiliated with or endorsed by Hypixel. These textures are not covered by the MIT License.
 
+## Minecraft textures
+
+Files: `public/icons/minecraft/*.png`, taken from the official Minecraft 26.3 client (`assets/minecraft/textures`).
+
+© Mojang Studios. Used for a few block and material icons on this free, non-commercial fan site, following the
+Minecraft Usage Guidelines. SkyProgression is not an official Minecraft product and is not approved by or associated
+with Mojang or Microsoft. These textures are not covered by the MIT License.
+
 ## Pixelify Sans
 
 File: `public/fonts/pixelify-sans-600.woff2`

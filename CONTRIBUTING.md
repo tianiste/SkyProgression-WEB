@@ -16,7 +16,7 @@ Thanks for helping. Corrections to guides, new guides and fixes to the site are 
 - Keep JavaScript out of pages unless something needs interaction; prefer plain HTML and CSS.
 - Colours and sizes live as custom properties in `src/styles/global.css`. Check both themes and a 360 px wide screen.
 - Small, focused commits with plain messages.
-- Do not commit secrets, API keys or Mojang textures. Item textures come only through `scripts/import-icons.mjs` (FurfSky Reborn and Hypixel, see THIRD_PARTY_NOTICES.md).
+- Do not commit secrets or API keys. Textures come only through `scripts/import-icons.mjs` (FurfSky Reborn, Hypixel and Minecraft; see THIRD_PARTY_NOTICES.md).
 
 ## Reporting problems
 
