@@ -19,9 +19,8 @@ Design: **minimalist and responsive.** Mobile first, readable on a phone at 360 
   (filters, player lookup, the HOTM tree hover). Plain CSS with custom properties, no CSS framework. Pagefind for search
   later.
 - **The engine stays in Java.** The site never re-implements calculations. Player features call our API, which forwards
-  to the relay VM, where the companion service runs the same `core/` engine as the mod. The companion already has
-  `/stats`, `/compare`, `/start` and `/prices` endpoints; in relay mode it currently only answers `/health`, `/profile`
-  and `/uuid`.
+  to the relay VM, where the companion service runs the same `core/` engine as the mod. Locally the companion also
+  serves `/prices` and `/resale`; in relay mode it answers `/health`, `/profile`, `/uuid` and `POST /checklist` (phase 2).
 - **Guides are data, not prose,** so they can become a checklist (see "Guide data model").
 - **License MIT,** README, CONTRIBUTING, no AI attribution anywhere, small commits pushed straight away, no secrets, item
   icons from FurfSky Reborn (with permission), then Hypixel's own SkyBlock pack and API (under Hypixel's license), then
@@ -128,8 +127,11 @@ browser -> api.skyprogression.dev (Worker: name to UUID, caching, rate limits)
 - Phase 2 endpoint: `POST /checklist` with the player and the guide's requirements (the site serves each guide's
   requirements as JSON); the engine returns owned / partial (with what is missing) / missing / unknown / manual for each.
   A generic evaluator keeps the server independent of guide wording.
-- Phase 3: open the companion's engine endpoints (`/stats`, `/compare`, `/start`, upgrades) in relay mode behind the
-  Worker. The relay does not fetch prices today; it would take them from the Worker's price bundle. Cache results per
+- Phase 3: add engine endpoints on the relay the same way as `/checklist` (`POST` with `uuid`/`ign` and `profile`; the
+  relay reuses its profile cache and answers JSON with the profile list and `fetchedAt`; the Worker resolves the name,
+  rate-limits, caches per profile and adds CORS for the site): stats, compare, start, upgrades, and the worn pieces'
+  render data for the 3D model. The mod computes these itself today (`core/` `PlayerData`), so the relay would call the
+  same classes. The relay does not fetch prices today; it would take them from the Worker's price bundle. Cache results per
   profile, bound response sizes, rate-limit per visitor.
 - Needs: the Hypixel application key approved (a public site cannot rely on the 3-day development key); the relay VM is
   1 CPU / 1 GB, which is enough with caching; deploy steps as in `deploy/relay/README.md`.
@@ -147,6 +149,40 @@ browser -> api.skyprogression.dev (Worker: name to UUID, caching, rate limits)
 2. **Guides as a checklist.** `/checklist` endpoint in the mod repo (engine + relay + Worker); "Check my profile" on each
    guide with per-section progress. Done when a real profile ticks items correctly and unknown data is not shown as
    missing.
+
+   **Status (2026-10-27): built, not deployed.** Engine `core/.../Checklist.java` (mod repo), companion and relay
+   `POST /checklist`, Worker `POST /checklist` (API repo), the `PlayerLookup` island on every guide page and an enabled
+   lookup box on the home page (a form to `/guides/?player=`, which carries the name into each guide link). Until the
+   owner updates the relay and deploys the Worker, the lookup says "Player lookup is not available yet" (the deployed
+   Worker refuses the page's origin). Verified without secrets: the evaluator on the sanitized fixture for Dwarven
+   Metals, Magma Fields Gemstones, Mineshaft Gemstones and Ores (results checked by hand against the fixture's gear,
+   pets, attributes, perks and collections); the companion with `SKYPROGRESSION_PROFILE_FIXTURE`; `wrangler dev`
+   forwarding to it (CORS, preflight, cache HIT, 400/403/404/405/413); the site in dev against that Worker at 360 px in
+   both themes. Not yet checked with a real live profile.
+
+   Exact limitations:
+   - Items are read from the inventory, armor, equipment, ender chest, wardrobe, bags (accessory bag, quiver and others),
+     backpacks, Loadouts sets, sacks and the personal vault (only with the Personal Vault API on). Not read: the museum,
+     minions, forge slots, auction listings, the Rift. Accessories count only in the accessory bag or inventory.
+   - An owned item crafted from the required one counts as done ("Upgraded to Divan's Drill"), using the engine's recipe
+     table (inputs taken once, recursively); the same rule applies to drill parts. Items outside that table do not.
+   - Applied items checked: Polarvoid Books, Divan's Powder Coating, power scrolls, Recombobulator, Hot Potato Books.
+     Others show as "not checked" and do not make the row partly done.
+   - Attribute levels use the engine's rarity table, plus a wiki table for attributes the engine does not use.
+     Discrepancy to settle: Fiesta Fortune is Uncommon in the engine and Epic in `attributes.yaml`.
+   - HOTM perks take the best level across Loadouts trees. API keys not seen in a real response yet (taken from names,
+     like the engine's): several attributes and echoes, `dwarven_expertise`, `fungus_fortuna`, `harena_fortuna`,
+     `frozen_skin`, `player_data.reaper_peppers_eaten`.
+   - Consumables count stored copies (Reaper Pepper also counts peppers eaten); a cereal's active buff is not readable.
+   - Unknown (never missing): items with the Inventory API off, collections with the Collections API off, Mining level
+     with the Skills API off, and pets, attributes, essence perks or HOTM when Hypixel sends none.
+   - ID check against `api.hypixel.net/v2/resources/skyblock/items` and Bazaar products: all item, pet item, drill part
+     and applied IDs exist except `BEJEWELED_COLLAR` (kept: FurfSky keys a texture to it; confirm in game).
+     Fixed: Flowstate and Wisdom are `ultimate_flowstate` and `ultimate_wisdom`. Unverified: the `prismatic` enchant (not
+     on the Bazaar) and the `heroic` reforge (a sword reforge outside the engine's mining reforge table; the check
+     compares the item's reforge name, so it works if the name is right).
+   - Results are cached 2 minutes per player, profile and requirements hash on the Worker; the relay reuses a profile for
+     5 minutes. Data age is the relay's fetch time. Limits: 20 lookups per minute per IP.
 3. **Mod features on the web,** one page at a time in the order Overview, Gear, Upgrades, Methods, Start with, HOTM. Done
    per page when it matches the mod's numbers for the same profile.
    - **3D player model in their gear.** The player pages show the looked-up player's skin as a rotatable 3D model

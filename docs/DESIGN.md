@@ -34,7 +34,7 @@ Home                                  Guide
 | logo   Guides  Ref  About    ◐ |    | Guides / Gemstones       | On this|
 +--------------------------------+    | Title (pixel)            | page   |
 | [mark] Mining guides for ...   |    | summary, byline          |  ...   |
-| [ Player name    ][Check]  soon|    | [XP bar] 0 of 43 checked |        |
+| [ Player name ][Pick a guide]   |    | [XP bar] [name][Check]   |        |
 | Guides                         |    | Where / Key blocks / Rate|        |
 |  ■ Gemstones  ■ Metals  ■ Ores |    | Gear          | HOTM     |        |
 |  links ...                     |    |  □ item, chips| powder   |        |
@@ -50,7 +50,13 @@ rows, the gear columns stack, and the navigation moves under the logo.
 ## Principles
 
 - **The to-do list is the point.** Every requirement starts with an empty square and each guide opens with an empty XP
-  bar. Player lookup will fill them in; nothing else on the page competes with that.
+  bar. Player lookup fills them in; nothing else on the page competes with that.
+- **Lookup states differ by shape, not only colour.** Done: XP-green square with a tick. Partly done: square half
+  filled with gold, and the item's missing upgrade chips get a dashed gold outline. Missing: empty square with a strong
+  border. Unknown (API data absent): dashed square with a question mark, never counted as missing. Check yourself:
+  dotted diamond-blue square. Every row also gets a status line that starts with the state in words, then what is still
+  needed and where the counted copy is stored. Gear groups, tiers, HOTM and attributes show "N of M done" with a thin
+  XP bar.
 - **The HOTM tree is the one bold element.** Perks are pixel tiles; state is shown by colour and shape (diamond for
   maxed, small square for bridging, ring for abilities, dashed outline for not taken), with a text list as well.
   Tapping a perk opens a popover; no script is needed.
@@ -58,7 +64,8 @@ rows, the gear columns stack, and the navigation moves under the logo.
   sunken inventory slots (`.slot`), and an ore seam (`.seam`, a CSS-only strip of stone with a diamond and a gold
   pixel) runs under each page header. Panels group what belongs together: glance facts, guide categories, the phone
   contents menu.
-- **Fast and accessible.** Static HTML, one font file, JavaScript only for the theme button and the guide filter.
+- **Fast and accessible.** Static HTML, one font file, JavaScript only for the theme button, the guide filter and the
+  player lookup island (loaded when the browser is idle; it fetches the guide's requirements only on lookup).
   Visible focus, AA contrast in both themes, no information only on hover.
 - **Icons carry meaning, text stays.** Item icons (FurfSky Reborn first, then Hypixel's own art, Minecraft blocks, then our pixel glyphs) sit
   next to their names, at whole-number scales. Stat symbols use the Hypixel stat colours.

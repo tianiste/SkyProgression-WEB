@@ -4,8 +4,8 @@ The website for [SkyProgression](https://github.com/tianiste/SkyProgression), a 
 mod. It lives at [skyprogression.dev](https://skyprogression.dev).
 
 It starts with the Mining Cult community's mining guides: gear for a budget and a max setup, Heart of the Mountain
-trees drawn from data, attributes, rates and how to mine. Guides are stored as structured requirements, so a later
-player lookup can show each guide as that player's to-do list. See [docs/PLAN.md](docs/PLAN.md) for the roadmap and
+trees drawn from data, attributes, rates and how to mine. Guides are stored as structured requirements, so player
+lookup shows each guide as that player's to-do list (checked by the mod's engine through the SkyProgression API). See [docs/PLAN.md](docs/PLAN.md) for the roadmap and
 [docs/DESIGN.md](docs/DESIGN.md) for the visual design.
 
 ## Run it
