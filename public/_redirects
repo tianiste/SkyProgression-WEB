@@ -2,3 +2,16 @@
 /reference/ /reference/stats/ 301
 /hotm /guides/ 301
 /hotm/ /guides/ 301
+# Player pages: one static shell per page; the island reads the name from the address.
+/player/:name/gear/ /player-page/gear/ 200
+/player/:name/upgrades/ /player-page/upgrades/ 200
+/player/:name/methods/ /player-page/methods/ 200
+/player/:name/start/ /player-page/start/ 200
+/player/:name/hotm/ /player-page/hotm/ 200
+/player/:name/gear /player/:name/gear/ 301
+/player/:name/upgrades /player/:name/upgrades/ 301
+/player/:name/methods /player/:name/methods/ 301
+/player/:name/start /player/:name/start/ 301
+/player/:name/hotm /player/:name/hotm/ 301
+/player/:name/ /player-page/overview/ 200
+/player/:name /player/:name/ 301

@@ -1,0 +1,43 @@
+---
+import Base from "../../layouts/Base.astro";
+import "../../styles/player.css";
+---
+
+<Base title="Players" description="Look up a Hypixel SkyBlock player's mining stats, rates, upgrades, best method and HOTM tree.">
+  <h1>Look up a player</h1>
+  <p class="lead">
+    Enter a Minecraft name to see that player's mining the way the SkyProgression mod works it out: stats for each method,
+    the rate and coins per hour, the next upgrades, the best gear they already own and their HOTM tree.
+  </p>
+  <form class="lookup-form player-search" method="get" action="/player/">
+    <label for="player-name">Minecraft name</label>
+    <div class="lookup-row">
+      <input id="player-name" name="name" type="text" autocomplete="off" spellcheck="false" placeholder="Minecraft name" maxlength="16" pattern="[A-Za-z0-9_]{1,16}" required />
+      <button type="submit">Look up</button>
+    </div>
+  </form>
+  <p class="muted">
+    The numbers need the player's SkyBlock API settings on (Inventory, Collections and Skills). Profiles are read through
+    the Hypixel API, so changes show after a few minutes.
+  </p>
+  <div class="seam" aria-hidden="true"></div>
+  <script>
+    // /player/?name=X (the form, or a link) opens /player/X/.
+    const go = (name: string) => {
+      if (/^[A-Za-z0-9_]{1,16}$/.test(name)) location.assign(`/player/${encodeURIComponent(name)}/`);
+    };
+    const given = new URLSearchParams(location.search).get("name")?.trim() ?? "";
+    if (given) go(given);
+    document.querySelector("form.player-search")!.addEventListener("submit", (e) => {
+      e.preventDefault();
+      go((document.getElementById("player-name") as HTMLInputElement).value.trim());
+    });
+  </script>
+</Base>
+
+<style>
+  .player-search {
+    max-width: 32rem;
+    margin: 1.5rem 0 1rem;
+  }
+</style>

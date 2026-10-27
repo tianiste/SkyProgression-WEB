@@ -1,0 +1,14 @@
+---
+import Base from "./Base.astro";
+import "../styles/player.css";
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<Base title={title} description="A Hypixel SkyBlock player's mining progress, worked out by the SkyProgression engine." noindex>
+  <slot />
+  <noscript><p>The player pages need JavaScript: they ask the SkyProgression API for the player's profile.</p></noscript>
+</Base>

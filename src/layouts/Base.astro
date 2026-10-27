@@ -6,14 +6,17 @@ import ModrinthButton from "../components/ModrinthButton.astro";
 interface Props {
   title?: string;
   description?: string;
+  /** Shells that only make sense with a player name in the URL. */
+  noindex?: boolean;
 }
 
-const { title, description = SITE.description } = Astro.props;
+const { title, description = SITE.description, noindex = false } = Astro.props;
 const pageTitle = title ? `${title} | ${SITE.name}` : `${SITE.name}: mining guides for Hypixel SkyBlock`;
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const canonical = new URL(path === "/" ? "/" : `${path}/`, SITE.url).href;
 const nav = [
   { href: "/guides/", label: "Guides" },
+  { href: "/player/", label: "Players", match: "/player" },
   { href: "/reference/stats/", label: "Reference", match: "/reference" },
   { href: "/about/", label: "About" },
 ];
@@ -30,7 +33,7 @@ const current = (href: string, match?: string) => {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#1c1e26" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
