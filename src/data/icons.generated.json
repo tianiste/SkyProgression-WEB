@@ -370,6 +370,11 @@
    "size": 16,
    "source": "furfsky"
   },
+  "ROUGH_AMETHYST_GEM": {
+   "file": "items/rough_amethyst_gem.png",
+   "size": 16,
+   "source": "furfsky"
+  },
   "RUBY_POLISHED_DRILL_ENGINE": {
    "file": "items/ruby_polished_drill_engine.png",
    "size": 16,

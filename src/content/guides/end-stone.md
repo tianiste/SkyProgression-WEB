@@ -19,7 +19,7 @@ hotm:
     tokens: 14
     cotm: 2
     powder: { mithril: 6850000, gemstone: 6700000 }
-    note: 6.8m Mithril and 6.7m Gemstone for the perks, plus 50k for Core of the Mountain 2. The tree picture for this method is not drawn yet.
+    note: 6.8m Mithril and 6.7m Gemstone for the perks, plus 50k for Core of the Mountain 2.
 requirements:
   - { id: armor-max, tier: max, group: armor, kind: item, item: GLOSSY_MINERAL_CHESTPLATE, label: 4/4 Glossy Mineral, modifiers: [{ kind: recomb }, { kind: reforge, id: jaded }] }
   - { id: armor-budget, tier: budget, group: armor, kind: item, item: MINERAL_CHESTPLATE, label: 4/4 Mineral, modifiers: [{ kind: reforge, id: jaded }] }

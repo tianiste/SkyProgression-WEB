@@ -26,7 +26,7 @@ hotm:
     tokens: 23
     cotm: 7
     powder: { mithril: 4050000, gemstone: 15800000, glacite: 4700000 }
-    note: 3.9m, 14.4m and 4.7m for the perks plus 150k and 1.4m for Core of the Mountain 7. Levelling Mole and Efficient Miner makes routes easier. The tree picture for this method is not drawn yet.
+    note: 3.9m, 14.4m and 4.7m for the perks plus 150k and 1.4m for Core of the Mountain 7. Levelling Mole and Efficient Miner makes routes easier.
 requirements:
   - id: armor-max
     tier: max

@@ -19,7 +19,7 @@ hotm:
     hotm: 7
     tokens: 17
     powder: { mithril: 11061843, gemstone: 8633785, glacite: 2184175 }
-    note: Upgrade Core of the Mountain if you are short of tokens. The tree picture for this method is not drawn yet.
+    note: Upgrade Core of the Mountain if you are short of tokens.
 requirements:
   - id: drill
     group: drill

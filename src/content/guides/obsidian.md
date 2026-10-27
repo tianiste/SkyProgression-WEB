@@ -17,7 +17,7 @@ hotm:
   - label: Recommended
     hotm: 10
     powder: { mithril: 8517747, gemstone: 9550915 }
-    note: 8,283,870 Gemstone if you are not levelling a pet. Max the perks that give Mining Speed and Block Fortune; Seasoned Mineman only if a pet is on EXP share. The tree picture for this method is not drawn yet.
+    note: 8,283,870 Gemstone if you are not levelling a pet. Max the perks that give Mining Speed and Block Fortune; Seasoned Mineman only if a pet is on EXP share.
 requirements:
   - id: armor
     group: armor

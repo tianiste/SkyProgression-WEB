@@ -20,7 +20,6 @@ hotm:
     hotm: 7
     tokens: 11
     powder: { mithril: 6759480, gemstone: 4600500 }
-    note: The tree picture for this method is not drawn yet.
 requirements:
   - { id: shovel, group: tools, kind: item, item: FLINT_SHOVEL, modifiers: [{ kind: recomb }, { kind: enchant, id: efficiency, level: 5 }, { kind: enchant, id: ultimate_wise, level: 5 }] }
   - { id: ability-drill, group: drill, kind: manual, label: Any drill for the ability, note: Perfectly-Cut Fuel Tank and a Blue Cheese omelette. }

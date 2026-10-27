@@ -28,7 +28,7 @@ npm run preview   # serve dist/
 | `src/content/attributes.yaml`, `src/content/stats.yaml` | The attribute and stat source references |
 | `src/schema/guide.ts` | The guide data model (zod); also served as JSON Schema at `/schema/guide.json` |
 | `src/data/` | Perk layout, item names, credited people |
-| `src/pages/` | Routes: `/`, `/guides`, `/guides/<guide>`, `/hotm`, `/reference/*`, `/about` |
+| `src/pages/` | Routes: `/`, `/guides`, `/guides/<guide>` (with its HOTM trees), `/reference/*`, `/about` |
 | `src/config.ts` | Site settings, including the Mining Cult Discord invite |
 
 ## Add a guide

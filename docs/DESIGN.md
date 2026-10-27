@@ -29,19 +29,20 @@ One column, max 72 rem, left aligned. Guide pages add a sticky "On this page" li
 ```
 Home                                  Guide
 +--------------------------------+    +--------------------------+--------+
-| logo   Guides HOTM Ref About ◐ |    | Guides / Gemstones       | On this|
+| logo   Guides  Ref  About    ◐ |    | Guides / Gemstones       | On this|
 +--------------------------------+    | Title (pixel)            | page   |
 | [mark] Mining guides for ...   |    | summary, byline          |  ...   |
 | [ Player name    ][Check]  soon|    | [XP bar] 0 of 43 checked |        |
 | Guides                         |    | Where / Key blocks / Rate|        |
-|  ■ Gemstones  ■ Metals  ■ Ores |    | Gear: budget | max       |        |
-|  links ...                     |    |  □ item, upgrades        |        |
-| The mod: Modrinth, GitHub      |    | HOTM presets + tree grid |        |
+|  ■ Gemstones  ■ Metals  ■ Ores |    | Gear          | HOTM     |        |
+|  links ...                     |    |  □ item, chips| powder   |        |
+| The mod: Modrinth, GitHub      |    |  budget | max | tree     |        |
 +--------------------------------+    | Attributes, how to mine  |        |
                                       +--------------------------+--------+
 ```
 
-Below 640 px tables turn into stacked rows, the gear columns stack, and the navigation moves under the logo.
+The HOTM column sits beside the gear from 1100 px up and above it below that. Below 640 px tables turn into stacked
+rows, the gear columns stack, and the navigation moves under the logo.
 
 ## Principles
 

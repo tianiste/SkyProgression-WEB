@@ -20,7 +20,6 @@ hotm:
     hotm: 7
     tokens: 15
     powder: { mithril: 6759480, gemstone: 4600500 }
-    note: The tree picture for this method is not drawn yet.
 requirements:
   - id: drill-budget
     tier: budget

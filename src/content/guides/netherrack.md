@@ -17,7 +17,6 @@ hotm:
     hotm: 7
     tokens: 11
     powder: { mithril: 6759480, gemstone: 4600500 }
-    note: The tree picture for this method is not drawn yet.
 videos:
   - { title: Budget setup without Black Cat, url: "https://youtu.be/nyZvFN-tgPo" }
 requirements:

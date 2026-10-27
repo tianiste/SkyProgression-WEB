@@ -48,7 +48,6 @@ Design: **minimalist and responsive.** Mobile first, readable on a phone at 360 
 | `/` | What SkyProgression is, download buttons, guide categories, a "look up a player" box (disabled until phase 2) | 1 |
 | `/guides` | All methods grouped (Gemstones, Dwarven Metals, Ores, Blocks, Other) with filters | 1 |
 | `/guides/<method>` | One guide (layout below) | 1 |
-| `/hotm` | All HOTM trees with a method filter | 1 |
 | `/reference/attributes` | Every mining attribute and its effect | 1 |
 | `/reference/stats` | Every mining stat source (from `general-stats.txt`, checked against our engine) | 1 |
 | `/about` | Credits, sources, license, privacy | 1 |
@@ -67,8 +66,10 @@ session tracker (it reads chat and the inventory live) and anything that needs t
 ## Guide page layout
 
 1. Summary: where to mine, key blocks, rates with the date they were measured, budget vs max.
-2. Gear in two tiers (budget, max): drill, armor, equipment, pet and pet item, accessories, with every upgrade.
-3. HOTM tree drawn from data; perk name and level on hover or tap; powder totals.
+2. HOTM presets with powder totals and the method's tree drawn from data (perk name and level on hover or tap), beside
+   the gear on wide screens and above it on phones; "Tree coming soon" when no tree is confirmed. HOTM trees live
+   inside each guide page; there is no separate HOTM tab (`/hotm` redirects to `/guides`).
+3. Gear in two tiers (budget, max): drill, armor, equipment, pet and pet item, accessories, with every upgrade.
 4. Attributes (shared table, filtered to the ones this method uses).
 5. How to mine: routes, ability use, tips, videos.
 6. Credits and sources, and the date the content was last checked.
@@ -138,7 +139,7 @@ browser -> api.skyprogression.dev (Worker: name to UUID, caching, rate limits)
 ## Phases and acceptance
 
 1. **Guides site.** Repo setup (Astro, license, README, CONTRIBUTING, CI build check); layout, theme and components;
-   home, guides list, guide page, HOTM trees page, attribute and stat-source references, about. All guides converted from
+   home, guides list, guide page (with its HOTM trees), attribute and stat-source references, about. All guides converted from
    the community guide posts into the data model with credits. Only the four captioned trees are published as certain
    (Gold MSB, MF Gems MSB, MF Gems Maniac Miner, Dwarven Metals MSB); the others show as "coming soon" until the
    mapping is confirmed. Cloudflare Pages connected to the repository. Done when every guide renders on desktop and a 360 px
@@ -148,3 +149,8 @@ browser -> api.skyprogression.dev (Worker: name to UUID, caching, rate limits)
    missing.
 3. **Mod features on the web,** one page at a time in the order Overview, Gear, Upgrades, Methods, Start with, HOTM. Done
    per page when it matches the mod's numbers for the same profile.
+   - **3D player model in their gear.** The player pages show the looked-up player's skin as a rotatable 3D model
+     (skinview3d, MIT) wearing their armor: dyed leather from the API colour, player-head helmets from their skull
+     texture, then FurfSky Reborn armor textures by applying the pack's item-to-texture rules per piece. The relay
+     returns the worn pieces' render data (item ID, dye colour, skull texture URL). Lazy-loaded, with a static fallback
+     for no WebGL and for reduced motion. Done when a looked-up player shows their skin and worn armor.

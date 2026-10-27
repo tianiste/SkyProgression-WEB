@@ -17,7 +17,6 @@ hotm:
   - label: Recommended
     hotm: 7
     powder: { mithril: 6759480, gemstone: 4600500 }
-    note: The tree picture for this method is not drawn yet.
 requirements:
   - id: armor
     group: armor

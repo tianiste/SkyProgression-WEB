@@ -20,7 +20,6 @@ hotm:
   - label: Recommended
     hotm: 7
     powder: { mithril: 8517747, gemstone: 19392014, glacite: 1267045 }
-    note: The tree picture for this preset is not drawn yet.
 requirements:
   - id: drill-progression
     tier: budget

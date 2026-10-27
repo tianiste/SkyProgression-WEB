@@ -13,7 +13,6 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const canonical = new URL(path === "/" ? "/" : `${path}/`, SITE.url).href;
 const nav = [
   { href: "/guides/", label: "Guides" },
-  { href: "/hotm/", label: "HOTM trees" },
   { href: "/reference/stats/", label: "Reference", match: "/reference" },
   { href: "/about/", label: "About" },
 ];

@@ -5,7 +5,7 @@ import Requirement from "../../components/Requirement.astro";
 import HotmTree from "../../components/HotmTree.astro";
 import Credit from "../../components/Credit.astro";
 import Icon from "../../components/Icon.astro";
-import { groupIcon, guideIcon, shardIcon } from "../../lib/icons";
+import { groupIcon, guideIcon, powderIcon, shardIcon } from "../../lib/icons";
 import { CATEGORIES } from "../../lib/categories";
 import { GEAR_GROUPS, GROUP_LABELS } from "../../lib/requirements";
 import { formatDate, formatPowder } from "../../lib/format";
@@ -42,12 +42,11 @@ const PRIORITY = { required: "Required", recommended: "Recommended", optional: "
 
 const treeIds = [...new Set(g.hotm.map((h) => h.tree).filter(Boolean))] as string[];
 const trees = (await Promise.all(treeIds.map((id) => getEntry("trees", id)))).filter((t) => t !== undefined);
-const hasPowder = (k: "mithril" | "gemstone" | "glacite") => g.hotm.some((h) => h.powder[k] !== undefined);
 
 const toc = [
   { id: "glance", label: "At a glance" },
-  { id: "gear", label: "Gear" },
   g.hotm.length || hotmReqs.length ? { id: "hotm", label: "Heart of the Mountain" } : null,
+  { id: "gear", label: "Gear" },
   attributeReqs.length ? { id: "attributes", label: "Attributes" } : null,
   ...headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, label: h.text })),
   g.videos.length ? { id: "videos", label: "Videos" } : null,
@@ -119,98 +118,94 @@ const toc = [
         </dl>
       </section>
 
-      <section id="gear" aria-labelledby="gear-title">
-        <h2 id="gear-title">Gear</h2>
-        <p class="muted">
-          <span class="tag budget">budget</span> is the cheapest setup the guide recommends, <span class="tag max">max</span> the
-          best one. Everything else applies to both.
-        </p>
+      <div class="gear-hotm">
         {
-          gear.map((s) => (
-            <section class="gear-group" aria-labelledby={`g-${s.id}`}>
-              <h3 id={`g-${s.id}`} class="with-icon"><Icon icon={groupIcon(s.id)} size={32} />{s.label}</h3>
-              {(s.budget.length > 0 || s.max.length > 0) && (
-                <div class="tiers">
-                  <div class="tier">
-                    <h4><span class="tag budget">budget</span></h4>
-                    {s.budget.length ? (
-                      <ul class="reqs">{s.budget.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>
-                    ) : (
-                      <p class="muted small">Nothing extra for this tier.</p>
+          (g.hotm.length > 0 || hotmReqs.length > 0) && (
+            <section id="hotm" class="hotm-col" aria-labelledby="hotm-title">
+              <h2 id="hotm-title">Heart of the Mountain</h2>
+              {g.hotm.map((h) => (
+                <div class="preset">
+                  <p class="preset-name">
+                    <strong>{h.label}</strong>
+                    <span class="muted small">
+                      {" "}HOTM {h.hotm}{h.tokens && <>, {h.tokens} tokens</>}{h.cotm !== undefined && <>, Core {h.cotm}</>}
+                    </span>
+                  </p>
+                  <ul class="powder" aria-label="Powder">
+                    {(["mithril", "gemstone", "glacite"] as const).map(
+                      (k) =>
+                        h.powder[k] !== undefined && (
+                          <li>
+                            <Icon icon={powderIcon(k)} size={16} />
+                            <span class="amount">{formatPowder(h.powder[k])}</span> {k[0]!.toUpperCase() + k.slice(1)}
+                          </li>
+                        ),
                     )}
-                  </div>
-                  <div class="tier">
-                    <h4><span class="tag max">max</span></h4>
-                    {s.max.length ? (
-                      <ul class="reqs">{s.max.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>
-                    ) : (
-                      <p class="muted small">Same as budget.</p>
-                    )}
-                  </div>
+                  </ul>
+                  {h.note && <p class="muted small preset-note">{h.note}</p>}
+                </div>
+              ))}
+              {trees.map((t) => (
+                <div class="tree">
+                  <h3>{t.data.title}</h3>
+                  <p class="muted small">
+                    Picture by {t.data.author && <Credit id={t.data.author.id} />}. {t.data.note}
+                  </p>
+                  <HotmTree id={t.id} label={`${t.data.title} HOTM tree`} perks={t.data.perks} ability={t.data.ability} disabled={t.data.disabled} />
+                </div>
+              ))}
+              {trees.length === 0 && (
+                <div class="tree-soon">
+                  <span class="soon-grid" aria-hidden="true" />
+                  <p><strong>Tree coming soon.</strong> <span class="muted">The drawn tree for this method is not confirmed yet.</span></p>
                 </div>
               )}
-              {s.both.length > 0 && <ul class="reqs">{s.both.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>}
+              {hotmReqs.length > 0 && (
+                <>
+                  <h3>Key perks</h3>
+                  <ul class="reqs">{hotmReqs.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} showTier />)}</ul>
+                </>
+              )}
             </section>
-          ))
+          )
         }
-      </section>
 
-      {
-        (g.hotm.length > 0 || hotmReqs.length > 0) && (
-          <section id="hotm" aria-labelledby="hotm-title">
-            <h2 id="hotm-title">Heart of the Mountain</h2>
-            {g.hotm.length > 0 && (
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Preset</th>
-                    <th scope="col" class="num">HOTM</th>
-                    <th scope="col" class="num">Tokens</th>
-                    {hasPowder("mithril") && <th scope="col" class="num">Mithril</th>}
-                    {hasPowder("gemstone") && <th scope="col" class="num">Gemstone</th>}
-                    {hasPowder("glacite") && <th scope="col" class="num">Glacite</th>}
-                  </tr>
-                </thead>
-                <tbody>
-                  {g.hotm.map((h) => (
-                    <tr>
-                      <td data-label="Preset">
-                        <strong>{h.label}</strong>
-                        {h.note && <span class="muted"> {h.note}</span>}
-                      </td>
-                      <td class="num" data-label="HOTM">{h.hotm}</td>
-                      <td class="num" data-label="Tokens">{h.tokens ?? "–"}</td>
-                      {hasPowder("mithril") && <td class="num" data-label="Mithril">{formatPowder(h.powder.mithril)}</td>}
-                      {hasPowder("gemstone") && <td class="num" data-label="Gemstone">{formatPowder(h.powder.gemstone)}</td>}
-                      {hasPowder("glacite") && <td class="num" data-label="Glacite">{formatPowder(h.powder.glacite)}</td>}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-            {trees.map((t) => (
-              <>
-                <h3>{t.data.title} tree</h3>
-                <p class="muted small">
-                  Picture by {t.data.author && <Credit id={t.data.author.id} />}. {t.data.note}
-                </p>
-                <HotmTree id={t.id} label={`${t.data.title} HOTM tree`} perks={t.data.perks} ability={t.data.ability} disabled={t.data.disabled} />
-              </>
-            ))}
-            {trees.length === 0 && (
-              <p class="muted">
-                The drawn tree for this method is coming soon. The <a href="/hotm/">HOTM trees page</a> lists the ones that are ready.
-              </p>
-            )}
-            {hotmReqs.length > 0 && (
-              <>
-                <h3>Key perks</h3>
-                <ul class="reqs">{hotmReqs.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} showTier />)}</ul>
-              </>
-            )}
-          </section>
-        )
-      }
+        <section id="gear" aria-labelledby="gear-title">
+          <h2 id="gear-title">Gear</h2>
+          <p class="muted">
+            <span class="tag budget">budget</span> is the cheapest setup the guide recommends, <span class="tag max">max</span> the
+            best one. Everything else applies to both.
+          </p>
+          {
+            gear.map((s) => (
+              <section class="gear-group" aria-labelledby={`g-${s.id}`}>
+                <h3 id={`g-${s.id}`} class="with-icon"><Icon icon={groupIcon(s.id)} size={32} />{s.label}</h3>
+                {(s.budget.length > 0 || s.max.length > 0) && (
+                  <div class="tiers">
+                    <div class="tier">
+                      <h4><span class="tag budget">budget</span></h4>
+                      {s.budget.length ? (
+                        <ul class="reqs">{s.budget.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>
+                      ) : (
+                        <p class="muted small">Nothing extra for this tier.</p>
+                      )}
+                    </div>
+                    <div class="tier">
+                      <h4><span class="tag max">max</span></h4>
+                      {s.max.length ? (
+                        <ul class="reqs">{s.max.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>
+                      ) : (
+                        <p class="muted small">Same as budget.</p>
+                      )}
+                    </div>
+                  </div>
+                )}
+                {s.both.length > 0 && <ul class="reqs">{s.both.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>}
+              </section>
+            ))
+          }
+        </section>
+      </div>
 
       {
         attributeReqs.length > 0 && (
@@ -416,6 +411,80 @@ const toc = [
   }
   .rate-value {
     font-weight: 400;
+  }
+  /* HOTM sits beside the gear on wide screens and above it on narrow ones. */
+  .gear-hotm {
+    display: grid;
+    gap: 0 2.5rem;
+  }
+  @media (min-width: 1100px) {
+    .gear-hotm {
+      grid-template-columns: minmax(0, 1fr) 17.5rem;
+    }
+    .gear-hotm > #gear {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .gear-hotm > .hotm-col {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .hotm-col h2 {
+      font-size: var(--step-2);
+    }
+  }
+  .preset {
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .preset-name {
+    margin: 0 0 0.3rem;
+  }
+  .powder {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.9rem;
+    font-size: var(--step--1);
+  }
+  .powder li {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .powder .amount {
+    font-weight: 650;
+  }
+  .preset-note {
+    margin: 0.3rem 0 0;
+  }
+  .tree h3 {
+    font-size: var(--step-0);
+    margin-bottom: 0.25rem;
+  }
+  .tree-soon {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin: 1rem 0;
+    padding: 0.75rem;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+    font-size: var(--step--1);
+  }
+  .tree-soon p {
+    margin: 0;
+  }
+  .soon-grid {
+    flex: none;
+    width: 42px;
+    height: 60px;
+    background-image: radial-gradient(circle, #3a3e4c 2px, transparent 2.5px);
+    background-size: 6px 6px;
+    background-color: #1c1e26;
+    border-radius: 2px;
   }
   .tiers {
     display: grid;
