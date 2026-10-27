@@ -10,14 +10,17 @@ interface Props {
 const { title, description = SITE.description } = Astro.props;
 const pageTitle = title ? `${title} | ${SITE.name}` : `${SITE.name}: mining guides for Hypixel SkyBlock`;
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
-const canonical = new URL(path, SITE.url).href;
+const canonical = new URL(path === "/" ? "/" : `${path}/`, SITE.url).href;
 const nav = [
-  { href: "/guides", label: "Guides" },
-  { href: "/hotm", label: "HOTM trees" },
-  { href: "/reference/stats", label: "Reference", match: "/reference" },
-  { href: "/about", label: "About" },
+  { href: "/guides/", label: "Guides" },
+  { href: "/hotm/", label: "HOTM trees" },
+  { href: "/reference/stats/", label: "Reference", match: "/reference" },
+  { href: "/about/", label: "About" },
 ];
-const current = (href: string, match?: string) => path === href || path.startsWith(`${match ?? href}/`) || (match && path.startsWith(match));
+const current = (href: string, match?: string) => {
+  const base = (match ?? href).replace(/\/$/, "");
+  return path === base || path.startsWith(`${base}/`);
+};
 ---
 
 <!doctype html>
@@ -83,7 +86,7 @@ const current = (href: string, match?: string) => path === href || path.startsWi
       <div class="inner">
         <p>
           Guides are written by the Mining Cult community and published here with the authors' permission. See
-          <a href="/about">About</a> for every author and source.
+          <a href="/about/">About</a> for every author and source.
         </p>
         <p>
           SkyProgression is a fan project. It is not affiliated with Hypixel or Mojang. Get the mod on

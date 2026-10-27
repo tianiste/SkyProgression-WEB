@@ -25,7 +25,7 @@ const groups = CATEGORIES.map((c) => ({ ...c, guides: guides.filter((g) => g.dat
         <ul>
           {c.guides.map((g) => (
             <li>
-              <a href={`/guides/${g.id}`}>{g.data.title}</a>
+              <a href={`/guides/${g.id}/`}>{g.data.title}</a>
               {showSummary && <span class="summary">{g.data.summary}</span>}
             </li>
           ))}

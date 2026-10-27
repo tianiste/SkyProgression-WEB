@@ -32,7 +32,7 @@ const guideFor = (treeId: string) => guides.find((g) => g.data.hotm.some((h) => 
             <h2 id={`${t.id}-title`}>{t.data.title}</h2>
             <p class="muted small">
               HOTM {t.data.hotm}. Picture by {t.data.author && <Credit id={t.data.author.id} />}. {t.data.note}
-              {guide && <> Used in the <a href={`/guides/${guide.id}`}>{guide.data.title} guide</a>.</>}
+              {guide && <> Used in the <a href={`/guides/${guide.id}/`}>{guide.data.title} guide</a>.</>}
             </p>
             <HotmTree id={t.id} label={`${t.data.title} HOTM tree`} perks={t.data.perks} ability={t.data.ability} disabled={t.data.disabled} />
           </section>

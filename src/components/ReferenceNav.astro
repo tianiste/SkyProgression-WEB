@@ -1,13 +1,13 @@
 ---
 const path = Astro.url.pathname.replace(/\/$/, "");
 const pages = [
-  { href: "/reference/stats", label: "Stat sources" },
-  { href: "/reference/attributes", label: "Attributes" },
+  { href: "/reference/stats/", label: "Stat sources" },
+  { href: "/reference/attributes/", label: "Attributes" },
 ];
 ---
 
 <nav class="subnav" aria-label="Reference">
-  {pages.map((p) => <a href={p.href} aria-current={path === p.href ? "page" : undefined}>{p.label}</a>)}
+  {pages.map((p) => <a href={p.href} aria-current={path === p.href.replace(/\/$/, "") ? "page" : undefined}>{p.label}</a>)}
 </nav>
 
 <style>

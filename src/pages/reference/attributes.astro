@@ -53,7 +53,7 @@ const usedBy = (id: string) => guides.filter((g) => g.data.requirements.some((r)
                       {a.data.note && <span class="muted"> {a.data.note}</span>}
                     </td>
                     <td data-label="Used in">
-                      {used.length ? used.map((g, i) => <>{i > 0 && ", "}<a href={`/guides/${g.id}#attributes`}>{g.data.title}</a></>) : <span class="muted">–</span>}
+                      {used.length ? used.map((g, i) => <>{i > 0 && ", "}<a href={`/guides/${g.id}/#attributes`}>{g.data.title}</a></>) : <span class="muted">–</span>}
                     </td>
                   </tr>
                 );

@@ -56,7 +56,7 @@ const toc = [
   <div class="layout">
     <article>
       <header class="guide-head">
-        <p class="crumbs"><a href="/guides">Guides</a> / <a href={`/guides#${category.id}`}>{category.label}</a></p>
+        <p class="crumbs"><a href="/guides/">Guides</a> / <a href={`/guides/#${category.id}`}>{category.label}</a></p>
         <h1>{g.title}</h1>
         <p class="lead">{g.summary}</p>
         <p class="byline">
@@ -196,7 +196,7 @@ const toc = [
             ))}
             {trees.length === 0 && (
               <p class="muted">
-                The drawn tree for this method is coming soon. The <a href="/hotm">HOTM trees page</a> lists the ones that are ready.
+                The drawn tree for this method is coming soon. The <a href="/hotm/">HOTM trees page</a> lists the ones that are ready.
               </p>
             )}
             {hotmReqs.length > 0 && (
@@ -214,7 +214,7 @@ const toc = [
           <section id="attributes" aria-labelledby="attributes-title">
             <h2 id="attributes-title">Attributes</h2>
             <p class="muted">
-              Level 10 values. See the <a href="/reference/attributes">attribute reference</a> for every mining attribute.
+              Level 10 values. See the <a href="/reference/attributes/">attribute reference</a> for every mining attribute.
             </p>
             <table class="table">
               <thead>
