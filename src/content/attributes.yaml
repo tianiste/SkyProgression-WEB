@@ -1,0 +1,268 @@
+# Mining attributes (level 10 values). Shards to reach level 10 by rarity: Common 96, Uncommon 64, Rare 48, Epic 32, Legendary 24.
+# Source: Mining Attribute Guide, Mining Cult Discord.
+- id: mossy_box
+  name: "Mossy Box"
+  shard: "Hideonleaf"
+  rarity: Common
+  family: stat
+  effect: "+50 Block Fortune"
+- id: yog_membrane
+  name: "Yog Membrane"
+  shard: "Yog"
+  rarity: Common
+  family: stat
+  effect: "+10 Heat Resistance"
+- id: rotten_pickaxe
+  name: "Rotten Pickaxe"
+  shard: "Zombie Miner"
+  rarity: Common
+  family: stat
+  effect: "+30 Mining Speed"
+- id: fortunate_miner
+  name: "Fortunate Miner"
+  shard: "Flitter"
+  rarity: Common
+  family: stat
+  effect: "+25 Mining Fortune"
+- id: gold_box
+  name: "Gold Box"
+  shard: "Hideonsun"
+  rarity: Common
+  family: stat
+  effect: "+50 Ore Fortune"
+- id: atomized_mithril
+  name: "Atomized Mithril"
+  shard: "Star Sentry"
+  rarity: Rare
+  family: stat
+  effect: "+10% Mithril Powder"
+- id: atomized_crystals
+  name: "Atomized Crystals"
+  shard: "Thyst"
+  rarity: Rare
+  family: stat
+  effect: "+10% Gemstone Powder"
+- id: atomized_glacite
+  name: "Atomized Glacite"
+  shard: "Stalagmight"
+  rarity: Rare
+  family: stat
+  effect: "+10% Glacite Powder"
+- id: sleepy_spread
+  name: "Sleepy Spread"
+  shard: "Snoozle"
+  rarity: Rare
+  family: stat
+  effect: "+10 Mining Spread"
+- id: pickaxe_cooldown
+  name: "Pickaxe Cooldown"
+  shard: "Abyssal Miner"
+  rarity: Epic
+  family: stat
+  effect: "-10% pickaxe ability cooldown"
+- id: echo_of_atomized
+  name: "Echo of Atomized"
+  shard: "Iguana"
+  rarity: Epic
+  family: stat
+  effect: "Atomized attributes +20%"
+- id: deep_technique
+  name: "Deep Technique"
+  shard: "Bal"
+  rarity: Epic
+  family: stat
+  effect: "10% chance per block of +1 Pristine for that block (about +0.1 Pristine)"
+- id: freezing_spread
+  name: "Freezing Spread"
+  shard: "Littlefoot"
+  rarity: Epic
+  family: stat
+  effect: "+0.5 Gemstone Spread per 20 Cold Resistance"
+  note: "Glacite Mineshafts"
+- id: cavern_wisdom
+  name: "Cavern Wisdom"
+  shard: "Cavernshade"
+  rarity: Epic
+  family: stat
+  effect: "+5 Mining Wisdom"
+- id: devouring_spread
+  name: "Devouring Spread"
+  shard: "Gemzie"
+  rarity: Epic
+  family: stat
+  effect: "+2.5 Gemstone Spread"
+- id: echo_of_wisdom
+  name: "Echo of Wisdom"
+  shard: "Wyvern"
+  rarity: Legendary
+  family: stat
+  effect: "Wisdom attributes +20%"
+- id: echo_of_echoes
+  name: "Echo of Echoes"
+  shard: "Tiamat"
+  rarity: Legendary
+  family: stat
+  effect: "Echo attributes +50%"
+- id: ultimate_dna
+  name: "Ultimate DNA"
+  shard: "Galaxy Fish"
+  rarity: Legendary
+  family: stat
+  effect: "+10 Mining Fortune"
+- id: cold_resistance
+  name: "Cold Resistance"
+  shard: "Wumpa"
+  rarity: Legendary
+  family: stat
+  effect: "+5 Cold Resistance"
+- id: mountain_climber
+  name: "Mountain Climber"
+  shard: "Troglobyte"
+  rarity: Uncommon
+  family: misc
+  effect: "Commissions give +10% HOTM XP"
+- id: bigger_box
+  name: "Bigger Box"
+  shard: "Hideoncave"
+  rarity: Uncommon
+  family: misc
+  effect: "+50% chance of an extra item in Treasure Chests and Crystal Nucleus runs"
+- id: echo_of_boxes
+  name: "Echo of Boxes"
+  shard: "Cuboa"
+  rarity: Uncommon
+  family: misc
+  effect: "Box attributes +20%"
+- id: dwarven_training
+  name: "Dwarven Training"
+  shard: "Treasure Hoarder"
+  rarity: Uncommon
+  family: misc
+  effect: "+10% HOTM XP"
+- id: crystal_serendipity
+  name: "Crystal Serendipity"
+  shard: "Silentdepth"
+  rarity: Rare
+  family: misc
+  effect: "10% chance to double Crystal Hollows Treasure Chest loot"
+- id: breeze
+  name: "Breeze"
+  shard: "Wither Specter"
+  rarity: Rare
+  family: misc
+  effect: "-10% mana costs when you have not taken damage for 5 seconds"
+- id: dwarven_serendipity
+  name: "Dwarven Serendipity"
+  shard: "Abyssal Lanternfish"
+  rarity: Rare
+  family: misc
+  effect: "+100% Golden and Diamond Goblin chance"
+- id: quartz_speed
+  name: "Quartz Speed"
+  shard: "Quartzfang"
+  rarity: Rare
+  family: misc
+  effect: "+10 to +100 Mining Speed on Mining Islands while Weather is active"
+  note: "Some guides describe it as +100% Mining Speed from weather."
+- id: fungy_luck
+  name: "Fungy Luck"
+  shard: "Fungloom"
+  rarity: Rare
+  family: misc
+  effect: "+100% chance of an extra Chisel charge at the Fossil Excavator"
+- id: scrap_chance
+  name: "Scrap Chance"
+  shard: "Scrappy"
+  rarity: Rare
+  family: misc
+  effect: "+10% Suspicious Scrap chance in Glacite Mineshafts"
+- id: greedy_goblin
+  name: "Greedy Goblin"
+  shard: "Gimmiegold"
+  rarity: Rare
+  family: misc
+  effect: "Goblin pet gains +10 Ore Fortune"
+- id: refined_luck
+  name: "Refined Luck"
+  shard: "Stoneworm"
+  rarity: Rare
+  family: misc
+  effect: "+10% Refined Mineral chance during Mining Fiestas"
+- id: glossy_fortune
+  name: "Glossy Fortune"
+  shard: "Scatha"
+  rarity: Epic
+  family: misc
+  effect: "+10% Glossy Gemstone chance during Mining Fiestas"
+- id: fiesta_fortune
+  name: "Fiesta Fortune"
+  shard: "Packrat"
+  rarity: Epic
+  family: misc
+  effect: "+50 Mining Fortune during Mayor Cole's Mining Fiesta"
+- id: royal_riches
+  name: "Royal Riches"
+  shard: "Nilbog"
+  rarity: Epic
+  family: misc
+  effect: "+50 Mining Speed and +25 Ore Fortune in the Mines of Divan"
+- id: why_not_more
+  name: "Why Not More"
+  shard: "Toucan"
+  rarity: Epic
+  family: misc
+  effect: "+10% pet EXP Share"
+- id: pity
+  name: "Pity"
+  shard: "Daemon"
+  rarity: Legendary
+  family: misc
+  effect: "RNG Meter fills 10% faster"
+- id: fog_elemental
+  name: "Fog Elemental"
+  shard: "Mist"
+  rarity: Common
+  family: intelligence
+  effect: "+10 Intelligence"
+- id: water_elemental
+  name: "Water Elemental"
+  shard: "Tide"
+  rarity: Uncommon
+  family: intelligence
+  effect: "+10 Intelligence"
+- id: torrent_elemental
+  name: "Torrent Elemental"
+  shard: "Cascade"
+  rarity: Rare
+  family: intelligence
+  effect: "+10 Intelligence"
+- id: frost_elemental
+  name: "Frost Elemental"
+  shard: "Cryo"
+  rarity: Epic
+  family: intelligence
+  effect: "+10 Intelligence"
+- id: snow_elemental
+  name: "Snow Elemental"
+  shard: "Blizzard"
+  rarity: Legendary
+  family: intelligence
+  effect: "+10 Intelligence"
+- id: echo_of_elemental
+  name: "Echo of Elemental"
+  shard: "Starborn"
+  rarity: Legendary
+  family: intelligence
+  effect: "Elemental attributes +20%"
+- id: maximal_torment
+  name: "Maximal Torment"
+  shard: "Taurus"
+  rarity: Legendary
+  family: intelligence
+  effect: "+1% Intelligence"
+- id: mana_regeneration
+  name: "Mana Regeneration"
+  shard: "XYZ"
+  rarity: Epic
+  family: intelligence
+  effect: "+10% mana regeneration"

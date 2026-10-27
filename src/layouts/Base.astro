@@ -1,0 +1,228 @@
+---
+import "../styles/global.css";
+import { SITE } from "../config";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = SITE.description } = Astro.props;
+const pageTitle = title ? `${title} | ${SITE.name}` : `${SITE.name}: mining guides for Hypixel SkyBlock`;
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const canonical = new URL(path, SITE.url).href;
+const nav = [
+  { href: "/guides", label: "Guides" },
+  { href: "/hotm", label: "HOTM trees" },
+  { href: "/reference/stats", label: "Reference", match: "/reference" },
+  { href: "/about", label: "About" },
+];
+const current = (href: string, match?: string) => path === href || path.startsWith(`${match ?? href}/`) || (match && path.startsWith(match));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#1c1e26" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/brand/mark.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/brand/icon-256.png" />
+    <link rel="preload" href="/fonts/pixelify-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL("/brand/icon-512.png", SITE.url).href} />
+    <meta property="og:url" content={canonical} />
+    <script is:inline>
+      try {
+        const t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="/" aria-label="SkyProgression home">
+          <img class="pixelated logo-on-dark" src="/brand/lockup-horizontal-dark-bg.svg" width="204" height="32" alt="" />
+          <img class="pixelated logo-on-light" src="/brand/lockup-horizontal-light-bg.svg" width="204" height="32" alt="" />
+        </a>
+        <nav aria-label="Main">
+          <ul>
+            {
+              nav.map((n) => (
+                <li>
+                  <a href={n.href} aria-current={current(n.href, n.match) ? "page" : undefined}>
+                    {n.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <button class="theme-toggle" type="button" aria-label="Switch to light theme" data-theme-toggle>
+          <svg width="20" height="20" viewBox="0 0 10 10" aria-hidden="true" shape-rendering="crispEdges">
+            <path class="sun" fill="currentColor" d="M4 0h2v2H4zM4 8h2v2H4zM0 4h2v2H0zM8 4h2v2H8zM3 3h4v4H3zM1 1h1v1H1zM8 1h1v1H8zM1 8h1v1H1zM8 8h1v1H8z"></path>
+            <path class="moon" fill="currentColor" d="M3 1h4v1H3zM2 2h2v1H2zM1 3h2v4H1zM2 7h2v1H2zM3 8h4v1H3zM6 7h2v1H6zM7 6h2v1H7z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="inner">
+        <p>
+          Guides are written by the Mining Cult community and published here with the authors' permission. See
+          <a href="/about">About</a> for every author and source.
+        </p>
+        <p>
+          SkyProgression is a fan project. It is not affiliated with Hypixel or Mojang. Get the mod on
+          <a href={SITE.modrinth}>Modrinth</a> or <a href={SITE.github}>GitHub</a>.
+          Site source on <a href={SITE.webGithub}>GitHub</a>, MIT License.
+        </p>
+      </div>
+    </footer>
+
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const button = document.querySelector("[data-theme-toggle]");
+        const isDark = () =>
+          root.dataset.theme ? root.dataset.theme === "dark" : !matchMedia("(prefers-color-scheme: light)").matches;
+        const label = () => button.setAttribute("aria-label", isDark() ? "Switch to light theme" : "Switch to dark theme");
+        label();
+        button.addEventListener("click", () => {
+          const next = isDark() ? "light" : "dark";
+          root.dataset.theme = next;
+          try {
+            localStorage.setItem("theme", next);
+          } catch {}
+          label();
+        });
+      })();
+    </script>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .bar {
+    max-width: var(--page);
+    margin: 0 auto;
+    padding: 0.75rem 16px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+  }
+  .brand {
+    display: block;
+    line-height: 0;
+  }
+  .logo-on-light {
+    display: none;
+  }
+  :global(:root[data-theme="light"]) .logo-on-light {
+    display: block;
+  }
+  :global(:root[data-theme="light"]) .logo-on-dark {
+    display: none;
+  }
+  @media (prefers-color-scheme: light) {
+    :global(:root:not([data-theme="dark"])) .logo-on-light {
+      display: block;
+    }
+    :global(:root:not([data-theme="dark"])) .logo-on-dark {
+      display: none;
+    }
+  }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+  }
+  nav a {
+    color: var(--text);
+    text-decoration: none;
+    padding: 0.35rem 0;
+    display: inline-block;
+    border-bottom: 2px solid transparent;
+  }
+  nav a:hover {
+    color: var(--accent);
+  }
+  nav a[aria-current="page"] {
+    border-bottom-color: var(--xp);
+  }
+  .theme-toggle {
+    width: 2.75rem;
+    height: 2.75rem;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+  .theme-toggle:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .theme-toggle .sun {
+    display: none;
+  }
+  :global(:root[data-theme="light"]) .theme-toggle .sun {
+    display: inline;
+  }
+  :global(:root[data-theme="light"]) .theme-toggle .moon {
+    display: none;
+  }
+  @media (prefers-color-scheme: light) {
+    :global(:root:not([data-theme="dark"])) .theme-toggle .sun {
+      display: inline;
+    }
+    :global(:root:not([data-theme="dark"])) .theme-toggle .moon {
+      display: none;
+    }
+  }
+  @media (max-width: 720px) {
+    .bar {
+      grid-template-columns: 1fr auto;
+    }
+    nav {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+  }
+  .site-footer {
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--muted);
+    font-size: var(--step--1);
+  }
+  .site-footer .inner {
+    max-width: var(--page);
+    margin: 0 auto;
+    padding: 1.5rem 16px 2rem;
+  }
+  .site-footer p {
+    max-width: 52rem;
+  }
+</style>

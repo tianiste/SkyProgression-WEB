@@ -1,0 +1,37 @@
+title: Dwarven Metals, Mining Speed Boost
+method: Dwarven Metals
+status: published
+order: 4
+author:
+  id: notwil
+  role: HOTM tree picture
+hotm: 10
+ability: mining_speed_boost
+note: Posted as "Metal MSB". Used for Umber and Tungsten.
+perks:
+  mining_speed: max
+  mining_fortune: max
+  precision_mining: max
+  luck_of_the_cave: 1
+  efficient_miner: 1
+  sky_mall: max
+  old_school: 1
+  daily_grind: max
+  core_of_the_mountain: 1
+  blockhead: max
+  great_explorer: max
+  speedy_mineman: max
+  fortunate_mineman: max
+  miners_blessing: max
+  no_stone_unturned: max
+  strong_arm: max
+  steady_hand: 1
+  warm_heart: max
+  surveyor: max
+  mineshaft_mayhem: max
+  metal_head: max
+  rags_to_riches: max
+  eager_adventurer: max
+  gifts_from_the_departed: max
+  mining_master: 1
+  dead_mans_chest: max

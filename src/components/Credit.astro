@@ -1,0 +1,39 @@
+---
+/** A credited person. Compact: the name links to their first link. Full: the name followed by all their links. */
+import { person, type PersonId } from "../data/people";
+import { SITE } from "../config";
+
+interface Props {
+  id: PersonId;
+  all?: boolean;
+}
+
+const { id, all = false } = Astro.props;
+const p = person(id);
+const links = id === "mining-cult" && SITE.miningCultInvite ? [{ label: "Join the Discord", url: SITE.miningCultInvite }] : p.links;
+const first = links[0];
+---
+
+{
+  all ? (
+    <span>
+      {p.name}
+      {links.length > 0 && (
+        <span>
+          {" ("}
+          {links.map((l, i) => (
+            <>
+              {i > 0 && ", "}
+              <a href={l.url}>{l.label}</a>
+            </>
+          ))}
+          {")"}
+        </span>
+      )}
+    </span>
+  ) : first ? (
+    <a href={first.url}>{p.name}</a>
+  ) : (
+    <span>{p.name}</span>
+  )
+}

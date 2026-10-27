@@ -1,0 +1,32 @@
+title: Gold, Mining Speed Boost
+method: Gold
+status: published
+order: 1
+author:
+  id: notwil
+  role: HOTM tree picture
+hotm: 10
+ability: mining_speed_boost
+note: Posted as "Non's Gold". Front Loaded is shown as not taken.
+perks:
+  mining_speed: max
+  mining_fortune: max
+  precision_mining: max
+  efficient_miner: max
+  mole: 1
+  professional: 1
+  old_school: max
+  sky_mall: max
+  gem_lover: 1
+  seasoned_mineman: max
+  daily_grind: 1
+  core_of_the_mountain: 1
+  daily_powder: 1
+  blockhead: 1
+  keep_it_cool: max
+  great_explorer: 1
+  speedy_mineman: max
+  powder_buff: max
+  fortunate_mineman: max
+  no_stone_unturned: 1
+  strong_arm: max

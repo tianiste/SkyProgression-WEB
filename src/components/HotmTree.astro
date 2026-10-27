@@ -1,0 +1,259 @@
+---
+/**
+ * A Heart of the Mountain tree drawn from data: 7 columns x 10 tiers, tier 10 at the top. Each perk is a button that
+ * opens a popover with its name and level (works with mouse, keyboard and touch, no script). The same information is
+ * listed as text below the grid.
+ */
+import { PERKS, tierOf, type Perk } from "../data/perks";
+
+interface Props {
+  id: string;
+  perks: Partial<Record<string, "max" | number>>;
+  ability?: string;
+  disabled?: string[];
+  label: string;
+}
+
+const { id, perks, ability, disabled = [], label } = Astro.props;
+
+type State = "max" | "bridge" | "level" | "none" | "selected" | "ability" | "disabled" | "core";
+
+function stateOf(p: Perk): State {
+  if (p.kind === "core") return "core";
+  if (p.kind === "ability") return p.id === ability ? "selected" : "ability";
+  if (disabled.includes(p.id)) return "disabled";
+  const v = perks[p.id];
+  if (v === undefined) return "none";
+  if (v === "max" || v >= p.max) return "max";
+  return v === 1 ? "bridge" : "level";
+}
+
+const STATE_TEXT: Record<State, string> = {
+  max: "Maxed",
+  bridge: "Unlocked only to reach other perks",
+  level: "Partly levelled",
+  none: "Not taken",
+  selected: "Selected ability",
+  ability: "Ability, not selected",
+  disabled: "Unlocked but turned off",
+  core: "Core of the Mountain",
+};
+
+function levelText(p: Perk, s: State): string {
+  const v = perks[p.id];
+  if (s === "max") return `${p.max} / ${p.max}`;
+  if (s === "level" && typeof v === "number") return `${v} / ${p.max}`;
+  if (s === "bridge") return `low level, max ${p.max}`;
+  if (s === "none") return `max ${p.max}`;
+  if (s === "core") return "level not shown in the picture";
+  return "";
+}
+
+const cells = PERKS.map((p) => ({ perk: p, state: stateOf(p) }));
+const groups: State[] = ["selected", "max", "level", "bridge", "disabled"];
+---
+
+<figure class="hotm" aria-label={label}>
+  <div class="grid" role="group" aria-label={`${label}, perk grid`}>
+    {
+      cells.map(({ perk, state }) => {
+        const pid = `${id}-${perk.id}`;
+        return (
+          <>
+            <button
+              class={`cell ${state}`}
+              style={`grid-column:${perk.x + 1};grid-row:${perk.y + 1}`}
+              popovertarget={pid}
+              aria-label={`${perk.name}: ${STATE_TEXT[state]}`}
+              title={perk.name}
+            >
+              <span class="glyph" aria-hidden="true" />
+            </button>
+            <div id={pid} popover class="tip">
+              <strong>{perk.name}</strong>
+              <span>
+                Tier {tierOf(perk)}. {STATE_TEXT[state]}
+                {levelText(perk, state) && <>, {levelText(perk, state)}</>}.
+              </span>
+            </div>
+          </>
+        );
+      })
+    }
+  </div>
+  <figcaption>
+    <ul class="legend">
+      <li><span class="cell max" aria-hidden="true"><span class="glyph"></span></span>Maxed</li>
+      <li><span class="cell bridge" aria-hidden="true"><span class="glyph"></span></span>Unlocked to reach others</li>
+      <li><span class="cell none" aria-hidden="true"><span class="glyph"></span></span>Not taken</li>
+      <li><span class="cell selected" aria-hidden="true"><span class="glyph"></span></span>Selected ability</li>
+      <li><span class="cell ability" aria-hidden="true"><span class="glyph"></span></span>Other ability</li>
+      <li><span class="cell core" aria-hidden="true"><span class="glyph"></span></span>Core of the Mountain</li>
+    </ul>
+    <details class="perk-list">
+      <summary>Perks as a list</summary>
+      <dl>
+        {
+          groups.map((g) => {
+            const list = cells.filter((c) => c.state === g);
+            return list.length ? (
+              <>
+                <dt>{STATE_TEXT[g]}</dt>
+                <dd>{list.map((c) => c.perk.name).join(", ")}</dd>
+              </>
+            ) : null;
+          })
+        }
+      </dl>
+    </details>
+  </figcaption>
+</figure>
+
+<style>
+  .hotm {
+    margin: 1rem 0 1.5rem;
+    max-width: 24rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(10, auto);
+    gap: 4px;
+    padding: 8px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .cell {
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 2px solid var(--line);
+    border-radius: 0;
+    background: var(--surface-2);
+    cursor: pointer;
+    min-width: 0;
+  }
+  .grid .cell:hover {
+    border-color: var(--text);
+  }
+  .glyph {
+    display: block;
+    width: 50%;
+    height: 50%;
+  }
+  /* Shape and colour both carry the state. */
+  .cell.max {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .cell.max .glyph {
+    background: var(--accent-ink);
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+    width: 40%;
+    height: 40%;
+  }
+  .cell.level,
+  .cell.bridge {
+    border-color: var(--xp);
+  }
+  .cell.bridge .glyph {
+    width: 30%;
+    height: 30%;
+    background: var(--xp);
+  }
+  .cell.level .glyph {
+    background: var(--xp);
+    width: 60%;
+    height: 60%;
+  }
+  .cell.none {
+    border-style: dashed;
+    background: transparent;
+  }
+  .cell.selected {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+  .cell.selected .glyph {
+    border: 3px solid var(--accent-ink);
+    border-radius: 50%;
+  }
+  .cell.ability {
+    border-color: var(--gold);
+    background: transparent;
+  }
+  .cell.ability .glyph {
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    width: 40%;
+    height: 40%;
+  }
+  .cell.disabled {
+    border-color: var(--core);
+  }
+  .cell.disabled .glyph {
+    background: linear-gradient(45deg, transparent 42%, var(--core) 42% 58%, transparent 58%);
+  }
+  .cell.core {
+    background: var(--core);
+    border-color: var(--core);
+  }
+  .cell.core .glyph {
+    background: var(--bg);
+    width: 30%;
+    height: 30%;
+  }
+  .tip {
+    margin: auto;
+    max-width: min(20rem, calc(100vw - 32px));
+    padding: 0.75rem 1rem;
+    background: var(--surface);
+    color: var(--text);
+    border: 2px solid var(--accent);
+    border-radius: var(--radius);
+    font-size: var(--step--1);
+  }
+  .tip strong {
+    display: block;
+    font-size: var(--step-0);
+  }
+  .tip::backdrop {
+    background: rgb(0 0 0 / 0.35);
+  }
+  figcaption {
+    margin-top: 0.75rem;
+    font-size: var(--step--1);
+  }
+  .legend {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+    gap: 0.35rem 1rem;
+  }
+  .legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .legend .cell {
+    width: 1.1rem;
+    flex: none;
+    cursor: default;
+  }
+  .perk-list summary {
+    cursor: pointer;
+    color: var(--accent);
+  }
+  .perk-list dt {
+    font-weight: 650;
+    margin-top: 0.5rem;
+  }
+  .perk-list dd {
+    margin: 0;
+    color: var(--muted);
+  }
+</style>

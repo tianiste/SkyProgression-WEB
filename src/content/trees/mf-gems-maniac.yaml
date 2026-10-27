@@ -1,0 +1,33 @@
+title: Magma Fields Gemstones, Maniac Miner
+method: Magma Fields Gemstones
+status: published
+order: 3
+author:
+  id: meow
+  role: HOTM tree picture
+hotm: 10
+ability: maniac_miner
+note: Posted as "Maniac Ruby".
+perks:
+  mining_speed: max
+  mining_fortune: max
+  efficient_miner: 1
+  mole: 1
+  professional: max
+  old_school: 1
+  sky_mall: max
+  gem_lover: max
+  seasoned_mineman: 1
+  front_loaded: max
+  core_of_the_mountain: 1
+  blockhead: 1
+  subterranean_fisher: 1
+  keep_it_cool: max
+  lonesome_miner: 1
+  great_explorer: 1
+  speedy_mineman: max
+  powder_buff: 1
+  fortunate_mineman: max
+  steady_hand: 1
+  rags_to_riches: 1
+  mining_master: max

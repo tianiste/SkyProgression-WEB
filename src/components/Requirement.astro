@@ -1,0 +1,109 @@
+---
+/**
+ * One guide requirement as a to-do item. The square in front stays empty until player lookup can check it.
+ */
+import type { LeafRequirement, Requirement } from "../schema/guide";
+import { modifierLines, modifiersOf, subtitle, title } from "../lib/requirements";
+
+interface Props {
+  r: Requirement | LeafRequirement;
+  attributeNames?: Map<string, string>;
+  showTier?: boolean;
+}
+
+const { r, attributeNames, showTier = false } = Astro.props;
+const lines = modifierLines(modifiersOf(r));
+const sub = subtitle(r);
+---
+
+<li class="req" data-requirement={r.id}>
+  <span class="box" aria-hidden="true"></span>
+  <div class="body">
+    <span class="name">{title(r, attributeNames)}</span>
+    {sub && <span class="sub">{sub}</span>}
+    {r.priority === "optional" && <span class="tag">optional</span>}
+    {showTier && r.tier && <span class={`tag ${r.tier}`}>{r.tier}</span>}
+    {
+      r.kind === "any_of" && (
+        <ul class="options">
+          {r.options.map((o) => (
+            <li>{title(o, attributeNames)}{subtitle(o) && <span class="sub"> {subtitle(o)}</span>}</li>
+          ))}
+        </ul>
+      )
+    }
+    {
+      lines.length > 0 && (
+        <dl class="mods">
+          {lines.map((l) => (
+            <div>
+              <dt>{l.label}</dt>
+              <dd>{l.values.join(", ")}</dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
+    {r.note && <p class="note">{r.note}</p>}
+  </div>
+</li>
+
+<style>
+  .req {
+    display: grid;
+    grid-template-columns: 1rem 1fr;
+    gap: 0.75rem;
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--line);
+    max-width: none;
+  }
+  .req:first-child {
+    border-top: 0;
+  }
+  .box {
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.3rem;
+    border: 2px solid var(--muted);
+    background: transparent;
+  }
+  .name {
+    font-weight: 600;
+    margin-right: 0.4rem;
+  }
+  .sub {
+    color: var(--muted);
+    margin-right: 0.4rem;
+  }
+  .tag {
+    margin-right: 0.3rem;
+    vertical-align: 0.1em;
+  }
+  .options {
+    margin: 0.25rem 0 0;
+    padding-left: 1.1rem;
+    list-style: square;
+  }
+  .mods {
+    margin: 0.3rem 0 0;
+    font-size: var(--step--1);
+    display: grid;
+    gap: 0.15rem;
+  }
+  .mods div {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 0.5rem;
+  }
+  .mods dt {
+    color: var(--muted);
+  }
+  .mods dd {
+    margin: 0;
+  }
+  .note {
+    margin: 0.3rem 0 0;
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+</style>

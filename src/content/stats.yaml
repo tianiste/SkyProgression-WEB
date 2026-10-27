@@ -1,0 +1,241 @@
+# Mining stat sources. Source: General Mining Stats Guide, Mining Cult Discord. Sources the guide calls impractical are left out.
+# 'With Blue Cheese' is the extra from a Blue Cheese Goblin Omelette, which adds one level to every HOTM perk.
+- id: fortune-speed
+  name: "Mining Fortune and Mining Speed"
+  order: 1
+  summary: "Values are Fortune / Speed. Totals use a Lustrous Divan's Drill with the Sunny Side omelette; a third Perfect Jade in the drill adds 60 Fortune. With a Blue Cheese omelette (+1 level on every HOTM perk) the drill loses the omelette's 50 Fortune."
+  totals:
+    - { label: "No pet", value: "2052 / 8706" }
+    - { label: "Bal", value: "2202 / 8756" }
+    - { label: "Glacite Golem", value: "2102 / 8881" }
+    - { label: "Scatha", value: "2239.5 / 8856" }
+  sources:
+    - { group: "Gear", source: "4/4 Armor of Divan (2 Perfect Jade, 2 Perfect Amber each, coating, Jaded)", value: "680 / 1360" }
+    - { group: "Gear", source: "Divan's Drill, Glacial", value: "495 / 3400", note: "Efficiency 10, Fortune 4, 5 Polarvoid, Amber-Polished engine, coating, 2 Perfect Jade + Amber, Sunny Side" }
+    - { group: "Gear", source: "Divan's Drill, Heated", value: "495 / 3470" }
+    - { group: "Gear", source: "Divan's Drill, Lustrous", value: "545 / 3475" }
+    - { group: "Gear", source: "Will-o'-wisp", value: "25 / 100" }
+    - { group: "Equipment", source: "Dwarven Handwarmers (Blazing, recombobulated)", value: "37 / 45" }
+    - { group: "Equipment", source: "Sapphire Cloak (Blazing, recombobulated)", value: "17 / 30" }
+    - { group: "Equipment", source: "Jade Belt (Blazing, recombobulated)", value: "17 / 30" }
+    - { group: "Equipment", source: "Pendant of Divan (Blazing, recombobulated, Perfect Jade + Amber, coating)", value: "93 / 200", note: "Royal gives more Speed and less Fortune than Blazing." }
+    - { group: "Pets", source: "Scatha, any rarity, level 100 (Hephaestus Relic or Quick Claw)", value: "187.5 / 150" }
+    - { group: "Pets", source: "Bal, any rarity, level 100 (Quick Claw)", value: "150 / 50" }
+    - { group: "Pets", source: "Legendary Glacite Golem, level 100 (Quick Claw)", value: "150 / 175", note: "Speed is 50 outside a Mineshaft." }
+    - { group: "HOTM", source: "Mining Speed (tier 1)", value: "1000 Speed", note: "+20 with Blue Cheese" }
+    - { group: "HOTM", source: "Speedy Mineman (tier 7)", value: "2000 Speed", note: "+40 with Blue Cheese" }
+    - { group: "HOTM", source: "Eager Adventurer (tier 9)", value: "400 Speed", note: "+4 with Blue Cheese; Mineshafts only" }
+    - { group: "HOTM", source: "Mining Fortune (tier 2)", value: "100 Fortune", note: "+2 with Blue Cheese" }
+    - { group: "HOTM", source: "Fortunate Mineman (tier 7)", value: "150 Fortune", note: "+3 with Blue Cheese" }
+    - { group: "HOTM", source: "Rags to Riches (tier 9)", value: "200 Fortune", note: "+4 with Blue Cheese; Mineshafts only" }
+    - { group: "HOTM", source: "Sky Mall", value: "50 Fortune or 100 Speed", note: "Random daily buff" }
+    - { group: "Accessories", source: "Titanium Relic", value: "60 Speed" }
+    - { group: "Accessories", source: "Relic of Power (Perfect gems, recombobulated)", value: "25 / 50" }
+    - { group: "Accessories", source: "Haste Artifact", value: "25 Speed" }
+    - { group: "Accessories", source: "Speed Relic", value: "1 Speed" }
+    - { group: "Accessories", source: "Glossy Mineral Talisman", value: "6 Fortune" }
+    - { group: "Accessories", source: "Magic 8 Ball", value: "25 Fortune", note: "Random" }
+    - { group: "Attributes", source: "Rotten Pickaxe", value: "30 Speed" }
+    - { group: "Attributes", source: "Ultimate DNA", value: "10 Fortune" }
+    - { group: "Attributes", source: "Fortunate Miner", value: "25 Fortune" }
+    - { group: "Attributes", source: "Royal Riches", value: "50 Speed", note: "Mines of Divan only" }
+    - { group: "Temporary", source: "Haste IV potion (in God Potion)", value: "200 Speed" }
+    - { group: "Temporary", source: "Spelunker V potion (in God Potion)", value: "25 Fortune" }
+    - { group: "Temporary", source: "Celestial Mason Jar", value: "15 Fortune" }
+    - { group: "Temporary", source: "Century Cake of Hype", value: "5 Fortune" }
+    - { group: "Temporary", source: "Filet O' Fortune", value: "20 Fortune" }
+    - { group: "Other", source: "Eager Miner 10 (Gold Essence shop)", value: "100 Speed" }
+    - { group: "Other", source: "Flowstate III", value: "0 to 600 Speed", note: "Grows while you keep mining" }
+    - { group: "Other", source: "Heated reforge", value: "0 to 100 Fortune, 0 to 400 Speed", note: "Scales with 0 to 100 Heat" }
+    - { group: "Other", source: "Glacial reforge", value: "Scales with Cold" }
+    - { group: "Other", source: "Cold above your Cold Resistance", value: "-0.5% of total Fortune and Speed per point" }
+    - { group: "Other", source: "Amber Power Scroll", value: "30 Speed", note: "While an ability is active" }
+    - { group: "Other", source: "Mining level 60", value: "240 Fortune" }
+    - { group: "Other", source: "Tungsten collection 8", value: "5 Fortune" }
+    - { group: "Other", source: "Glacite collection 8", value: "4 Fortune" }
+    - { group: "Other", source: "Umber collection 8", value: "4 Fortune" }
+    - { group: "Other", source: "Obsidian collection 10", value: "4 Fortune" }
+- id: mining-spread
+  name: "Mining Spread"
+  order: 2
+  summary: "Block Spread also works on Hard Stone; /hbg in game shows what affects what."
+  totals:
+    - { label: "Everything", value: "310" }
+    - { label: "With Glossy armor", value: "910" }
+    - { label: "On Hard Stone", value: "1810" }
+    - { label: "With Goblin pet", value: "1010" }
+  sources:
+    - { group: "Gear", source: "4/4 Glossy Mineral armor", value: "600", note: "Ores and blocks only" }
+    - { group: "Gear", source: "Lustrous Divan's Drill", value: "35", note: "Mining Fiesta only" }
+    - { group: "Gear", source: "Fleet Divan's Drill", value: "100", note: "Blocks" }
+    - { group: "Pets", source: "Legendary Snail", value: "400", note: "Blocks" }
+    - { group: "Pets", source: "Legendary Goblin", value: "100", note: "Mines of Divan only" }
+    - { group: "Pets", source: "Legendary or better Armadillo", value: "300", note: "Hard Stone only" }
+    - { group: "HOTM", source: "Efficient Miner (tier 3)", value: "300", note: "+3 with Blue Cheese" }
+    - { group: "HOTM", source: "Mole (tier 4)", value: "400", note: "+1.76 with Blue Cheese; Hard Stone only" }
+    - { group: "Attributes", source: "Sleepy Spread", value: "10" }
+- id: heat-resistance
+  name: "Heat Resistance"
+  order: 3
+  totals:
+    - { label: "No pet", value: "103" }
+    - { label: "Bal", value: "253 (+75 with Hephaestus Relic)" }
+  sources:
+    - { group: "Gear", source: "4/4 Armor of Divan", value: "40" }
+    - { group: "Gear", source: "Will-o'-wisp", value: "20" }
+    - { group: "Equipment", source: "Handwarmers, Cloak, Belt, Pendant (Blazing, recombobulated)", value: "3 each" }
+    - { group: "Pets", source: "Bal, any rarity", value: "150", note: "+75 with Hephaestus Relic; Legendary Bal loses 4 Heat per mob kill in the Crystal Hollows" }
+    - { group: "HOTM", source: "Keep It Cool (tier 6)", value: "20", note: "+0.4 with Blue Cheese" }
+    - { group: "Attributes", source: "Yog Membrane", value: "10" }
+    - { group: "Accessories", source: "Fried Frozen Chicken", value: "1" }
+- id: cold-resistance
+  name: "Cold Resistance"
+  order: 4
+  totals:
+    - { label: "No pet", value: "103.5" }
+    - { label: "Glacite Golem, Mammoth or Baby Yeti", value: "113.5 (+5 with Hephaestus Relic)" }
+    - { label: "Penguin", value: "118.5 (+1 per nearby player up to 10, +7.5 with Hephaestus Relic)" }
+  sources:
+    - { group: "Other", source: "Cut Loose 5 (Fossil shop)", value: "2.5 per mob killed in a Mineshaft, up to 10", note: "+0.4 with Blue Cheese" }
+    - { group: "Gear", source: "Any 4/4 armor with Ice Cold 5", value: "20" }
+    - { group: "Gear", source: "Will-o'-wisp", value: "10" }
+    - { group: "Equipment", source: "Dwarven Handwarmers", value: "5" }
+    - { group: "Equipment", source: "Pendant of Divan", value: "10" }
+    - { group: "Equipment", source: "Safari Belt", value: "10" }
+    - { group: "Pets", source: "Mythic Baby Yeti, Legendary Mammoth or any Glacite Golem, level 100", value: "10", note: "+5 with Hephaestus Relic" }
+    - { group: "Pets", source: "Legendary Penguin", value: "15", note: "+1 per player within 30 blocks up to 10, +7.5 with Hephaestus Relic" }
+    - { group: "HOTM", source: "Warm Heart (tier 8)", value: "20", note: "+0.4 with Blue Cheese" }
+    - { group: "Accessories", source: "Fried Frozen Chicken", value: "1" }
+    - { group: "Accessories", source: "Organ Donor Artifact", value: "1.5" }
+    - { group: "Temporary", source: "Corpse-Flavored Century Cake", value: "1" }
+    - { group: "Temporary", source: "Cold Resistance IV potion", value: "10", note: "Not in the God Potion" }
+    - { group: "Attributes", source: "Cold Resistance (Wumpa)", value: "5" }
+    - { group: "Other", source: "5x Reaper Pepper", value: "5" }
+    - { group: "Other", source: "Frozen Skin 5 (Ice Essence shop)", value: "5" }
+- id: mining-wisdom
+  name: "Mining Wisdom"
+  order: 5
+  totals:
+    - { label: "No pet", value: "113" }
+    - { label: "Silverfish", value: "143" }
+  sources:
+    - { group: "Gear", source: "Divan's Drill (Compact 10, Refined or Andesite Whetstone)", value: "20" }
+    - { group: "Gear", source: "Any base Legendary armor set (recombobulated, Dimensional or Titanium Tesseract)", value: "12" }
+    - { group: "Pets", source: "Legendary Silverfish", value: "30" }
+    - { group: "HOTM", source: "Seasoned Mineman (tier 4)", value: "15", note: "+0.1 with Blue Cheese" }
+    - { group: "Accessories", source: "Actually Blue Abicase", value: "1.5" }
+    - { group: "Accessories", source: "Glacial Artifact", value: "15", note: "Jerry's Workshop only" }
+    - { group: "Accessories", source: "Magic 8 Ball", value: "1", note: "Random" }
+    - { group: "Attributes", source: "Cavern Wisdom", value: "5", note: "+1 with Echo of Wisdom, +0.5 with Echo of Echoes" }
+    - { group: "Temporary", source: "Celestial Mason Jar", value: "3" }
+    - { group: "Temporary", source: "Booster Cookie", value: "25" }
+    - { group: "Temporary", source: "Mining XP Boost III potion (God Potion)", value: "20" }
+    - { group: "Temporary", source: "Dwarven Training 3 (Gold Essence shop)", value: "10" }
+    - { group: "Temporary", source: "Quantum 5", value: "2" }
+    - { group: "Temporary", source: "Mayor Cole, Mining XP perk", value: "60" }
+    - { group: "Temporary", source: "Mining Fiesta", value: "75" }
+- id: pristine
+  name: "Pristine"
+  order: 6
+  summary: "All totals include the Bal shard (Deep Technique)."
+  totals:
+    - { label: "No pet", value: "14.8" }
+    - { label: "Bal in the Magma Fields", value: "17.8" }
+    - { label: "Glacite Golem in a Mineshaft with 4 corpses", value: "19.15" }
+  sources:
+    - { group: "Gear", source: "4/4 Armor of Divan (1 Perfect Topaz each, recombobulated)", value: "8" }
+    - { group: "Gear", source: "Divan's Drill (Perfect Topaz, Prismatic 5, recombobulated)", value: "4.7" }
+    - { group: "Equipment", source: "Pendant of Divan", value: "0.25", note: "Mineshafts only" }
+    - { group: "Pets", source: "Legendary Bal", value: "3", note: "Magma Fields" }
+    - { group: "Pets", source: "Legendary Glacite Golem", value: "1 per looted corpse", note: "Mineshafts only" }
+    - { group: "HOTM", source: "Mining Master (tier 10)", value: "1", note: "+0.1 with Blue Cheese" }
+    - { group: "Accessories", source: "Artifact of Power (Perfect Topaz)", value: "1" }
+    - { group: "Attributes", source: "Deep Technique", value: "0.1" }
+    - { group: "Consumables", source: "Chilled Pristine Potato", value: "0.1", note: "Mineshafts" }
+- id: gemstone
+  name: "Gemstone Mining Speed and Gemstone Fortune"
+  order: 7
+  totals:
+    - { label: "Gemstone Mining Speed", value: "850" }
+    - { label: "Gemstone Fortune, no pet", value: "190" }
+    - { label: "Gemstone Fortune, Scatha", value: "315" }
+  sources:
+    - { group: "Gear", source: "Any drill with Lapidary 5", value: "100 Speed, 50 Fortune", note: "Jasper Drill X gives 900 Speed and 170 Fortune" }
+    - { group: "HOTM", source: "Professional (tier 4)", value: "750 Speed", note: "+5 with Blue Cheese" }
+    - { group: "HOTM", source: "Front Loaded", value: "250 Speed", note: "First 2,500 gemstones a day; not counted in the total" }
+    - { group: "Equipment", source: "Amber Necklace, Sapphire Cloak, Jade Belt, Amethyst Gauntlet", value: "30 Fortune each", note: "On their own gemstone" }
+    - { group: "Pets", source: "Legendary Scatha", value: "125 Fortune" }
+    - { group: "HOTM", source: "Gem Lover (tier 4)", value: "100 Fortune", note: "+4 with Blue Cheese" }
+    - { group: "Accessories", source: "Jungle Amulet", value: "10 Fortune" }
+    - { group: "Consumables", source: "5x Dwarven O's Gemstone Grahams", value: "10 Fortune" }
+    - { group: "Other", source: "Rhinestone Infusion 10 (Diamond Essence shop)", value: "20 Fortune" }
+- id: gemstone-spread
+  name: "Gemstone Spread"
+  order: 8
+  totals:
+    - { label: "Outside a Mineshaft", value: "5" }
+    - { label: "Inside a Mineshaft", value: "17.5 (+0.5 per 20 Cold Resistance)" }
+  sources:
+    - { group: "Gear", source: "Will-o'-wisp", value: "2.5" }
+    - { group: "Equipment", source: "Pendant of Divan", value: "2.5", note: "Mineshafts" }
+    - { group: "HOTM", source: "Steady Hand (tier 8)", value: "10", note: "+0.1 with Blue Cheese; Mineshafts" }
+    - { group: "Attributes", source: "Freezing Spread", value: "0.5 per 20 Cold Resistance", note: "Mineshafts" }
+    - { group: "Attributes", source: "Devouring Spread", value: "2.5" }
+- id: block
+  name: "Block Fortune"
+  order: 9
+  summary: "There are no Block Speed sources."
+  totals:
+    - { label: "Block Fortune", value: "450" }
+  sources:
+    - { group: "Gear", source: "4/4 Glossy Mineral armor", value: "200" }
+    - { group: "Gear", source: "Fleet Divan's Drill", value: "75" }
+    - { group: "Pets", source: "Legendary Snail", value: "1 per 2 Speed above 100", note: "Not counted in the total" }
+    - { group: "HOTM", source: "Blockhead (tier 6)", value: "100", note: "+5 with Blue Cheese" }
+    - { group: "Attributes", source: "Mossy Box", value: "50", note: "+10 with Echo of Boxes, +5 with Echo of Echoes" }
+    - { group: "Consumables", source: "5x Dwarven O's Block Bran", value: "10" }
+- id: dwarven-metal
+  name: "Dwarven Metal Speed and Fortune"
+  order: 10
+  totals:
+    - { label: "Dwarven Metal Speed", value: "500" }
+    - { label: "Dwarven Metal Fortune", value: "145" }
+  sources:
+    - { group: "HOTM", source: "Strong Arm (tier 8)", value: "500 Speed", note: "+5 with Blue Cheese" }
+    - { group: "HOTM", source: "Metal Head (tier 9)", value: "100 Fortune", note: "+5 with Blue Cheese" }
+    - { group: "Accessories", source: "Dwarven Metal Talisman", value: "15 Fortune" }
+    - { group: "Consumables", source: "5x Dwarven O's Metallic Minis", value: "10 Fortune" }
+    - { group: "Other", source: "Dwarven Expertise (Fossil Essence shop)", value: "20 Fortune" }
+- id: ore
+  name: "Ore Speed and Ore Fortune"
+  order: 11
+  totals:
+    - { label: "Ore Fortune, no pet", value: "175" }
+    - { label: "Ore Fortune, Goblin", value: "340 (+5 with Blue Cheese)" }
+  sources:
+    - { group: "Pets", source: "Legendary Goblin", value: "250 Ore Speed", note: "1,250 on non-pure ores, a bug" }
+    - { group: "Pets", source: "Legendary Goblin", value: "100 Ore Fortune", note: "+50 with Hephaestus Relic" }
+    - { group: "HOTM", source: "Old-School (tier 4)", value: "100 Fortune", note: "+5 with Blue Cheese" }
+    - { group: "Attributes", source: "Gold Box", value: "50 Fortune", note: "+10 with Echo of Boxes, +5 with Echo of Echoes" }
+    - { group: "Attributes", source: "Greedy Goblin", value: "10 Fortune", note: "Goblin pet only; +5 with Hephaestus Relic" }
+    - { group: "Attributes", source: "Royal Riches", value: "25 Fortune", note: "Mines of Divan only" }
+    - { group: "Consumables", source: "5x Dwarven O's Ore Oats", value: "10 Fortune" }
+- id: max
+  name: "Maximum stats by method"
+  order: 12
+  summary: "Fortune / Speed, normal and type-specific combined."
+  totals:
+    - { label: "Gemstones outside the Magma Fields, Scatha (Flowstate, Lustrous)", value: "2554.5 / 10306" }
+    - { label: "Gemstones in the Magma Fields, Bal at 100 Heat (Flowstate, Heated)", value: "2442 / 10601" }
+    - { label: "Gemstones in a Mineshaft, Glacite Golem at 0 Cold (Flowstate, Glacial)", value: "2542 / 10656" }
+    - { label: "Dwarven Metals outside a Mineshaft, Scatha, 0 Cold", value: "2444.5 / 9956" }
+    - { label: "Dwarven Metals inside a Mineshaft (Flowstate, third Jade)", value: "2644.5 / 10356" }
+    - { label: "Ores outside the Magma Fields, Scatha, 3/4 Glossy + 1/4 Divan, Lustrous", value: "2054.5 / 8616" }
+    - { label: "Ores in the Magma Fields at 100 Heat, Heated", value: "2104.5 / 9011" }
+    - { label: "Coal (1/4 Glossy + 3/4 Divan, 0 Heat, no Wisp)", value: "2309.5 / 9076" }
+    - { label: "Gold (4/4 Glossy, 0 Heat, Goblin)", value: "1992 / 8486" }
+    - { label: "Blocks outside the Magma Fields, Scatha, 4/4 Glossy", value: "2089.5 / 8211" }
+    - { label: "Cobblestone (4/4 Glossy, Black Cat with Unalloyed Speed, Fleet)", value: "1902 / 8111" }
+    - { label: "Mycelium and Red Sand (4/4 Glossy, Scatha with Unalloyed Speed, no drill)", value: "1522 / speed does not matter" }
+  sources:
+    - { group: "Other", source: "Crimson Essence shop", value: "+20 Fortune", note: "Mycelium and Red Sand only" }
