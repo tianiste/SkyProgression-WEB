@@ -1,0 +1,68 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import ReferenceNav from "../../components/ReferenceNav.astro";
+import Credit from "../../components/Credit.astro";
+
+const all = await getCollection("attributes");
+const FAMILIES = [
+  { id: "stat", title: "Stat attributes", intro: "Attributes that add mining stats or powder." },
+  { id: "misc", title: "Other mining attributes", intro: "Loot, XP, events and pets." },
+  { id: "intelligence", title: "Intelligence attributes", intro: "For Maniac Miner, which needs Intelligence for its full Fortune bonus." },
+] as const;
+const RARITY = ["Common", "Uncommon", "Rare", "Epic", "Legendary"];
+const SHARDS: Record<string, number> = { Common: 96, Uncommon: 64, Rare: 48, Epic: 32, Legendary: 24 };
+const guides = await getCollection("guides");
+const usedBy = (id: string) => guides.filter((g) => g.data.requirements.some((r) => r.kind === "attribute" && r.attribute === id));
+---
+
+<Base title="Mining attributes" description="Every mining attribute in Hypixel SkyBlock, its shard and its effect at level 10.">
+  <ReferenceNav />
+  <h1>Mining attributes</h1>
+  <p class="lead">Every mining attribute, the shard it comes from and its effect at level 10.</p>
+  <p class="muted">
+    Shards needed to reach level 10: {RARITY.map((r, i) => <>{i > 0 && ", "}{r} {SHARDS[r]}</>)}. Echo attributes make
+    their family stronger: Echo of Boxes and Echo of Echoes together turn Mossy Box and Gold Box into +65 Fortune each.
+  </p>
+
+  {
+    FAMILIES.map((f) => {
+      const rows = all.filter((a) => a.data.family === f.id).sort((a, b) => RARITY.indexOf(a.data.rarity) - RARITY.indexOf(b.data.rarity));
+      return (
+        <section aria-labelledby={`fam-${f.id}`}>
+          <h2 id={`fam-${f.id}`}>{f.title}</h2>
+          <p class="muted">{f.intro}</p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Attribute</th>
+                <th scope="col">Shard</th>
+                <th scope="col">Effect at level 10</th>
+                <th scope="col">Used in</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((a) => {
+                const used = usedBy(a.id);
+                return (
+                  <tr id={a.id}>
+                    <td data-label="Attribute"><strong>{a.data.name}</strong></td>
+                    <td data-label="Shard">{a.data.shard} ({a.data.rarity})</td>
+                    <td data-label="Effect">
+                      {a.data.effect}
+                      {a.data.note && <span class="muted"> {a.data.note}</span>}
+                    </td>
+                    <td data-label="Used in">
+                      {used.length ? used.map((g, i) => <>{i > 0 && ", "}<a href={`/guides/${g.id}#attributes`}>{g.data.title}</a></>) : <span class="muted">–</span>}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </section>
+      );
+    })
+  }
+  <p class="muted small">Source: the Mining Attribute Guide in the <Credit id="mining-cult" />.</p>
+</Base>

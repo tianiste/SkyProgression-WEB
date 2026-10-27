@@ -1,0 +1,72 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import HotmTree from "../components/HotmTree.astro";
+import Credit from "../components/Credit.astro";
+
+const trees = (await getCollection("trees")).sort((a, b) => a.data.order - b.data.order);
+const published = trees.filter((t) => t.data.status === "published");
+const soon = trees.filter((t) => t.data.status === "coming-soon");
+const guides = await getCollection("guides");
+const guideFor = (treeId: string) => guides.find((g) => g.data.hotm.some((h) => h.tree === treeId));
+---
+
+<Base title="HOTM trees" description="Heart of the Mountain trees for mining methods, drawn from community pictures.">
+  <h1>Heart of the Mountain trees</h1>
+  <p class="lead">
+    Community trees for each method, drawn perk by perk. Tap or hover a perk to see its name and level; each tree also
+    has a text list.
+  </p>
+  <nav class="jump" aria-label="Trees on this page">
+    <ul>
+      {published.map((t) => <li><a href={`#${t.id}`}>{t.data.title}</a></li>)}
+    </ul>
+  </nav>
+
+  <div class="trees">
+    {
+      published.map((t) => {
+        const guide = guideFor(t.id);
+        return (
+          <section id={t.id} aria-labelledby={`${t.id}-title`}>
+            <h2 id={`${t.id}-title`}>{t.data.title}</h2>
+            <p class="muted small">
+              HOTM {t.data.hotm}. Picture by {t.data.author && <Credit id={t.data.author.id} />}. {t.data.note}
+              {guide && <> Used in the <a href={`/guides/${guide.id}`}>{guide.data.title} guide</a>.</>}
+            </p>
+            <HotmTree id={t.id} label={`${t.data.title} HOTM tree`} perks={t.data.perks} ability={t.data.ability} disabled={t.data.disabled} />
+          </section>
+        );
+      })
+    }
+  </div>
+
+  <h2>Coming soon</h2>
+  <p>These methods have tree pictures that still need their method confirmed before they are drawn here.</p>
+  <ul class="soon">
+    {soon.map((t) => <li>{t.data.title}</li>)}
+  </ul>
+</Base>
+
+<style>
+  .jump ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+  }
+  .trees {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+    gap: 0 3rem;
+  }
+  .trees h2 {
+    font-size: var(--step-2);
+  }
+  .soon {
+    columns: 14rem;
+    padding-left: 1.1rem;
+    list-style: square;
+  }
+</style>

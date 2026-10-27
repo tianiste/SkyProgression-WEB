@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import GuideList from "../../components/GuideList.astro";
+import CategoryFilter from "../../components/islands/CategoryFilter";
+import { CATEGORIES } from "../../lib/categories";
+
+const guides = await getCollection("guides");
+const used = CATEGORIES.filter((c) => guides.some((g) => g.data.category === c.id)).map(({ id, label }) => ({ id, label }));
+---
+
+<Base title="Guides" description="Every mining guide on SkyProgression, grouped by what you mine.">
+  <h1>Guides</h1>
+  <p class="lead">Pick what you want to mine. Each guide lists gear for a budget and a max setup, the HOTM tree, attributes and how to mine.</p>
+  <CategoryFilter client:idle categories={used} />
+  <GuideList />
+</Base>
+
+<style>
+  :global(.chips) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+  :global(.chips button) {
+    font: inherit;
+    font-size: var(--step--1);
+    padding: 0.4rem 0.8rem;
+    color: var(--text);
+    background: transparent;
+    border: 2px solid var(--line);
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+  :global(.chips button[aria-pressed="true"]) {
+    border-color: var(--accent);
+    background: var(--surface);
+  }
+  :global(.chips button:hover) {
+    border-color: var(--accent);
+  }
+</style>

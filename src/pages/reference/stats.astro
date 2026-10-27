@@ -1,0 +1,98 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import ReferenceNav from "../../components/ReferenceNav.astro";
+import Credit from "../../components/Credit.astro";
+
+const stats = (await getCollection("stats")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Mining stat sources" description="Where every mining stat comes from in Hypixel SkyBlock: gear, pets, HOTM, accessories, attributes and more.">
+  <ReferenceNav />
+  <h1>Mining stat sources</h1>
+  <p class="lead">Where each mining stat comes from, with the best totals you can reach.</p>
+  <p class="muted">
+    "With Blue Cheese" is the extra from a Blue Cheese Goblin Omelette on your drill, which adds one level to every HOTM
+    perk. Sources that are random or only work in one place are marked.
+  </p>
+  <nav aria-label="Stats on this page">
+    <ul class="jump">
+      {stats.map((s) => <li><a href={`#${s.id}`}>{s.data.name}</a></li>)}
+    </ul>
+  </nav>
+
+  {
+    stats.map((s) => (
+      <section id={s.id} aria-labelledby={`${s.id}-title`}>
+        <h2 id={`${s.id}-title`}>{s.data.name}</h2>
+        {s.data.summary && <p class="muted">{s.data.summary}</p>}
+        {s.data.totals.length > 0 && (
+          <dl class="totals">
+            {s.data.totals.map((t) => (
+              <div>
+                <dt>{t.label}</dt>
+                <dd>{t.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Type</th>
+              <th scope="col">Source</th>
+              <th scope="col" class="num">Value</th>
+              <th scope="col">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {s.data.sources.map((r) => (
+              <tr>
+                <td data-label="Type" class="muted">{r.group}</td>
+                <td data-label="Source">{r.source}</td>
+                <td data-label="Value" class="num"><strong>{r.value}</strong></td>
+                <td data-label="Notes" class="muted">{r.note ?? ""}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    ))
+  }
+  <p class="muted small">Source: the General Mining Stats Guide in the <Credit id="mining-cult" />.</p>
+</Base>
+
+<style>
+  .jump {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    font-size: var(--step--1);
+  }
+  .totals {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+    gap: 0.75rem;
+    margin: 1rem 0 1.25rem;
+  }
+  .totals div {
+    padding: 0.6rem 0.8rem;
+    border-left: 3px solid var(--xp);
+    background: var(--surface);
+  }
+  .totals dt {
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+  .totals dd {
+    margin: 0;
+    font-weight: 650;
+  }
+  @media (max-width: 640px) {
+    td.num {
+      white-space: normal;
+    }
+  }
+</style>

@@ -1,4 +1,69 @@
 ---
 import Base from "../layouts/Base.astro";
+import LookupBox from "../components/LookupBox.astro";
+import GuideList from "../components/GuideList.astro";
+import { SITE } from "../config";
 ---
-<Base><h1>SkyProgression</h1></Base>
+
+<Base>
+  <section class="hero">
+    <img class="mark pixelated" src="/brand/mark.svg" width="96" height="96" alt="" />
+    <div>
+      <h1>Mining guides for Hypixel SkyBlock</h1>
+      <p class="lead">
+        Gear, Heart of the Mountain trees, attributes and rates for each mining method, written by miners from the
+        Mining Cult community.
+      </p>
+    </div>
+  </section>
+
+  <LookupBox />
+
+  <h2>Guides</h2>
+  <GuideList headingLevel={3} showSummary={false} />
+  <p class="more"><a href="/guides">All guides with summaries</a></p>
+
+  <section class="mod" aria-labelledby="mod-title">
+    <h2 id="mod-title">The mod</h2>
+    <p>
+      SkyProgression is also a Fabric mod for Minecraft. In the game it shows where every mining stat comes from, your
+      rate for each method and the upgrade that helps most for the coins. The website will get the same features
+      through player lookup.
+    </p>
+    <p><a href={SITE.modrinth}>Download on Modrinth</a> or <a href={SITE.github}>read the source on GitHub</a>.</p>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: center;
+    margin: 1rem 0 2rem;
+  }
+  .hero h1 {
+    margin-bottom: 0.4em;
+  }
+  .hero .lead {
+    margin: 0;
+  }
+  @media (max-width: 560px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .mark {
+      width: 64px;
+      height: 64px;
+    }
+  }
+  .more {
+    margin-top: 1rem;
+  }
+  .mod {
+    margin-top: 3rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--line);
+  }
+</style>

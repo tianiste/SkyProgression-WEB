@@ -1,0 +1,87 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import Credit from "../components/Credit.astro";
+import { PEOPLE, type PersonId } from "../data/people";
+import { SITE } from "../config";
+
+const guides = (await getCollection("guides")).sort((a, b) => a.data.title.localeCompare(b.data.title));
+const trees = (await getCollection("trees")).filter((t) => t.data.status === "published");
+
+/** What each person made, collected from the guide and tree data. */
+const credits = new Map<PersonId, string[]>();
+const add = (id: PersonId, what: string) => credits.set(id, [...(credits.get(id) ?? []), what]);
+for (const g of guides) {
+  for (const a of g.data.authors) add(a.id, `${a.role ?? "Guide"}: ${g.data.title}`);
+  for (const c of g.data.contributors) if (c.id !== "mining-cult") add(c.id, `${c.role ?? "Contributor"}: ${g.data.title}`);
+}
+for (const t of trees) if (t.data.author) add(t.data.author.id, `HOTM tree: ${t.data.title}`);
+const people = [...credits.entries()]
+  .filter(([id]) => id !== "mining-cult")
+  .sort(([a], [b]) => PEOPLE[a].name.localeCompare(PEOPLE[b].name));
+---
+
+<Base title="About" description="Who wrote the guides, where the data comes from, the license and privacy.">
+  <h1>About</h1>
+  <p class="lead">
+    SkyProgression helps Hypixel SkyBlock players get better at mining. It started as a Fabric mod; this site begins
+    with the community's mining guides and will grow into the mod's features for any player.
+  </p>
+
+  <h2>The guides and their authors</h2>
+  <p>
+    Every guide was written by a miner from the <Credit id="mining-cult" /> and is published here with the author's
+    permission. The content is theirs; this site only puts it in a form that a player lookup can check.
+    {SITE.miningCultInvite && <> <a href={SITE.miningCultInvite}>Join the Mining Cult Discord</a> to ask the authors questions.</>}
+  </p>
+  <ul class="people">
+    {
+      people.map(([id, what]) => (
+        <li>
+          <Credit id={id} all />
+          <span class="muted small">{[...new Set(what)].join("; ")}</span>
+        </li>
+      ))
+    }
+  </ul>
+  <p>
+    The <a href="/reference/attributes">attribute</a> and <a href="/reference/stats">stat source</a> references come from
+    guides posted in the Mining Cult Discord without a named author.
+  </p>
+
+  <h2>Data and accuracy</h2>
+  <p>
+    Guide numbers are the authors' own measurements and estimates, dated on each guide. Game updates change them, so
+    check the date before you spend coins. Requirements are stored with Hypixel item, pet, perk and attribute IDs so the
+    mod's calculation engine can check them against a profile later. Each guide's data is available as JSON, in the
+    format described by the <a href="/schema/guide.json">guide schema</a>.
+  </p>
+
+  <h2>License</h2>
+  <p>
+    The site's code is under the MIT License; the source is on <a href={SITE.webGithub}>GitHub</a>. Guide text belongs to
+    its authors. The SkyProgression logo is the project's own pixel art. Headings use Pixelify Sans under the SIL Open
+    Font License. No Hypixel or Mojang textures are used.
+  </p>
+  <p>SkyProgression is not affiliated with Hypixel or Mojang.</p>
+
+  <h2>Privacy</h2>
+  <p>
+    The site has no accounts, no analytics and no tracking cookies. Your theme choice is saved in your browser only.
+    When player lookup arrives, the name you enter will be sent to the SkyProgression API to fetch that player's
+    public SkyBlock profile from Hypixel; results are cached briefly and not used for anything else.
+  </p>
+</Base>
+
+<style>
+  .people {
+    list-style: none;
+    padding: 0;
+    max-width: var(--measure);
+  }
+  .people li {
+    padding: 0.55rem 0;
+    border-top: 1px solid var(--line);
+    display: grid;
+  }
+</style>

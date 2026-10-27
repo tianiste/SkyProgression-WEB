@@ -1,0 +1,78 @@
+---
+/** Guides grouped by category, each category marked with the colour of its material. */
+import { getCollection } from "astro:content";
+import { CATEGORIES } from "../lib/categories";
+
+interface Props {
+  headingLevel?: 2 | 3;
+  showSummary?: boolean;
+}
+
+const { headingLevel = 2, showSummary = true } = Astro.props;
+const H = `h${headingLevel}` as "h2" | "h3";
+const guides = (await getCollection("guides")).sort((a, b) => a.data.title.localeCompare(b.data.title));
+const groups = CATEGORIES.map((c) => ({ ...c, guides: guides.filter((g) => g.data.category === c.id) })).filter((c) => c.guides.length);
+---
+
+<div class="categories">
+  {
+    groups.map((c) => (
+      <section class="category" id={c.id} data-category={c.id} aria-labelledby={`cat-${c.id}`}>
+        <H id={`cat-${c.id}`} class="cat-title">
+          <span class="swatch" style={`--swatch:${c.swatch}`} aria-hidden="true" />
+          {c.label}
+        </H>
+        <ul>
+          {c.guides.map((g) => (
+            <li>
+              <a href={`/guides/${g.id}`}>{g.data.title}</a>
+              {showSummary && <span class="summary">{g.data.summary}</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</div>
+
+<style>
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: 0.5rem 2.5rem;
+  }
+  .cat-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-pixel);
+    font-weight: 600;
+    font-size: var(--step-2);
+    margin: 1.5rem 0 0.5rem;
+  }
+  .swatch {
+    width: 14px;
+    height: 14px;
+    background: var(--swatch);
+    box-shadow: inset -3px -3px 0 rgb(0 0 0 / 0.3), inset 3px 3px 0 rgb(255 255 255 / 0.3);
+    flex: none;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    padding: 0.55rem 0;
+    border-top: 1px solid var(--line);
+  }
+  li a {
+    font-weight: 600;
+  }
+  .summary {
+    display: block;
+    color: var(--muted);
+    font-size: var(--step--1);
+    line-height: 1.5;
+  }
+</style>

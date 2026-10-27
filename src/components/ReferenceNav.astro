@@ -1,0 +1,31 @@
+---
+const path = Astro.url.pathname.replace(/\/$/, "");
+const pages = [
+  { href: "/reference/stats", label: "Stat sources" },
+  { href: "/reference/attributes", label: "Attributes" },
+];
+---
+
+<nav class="subnav" aria-label="Reference">
+  {pages.map((p) => <a href={p.href} aria-current={path === p.href ? "page" : undefined}>{p.label}</a>)}
+</nav>
+
+<style>
+  .subnav {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .subnav a {
+    padding: 0.4rem 0;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  .subnav a[aria-current="page"] {
+    color: var(--text);
+    border-bottom-color: var(--xp);
+  }
+</style>

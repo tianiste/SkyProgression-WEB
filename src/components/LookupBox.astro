@@ -1,0 +1,63 @@
+---
+/** Player lookup. Shown now so people know it is coming; enabled once the checklist API is live. */
+---
+
+<form class="lookup" aria-describedby="lookup-note" onsubmit="return false">
+  <label for="player">Minecraft name</label>
+  <div class="row">
+    <input id="player" name="player" type="text" autocomplete="off" spellcheck="false" placeholder="Player name" disabled />
+    <button type="submit" disabled>Check profile</button>
+  </div>
+  <p id="lookup-note">Coming soon: enter a name to see every guide as that player's to-do list, plus their stats, rates and best upgrades.</p>
+</form>
+
+<style>
+  .lookup {
+    max-width: 34rem;
+    padding: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  .row {
+    display: flex;
+    gap: 0.5rem;
+  }
+  input {
+    flex: 1;
+    min-width: 0;
+    font: inherit;
+    padding: 0.55rem 0.75rem;
+    color: var(--text);
+    background: var(--bg);
+    border: 2px solid var(--line);
+    border-radius: var(--radius);
+  }
+  button {
+    font: inherit;
+    font-weight: 600;
+    padding: 0.55rem 1rem;
+    color: var(--accent-ink);
+    background: var(--accent);
+    border: 0;
+    border-radius: var(--radius);
+  }
+  input:disabled,
+  button:disabled {
+    cursor: not-allowed;
+  }
+  button:disabled {
+    background: var(--surface-2);
+    color: var(--muted);
+  }
+  p {
+    margin: 0.6rem 0 0;
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+</style>
