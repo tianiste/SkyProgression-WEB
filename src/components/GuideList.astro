@@ -85,6 +85,12 @@ const groups = CATEGORIES.map((c) => ({ ...c, guides: guides.filter((g) => g.dat
     border-top: 1px solid var(--line);
     max-width: none;
   }
+  li:has(.summary) {
+    align-items: flex-start;
+  }
+  li:has(.summary) > div {
+    padding-top: 0.1rem;
+  }
   li a {
     font-weight: 600;
   }

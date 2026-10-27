@@ -2,6 +2,8 @@
 import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
 import Credit from "../components/Credit.astro";
+import Icon from "../components/Icon.astro";
+import { guideIcon, itemIcon } from "../lib/icons";
 import { PEOPLE, type PersonId } from "../data/people";
 import { SITE } from "../config";
 
@@ -66,14 +68,14 @@ const people = [...credits.entries()]
   </p>
   <dl class="sources">
     <div>
-      <dt>Item textures</dt>
+      <dt><span class="slot"><Icon icon={itemIcon("DIVAN_DRILL")} size={32} /></span>Item textures</dt>
       <dd>
         By the <a href={SITE.furfsky}>FurfSky Reborn team</a>, used with permission. From the
         <a href={SITE.furfskyModrinth}>FurfSky Reborn resource pack</a>, version 1.9.2.
       </dd>
     </div>
     <div>
-      <dt>Hypixel's own art</dt>
+      <dt><span class="slot"><Icon icon={itemIcon("BAL")} size={32} /></span>Hypixel's own art</dt>
       <dd>
         Items FurfSky Reborn does not retexture use textures from the official
         <a href="https://hypixel.net/threads/hypixel-skyblock-0-26-skyblock-resource-pack-loadouts-security-quest-and-more.6117801/">Hypixel SkyBlock Resource Pack</a>
@@ -83,14 +85,14 @@ const people = [...credits.entries()]
       </dd>
     </div>
     <div>
-      <dt>Block textures</dt>
+      <dt><span class="slot"><Icon icon={guideIcon("cobblestone")} size={32} /></span>Block textures</dt>
       <dd>
         Plain blocks and materials (Coal, Cobblestone, End Stone, Obsidian and similar) use Minecraft's own textures,
         © Mojang Studios, following Minecraft's usage guidelines.
       </dd>
     </div>
     <div>
-      <dt>Font</dt>
+      <dt><span class="slot"><Icon icon={{ kind: "glyph", glyph: "book", color: "var(--stat-purple)" }} size={32} /></span>Font</dt>
       <dd>Headings use Pixelify Sans under the SIL Open Font License.</dd>
     </div>
   </dl>
@@ -127,9 +129,17 @@ const people = [...credits.entries()]
     border-top: 1px solid var(--line);
   }
   .sources dt {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
     font-weight: 650;
   }
   .sources dd {
-    margin: 0.15rem 0 0;
+    margin: 0.25rem 0 0 calc(40px + 0.85rem);
+  }
+  @media (max-width: 480px) {
+    .sources dd {
+      margin-left: 0;
+    }
   }
 </style>

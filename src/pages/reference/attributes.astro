@@ -49,7 +49,7 @@ const usedBy = (id: string) => guides.filter((g) => g.data.requirements.some((r)
                 const used = usedBy(a.id);
                 return (
                   <tr id={a.id}>
-                    <td data-label="Attribute" class="attr"><Icon icon={shardIcon(a.data.rarity)} size={16} /><strong>{a.data.name}</strong></td>
+                    <td data-label="Attribute"><span class="attr"><Icon icon={shardIcon(a.data.rarity)} size={16} /><strong>{a.data.name}</strong></span></td>
                     <td data-label="Shard">{a.data.shard} ({a.data.rarity})</td>
                     <td data-label="Effect">
                       {a.data.effect}
@@ -72,13 +72,9 @@ const usedBy = (id: string) => guides.filter((g) => g.data.requirements.some((r)
 
 <style>
   .attr {
-    display: flex;
+    display: inline-flex;
     gap: 0.4rem;
     align-items: center;
   }
-  @media (max-width: 640px) {
-    .attr {
-      display: block;
-    }
-  }
+
 </style>

@@ -119,7 +119,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
                     {g.rates.map((r) => (
                       <li>
                         <span class="rate-label">{r.label}</span> <strong class="rate-value">{r.value}</strong>
-                        {r.note && <span class="muted small"> {r.note}</span>}
+                        {r.note && <span class="rate-note muted small">{r.note}</span>}
                       </li>
                     ))}
                   </ul>}
@@ -252,7 +252,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
                   const a = r.kind === "attribute" ? attrById.get(r.attribute) : undefined;
                   return (
                     <tr data-requirement={r.id}>
-                      <td data-label="Attribute" class="attr"><Icon icon={shardIcon(a?.rarity)} size={16} /><strong>{a?.name ?? (r.kind === "attribute" ? r.attribute : r.id)}</strong></td>
+                      <td data-label="Attribute"><span class="attr"><Icon icon={shardIcon(a?.rarity)} size={16} /><strong>{a?.name ?? (r.kind === "attribute" ? r.attribute : r.id)}</strong></span></td>
                       <td data-label="Shard">{a ? `${a.shard} (${a.rarity})` : "–"}</td>
                       <td data-label="Effect">{a?.effect}{r.note && <span class="muted"> {r.note}</span>}</td>
                       <td data-label="Priority">{r.priority ? PRIORITY[r.priority] : "–"}</td>
@@ -431,15 +431,11 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
     gap: 0.6rem;
   }
   .attr {
-    display: flex;
+    display: inline-flex;
     gap: 0.4rem;
     align-items: center;
   }
-  @media (max-width: 640px) {
-    .attr {
-      display: block;
-    }
-  }
+
   .crumbs {
     font-size: var(--step--1);
     color: var(--muted);
@@ -527,6 +523,12 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
   }
   .rate-value {
     font-weight: 650;
+  }
+  .rate-note {
+    display: block;
+  }
+  .glance .rates li + li {
+    margin-top: 0.5rem;
   }
   /* HOTM sits beside the gear on wide screens and above it on narrow ones. */
   .gear-hotm {
