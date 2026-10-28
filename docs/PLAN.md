@@ -66,8 +66,9 @@ session tracker (it reads chat and the inventory live) and anything that needs t
 
 1. Summary: where to mine, key blocks, rates with the date they were measured, budget vs max.
 2. HOTM presets with powder totals and the method's tree drawn from data (perk name and level on hover or tap), beside
-   the gear on wide screens and above it on phones; "Tree coming soon" when no tree is confirmed. HOTM trees live
-   inside each guide page; there is no separate HOTM tab (`/hotm` redirects to `/guides`).
+   the gear on wide screens and above it on phones. HOTM trees live inside each guide page; there is no separate HOTM
+   tab (`/hotm` redirects to `/guides`). Trees whose method has no guide here (powder mining, commissions, Scatha) are
+   on `/guides/hotm-trees/`, linked from the guides list.
 3. Gear in two tiers (budget, max): drill, armor, equipment, pet and pet item, accessories, with every upgrade.
 4. Attributes (shared table, filtered to the ones this method uses).
 5. How to mine: routes, ability use, tips, videos.
@@ -145,9 +146,11 @@ browser -> api.skyprogression.dev (Worker: name to UUID, caching, rate limits)
 
 1. **Guides site.** Repo setup (Astro, license, README, CONTRIBUTING, CI build check); layout, theme and components;
    home, guides list, guide page (with its HOTM trees), attribute and stat-source references, about. All guides converted from
-   the community guide posts into the data model with credits. Only the four captioned trees are published as certain
-   (Gold MSB, MF Gems MSB, MF Gems Maniac Miner, Dwarven Metals MSB); the others show as "coming soon" until the
-   mapping is confirmed. Cloudflare Pages connected to the repository. Done when every guide renders on desktop and a 360 px
+   the community guide posts into the data model with credits. HOTM trees: 27 trees transcribed cell by cell from the
+   Mining Cult Heart of the Mountain tree guide (KoenigBooHoo; pictures by TheUltimateNon, NotWil, willo__wisp, Meow),
+   whose pictures were matched to their methods on 2026-10-28. Each tree file keeps the guide's tier, tokens and maximum
+   powder; where the picture and the guide's numbers disagree the tree's note says so. The pictures show maxed and
+   unlocked perks, not levels. Cloudflare Pages connected to the repository. Done when every guide renders on desktop and a 360 px
    phone, CI builds, and the Lighthouse scores are 95+ for performance and accessibility.
 2. **Guides as a checklist.** `/checklist` endpoint in the mod repo (engine + relay + Worker); "Check my profile" on each
    guide with per-section progress. Done when a real profile ticks items correctly and unknown data is not shown as
@@ -221,8 +224,8 @@ browser -> api.skyprogression.dev (Worker: name to UUID, caching, rate limits)
      minutes. Uncached pages share the checklist's limit of 20 per minute per IP.
    - Item icons exist only for the items the guides use (the import script keeps those), so many gear rows show an empty
      slot.
-   - HOTM compares with the guides' confirmed trees only (MF Gems MSB and Maniac Miner, Dwarven Metals MSB, Gold MSB);
-     other methods say no confirmed tree yet. The API does not say which ability is selected or which Loadouts tree is
+   - HOTM compares with the community tree of the method's guide and shows the mod's HOTM planner (planned vs current
+     tree, ability, rate before and after, respec gain, powder needed and missing) next to it. The API does not say which ability is selected or which Loadouts tree is
      active; each tree can be picked.
    - The 3D model: skin from Mojang's session server (through the relay, cached an hour; Steve when unreadable), loaded
      through the Worker's `/texture/` proxy. Armor is drawn on the skin's outer layer (slightly larger than the body,

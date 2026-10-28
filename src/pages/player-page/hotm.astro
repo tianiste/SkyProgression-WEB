@@ -15,6 +15,7 @@ const recommended = guides.flatMap((g) =>
     for (const [perk, v] of Object.entries(t.data.perks)) levels[perk] = v === "max" ? (perkById.get(perk)?.max ?? 1) : (v as number);
     return [{
       id: `${g.id}/${t.id}`,
+      tree: t.id,
       label: preset.label,
       guide: g.data.title,
       slug: g.id,

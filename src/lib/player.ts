@@ -219,11 +219,32 @@ export interface Start extends Common {
   wornBest: { id: string; label: string; coinsPerHour: number } | null;
   notes: string[];
 }
+/** Powder per type (MITHRIL, GEMSTONE, GLACITE); a type that is missing is unknown, null means unknown. */
+export type PowderMap = Record<string, number | null>;
+export interface PlannedTree { levels: Record<string, number>; ability: string; rate: number | null; powder: PowderMap; tokens: number }
+/** The mod's HOTM planner (HotmPlanner.Plan): rates per hour of `unit`. */
+export interface HotmPlan {
+  unit: string;
+  before: number | null;
+  now: PlannedTree | null;
+  target: PlannedTree;
+  other: PlannedTree | null;
+  need: PowderMap;
+  have: PowderMap;
+  missing: PowderMap;
+  tokens: number;
+  changes: { id: string; name: string; from: number; to: number; disabled: boolean }[];
+  reset: boolean;
+  notes: string[];
+  community: { id: string; title: string; ability: string; rate: number | null; powder: PowderMap; tokens: number; tier: number; fits: boolean; missing: PowderMap }[];
+}
 export interface Hotm extends Common {
   tier: number;
   powder: Record<string, { unspent: number; spent: number }>;
   trees: { label: string; levels: Record<string, number>; off: string[] }[];
   tokensSpent: number;
+  /** Null when the tree, the HOTM XP or the method's rate model is missing. */
+  planner: HotmPlan | null;
 }
 
 /** What the page asks for, from its URL. */
