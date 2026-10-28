@@ -14,7 +14,7 @@
   effect: "+10 Heat Resistance"
 - id: rotten_pickaxe
   name: "Rotten Pickaxe"
-  shard: "Zombie Miner"
+  shard: "Miner Zombie"
   rarity: Common
   family: stat
   effect: "+30 Mining Speed"
@@ -147,7 +147,7 @@
   effect: "10% chance to double Crystal Hollows Treasure Chest loot"
 - id: breeze
   name: "Breeze"
-  shard: "Wither Specter"
+  shard: "Wither Spectre"
   rarity: Rare
   family: misc
   effect: "-10% mana costs when you have not taken damage for 5 seconds"
@@ -197,9 +197,9 @@
 - id: fiesta_fortune
   name: "Fiesta Fortune"
   shard: "Packrat"
-  rarity: Epic
+  rarity: Uncommon
   family: misc
-  effect: "+50 Mining Fortune during Mayor Cole's Mining Fiesta"
+  effect: "+50 Gemstone Fortune during Mayor Cole's Mining Fiesta"
 - id: royal_riches
   name: "Royal Riches"
   shard: "Nilbog"

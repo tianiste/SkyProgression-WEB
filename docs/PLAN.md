@@ -169,10 +169,9 @@ browser -> api.skyprogression.dev (Worker: name to UUID, caching, rate limits)
    - Applied items checked: Polarvoid Books, Divan's Powder Coating, power scrolls, Recombobulator, Hot Potato Books.
      Others show as "not checked" and do not make the row partly done.
    - Attribute levels use the engine's rarity table, plus a wiki table for attributes the engine does not use.
-     Discrepancy to settle: Fiesta Fortune is Uncommon in the engine and Epic in `attributes.yaml`.
-   - HOTM perks take the best level across Loadouts trees. API keys not seen in a real response yet (taken from names,
-     like the engine's): several attributes and echoes, `dwarven_expertise`, `fungus_fortuna`, `harena_fortuna`,
-     `frozen_skin`, `player_data.reaper_peppers_eaten`.
+     Fiesta Fortune is Uncommon (wiki Packrat Shard, NEU `attribute_shards.json`; fixed in `attributes.yaml` 2026-10-28).
+   - HOTM perks take the best level across Loadouts trees. The attribute, essence perk, HOTM and Reaper Pepper keys
+     were confirmed on 2026-10-28 (mod `docs/references/API-FIELDS.md`, "Key verification"); none was wrong.
    - Consumables count stored copies (Reaper Pepper also counts peppers eaten); a cereal's active buff is not readable.
    - Unknown (never missing): items with the Inventory API off, collections with the Collections API off, Mining level
      with the Skills API off, and pets, attributes, essence perks or HOTM when Hypixel sends none.
