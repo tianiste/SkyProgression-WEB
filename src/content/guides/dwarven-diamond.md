@@ -8,6 +8,11 @@ contributors:
   - { id: the-ultimate-non, role: HOTM tree picture }
 source: { name: Mining Cult Discord, posted: 2025-04-15 }
 updated: 2026-10-27
+notices:
+  - status: stale
+    date: 2026-10-28
+    text: "The Bal rod-swap before the pickaxe ability predates patch 0.27 (4 Aug 2026), which removed Bal's Chimney perk: Bal no longer lowers pickaxe ability cooldown."
+    source: { label: "Bal Pet, Hypixel SkyBlock Wiki", url: "https://hypixelskyblock.minecraft.wiki/w/Bal_Pet" }
 where: Pure Diamond veins in the Dwarven Mines, on a route with Etherwarp.
 blocks:
   - "Pure Diamond: 4 ticks at 4,001 Mining Speed"

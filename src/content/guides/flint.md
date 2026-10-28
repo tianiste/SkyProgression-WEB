@@ -6,6 +6,11 @@ authors:
   - { id: the-ultimate-non, role: Guide }
 source: { name: Mining Cult Discord }
 updated: 2026-10-27
+notices:
+  - status: stale
+    date: 2026-10-28
+    text: "The rod-swap to Bal or Crow before Maniac Miner predates patch 0.27 (4 Aug 2026): Bal's Chimney perk was removed and Crow's Quick Hands now lowers weapon ability cooldowns only."
+    source: { label: "Bal Pet, Hypixel SkyBlock Wiki", url: "https://hypixelskyblock.minecraft.wiki/w/Bal_Pet" }
 where: The Gravel Cave in the Spider's Den. Mine around the entrance, where the gravel chunks are bigger.
 blocks:
   - "Gravel. Mining Speed has no effect; Haste and Efficiency do, and otherwise only the server TPS"

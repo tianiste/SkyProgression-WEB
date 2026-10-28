@@ -121,8 +121,16 @@ export const guideSchema = z.object({
   blocks: z.array(z.string()).default([]),
   rates: z.array(z.object({ label: z.string(), value: z.string(), note: z.string().optional() })).default([]),
   ratesMeasured: z.string().optional(),
-  /** Shown as a notice at the top when the source thread is marked outdated or parts of it are known to be stale. */
-  outdated: z.string().optional(),
+  /**
+   * Dated notices shown at the top: "outdated" when the author marked the source thread outdated, "stale" when a later
+   * game change makes part of the advice wrong. The guide's own text stays as the author wrote it.
+   */
+  notices: z.array(z.object({
+    status: z.enum(["outdated", "stale"]),
+    date: z.coerce.date(),
+    text: z.string(),
+    source: z.object({ label: z.string(), url: z.url() }).optional(),
+  })).default([]),
   hotm: z.array(hotmPreset).default([]),
   videos: z.array(z.object({ title: z.string(), url: z.url(), by: z.string().optional() })).default([]),
   requirements: z.array(requirement),

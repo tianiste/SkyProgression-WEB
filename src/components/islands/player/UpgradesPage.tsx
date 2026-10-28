@@ -9,14 +9,14 @@ export default function UpgradesPage() {
   const state = usePlayer<Upgrades>("upgrades");
   const { data: d } = state;
   const [part, setPart] = useState<"buy" | "other">("buy");
-  if (!d) return <Shell view="upgrades" state={state} prices god />;
+  if (!d) return <Shell view="upgrades" state={state} prices cost god />;
   const unit = d.unit;
   const model = d.rated
     ? `Gains are the change in the ${d.methodLabel} rate (${unit}). Mining Speed counts only when it changes the ticks per block; the ability cooldown counts through uptime.`
     : d.rateModel ? "Gains are the drop multiplier (Fortune × Spread × Pristine): the rate can't be worked out from these stats." : `Gains are the drop multiplier: ${d.methodLabel} has no rate model yet.`;
   const last = d.plan.at(-1);
   return (
-    <Shell view="upgrades" state={state} prices god>
+    <Shell view="upgrades" state={state} prices cost god>
       <div class="chips" role="group" aria-label="Upgrades to show">
         <button type="button" aria-pressed={part === "buy"} onClick={() => setPart("buy")}>Purchases</button>
         <button type="button" aria-pressed={part === "other"} onClick={() => setPart("other")}>Other and progress</button>

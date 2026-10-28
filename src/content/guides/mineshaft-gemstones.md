@@ -11,6 +11,14 @@ contributors:
   - { id: sleepinginseattle, role: Tungsten spawning route }
 source: { name: Mining Cult Discord, posted: 2025-03-04 }
 updated: 2026-10-27
+notices:
+  - status: outdated
+    date: 2026-10-28
+    text: "Marked outdated by its author: the Mining Cult thread is now titled \"(Outdated) Mineshaft Mining Guide\" and a new Shafting guide is announced. Its setups and HOTM trees may no longer be the best."
+  - status: stale
+    date: 2026-10-28
+    text: "The Bal rod-swap before the pickaxe ability predates patch 0.27 (4 Aug 2026), which removed Bal's Chimney perk: Bal no longer lowers pickaxe ability cooldown."
+    source: { label: "Bal Pet, Hypixel SkyBlock Wiki", url: "https://hypixelskyblock.minecraft.wiki/w/Bal_Pet" }
 where: The Glacite Tunnels to spawn shafts (Tungsten or Mithril routes, Pickobulus on Glacite clusters), then the Glacite Mineshafts themselves.
 blocks:
   - "Jasper shafts: always mine them, even with poor buffs"
@@ -20,7 +28,6 @@ blocks:
 rates:
   - { label: Maxed setup, value: about 50M to 80M coins per hour }
 ratesMeasured: The author's own experience. The method depends a lot on luck and powder, so rates vary from hour to hour.
-outdated: The author has since marked this thread outdated in the Mining Cult forum, and a new Shafting guide is announced. Its setups and HOTM trees may no longer be the best; the Bal cooldown swap no longer works since patch 0.27.
 hotm:
   - label: Tungsten spawning tree
     hotm: 10

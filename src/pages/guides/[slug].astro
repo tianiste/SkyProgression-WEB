@@ -3,6 +3,7 @@ import { getCollection, getEntry, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Requirement from "../../components/Requirement.astro";
 import HotmTree from "../../components/HotmTree.astro";
+import Notice from "../../components/Notice.astro";
 import Credit from "../../components/Credit.astro";
 import Icon from "../../components/Icon.astro";
 import ModrinthButton from "../../components/ModrinthButton.astro";
@@ -80,7 +81,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
             )
           }{g.source.posted && <> on {formatDate(g.source.posted)}</>}. Checked {formatDate(g.updated)}.
         </p>
-        {g.outdated && <p class="outdated" role="note"><strong>Outdated.</strong> {g.outdated}</p>}
+        {g.notices.map((n) => <Notice {...n} />)}
       </header>
       <div class="seam" aria-hidden="true"></div>
 
@@ -461,16 +462,6 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
     font-size: var(--step--1);
     color: var(--muted);
     margin-bottom: 0.75rem;
-  }
-  .outdated {
-    margin: 0.75rem 0 0;
-    padding: 0.6rem 0.8rem;
-    border-left: 3px solid var(--gold);
-    background: var(--surface-2);
-    color: var(--text);
-  }
-  .outdated strong {
-    color: var(--gold);
   }
   .byline {
     font-size: var(--step--1);

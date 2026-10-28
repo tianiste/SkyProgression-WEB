@@ -40,17 +40,22 @@ interface Props<T extends Common> {
   state: ReturnType<typeof usePlayer<T>>;
   /** Selectors the page uses (the method is always shown, prices only where coins appear). */
   prices?: boolean;
+  /** The purchase cost mode, where upgrade costs appear. */
+  cost?: boolean;
   god?: boolean;
   children?: ComponentChildren;
 }
 
 const API_NAMES: Record<string, string> = { inventory: "Inventory API", collections: "Collections API", skills: "Skills API", vault: "Personal Vault API" };
 
-export function Shell<T extends Common>({ view, state, prices = false, god = false, children }: Props<T>) {
+export function Shell<T extends Common>({ view, state, prices = false, cost = false, god = false, children }: Props<T>) {
   const { q, data, error, busy, update } = state;
   const name = data?.player || q?.name || "";
   const off = data ? (["inventory", "collections", "skills"] as const).filter((k) => !data.api[k]) : [];
   const vaultOff = data !== null && data.api.inventory && !data.api.vault;
+  // An API or relay without the cost option ignores it: no control then, and a note if one was asked for.
+  const costModes = cost && data?.costModes?.length ? data.costModes : null;
+  const costIgnored = costModes !== null && !!q?.cost && q.cost !== data!.costMode;
   const tab = (id: View) => (q ? pageUrl({ ...q, view: id }) : "#");
 
   return (
@@ -86,6 +91,14 @@ export function Shell<T extends Common>({ view, state, prices = false, god = fal
                 </select>
               </label>
             )}
+            {costModes && (
+              <label title={costModes.find((m) => m.id === data.costMode)?.meaning}>
+                <span>Cost</span>
+                <select value={data.costMode} disabled={busy} onChange={(e) => update({ cost: (e.target as HTMLSelectElement).value })}>
+                  {costModes.map((m) => <option value={m.id} key={m.id} title={m.meaning}>{m.label}</option>)}
+                </select>
+              </label>
+            )}
             {god && (
               <label class="check">
                 <input type="checkbox" checked={data.godPotion} disabled={busy} onChange={(e) => update({ god: (e.target as HTMLInputElement).checked })} />
@@ -98,6 +111,7 @@ export function Shell<T extends Common>({ view, state, prices = false, god = fal
           <p class="player-age">
             {data.profiles.length === 1 && <>{profileLabel(data.profile)}. </>}
             Profile data from {age(data.fetchedAt)}{data.pricesAt ? <>, prices from {age(data.pricesAt)}</> : null}. Hypixel shows changes a few minutes after you make them.
+            {costIgnored && <> Buy-order costs are not available yet, so costs are instant-buy.</>}
           </p>
         )}
         <nav class="player-tabs" aria-label="Player pages">

@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import ReferenceNav from "../../components/ReferenceNav.astro";
 import Credit from "../../components/Credit.astro";
+import Notice from "../../components/Notice.astro";
 import Icon from "../../components/Icon.astro";
 import { STAT_GLYPHS, groupIcon, type Icon as IconT } from "../../lib/icons";
 
@@ -66,6 +67,7 @@ const stats = (await getCollection("stats")).sort((a, b) => a.data.order - b.dat
       </section>
     ))
   }
+  <Notice status="outdated" date={new Date("2026-10-12")} text="Its author marked the General Mining Stats Guide as no longer updated. Every value here still matched it on 27 Oct 2026, but later game changes will not reach this page through the guide." />
   <p class="muted small">Source: the General Mining Stats Guide in the <Credit id="mining-cult" />.</p>
 </Base>
 

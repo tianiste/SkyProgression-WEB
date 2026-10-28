@@ -9,7 +9,7 @@ export default function OverviewPage() {
   const state = usePlayer<Overview>("overview");
   const { data: d, q, update } = state;
   return (
-    <Shell view="overview" state={state} prices god>
+    <Shell view="overview" state={state} prices cost god>
       {d && q && (
         <div class="grid-2">
           <section class="panel" aria-labelledby="stats-title">

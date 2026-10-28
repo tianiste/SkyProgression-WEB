@@ -6,6 +6,11 @@ authors:
   - { id: the-ultimate-non, role: Guide }
 source: { name: Mining Cult Discord }
 updated: 2026-10-27
+notices:
+  - status: stale
+    date: 2026-10-28
+    text: "The Bal rod-swap before the pickaxe ability predates patch 0.27 (4 Aug 2026), which removed Bal's Chimney perk: Bal no longer lowers pickaxe ability cooldown."
+    source: { label: "Bal Pet, Hypixel SkyBlock Wiki", url: "https://hypixelskyblock.minecraft.wiki/w/Bal_Pet" }
 where: Crimson Isle around X -460, Y 180, Z -505.
 blocks:
   - "Netherrack. Turn off Jump Boost and Rabbit effects in the Booster Cookie menu first"

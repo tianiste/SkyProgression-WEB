@@ -6,6 +6,11 @@ authors:
   - { id: the-ultimate-non, role: Guide }
 source: { name: Mining Cult Discord }
 updated: 2026-10-27
+notices:
+  - status: stale
+    date: 2026-10-28
+    text: "The Bal rod-swap before the pickaxe ability predates patch 0.27 (4 Aug 2026), which removed Bal's Chimney perk: Bal no longer lowers pickaxe ability cooldown."
+    source: { label: "Bal Pet, Hypixel SkyBlock Wiki", url: "https://hypixelskyblock.minecraft.wiki/w/Bal_Pet" }
 where: Dwarven Mines and Crystal Hollows. Pure Diamond, Emerald, Iron, Lapis, Redstone, Gold and Coal in the Royal Mines and the Mines of Divan; Pure Quartz only in the Abandoned Quarry.
 blocks:
   - "Pure ores: 4 ticks at 4,001 Mining Speed, instamine at 36,001 with Mining Speed Boost"

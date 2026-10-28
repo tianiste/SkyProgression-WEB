@@ -35,6 +35,9 @@ export interface Common {
   methods: Option[];
   priceMode: string;
   priceModes: Option[];
+  /** How purchases are priced; missing from relays that predate the option. */
+  costMode?: string;
+  costModes?: Option[];
   godPotion: boolean;
   efficiency: number;
   model: { skin: { hash: string; slim: boolean } | null; armor: ArmorPiece[] };
@@ -224,7 +227,7 @@ export interface Hotm extends Common {
 }
 
 /** What the page asks for, from its URL. */
-export interface Query { name: string; view: View; profile: string; method: string; price: string; god: boolean; gear: string }
+export interface Query { name: string; view: View; profile: string; method: string; price: string; cost: string; god: boolean; gear: string }
 
 export const NOT_AVAILABLE = "Player pages are not available yet.";
 export const NAME = /^[A-Za-z0-9_]{1,16}$/;
@@ -234,7 +237,7 @@ export function readQuery(view: View): Query {
   // /player/<name>/<view>/; the dev shells are also reachable as /player-page/<view>/?name=.
   const q = new URLSearchParams(location.search);
   const name = parts[0] === "player" && parts[1] ? decodeURIComponent(parts[1]) : (q.get("name") ?? "");
-  return { name, view, profile: q.get("profile") ?? "", method: q.get("method") ?? "", price: q.get("price") ?? "", god: q.get("god") !== "false", gear: q.get("gear") ?? "" };
+  return { name, view, profile: q.get("profile") ?? "", method: q.get("method") ?? "", price: q.get("price") ?? "", cost: q.get("cost") ?? "", god: q.get("god") !== "false", gear: q.get("gear") ?? "" };
 }
 
 /** The page's own URL for a query (only options that differ from the defaults are written). */
@@ -243,6 +246,7 @@ export function pageUrl(q: Query): string {
   if (q.profile) params.set("profile", q.profile);
   if (q.method) params.set("method", q.method);
   if (q.price && q.price !== "INSTANT_SELL") params.set("price", q.price);
+  if (q.cost && q.cost !== "INSTANT_BUY") params.set("cost", q.cost);
   if (!q.god) params.set("god", "false");
   if (q.gear === "equipped" && q.view === "gear") params.set("gear", "equipped");
   const search = params.toString();
@@ -260,6 +264,7 @@ export async function load<T extends Common>(q: Query, signal?: AbortSignal): Pr
   if (q.profile) params.set("profile", q.profile);
   if (q.method) params.set("method", q.method);
   if (q.price) params.set("price", q.price);
+  if (q.cost) params.set("cost", q.cost);
   if (!q.god) params.set("god", "false");
   if (q.gear) params.set("gear", q.gear);
   const url = `${SITE.api}/player?${params}`;
