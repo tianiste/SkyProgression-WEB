@@ -112,7 +112,10 @@ requirements:
 ```
 
 Kinds: `item`, `pet`, `hotm`, `powder`, `attribute`, `essence`, `accessory`, `collection`, `skill`, `consumable`,
-`manual`, `any_of`; `prerequisites` and `tier` on any entry. A JSON Schema for this file is published by the site, so the
+`manual`, `any_of`; `prerequisites` and `tier` on any entry. A guide can carry dated `notices` (`status: outdated` when
+the author marked the source thread outdated, `stale` when a later patch makes part of it wrong, each with `date`, `text`
+and an optional `source` link); they show at the top of the guide, and the authors' text stays as written. The stats
+reference page carries the same notice for the General Mining Stats Guide (no longer updated since 2026-10-12). A JSON Schema for this file is published by the site, so the
 engine and the site validate the same format. HOTM trees are their own data files (perk id to level per cell), converted
 from the community tree pictures (see `src/content/trees/`).
 
@@ -205,6 +208,12 @@ browser -> api.skyprogression.dev (Worker: name to UUID, caching, rate limits)
    - The pages use the mod's defaults: best owned gear (Gear can switch to worn), the method's usual zone and default
      efficiency, God Potion on unless turned off. There is no Type Stats (manual stat overrides), no held-tool or zone
      choice, and no "rank by stat points" view.
+   - Cost option (2026-10-28): Overview and Upgrades have a Cost select next to Price, kept in the URL as `cost=`:
+     instant-buy (default) or buy order (Bazaar items at the top buy order, "fills only when a seller accepts your
+     order"; Auction House items stay at the lowest BIN). The Worker validates `cost`, passes it to the relay and keys
+     its cache on it. The select shows only when the answer lists `costModes`; when a buy order was asked for but the
+     answer says instant-buy (a Worker that predates the option), the page says so. Checked in `astro dev` with a mocked
+     answer at 360 px and desktop, both themes.
    - Upgrade costs are the cash outlay. The mod subtracts the replaced item's sale value (Coflnet resale quotes); the web
      does not fetch those, so the plan's "net after selling" figures are absent.
    - The session tracker stays in the mod (it reads chat and the inventory live).
