@@ -31,8 +31,8 @@ requirements:
     group: pet
     kind: pet
     pet: { type: BAL, minTier: LEGENDARY, level: 100, item: BEJEWELED_COLLAR }
-    note: "Swap to Bal and use Maniac Miner whenever it is ready. Best to worst: Legendary Bal with Bejeweled Collar, with Minos Relic, with Quick Claw, then an Epic Scatha with Quick Claw. An Epic Crow now beats Bal for cooldown."
-  - { id: scatha, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: PET_ITEM_QUICK_CLAW }, note: "Start with a Bejeweled Collar. Autopet: rod cast to Bal, Mining XP gain to the fortune pet." }
+    note: "Swap to Bal and use Maniac Miner whenever it is ready. Best to worst: Legendary Bal with Bejeweled Collar, with Minos Relic, with Quick Claw, then an Epic Scatha with Quick Claw. The guide swapped to Bal for its cooldown perk, which patch 0.27 (4 Aug 2026) removed; Bal still gives Mining Fortune."
+  - { id: scatha, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: PET_ITEM_QUICK_CLAW }, note: "Start with a Bejeweled Collar. The guide's Autopet rod swap to Bal was for its cooldown perk, removed in patch 0.27." }
   - { id: glossy-talisman, group: accessories, kind: accessory, item: GLOSSY_MINERAL_TALISMAN, note: Or the Mineral Talisman. }
   - { id: relic, group: accessories, kind: accessory, item: POWER_RELIC }
   - { id: grimoire, group: tools, kind: item, item: GLOOMLOCK_GRIMOIRE, priority: optional }
@@ -59,6 +59,7 @@ Use `/recipe enchanted flint` to compact straight from your sacks (Skytils can b
 
 ## Updates since the guide
 
-- An Epic Crow is now better than a Legendary Bal for pickaxe ability cooldown.
+- Since patch 0.27 (4 Aug 2026) neither Bal nor Crow lowers pickaxe ability cooldown: Bal's Chimney perk was removed and Crow's Quick Hands now covers weapon abilities only (wiki).
+  Earlier advice to rod-swap to either pet before the ability no longer helps.
 - The Snail pet's speed penalty is fixed, so the workarounds for it are no longer needed.
 - Mining lanterns: Mithril Lantern (HOTM 2), Titanium Lantern (HOTM 5), Glacite Lantern (HOTM 8), Will-o'-wisp (HOTM 10).

@@ -20,6 +20,7 @@ blocks:
 rates:
   - { label: Maxed setup, value: about 50M to 80M coins per hour }
 ratesMeasured: The author's own experience. The method depends a lot on luck and powder, so rates vary from hour to hour.
+outdated: The author has since marked this thread outdated in the Mining Cult forum, and a new Shafting guide is announced. Its setups and HOTM trees may no longer be the best; the Bal cooldown swap no longer works since patch 0.27.
 hotm:
   - label: Tungsten spawning tree
     hotm: 10
@@ -96,7 +97,7 @@ requirements:
   - { id: gemstone-equipment, tier: max, group: equipment, kind: manual, label: Gemstone equipment in place of Titanium, note: Recombobulated. }
   - { id: golem, group: pet, kind: pet, pet: { type: GLACITE_GOLEM, minTier: LEGENDARY, level: 100, item: PET_ITEM_QUICK_CLAW }, note: +1 Pristine per looted corpse in a shaft. Start with a Bejeweled Collar. }
   - { id: scatha, group: pet, kind: pet, pet: { type: SCATHA, minTier: EPIC, level: 100, item: PET_ITEM_QUICK_CLAW }, note: For shafts with no Lapis corpses. Legendary is better. Start with a Bejeweled Collar. }
-  - { id: bal, group: pet, kind: pet, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: Swap to it before every ability for 10% less cooldown. }
+  - { id: bal, group: pet, kind: pet, priority: optional, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "The guide swapped to it before every ability for 10% less cooldown; patch 0.27 (4 Aug 2026) removed that perk, so the swap no longer helps." }
   - { id: mammoth, group: pet, kind: pet, priority: optional, pet: { type: MAMMOTH, minTier: LEGENDARY, level: 100, item: DWARF_TURTLE_SHELMET }, note: Clears mobs without gaining Cold. }
   - { id: leveling-pet, group: pet, kind: manual, label: A pet you level for profit, note: Level it while spawning shafts. }
   - { id: gauntlet, group: tools, kind: item, item: GEMSTONE_GAUNTLET, note: Fully enchanted with Fine gemstones. }
@@ -147,7 +148,8 @@ shafts, mine with the pet you are levelling.
 ### Pet rules
 
 1. On fishing hook throw, equip your levelling pet unless it is equipped. Use it to claim commissions.
-2. On fishing hook throw, equip a level 100 Bal unless a Bal is equipped. Swap before every ability for 10% less cooldown.
+2. (No longer useful.) The guide equipped a level 100 Bal on fishing hook throw before every ability for 10% less cooldown;
+   patch 0.27 (4 Aug 2026) removed Bal's cooldown perk.
 3. On Combat XP gain, equip a level 100 Mammoth, except outside a Mineshaft. Stops you gaining Cold from mob damage.
 4. On Gemstone collection gain, equip a level 100 Glacite Golem, except outside a Mineshaft. Swap the Golem for Scatha
    here when a shaft has no corpses.

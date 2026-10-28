@@ -53,8 +53,8 @@ requirements:
   - { id: cloak, tier: max, group: equipment, kind: item, item: ANCIENT_CLOAK, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
   - { id: belt, tier: max, group: equipment, kind: item, item: JADE_BELT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
   - { id: gloves, tier: max, group: equipment, kind: item, item: DWARVEN_HANDWARMERS, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
-  - { id: bal, group: pet, kind: pet, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "Rod-swap to it for 10% less ability cooldown. Pet items in order: Bejeweled Collar, Minos Relic, Quick Claw. An Epic Crow now beats it for cooldown." }
-  - { id: scatha, group: pet, kind: pet, priority: optional, pet: { type: SCATHA, minTier: RARE, level: 100 }, note: "Autopet: rod cast to Bal, Mining XP gain to Scatha." }
+  - { id: bal, group: pet, kind: pet, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "The guide rod-swapped to it for 10% less ability cooldown; patch 0.27 (4 Aug 2026) removed that perk, so it now only adds Mining Fortune. Pet items in order: Bejeweled Collar, Minos Relic, Quick Claw." }
+  - { id: scatha, group: pet, kind: pet, priority: optional, pet: { type: SCATHA, minTier: RARE, level: 100 }, note: "The guide's Autopet rod swap to Bal was for its cooldown perk, removed in patch 0.27; Scatha adds more Mining Fortune." }
   - { id: mineral-talisman, tier: budget, group: accessories, kind: accessory, item: MINERAL_TALISMAN }
   - { id: glossy-talisman, tier: max, group: accessories, kind: accessory, item: GLOSSY_MINERAL_TALISMAN }
   - { id: relic, group: accessories, kind: accessory, item: POWER_RELIC, modifiers: [{ kind: recomb }, { kind: gem, gem: JADE, quality: PERFECT }] }
@@ -89,6 +89,7 @@ Use `/recipe enchanted <material>` to compact straight from your sacks.
 
 ## Updates since the guide
 
-- An Epic Crow is now better than a Legendary Bal for pickaxe ability cooldown.
+- Since patch 0.27 (4 Aug 2026) neither Bal nor Crow lowers pickaxe ability cooldown: Bal's Chimney perk was removed and Crow's Quick Hands now covers weapon abilities only (wiki).
+  Earlier advice to rod-swap to either pet before the ability no longer helps.
 - Mining lanterns: Mithril Lantern (HOTM 2), Titanium Lantern (HOTM 5), Glacite Lantern (HOTM 8), Will-o'-wisp (HOTM 10).
 - The Snail pet's speed penalty is fixed.

@@ -121,6 +121,8 @@ export const guideSchema = z.object({
   blocks: z.array(z.string()).default([]),
   rates: z.array(z.object({ label: z.string(), value: z.string(), note: z.string().optional() })).default([]),
   ratesMeasured: z.string().optional(),
+  /** Shown as a notice at the top when the source thread is marked outdated or parts of it are known to be stale. */
+  outdated: z.string().optional(),
   hotm: z.array(hotmPreset).default([]),
   videos: z.array(z.object({ title: z.string(), url: z.url(), by: z.string().optional() })).default([]),
   requirements: z.array(requirement),
