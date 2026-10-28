@@ -1,0 +1,31 @@
+title: Scatha
+method: Scatha
+status: published
+order: 32
+author:
+  id: notwil
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+group: Commissions and Scatha
+hotm: 8
+tokens: 13
+powder: { mithril: 4700000, gemstone: 9300000 }
+ability: anomalous_desire
+note: "Mole and Efficient Miner are unlocked but turned off; the Scatha guide explains why. The HOTM tree guide's 4.7m Mithril and 9.3m Gemstone mean both are levelled while off; the picture does not show their levels."
+perks:
+  mining_speed: 1
+  mining_fortune: 1
+  efficient_miner: 1
+  mole: 1
+  blockhead: 1
+  subterranean_fisher: 1
+  keep_it_cool: max
+  lonesome_miner: 1
+  great_explorer: max
+  speedy_mineman: 1
+  miners_blessing: max
+  no_stone_unturned: 1
+  core_of_the_mountain: 2
+disabled: [efficient_miner, mole]

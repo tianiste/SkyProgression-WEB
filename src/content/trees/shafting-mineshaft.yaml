@@ -1,0 +1,42 @@
+title: Shafting 1, Gemstone Mineshaft
+method: Gemstone Shafting
+status: published
+order: 12
+author:
+  id: notwil
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+hotm: 10
+tokens: 25
+powder: { mithril: 8600000, gemstone: 18800000, glacite: 17400000 }
+ability: mining_speed_boost
+note: "Posted as \"monkstaa's Shaft\". Swap to it only to mine out a Gemstone Mineshaft or kill a Littlefoot. Front Loaded is unlocked but turned off; Miner's Blessing can be swapped for Quick Forge."
+perks:
+  mining_speed: max
+  precision_mining: max
+  mining_fortune: max
+  efficient_miner: max
+  sky_mall: max
+  old_school: 1
+  professional: max
+  mole: max
+  gem_lover: max
+  seasoned_mineman: 1
+  front_loaded: 1
+  keep_it_cool: 1
+  powder_buff: 1
+  speedy_mineman: max
+  fortunate_mineman: max
+  warm_heart: max
+  miners_blessing: max
+  no_stone_unturned: max
+  strong_arm: 1
+  steady_hand: max
+  surveyor: 1
+  rags_to_riches: max
+  eager_adventurer: max
+  mining_master: max
+  core_of_the_mountain: 10
+disabled: [front_loaded]

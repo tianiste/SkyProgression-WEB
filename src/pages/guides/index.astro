@@ -16,6 +16,7 @@ const used = CATEGORIES.filter((c) => guides.some((g) => g.data.category === c.i
   <div class="seam" aria-hidden="true"></div>
   <CategoryFilter client:idle categories={used} />
   <GuideList />
+  <p class="more-trees">HOTM trees for powder mining, Glacite Tunnels commissions and Scatha: <a href="/guides/hotm-trees/">More HOTM trees</a>.</p>
   <script>
     // From the home page lookup: open each guide checked for that player.
     const player = new URLSearchParams(location.search).get("player")?.trim() ?? "";
@@ -35,6 +36,9 @@ const used = CATEGORIES.filter((c) => guides.some((g) => g.data.category === c.i
 </Base>
 
 <style>
+  .more-trees {
+    margin-top: 2rem;
+  }
   .picking {
     font-weight: 600;
     color: var(--xp);

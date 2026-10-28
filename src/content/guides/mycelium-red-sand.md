@@ -5,6 +5,9 @@ category: blocks
 summary: Mycelium and Red Sand on the Crimson Isle with a Promising Shovel, Maniac Miner and a Will-o'-wisp, where Mining Speed does not matter.
 authors:
   - { id: mining-cult, role: Guide }
+contributors:
+  - { id: the-ultimate-non, role: HOTM tree picture }
+  - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord }
 updated: 2026-10-27
 where: Crimson Isle. Place the Will-o'-wisp at -164.5 146 -901.5 for Mycelium or -695.5 124 -961.5 for Red Sand.
@@ -16,6 +19,7 @@ rates:
 hotm:
   - label: Recommended
     hotm: 7
+    tree: blocks
     powder: { mithril: 6759480, gemstone: 4600500 }
 requirements:
   - id: armor

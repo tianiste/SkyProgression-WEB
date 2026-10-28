@@ -1,0 +1,36 @@
+title: Gemstone Powder, HOTM 10
+method: Gemstone Powder
+status: published
+order: 25
+author:
+  id: notwil
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+group: Powder mining
+hotm: 10
+tokens: 19
+powder: { mithril: 6500000, gemstone: 15000000 }
+ability: sheer_force
+note: "Posted as \"Non's Gem Powder\". Same minimum and skips as the HOTM 7 tree."
+perks:
+  mining_speed: max
+  mining_fortune: 1
+  efficient_miner: max
+  sky_mall: max
+  old_school: 1
+  professional: 1
+  mole: max
+  blockhead: 1
+  subterranean_fisher: 1
+  keep_it_cool: 1
+  lonesome_miner: 1
+  great_explorer: max
+  powder_buff: max
+  speedy_mineman: max
+  fortunate_mineman: 1
+  surveyor: 1
+  eager_adventurer: 1
+  vanguard_seeker: 1
+  core_of_the_mountain: 2

@@ -6,6 +6,7 @@ authors:
   - { id: ghostz06, role: Guide }
 contributors:
   - { id: the-ultimate-non, role: HOTM tree picture }
+  - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord, posted: 2025-04-15 }
 updated: 2026-10-27
 notices:
@@ -25,6 +26,13 @@ hotm:
     hotm: 7
     tokens: 15
     powder: { mithril: 6759480, gemstone: 4600500 }
+  - label: HOTM tree guide
+    hotm: 7
+    tokens: 15
+    cotm: 2
+    tree: ores
+    powder: { mithril: 8600000, gemstone: 7400000 }
+    note: From the Heart of the Mountain tree guide, the same picture as Ore Mining. Minimum 8.6m Mithril, 3.7m Gemstone and 12 tokens (skips Speedy Mineman), plus 50k for Core of the Mountain 2.
 requirements:
   - id: drill-budget
     tier: budget

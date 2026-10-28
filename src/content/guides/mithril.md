@@ -4,6 +4,9 @@ category: other
 summary: Mithril veins in the Abandoned Quarry of the Dwarven Mines, mining Blue first and Titanium when it spawns, with Maniac Miner off cooldown.
 authors:
   - { id: the-ultimate-non, role: Guide }
+contributors:
+  - { id: the-ultimate-non, role: HOTM tree picture }
+  - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord }
 updated: 2026-10-27
 notices:
@@ -23,6 +26,7 @@ hotm:
   - label: Recommended
     hotm: 7
     tokens: 17
+    tree: mithril
     powder: { mithril: 11061843, gemstone: 8633785, glacite: 2184175 }
     note: Upgrade Core of the Mountain if you are short of tokens.
 requirements:

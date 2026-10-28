@@ -18,6 +18,7 @@ for (const g of guides) {
   for (const c of g.data.contributors) if (c.id !== "mining-cult") add(c.id, `${c.role ?? "Contributor"}: ${g.data.title}`);
 }
 for (const t of trees) if (t.data.author) add(t.data.author.id, `HOTM tree: ${t.data.title}`);
+for (const t of trees) if (t.data.collector) add(t.data.collector.id, "Heart of the Mountain tree guide (the HOTM tree numbers)");
 const people = [...credits.entries()]
   .filter(([id]) => id !== "mining-cult")
   .sort(([a], [b]) => PEOPLE[a].name.localeCompare(PEOPLE[b].name));

@@ -1,0 +1,37 @@
+title: Mithril Powder, HOTM 10
+method: Mithril Powder
+status: published
+order: 22
+author:
+  id: the-ultimate-non
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+group: Powder mining
+hotm: 10
+tokens: 20
+powder: { mithril: 9000000, gemstone: 7400000, glacite: 1300000 }
+ability: sheer_force
+note: Minimum 3.7m Gemstone and 17 tokens; skips Mining Speed, Titanium Insanium, Efficient Miner, Speedy Mineman and Strong Arm.
+perks:
+  mining_speed: max
+  precision_mining: max
+  mining_fortune: 1
+  titanium_insanium: max
+  efficient_miner: max
+  sky_mall: max
+  old_school: 1
+  professional: 1
+  mole: 1
+  keep_it_cool: 1
+  powder_buff: max
+  speedy_mineman: max
+  warm_heart: 1
+  no_stone_unturned: 1
+  strong_arm: max
+  steady_hand: 1
+  surveyor: 1
+  eager_adventurer: 1
+  vanguard_seeker: 1
+  core_of_the_mountain: 4

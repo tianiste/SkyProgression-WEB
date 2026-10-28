@@ -1,0 +1,42 @@
+title: Glacite Tunnels commissions, XP
+method: Glacite Tunnels Commissions
+status: published
+order: 31
+author:
+  id: notwil
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+group: Commissions and Scatha
+hotm: 10
+tokens: 24
+powder: { mithril: 8600000, gemstone: 20000000, glacite: 16200000 }
+ability: pickobulus
+note: "Posted as \"GT comm $ + xp\", for XP or XP and money. Drawn with 25 tokens; the HOTM tree guide lists 24. Minimum skips Mole and Dead Man's Chest."
+perks:
+  mining_speed: max
+  precision_mining: max
+  mining_fortune: max
+  efficient_miner: max
+  quick_forge: max
+  sky_mall: max
+  old_school: 1
+  professional: max
+  mole: max
+  gem_lover: max
+  seasoned_mineman: max
+  keep_it_cool: 1
+  powder_buff: 1
+  speedy_mineman: max
+  fortunate_mineman: max
+  warm_heart: max
+  no_stone_unturned: max
+  strong_arm: max
+  steady_hand: 1
+  surveyor: max
+  metal_head: max
+  rags_to_riches: 1
+  mining_master: max
+  dead_mans_chest: max
+  core_of_the_mountain: 10

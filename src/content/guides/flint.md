@@ -4,6 +4,9 @@ category: blocks
 summary: Gravel for Flint in the Spider's Den, where Mining Speed does nothing and Maniac Miner with Bal carries the rates.
 authors:
   - { id: the-ultimate-non, role: Guide }
+contributors:
+  - { id: the-ultimate-non, role: HOTM tree picture }
+  - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord }
 updated: 2026-10-27
 notices:
@@ -24,6 +27,7 @@ hotm:
   - label: Max efficiency
     hotm: 7
     tokens: 11
+    tree: blocks
     powder: { mithril: 6759480, gemstone: 4600500 }
 requirements:
   - { id: shovel, group: tools, kind: item, item: FLINT_SHOVEL, modifiers: [{ kind: recomb }, { kind: enchant, id: efficiency, level: 5 }, { kind: enchant, id: ultimate_wise, level: 5 }] }

@@ -1,4 +1,30 @@
 title: Cobblestone
 method: Cobblestone
-status: coming-soon
-order: 15
+status: published
+order: 7
+author:
+  id: the-ultimate-non
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+hotm: 7
+tokens: 14
+powder: { mithril: 5500000, gemstone: 4700000 }
+ability: maniac_miner
+note: HOTM 7, 14 tokens.
+perks:
+  mining_speed: 1
+  mining_fortune: max
+  efficient_miner: max
+  sky_mall: max
+  old_school: 1
+  professional: 1
+  mole: 1
+  blockhead: max
+  subterranean_fisher: 1
+  keep_it_cool: 1
+  lonesome_miner: 1
+  great_explorer: 1
+  fortunate_mineman: max
+  core_of_the_mountain: 2

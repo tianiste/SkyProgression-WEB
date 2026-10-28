@@ -12,16 +12,18 @@ interface Props {
   perks: Partial<Record<string, "max" | number>>;
   ability?: string;
   disabled?: string[];
+  /** Abilities unlocked next to the selected one. */
+  unlocked?: string[];
   label: string;
 }
 
-const { id, perks, ability, disabled = [], label } = Astro.props;
+const { id, perks, ability, disabled = [], unlocked = [], label } = Astro.props;
 
-type State = "max" | "bridge" | "level" | "none" | "selected" | "ability" | "disabled" | "core";
+type State = "max" | "bridge" | "level" | "none" | "selected" | "standby" | "ability" | "disabled" | "core";
 
 function stateOf(p: Perk): State {
   if (p.kind === "core") return "core";
-  if (p.kind === "ability") return p.id === ability ? "selected" : "ability";
+  if (p.kind === "ability") return p.id === ability ? "selected" : unlocked.includes(p.id) ? "standby" : "ability";
   if (disabled.includes(p.id)) return "disabled";
   const v = perks[p.id];
   if (v === undefined) return "none";
@@ -35,6 +37,7 @@ const STATE_TEXT: Record<State, string> = {
   level: "Partly levelled",
   none: "Not taken",
   selected: "Selected ability",
+  standby: "Ability unlocked, not selected",
   ability: "Ability, not selected",
   disabled: "Unlocked but turned off",
   core: "Core of the Mountain",
@@ -50,6 +53,7 @@ const PIECE: Record<State, string> = {
   level: "unlocked|maxed",
   none: "locked",
   selected: "maxed|unlocked",
+  standby: "unlocked|locked",
   ability: "locked",
   disabled: "disabled",
   core: WORDS[coreLevel] ?? "locked",
@@ -66,12 +70,15 @@ function levelText(p: Perk, s: State): string {
 }
 
 const cells = PERKS.map((p) => ({ perk: p, state: stateOf(p), src: hotmPiece(p.id, PIECE[stateOf(p)]) }));
-const groups: State[] = ["selected", "max", "level", "bridge", "disabled"];
+const groups: State[] = ["selected", "standby", "max", "level", "bridge", "disabled"];
+const used = new Set(cells.map((c) => c.state));
 const legend: { state: State; perk: string; text: string }[] = [
   { state: "max", perk: "strong_arm", text: "Maxed" },
   { state: "bridge", perk: "strong_arm", text: "Unlocked to reach others" },
   { state: "none", perk: "strong_arm", text: "Not taken" },
+  ...(used.has("disabled") ? [{ state: "disabled" as State, perk: "strong_arm", text: "Unlocked, turned off" }] : []),
   { state: "selected", perk: "mining_speed_boost", text: "Selected ability (lit)" },
+  ...(used.has("standby") ? [{ state: "standby" as State, perk: "mining_speed_boost", text: "Ability unlocked, not selected (green ring)" }] : []),
   { state: "ability", perk: "mining_speed_boost", text: "Other ability (dark)" },
 ];
 ---
@@ -107,7 +114,7 @@ const legend: { state: State; perk: string; text: string }[] = [
       {
         legend.map((l) => (
           <li>
-            <span class="swatch-box">
+            <span class={`swatch-box ${l.state}`}>
               {hotmPiece(l.perk, PIECE[l.state]) ? (
                 <img class="pixelated" src={hotmPiece(l.perk, PIECE[l.state])} width="32" height="32" alt="" />
               ) : (
@@ -216,6 +223,20 @@ const legend: { state: State; perk: string; text: string }[] = [
   .cell.none:not(.piece) {
     border-style: dashed;
     background: transparent;
+  }
+  /* A selected ability without a lit piece (Pickobulus, Tunnel Vision, Sheer Force): a lit tile with a round mark. */
+  .cell.selected:not(.piece) {
+    background: #4fe3ec;
+    border-color: #4fe3ec;
+  }
+  .cell.selected .glyph {
+    background: #1c1e26;
+    border-radius: 50%;
+  }
+  /* An unlocked ability that is not selected: the dark piece with a green ring. */
+  .cell.standby,
+  .swatch-box.standby {
+    box-shadow: inset 0 0 0 2px #8ef04a;
   }
   .cell.disabled:not(.piece) {
     border-color: #d4524a;

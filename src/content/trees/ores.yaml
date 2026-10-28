@@ -1,4 +1,31 @@
 title: Ores
-method: Ores
-status: coming-soon
-order: 18
+method: Ores and Dwarven Diamond
+status: published
+order: 9
+author:
+  id: the-ultimate-non
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+hotm: 7
+tokens: 15
+powder: { mithril: 8600000, gemstone: 8300000 }
+ability: maniac_miner
+note: "Ore Mining and Diamond Mining use the same picture: HOTM 7, 15 tokens."
+perks:
+  mining_speed: max
+  mining_fortune: max
+  efficient_miner: max
+  sky_mall: max
+  old_school: max
+  professional: 1
+  mole: 1
+  blockhead: 1
+  subterranean_fisher: 1
+  keep_it_cool: 1
+  lonesome_miner: 1
+  great_explorer: 1
+  speedy_mineman: max
+  fortunate_mineman: max
+  core_of_the_mountain: 2

@@ -18,10 +18,19 @@ const trees = defineCollection({
     status: z.enum(["published", "coming-soon"]),
     order: z.number().default(100),
     author: person.optional(),
+    /** Who collected the picture with its numbers (the HOTM tree guide). */
+    collector: person.optional(),
+    /** Heading on the other-trees page, for trees whose method has no guide here. */
+    group: z.string().optional(),
     hotm: z.number().int().min(1).max(10).optional(),
+    /** The HOTM tree guide's token count and maximum powder for the perks (rounded up as the guide gives them). */
+    tokens: z.number().int().min(1).optional(),
+    powder: z.object({ mithril: z.number().int().optional(), gemstone: z.number().int().optional(), glacite: z.number().int().optional() }).optional(),
     ability: z.enum(["mining_speed_boost", "maniac_miner", "pickobulus", "anomalous_desire", "gemstone_infusion", "sheer_force"]).optional(),
     perks: z.partialRecord(z.enum(PERK_IDS), z.union([z.literal("max"), z.number().int().min(1)])).default({}),
     disabled: z.array(z.enum(PERK_IDS)).default([]),
+    /** Abilities unlocked next to the selected one (both used). */
+    unlocked: z.array(z.enum(PERK_IDS)).default([]),
     note: z.string().optional(),
   }),
 });

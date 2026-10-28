@@ -1,4 +1,34 @@
 title: Coal
 method: Coal
-status: coming-soon
-order: 11
+status: published
+order: 6
+author:
+  id: the-ultimate-non
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+hotm: 7
+tokens: 17
+powder: { mithril: 8600000, gemstone: 16200000 }
+ability: maniac_miner
+note: "Great Explorer is unlocked but turned off. The HOTM tree guide's maximum (16.2m Gemstone) leaves out Keep It Cool; with it maxed as drawn the tree costs 19.4m."
+perks:
+  mining_speed: max
+  mining_fortune: max
+  efficient_miner: max
+  sky_mall: max
+  old_school: max
+  professional: 1
+  mole: max
+  gem_lover: 1
+  seasoned_mineman: max
+  blockhead: max
+  subterranean_fisher: 1
+  keep_it_cool: max
+  lonesome_miner: 1
+  great_explorer: 1
+  speedy_mineman: max
+  fortunate_mineman: max
+  core_of_the_mountain: 5
+disabled: [great_explorer]

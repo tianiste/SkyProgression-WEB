@@ -29,6 +29,7 @@ export const PEOPLE = {
   sleepinginseattle: { name: "sleepinginseattle.", links: [] },
   fazehunter: { name: "FazeHunter (Ji)", links: [] },
   lfalloy: { name: "lfAlloy", links: [] },
+  koenigboohoo: { name: "KoenigBooHoo", links: [] },
   "mining-cult": { name: "Mining Cult Discord", links: [] },
 } satisfies Record<string, Person>;
 

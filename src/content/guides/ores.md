@@ -4,6 +4,8 @@ category: ores
 summary: Pure ores in the Dwarven Mines and Crystal Hollows with Maniac Miner, mostly Glossy Mineral armor and a rod-swap to Bal for the ability.
 authors:
   - { id: the-ultimate-non, role: Guide }
+contributors:
+  - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord }
 updated: 2026-10-27
 notices:
@@ -29,6 +31,13 @@ hotm:
     hotm: 7
     tokens: 15
     powder: { mithril: 6759480, gemstone: 4600500 }
+  - label: HOTM tree guide
+    hotm: 7
+    tokens: 15
+    cotm: 2
+    tree: ores
+    powder: { mithril: 8600000, gemstone: 8300000 }
+    note: From the Heart of the Mountain tree guide. 8.6m Mithril and 8.3m Gemstone for the perks, plus 50k for Core of the Mountain 2.
 requirements:
   - id: drill-budget
     tier: budget

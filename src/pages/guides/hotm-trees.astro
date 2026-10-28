@@ -1,0 +1,116 @@
+---
+/**
+ * HOTM trees from the Heart of the Mountain tree guide whose method has no guide on this site yet (powder mining,
+ * commissions, Scatha), grouped by the tree's group. Trees with a guide are shown on that guide's page.
+ */
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import HotmTree from "../../components/HotmTree.astro";
+import Credit from "../../components/Credit.astro";
+import Icon from "../../components/Icon.astro";
+import { powderIcon } from "../../lib/icons";
+import { formatPowder } from "../../lib/format";
+
+const trees = (await getCollection("trees"))
+  .filter((t) => t.data.status === "published" && t.data.group)
+  .sort((a, b) => a.data.order - b.data.order);
+const groups = [...new Set(trees.map((t) => t.data.group!))];
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+---
+
+<Base title="More HOTM trees" description="Heart of the Mountain trees for powder mining, commissions and Scatha from the Mining Cult HOTM tree guide.">
+  <h1>More HOTM trees</h1>
+  <p class="lead">
+    Trees for methods without a guide here yet, from the Heart of the Mountain tree guide by <Credit id="koenigboohoo" /> in
+    the <Credit id="mining-cult" />. The other trees are on each method's <a href="/guides/">guide</a>.
+  </p>
+  <p class="muted small">
+    The pictures show which perks are maxed or unlocked, not their levels. Powder is the guide's maximum for the perks,
+    rounded up as the guide gives it, without Core of the Mountain. Last updated by the guide on 22 October 2026.
+  </p>
+  <nav aria-label="Groups" class="jump">
+    {groups.map((g) => <a href={`#${slug(g)}`}>{g}</a>)}
+  </nav>
+  <div class="seam" aria-hidden="true"></div>
+
+  {
+    groups.map((group) => (
+      <section aria-labelledby={slug(group)}>
+        <h2 id={slug(group)}>{group}</h2>
+        <div class="trees">
+          {trees
+            .filter((t) => t.data.group === group)
+            .map((t) => (
+              <article class="tree" aria-labelledby={`${t.id}-title`}>
+                <h3 id={`${t.id}-title`}>{t.data.title}</h3>
+                <p class="muted small">
+                  {[`HOTM ${t.data.hotm}`, t.data.tokens && `${t.data.tokens} tokens`, typeof t.data.perks.core_of_the_mountain === "number" && `Core ${t.data.perks.core_of_the_mountain}`].filter(Boolean).join(", ")}
+                </p>
+                {t.data.powder && (
+                  <ul class="powder" aria-label="Powder">
+                    {(["mithril", "gemstone", "glacite"] as const).map(
+                      (k) =>
+                        t.data.powder![k] !== undefined && (
+                          <li>
+                            <Icon icon={powderIcon(k)} size={16} />
+                            <span class="amount">{formatPowder(t.data.powder![k])}</span> {k[0]!.toUpperCase() + k.slice(1)}
+                          </li>
+                        ),
+                    )}
+                  </ul>
+                )}
+                <p class="muted small">
+                  Picture by {t.data.author && <Credit id={t.data.author.id} />}. {t.data.note}
+                </p>
+                <HotmTree id={t.id} label={`${t.data.title} HOTM tree`} perks={t.data.perks} ability={t.data.ability} disabled={t.data.disabled} unlocked={t.data.unlocked} />
+              </article>
+            ))}
+        </div>
+      </section>
+    ))
+  }
+</Base>
+
+<style>
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 1rem 0;
+  }
+  .trees {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 24rem), 1fr));
+    gap: 1rem 2rem;
+  }
+  .tree {
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line);
+    min-width: 0;
+  }
+  .tree h3 {
+    font-size: var(--step-0);
+    margin: 0 0 0.25rem;
+  }
+  .tree p {
+    margin: 0.25rem 0;
+  }
+  .powder {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.9rem;
+    font-size: var(--step--1);
+  }
+  .powder li {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .amount {
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+  }
+</style>

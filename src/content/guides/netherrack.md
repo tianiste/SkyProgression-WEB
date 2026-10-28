@@ -4,6 +4,9 @@ category: blocks
 summary: Netherrack on the Crimson Isle, mainly to reach the 1M collection for the Kuudra Follower Artifact in about ten minutes.
 authors:
   - { id: the-ultimate-non, role: Guide }
+contributors:
+  - { id: the-ultimate-non, role: HOTM tree picture }
+  - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord }
 updated: 2026-10-27
 notices:
@@ -21,6 +24,7 @@ hotm:
   - label: Max efficiency
     hotm: 7
     tokens: 11
+    tree: blocks
     powder: { mithril: 6759480, gemstone: 4600500 }
 videos:
   - { title: Budget setup without Black Cat, url: "https://youtu.be/nyZvFN-tgPo" }

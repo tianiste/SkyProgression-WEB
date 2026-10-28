@@ -1,0 +1,30 @@
+title: Gemstone Powder, HOTM 7
+method: Gemstone Powder
+status: published
+order: 23
+author:
+  id: notwil
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+group: Powder mining
+hotm: 7
+tokens: 13
+powder: { mithril: 6500000, gemstone: 15000000 }
+ability: pickobulus
+note: "Posted as \"Non's Gem Powder\". Minimum 4.7m Mithril plus Core of the Mountain 2; skips Mining Speed, Mole, Great Explorer, Speedy Mineman and Powder Buff."
+perks:
+  mining_speed: max
+  mining_fortune: 1
+  titanium_insanium: 1
+  efficient_miner: max
+  mole: max
+  blockhead: 1
+  subterranean_fisher: 1
+  keep_it_cool: 1
+  lonesome_miner: 1
+  great_explorer: max
+  powder_buff: max
+  speedy_mineman: max
+  core_of_the_mountain: 2

@@ -5,6 +5,9 @@ category: blocks
 summary: A skill-based block method. Follow floor and wall waypoints with a Snail, and swap to Scatha and a Blue Cheese drill for Mining Speed Boost.
 authors:
   - { id: mining-cult, role: Guide }
+contributors:
+  - { id: the-ultimate-non, role: HOTM tree picture }
+  - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord }
 updated: 2026-10-27
 where: Obsidian waypoints shared in the Mining Cult post, imported into SkyHanni.
@@ -16,6 +19,7 @@ ratesMeasured: With max Magical Power and decent skill. Crafting Obsidian into N
 hotm:
   - label: Recommended
     hotm: 10
+    tree: obsidian
     powder: { mithril: 8517747, gemstone: 9550915 }
     note: 8,283,870 Gemstone if you are not levelling a pet. Max the perks that give Mining Speed and Block Fortune; Seasoned Mineman only if a pet is on EXP share.
 requirements:

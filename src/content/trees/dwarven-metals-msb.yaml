@@ -5,33 +5,37 @@ order: 4
 author:
   id: notwil
   role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
 hotm: 10
+tokens: 25
+powder: { mithril: 8600000, gemstone: 8300000, glacite: 14900000 }
 ability: mining_speed_boost
-note: Posted as "Metal MSB". Used for Umber and Tungsten.
+note: "Posted as \"Metal MSB\". Used for Umber and Tungsten, and as Shafting tree 5 (Dwarven Metals spawning). Core of the Mountain is levelled to 10 for the tokens."
 perks:
   mining_speed: max
-  mining_fortune: max
   precision_mining: max
+  mining_fortune: max
   luck_of_the_cave: 1
-  efficient_miner: 1
+  efficient_miner: max
   sky_mall: max
   old_school: 1
   daily_grind: max
-  core_of_the_mountain: 10
   blockhead: max
-  great_explorer: max
   speedy_mineman: max
   fortunate_mineman: max
+  warm_heart: max
   miners_blessing: max
   no_stone_unturned: max
   strong_arm: max
   steady_hand: 1
-  warm_heart: max
-  surveyor: max
   mineshaft_mayhem: max
+  surveyor: max
   metal_head: max
   rags_to_riches: max
   eager_adventurer: max
   gifts_from_the_departed: max
   mining_master: 1
   dead_mans_chest: max
+  core_of_the_mountain: 10

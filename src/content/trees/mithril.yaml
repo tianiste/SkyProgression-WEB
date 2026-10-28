@@ -1,4 +1,37 @@
 title: Mithril
 method: Mithril
-status: coming-soon
-order: 21
+status: published
+order: 10
+author:
+  id: the-ultimate-non
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+hotm: 9
+tokens: 21
+powder: { mithril: 11100000, gemstone: 7400000, glacite: 2200000 }
+ability: maniac_miner
+note: The HOTM tree guide lists HOTM 9, 21 tokens and Core of the Mountain 7.
+perks:
+  mining_speed: max
+  precision_mining: max
+  mining_fortune: max
+  titanium_insanium: max
+  efficient_miner: max
+  sky_mall: max
+  old_school: 1
+  professional: 1
+  mole: 1
+  gem_lover: 1
+  seasoned_mineman: max
+  daily_grind: 1
+  daily_powder: 1
+  blockhead: 1
+  great_explorer: 1
+  speedy_mineman: max
+  fortunate_mineman: max
+  no_stone_unturned: 1
+  strong_arm: max
+  metal_head: max
+  core_of_the_mountain: 7

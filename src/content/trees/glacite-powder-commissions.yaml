@@ -1,0 +1,41 @@
+title: Glacite Powder, commissions
+method: Glacite Powder
+status: published
+order: 26
+author:
+  id: notwil
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+group: Powder mining
+hotm: 10
+tokens: 24
+powder: { mithril: 8600000, gemstone: 15800000, glacite: 11500000 }
+ability: pickobulus
+note: "Posted as \"Glacite Comm Powder\". Minimum HOTM 8, 19 tokens and Core of the Mountain 7; skips Metal Head, Strong Arm, Surveyor, Mining Master and Dead Man's Chest."
+perks:
+  mining_speed: max
+  precision_mining: max
+  mining_fortune: max
+  titanium_insanium: 1
+  efficient_miner: max
+  sky_mall: max
+  old_school: 1
+  professional: max
+  mole: 1
+  gem_lover: max
+  keep_it_cool: 1
+  powder_buff: max
+  speedy_mineman: max
+  fortunate_mineman: max
+  warm_heart: 1
+  no_stone_unturned: 1
+  strong_arm: max
+  steady_hand: 1
+  surveyor: max
+  metal_head: max
+  rags_to_riches: 1
+  mining_master: max
+  dead_mans_chest: max
+  core_of_the_mountain: 10

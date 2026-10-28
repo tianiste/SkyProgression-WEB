@@ -5,6 +5,9 @@ category: ores
 summary: Coal and Hard Stone on routes in the Crystal Hollows, instamining with high Mining Speed and swapping to a Blue Cheese drill for the ability.
 authors:
   - { id: the-ultimate-non, role: Guide }
+contributors:
+  - { id: the-ultimate-non, role: HOTM tree picture }
+  - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord, posted: 2026-10-13 }
 updated: 2026-10-27
 where: Crystal Hollows, on routes from the route-sharing channel or your own. During progression, The Jungle while Sludge Mining or grinding powder.
@@ -19,6 +22,7 @@ ratesMeasured: Rough estimates from the author; most players land in between or 
 hotm:
   - label: Recommended
     hotm: 7
+    tree: coal
     powder: { mithril: 8517747, gemstone: 19392014, glacite: 1267045 }
 requirements:
   - id: drill-progression

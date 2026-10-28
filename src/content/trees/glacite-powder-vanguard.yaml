@@ -1,0 +1,38 @@
+title: Glacite Powder, Vanguard corpses
+method: Glacite Powder
+status: published
+order: 27
+author:
+  id: notwil
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+group: Powder mining
+hotm: 10
+tokens: 21
+powder: { mithril: 6500000, gemstone: 7400000, glacite: 8500000 }
+ability: pickobulus
+note: "Mithril spawning for Vanguard corpses. Minimum HOTM 7, 15 tokens; skips Strong Arm, Surveyor, Dead Man's Chest and Vanguard Seeker. Maxed as drawn it costs about 9m Mithril and 14m Gemstone; the HOTM tree guide lists 6.5m and 7.4m."
+perks:
+  mining_speed: max
+  precision_mining: max
+  mining_fortune: 1
+  titanium_insanium: max
+  efficient_miner: max
+  sky_mall: max
+  old_school: 1
+  professional: 1
+  mole: max
+  keep_it_cool: 1
+  powder_buff: max
+  speedy_mineman: max
+  warm_heart: 1
+  no_stone_unturned: 1
+  strong_arm: max
+  steady_hand: 1
+  surveyor: max
+  eager_adventurer: 1
+  dead_mans_chest: max
+  vanguard_seeker: max
+  core_of_the_mountain: 9

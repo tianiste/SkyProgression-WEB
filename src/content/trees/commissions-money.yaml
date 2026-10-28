@@ -1,0 +1,43 @@
+title: Glacite Tunnels commissions, money
+method: Glacite Tunnels Commissions
+status: published
+order: 30
+author:
+  id: notwil
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+group: Commissions and Scatha
+hotm: 10
+tokens: 24
+powder: { mithril: 8600000, gemstone: 18700000, glacite: 19600000 }
+ability: pickobulus
+note: "Posted as \"GT comm $\". Mining Speed Boost is drawn unlocked next to the selected Pickobulus, which makes 25 tokens; the HOTM tree guide lists 24. Minimum skips Mole."
+perks:
+  mining_speed: max
+  mining_speed_boost: 1
+  precision_mining: max
+  mining_fortune: max
+  titanium_insanium: 1
+  efficient_miner: max
+  sky_mall: max
+  old_school: 1
+  professional: max
+  mole: max
+  gem_lover: max
+  keep_it_cool: 1
+  powder_buff: 1
+  speedy_mineman: max
+  fortunate_mineman: max
+  warm_heart: max
+  no_stone_unturned: max
+  strong_arm: max
+  steady_hand: max
+  mineshaft_mayhem: max
+  surveyor: max
+  rags_to_riches: max
+  eager_adventurer: max
+  mining_master: max
+  core_of_the_mountain: 10
+unlocked: [mining_speed_boost]

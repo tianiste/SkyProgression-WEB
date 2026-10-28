@@ -8,6 +8,8 @@ authors:
 contributors:
   - { id: mycelium-larper, role: Rate calculations }
   - { id: parker, role: Grotto routes }
+  - { id: notwil, role: HOTM tree picture }
+  - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord }
 updated: 2026-10-27
 where: A Fairy Grotto in the Jungle of the Crystal Hollows, found yourself or bought in the Mining Cult trading channels. Mansion and Palace grottos are the best; grottos in the Magma Fields earn more.
@@ -25,6 +27,7 @@ hotm:
     hotm: 10
     tokens: 23
     cotm: 7
+    tree: mf-gems-msb
     powder: { mithril: 4050000, gemstone: 15800000, glacite: 4700000 }
     note: 3.9m, 14.4m and 4.7m for the perks plus 150k and 1.4m for Core of the Mountain 7. Levelling Mole and Efficient Miner makes routes easier.
 requirements:

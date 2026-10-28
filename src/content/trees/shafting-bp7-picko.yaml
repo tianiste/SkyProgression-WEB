@@ -1,0 +1,41 @@
+title: Shafting 2, Breaking Power 7 gems and Pickobulus Glacite
+method: Gemstone Shafting
+status: published
+order: 13
+author:
+  id: notwil
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+hotm: 10
+tokens: 25
+powder: { mithril: 3900000, gemstone: 13000000, glacite: 22200000 }
+ability: pickobulus
+note: "Posted as \"madobrick's BP7 Picko\". A spawning tree: loot corpses with it. Crystalline and Vanguard Seeker can be turned off if you do not forge flip or sell the Vanguard Mineshafts."
+perks:
+  mining_speed: max
+  mining_fortune: max
+  titanium_insanium: 1
+  efficient_miner: 1
+  sky_mall: max
+  old_school: 1
+  professional: max
+  mole: 1
+  gem_lover: max
+  daily_grind: max
+  blockhead: max
+  speedy_mineman: max
+  fortunate_mineman: max
+  warm_heart: max
+  no_stone_unturned: 1
+  mineshaft_mayhem: max
+  surveyor: max
+  metal_head: 1
+  eager_adventurer: 1
+  crystalline: max
+  gifts_from_the_departed: max
+  mining_master: max
+  dead_mans_chest: max
+  vanguard_seeker: max
+  core_of_the_mountain: 10

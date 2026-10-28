@@ -1,0 +1,27 @@
+title: Blocks
+method: End Stone, Mycelium, Red Sand, Netherrack, Glowstone, Gravel
+status: published
+order: 8
+author:
+  id: the-ultimate-non
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+hotm: 7
+tokens: 14
+powder: { mithril: 5500000, gemstone: 4700000 }
+ability: maniac_miner
+note: "One tree for Glowstone, Netherrack, End Stone, Mycelium, Red Sand and Gravel. Drawn with 11 tokens; the HOTM tree guide lists 14 tokens and the Cobblestone tree's powder."
+perks:
+  mining_speed: 1
+  mining_fortune: max
+  efficient_miner: max
+  mole: 1
+  blockhead: max
+  subterranean_fisher: 1
+  keep_it_cool: 1
+  lonesome_miner: 1
+  great_explorer: 1
+  fortunate_mineman: max
+  core_of_the_mountain: 2

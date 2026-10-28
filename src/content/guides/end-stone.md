@@ -5,6 +5,9 @@ category: blocks
 summary: One of the easiest mining money makers. Run in a circle on End Stone in The End with Maniac Miner, barely affected by ping.
 authors:
   - { id: mining-cult, role: Guide }
+contributors:
+  - { id: the-ultimate-non, role: HOTM tree picture }
+  - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord }
 updated: 2026-10-27
 where: The End. The Mining Cult post has a picture of the exact spot.
@@ -18,6 +21,7 @@ hotm:
     hotm: 7
     tokens: 14
     cotm: 2
+    tree: blocks
     powder: { mithril: 6850000, gemstone: 6700000 }
     note: 6.8m Mithril and 6.7m Gemstone for the perks, plus 50k for Core of the Mountain 2.
 requirements:

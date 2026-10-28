@@ -1,0 +1,42 @@
+title: Shafting 4, Breaking Power 7 gems, Pickobulus and Mining Speed Boost
+method: Gemstone Shafting
+status: published
+order: 15
+author:
+  id: notwil
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+hotm: 10
+tokens: 25
+powder: { mithril: 3900000, gemstone: 13000000, glacite: 19700000 }
+ability: pickobulus
+note: "Posted as \"BP7 Gem MSB/Picko\": two Pickobulus Glacite, one Mining Speed Boost Peridot. Both abilities are unlocked; Pickobulus is selected."
+perks:
+  mining_speed: max
+  mining_speed_boost: 1
+  precision_mining: max
+  mining_fortune: max
+  titanium_insanium: 1
+  efficient_miner: 1
+  old_school: 1
+  professional: max
+  mole: 1
+  gem_lover: max
+  daily_grind: max
+  blockhead: max
+  speedy_mineman: max
+  fortunate_mineman: max
+  no_stone_unturned: 1
+  mineshaft_mayhem: max
+  surveyor: max
+  metal_head: 1
+  eager_adventurer: 1
+  crystalline: max
+  gifts_from_the_departed: max
+  mining_master: max
+  dead_mans_chest: max
+  vanguard_seeker: max
+  core_of_the_mountain: 10
+unlocked: [mining_speed_boost]

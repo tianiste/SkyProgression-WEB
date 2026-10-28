@@ -165,17 +165,12 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
                 <div class="tree">
                   <h3>{t.data.title}</h3>
                   <p class="muted small">
-                    Picture by {t.data.author && <Credit id={t.data.author.id} />}. {t.data.note}
+                    Picture by {t.data.author && <Credit id={t.data.author.id} />}{t.data.collector && <>, from the Heart of the Mountain tree guide by <Credit id={t.data.collector.id} /></>}. {t.data.note}
                   </p>
-                  <HotmTree id={t.id} label={`${t.data.title} HOTM tree`} perks={t.data.perks} ability={t.data.ability} disabled={t.data.disabled} />
+                  <HotmTree id={t.id} label={`${t.data.title} HOTM tree`} perks={t.data.perks} ability={t.data.ability} disabled={t.data.disabled} unlocked={t.data.unlocked} />
                 </div>
               ))}
-              {trees.length === 0 && (
-                <div class="tree-soon">
-                  <span class="soon-grid" aria-hidden="true" />
-                  <p><strong>Tree coming soon.</strong> <span class="muted">The drawn tree for this method is not confirmed yet.</span></p>
-                </div>
-              )}
+              {trees.length === 0 && <p class="muted small">No community tree picture for this method yet.</p>}
               {hotmReqs.length > 0 && (
                 <>
                   <h3>Key perks</h3>
@@ -604,28 +599,6 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
   .tree h3 {
     font-size: var(--step-0);
     margin-bottom: 0.25rem;
-  }
-  .tree-soon {
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
-    margin: 1rem 0;
-    padding: 0.75rem;
-    border: 1px dashed var(--line);
-    border-radius: var(--radius);
-    font-size: var(--step--1);
-  }
-  .tree-soon p {
-    margin: 0;
-  }
-  .soon-grid {
-    flex: none;
-    width: 42px;
-    height: 60px;
-    background-image: radial-gradient(circle, var(--line) 2px, transparent 2.5px);
-    background-size: 6px 6px;
-    background-color: var(--slot-bg);
-    border-radius: 2px;
   }
   .get-mod {
     display: grid;

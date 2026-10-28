@@ -9,6 +9,10 @@ contributors:
   - { id: yadi, role: Video guide }
   - { id: woqh, role: Mithril spawning route }
   - { id: sleepinginseattle, role: Tungsten spawning route }
+  - { id: notwil, role: Shafting tree pictures }
+  - { id: willo-wisp, role: Shafting tree pictures }
+  - { id: the-ultimate-non, role: Shafting trees }
+  - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord, posted: 2025-03-04 }
 updated: 2026-10-27
 notices:
@@ -39,6 +43,41 @@ hotm:
     cotm: 10
     powder: { mithril: 11211843, gemstone: 13476732, glacite: 11649848 }
     note: Minimum to start, including Peak of the Mountain. 27.2m Glacite maxes every perk. Gemstone powder as for the Tungsten tree.
+  - label: "Shafting 1: Gemstone Mineshaft tree"
+    hotm: 10
+    tokens: 25
+    cotm: 10
+    tree: shafting-mineshaft
+    powder: { mithril: 8600000, gemstone: 18800000, glacite: 17400000 }
+    note: From the Heart of the Mountain tree guide (new Shafting trees). For mining out a Gemstone Mineshaft and killing Littlefoots. Minimum 10.7m Glacite (skips No Stone Unturned and Steady Hand), plus 150k, 1.4m and 3m for Core of the Mountain 10.
+  - label: "Shafting 2: Breaking Power 7 gems, Pickobulus Glacite"
+    hotm: 10
+    tokens: 25
+    cotm: 10
+    tree: shafting-bp7-picko
+    powder: { mithril: 3900000, gemstone: 13000000, glacite: 22200000 }
+    note: Spawning tree; loot corpses with it. Minimum 12.1m Gemstone and 14.3m Glacite (skips Blockhead, Crystalline, Vanguard Seeker), plus 150k, 1.4m and 3m for Core of the Mountain 10. Mineshaft Mayhem stays active in a shaft after you swap trees.
+  - label: "Shafting 3: Breaking Power 7 gems, Mining Speed Boost Peridot"
+    hotm: 10
+    tokens: 25
+    cotm: 10
+    tree: shafting-bp7-msb
+    powder: { mithril: 3900000, gemstone: 13000000, glacite: 22200000 }
+    note: Spawning tree. Same minimum and skips as Shafting 2, plus 150k, 1.4m and 3m for Core of the Mountain 10.
+  - label: "Shafting 4: Breaking Power 7 gems, two Pickobulus Glacite and one Mining Speed Boost Peridot"
+    hotm: 10
+    tokens: 25
+    cotm: 10
+    tree: shafting-bp7-picko-msb
+    powder: { mithril: 3900000, gemstone: 13000000, glacite: 19700000 }
+    note: Spawning tree. Minimum 12.1m Gemstone and 11.8m Glacite (skips Blockhead, Crystalline, Vanguard Seeker), plus 150k, 1.4m and 3m for Core of the Mountain 10.
+  - label: "Shafting 5: Dwarven Metals, Mining Speed Boost"
+    hotm: 10
+    tokens: 25
+    cotm: 10
+    tree: dwarven-metals-msb
+    powder: { mithril: 8600000, gemstone: 8300000, glacite: 17300000 }
+    note: Spawning tree, the Dwarven Metals tree. Minimum 7.4m Gemstone and 10.2m Glacite (skips Blockhead, No Stone Unturned, Gifts from the Departed, Warm Heart), plus 150k, 1.4m and 3m for Core of the Mountain 10.
 videos:
   - { title: Mineshaft gemstone mining guide, url: "https://www.youtube.com/watch?v=gAH3ejdb8rY", by: Yadi }
 requirements:

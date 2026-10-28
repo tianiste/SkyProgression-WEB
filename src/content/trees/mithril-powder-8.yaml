@@ -1,0 +1,33 @@
+title: Mithril Powder, HOTM 8
+method: Mithril Powder
+status: published
+order: 21
+author:
+  id: the-ultimate-non
+  role: HOTM tree picture
+collector:
+  id: koenigboohoo
+  role: HOTM tree guide
+group: Powder mining
+hotm: 8
+tokens: 16
+powder: { mithril: 9000000, gemstone: 7400000, glacite: 1300000 }
+ability: pickobulus
+note: Minimum 3.7m Gemstone and 12 tokens; skips Mining Speed, Titanium Insanium, Efficient Miner, Speedy Mineman and Strong Arm.
+perks:
+  mining_speed: max
+  precision_mining: max
+  mining_fortune: 1
+  titanium_insanium: max
+  efficient_miner: max
+  sky_mall: max
+  old_school: 1
+  professional: 1
+  mole: 1
+  keep_it_cool: 1
+  powder_buff: max
+  speedy_mineman: max
+  no_stone_unturned: 1
+  strong_arm: max
+  steady_hand: 1
+  core_of_the_mountain: 4

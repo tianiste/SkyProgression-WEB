@@ -9,6 +9,7 @@ contributors:
   - { id: the-ultimate-non, role: Maniac Miner HOTM tree picture }
   - { id: willo-wisp, role: Mining Speed Boost HOTM tree picture }
   - { id: notwil, role: Drawn Mining Speed Boost tree }
+  - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord }
 updated: 2026-10-27
 where: Mines of Divan in the Mithril Deposits of the Crystal Hollows. Find it with a Wishing Compass.
@@ -22,6 +23,7 @@ hotm:
     hotm: 7
     tokens: 17
     cotm: 5
+    tree: gold-maniac-miner
     powder: { mithril: 8750000, gemstone: 11500000 }
     note: 8.6m Mithril and 11m Gemstone for the perks, plus 150k and 500k for Core of the Mountain 5.
   - label: Mining Speed Boost

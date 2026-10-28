@@ -8,6 +8,8 @@ authors:
 contributors:
   - { id: fazehunter, role: Location video }
   - { id: lfalloy, role: Roof access technique }
+  - { id: the-ultimate-non, role: HOTM tree picture }
+  - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord }
 updated: 2026-10-27
 where: The roof of the Dwarven Mines.
@@ -21,6 +23,7 @@ hotm:
     hotm: 7
     tokens: 14
     cotm: 2
+    tree: cobblestone
     powder: { mithril: 6850000, gemstone: 6700000 }
     note: 6.8m Mithril and 6.7m Gemstone for the perks, plus 50k for Core of the Mountain 2.
 requirements:
