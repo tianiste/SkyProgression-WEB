@@ -236,7 +236,8 @@ export interface HotmPlan {
   changes: { id: string; name: string; from: number; to: number; disabled: boolean }[];
   reset: boolean;
   notes: string[];
-  community: { id: string; title: string; ability: string; rate: number | null; powder: PowderMap; tokens: number; tier: number; fits: boolean; missing: PowderMap }[];
+  /** Missing from relays older than the community comparison. */
+  community?: { id: string; title: string; ability: string; rate: number | null; powder: PowderMap; tokens: number; tier: number; fits: boolean; missing: PowderMap }[];
 }
 export interface Hotm extends Common {
   tier: number;

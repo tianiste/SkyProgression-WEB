@@ -202,7 +202,7 @@ function Planner({ plan, label, method, have, trees }: { plan: HotmPlan | null; 
   const planned = (id: string) => (id === "core_of_the_mountain" ? have(id) : shown.levels[id] ?? 0);
   const gain = pct(shown.rate, plan.before);
   const targetGain = pct(plan.target.rate, plan.before);
-  const community = plan.community
+  const community = (plan.community ?? [])
     .map((c) => ({ c, drawn: trees.find((t) => t.tree === c.id && t.methods.includes(method)) ?? trees.find((t) => t.tree === c.id) }))
     .sort((a, b) => (b.c.rate ?? -1) - (a.c.rate ?? -1));
   const ref = community.find((x) => x.c.id === pick) ?? community[0];
