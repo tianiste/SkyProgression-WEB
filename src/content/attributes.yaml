@@ -255,7 +255,7 @@
   family: intelligence
   effect: "Elemental attributes +20%"
 - id: maximal_torment
-  name: "Maximal Torment"
+  name: "Unlimited Torment"
   shard: "Taurus"
   rarity: Legendary
   family: intelligence
