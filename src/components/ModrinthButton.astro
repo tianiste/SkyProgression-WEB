@@ -1,7 +1,7 @@
 ---
 /**
- * The site's main call to action: download the mod from Modrinth. Text and a pixel download arrow; Modrinth's own
- * logo is not used. "compact" is the header version.
+ * The site's main call to action: download the mod (SITE.download). Text and a pixel download arrow. "compact" is
+ * the header version.
  */
 import { SITE } from "../config";
 
@@ -10,10 +10,10 @@ interface Props {
   label?: string;
 }
 
-const { size = "large", label = "Download on Modrinth" } = Astro.props;
+const { size = "large", label = "Download the mod" } = Astro.props;
 ---
 
-<a class:list={["dl", size]} href={SITE.modrinth}>
+<a class:list={["dl", size]} href={SITE.download}>
   <svg width="16" height="16" viewBox="0 0 8 8" aria-hidden="true" shape-rendering="crispEdges">
     <path fill="currentColor" d="M3 0h2v3h2v1h-1v1h-1v1h-2v-1h-1v-1h-1v-1h2zM0 6h1v1h6v-1h1v2h-8z"></path>
   </svg>
