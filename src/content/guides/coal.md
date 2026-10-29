@@ -109,10 +109,17 @@ requirements:
     pet: { type: GOBLIN, minTier: LEGENDARY, level: 100 }
     note: Goblin gives 12.5 Mining Speed per level instead of 2.5, 1,250 at level 100. Use it if you are short of Mining Speed.
   - id: pet-scatha
+    tier: budget
     group: pet
     kind: pet
-    pet: { type: SCATHA, minTier: RARE, level: 100 }
+    pet: { type: SCATHA, minTier: RARE, level: 100, item: PET_ITEM_QUICK_CLAW }
     note: "Pet items in order: Bejeweled Collar, Quick Claw, Hephaestus Relic."
+  - id: pet-scatha-max
+    tier: max
+    group: pet
+    kind: pet
+    pet: { type: SCATHA, minTier: RARE, level: 100, item: HEPHAESTUS_RELIC }
+    note: The last pet item in the guide's order.
   - { id: compactor, group: accessories, kind: accessory, item: PERSONAL_COMPACTOR_7000 }
   - { id: speed-relic, group: accessories, kind: accessory, item: SPEED_RELIC }
   - { id: titanium-relic, group: accessories, kind: accessory, item: TITANIUM_RELIC }

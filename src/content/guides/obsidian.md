@@ -31,6 +31,7 @@ requirements:
     note: Sugar Rush III on the boots.
     modifiers: [{ kind: recomb }, { kind: reforge, id: jaded }]
   - { id: pendant, group: equipment, kind: item, item: DIVAN_PENDANT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: gem, gem: AMBER, quality: PERFECT }, { kind: gem, gem: JADE, quality: PERFECT }, { kind: applied, item: DIVAN_POWDER_COATING }] }
+  - { id: pendant, group: equipment, kind: item, item: DIVAN_PENDANT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: gem, gem: AMBER, quality: PERFECT }, { kind: gem, gem: JADE, quality: PERFECT }, { kind: applied, item: DIVAN_POWDER_COATING }] }
   - { id: cloak, group: equipment, kind: item, item: DRAGONFADE_CLOAK, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }] }
   - { id: belt, group: equipment, kind: item, item: JADE_BELT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }] }
   - { id: gloves, group: equipment, kind: item, item: DWARVEN_HANDWARMERS, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }] }
@@ -56,6 +57,7 @@ requirements:
   - { id: drill-ability, group: drill, kind: item, item: DIVAN_DRILL, label: Second Divan's Drill with Blue Cheese, note: Same as the main drill with a Blue Cheese omelette. Hold it for the ability., modifiers: [{ kind: drill_part, slot: module, item: GOBLIN_OMELETTE_BLUE_CHEESE }] }
   - { id: wisp, group: tools, kind: item, item: WILL_O_WISP, note: With 10 Mana Disintegrators. Replace it whenever it runs out. }
   - { id: rogue-sword, group: tools, kind: item, item: ROGUE_SWORD, modifiers: [{ kind: reforge, id: heroic }, { kind: enchant, id: ultimate_wise, level: 5 }], note: Use it every 30 seconds. }
+  - { id: rogue-sword, group: tools, kind: item, item: ROGUE_SWORD, modifiers: [{ kind: reforge, id: heroic }, { kind: enchant, id: ultimate_wise, level: 5 }] }
   - { id: tuba, group: tools, kind: item, item: WEIRDER_TUBA, note: Use it every 30 seconds. }
   - { id: rod, group: tools, kind: manual, label: Any fishing rod, note: "Autopet: rod throw to Scatha unless equipped, rod throw to Snail unless equipped." }
   - { id: scatha, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: UNALLOYED_SPEED } }

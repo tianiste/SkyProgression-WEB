@@ -52,16 +52,17 @@ requirements:
     label: 1/4 Armor of Divan and 3/4 Glossy Mineral
     note: All Jaded with Wisdom V. The Divan's piece gets a Perfect Jade and a coating. Without Glossy, use 4/4 Mineral; a 2/4 mix also works.
   - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: 4/4 Titanium equipment, note: Its set bonus beats an Ancient Cloak with Handwarmers. }
-  - { id: belt, tier: max, group: equipment, kind: item, item: JADE_BELT, modifiers: [{ kind: reforge, id: blazing }] }
-  - { id: cloak, tier: max, group: equipment, kind: item, item: SAPPHIRE_CLOAK, modifiers: [{ kind: reforge, id: blazing }] }
-  - { id: gloves, tier: max, group: equipment, kind: item, item: DWARVEN_HANDWARMERS, modifiers: [{ kind: reforge, id: blazing }] }
-  - { id: pendant, tier: max, group: equipment, kind: item, item: DIVAN_PENDANT, modifiers: [{ kind: reforge, id: blazing }, { kind: applied, item: DIVAN_POWDER_COATING }] }
-  - { id: bal, group: pet, kind: pet, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "Pet items in order: Bejeweled Collar, Minos Relic, Quick Claw." }
-  - { id: scatha, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100 }, note: Rare to Legendary. }
+  - { id: belt, tier: max, group: equipment, kind: item, item: JADE_BELT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }] }
+  - { id: cloak, tier: max, group: equipment, kind: item, item: SAPPHIRE_CLOAK, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }] }
+  - { id: gloves, tier: max, group: equipment, kind: item, item: DWARVEN_HANDWARMERS, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }] }
+  - { id: pendant, tier: max, group: equipment, kind: item, item: DIVAN_PENDANT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: applied, item: DIVAN_POWDER_COATING }] }
+  - { id: scatha-budget, tier: budget, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: PET_ITEM_QUICK_CLAW }, note: "The guide's fortune pet, Rare to Legendary (Autopet: Mining XP to Scatha). Start with a Bejeweled Collar. Our correction, not in the guide: Minos Relic is left out because it now boosts combat stats only (wiki, patch 0.24.1)." }
+  - { id: scatha-max, tier: max, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: HEPHAESTUS_RELIC }, note: "Our correction, not in the guide: Hephaestus Relic adds 50% to the pet's base stats, and Scatha's 125 Mining Fortune is a base stat, so it beats Quick Claw on Scatha only (wiki; Mining Cult gear progression guide)." }
+  - { id: bal, group: pet, kind: pet, priority: optional, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "The guide rod-swapped to it for 10% less ability cooldown; patch 0.27 (4 Aug 2026) removed that perk, and its 100 Mining Fortune is less than Scatha's 125." }
   - { id: aotv, group: tools, kind: item, item: ASPECT_OF_THE_VOID, note: With Etherwarp. A must; without it, farm or mine Gold instead. }
   - { id: sacks, group: tools, kind: manual, label: 1 Large Mining Sack and 1 to 3 Large Enchanted Mining Sacks }
   - { id: glossy-talisman, group: accessories, kind: accessory, item: GLOSSY_MINERAL_TALISMAN, note: Or the Mineral Talisman. }
-  - { id: relic, group: accessories, kind: accessory, item: POWER_RELIC }
+  - { id: relic, group: accessories, kind: accessory, item: POWER_RELIC, modifiers: [{ kind: recomb }, { kind: note, text: Perfect gemstones }] }
   - { id: eight-ball, group: accessories, kind: accessory, item: MAGIC_8_BALL, priority: optional }
   - { id: magical-power, group: accessories, kind: manual, label: 450+ Magical Power, Sighted or Bizarre power stone, Intelligence tunings, note: "Maniac Miner: 2,000 Intelligence for its full Fortune (1,333 with Blue Cheese; 1,000 and 667 with Ultimate Wise), plus more for flux and teleports." }
   - { id: ore-oats, group: consumables, kind: consumable, item: DWARVEN_OS_ORE_OATS, count: 5 }
@@ -100,3 +101,10 @@ no-Etherwarp route by Ghostz made for 4/4 refined Mineral armor.
 
 - Since patch 0.27 (4 Aug 2026) Bal no longer lowers pickaxe ability cooldown (its Chimney perk was removed, wiki), so
   the guide's rod-swap to Bal before the ability is left out here; Bal still gives Mining Fortune.
+- Our corrections to the pets (not the author's advice): Scatha is the mining pet and Bal is optional, since Bal's
+  cooldown perk is gone and its 100 base Mining Fortune is less than Scatha's 125
+  ([Scatha](https://hypixelskyblock.minecraft.wiki/w/Scatha_Pet), [Bal](https://hypixelskyblock.minecraft.wiki/w/Bal_Pet)).
+  The pet item path drops Minos Relic, which now boosts combat stats only
+  ([Minos Relic](https://hypixelskyblock.minecraft.wiki/w/Minos_Relic), patch 0.24.1), and ends at Quick Claw, or a
+  Hephaestus Relic on the max tier, which adds 50% to Scatha's base Mining Fortune and Mining Speed
+  ([Quick Claw](https://hypixelskyblock.minecraft.wiki/w/Quick_Claw), [Hephaestus Relic](https://hypixelskyblock.minecraft.wiki/w/Hephaestus_Relic)).

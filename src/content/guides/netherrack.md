@@ -34,9 +34,14 @@ requirements:
       - { id: divan-drill, group: drill, kind: item, item: DIVAN_DRILL, modifiers: [{ kind: reforge, id: fleet }] }
   - { id: armor-budget, tier: budget, group: armor, kind: item, item: MINERAL_CHESTPLATE, label: 4/4 Mineral, modifiers: [{ kind: reforge, id: jaded }, { kind: enchant, id: ultimate_wisdom, level: 5 }] }
   - { id: armor-max, tier: max, group: armor, kind: item, item: GLOSSY_MINERAL_CHESTPLATE, label: 4/4 Glossy Mineral, modifiers: [{ kind: reforge, id: jaded }, { kind: enchant, id: ultimate_wisdom, level: 5 }] }
-  - { id: equipment, group: equipment, kind: manual, label: Equipment as in the Flint guide }
-  - { id: bal, group: pet, kind: pet, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "Autopet: Mining XP gain to the fortune pet." }
-  - { id: black-cat, group: pet, kind: pet, pet: { type: BLACK_CAT, minTier: LEGENDARY, level: 100, item: PET_ITEM_QUICK_CLAW }, note: Start with a Bejeweled Collar. }
+  - { id: pendant, tier: max, group: equipment, kind: item, item: DIVAN_PENDANT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
+  - { id: cloak, group: equipment, kind: item, item: ANCIENT_CLOAK, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
+  - { id: belt, tier: max, group: equipment, kind: item, item: JADE_BELT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
+  - { id: gloves, group: equipment, kind: item, item: DWARVEN_HANDWARMERS, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
+  - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: 2/4 Titanium equipment, note: Blazing, Quantum V. }
+  - { id: scatha, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: PET_ITEM_QUICK_CLAW }, note: "Our correction, not in the guide: the guide's fortune pet is a Black Cat with Quick Claw, but Black Cat has no mining stats (wiki), while Scatha has 125 base Mining Fortune. Start with a Bejeweled Collar." }
+  - { id: black-cat, group: pet, kind: pet, priority: optional, pet: { type: BLACK_CAT, minTier: LEGENDARY, level: 100, item: PET_ITEM_QUICK_CLAW }, note: "The guide's fortune pet (Autopet: Mining XP gain to it). With Quick Claw it gets 50 Mining Fortune, from the item only." }
+  - { id: bal, group: pet, kind: pet, priority: optional, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "The guide rod-swapped to it for 10% less ability cooldown; patch 0.27 (4 Aug 2026) removed that perk." }
   - { id: kuudra, group: pet, kind: pet, pet: { type: KUUDRA, minTier: EPIC, level: 100 }, note: +100 Mining Fortune; its perks work even when it is not summoned. }
   - { id: glossy-talisman, group: accessories, kind: accessory, item: GLOSSY_MINERAL_TALISMAN, note: Or the Mineral Talisman. }
   - { id: relic, group: accessories, kind: accessory, item: POWER_RELIC }
@@ -61,3 +66,6 @@ turn off Jump Boost and Rabbit effects in the Booster Cookie menu, and mine. Use
 
 - Since patch 0.27 (4 Aug 2026) Bal no longer lowers pickaxe ability cooldown (its Chimney perk was removed, wiki), so
   the guide's rod-swap to Bal before the ability is left out here; Bal still gives Mining Fortune.
+- Our correction (not the author's advice): Scatha replaces Black Cat as the fortune pet. Black Cat has no Mining Fortune
+  or Mining Speed ([Black Cat](https://hypixelskyblock.minecraft.wiki/w/Black_Cat_Pet)); Scatha has 125 base Mining
+  Fortune ([Scatha](https://hypixelskyblock.minecraft.wiki/w/Scatha_Pet)), and Quick Claw adds the same 50 to either pet.

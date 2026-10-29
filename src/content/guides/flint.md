@@ -29,14 +29,14 @@ requirements:
   - { id: ability-drill, group: drill, kind: manual, label: Any drill for the ability, note: Perfectly-Cut Fuel Tank and a Blue Cheese omelette. }
   - { id: armor-budget, tier: budget, group: armor, kind: item, item: MINERAL_CHESTPLATE, label: 4/4 Mineral, modifiers: [{ kind: recomb }, { kind: reforge, id: jaded }, { kind: enchant, id: ultimate_wisdom, level: 5 }] }
   - { id: armor-max, tier: max, group: armor, kind: item, item: GLOSSY_MINERAL_CHESTPLATE, label: 4/4 Glossy Mineral, modifiers: [{ kind: recomb }, { kind: reforge, id: jaded }, { kind: enchant, id: ultimate_wisdom, level: 5 }] }
-  - { id: equipment-budget, tier: budget, group: equipment, kind: manual, label: 2/4 Titanium, Ancient Cloak and Dwarven Handwarmers, note: Blazing, Quantum V. }
-  - { id: equipment-max, tier: max, group: equipment, kind: manual, label: Pendant of Divan, Ancient Cloak, Jade Belt and Dwarven Handwarmers, note: Blazing, Quantum V. }
-  - id: bal
-    group: pet
-    kind: pet
-    pet: { type: BAL, minTier: LEGENDARY, level: 100, item: BEJEWELED_COLLAR }
-    note: "Use Maniac Miner whenever it is ready. Best to worst: Legendary Bal with Bejeweled Collar, with Minos Relic, with Quick Claw, then an Epic Scatha with Quick Claw. The guide swapped to Bal for its cooldown perk, which patch 0.27 (4 Aug 2026) removed; Bal still gives Mining Fortune."
-  - { id: scatha, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: PET_ITEM_QUICK_CLAW }, note: "Start with a Bejeweled Collar. The guide's Autopet rod swap to Bal was for its cooldown perk, removed in patch 0.27." }
+  - { id: pendant, tier: max, group: equipment, kind: item, item: DIVAN_PENDANT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
+  - { id: cloak, group: equipment, kind: item, item: ANCIENT_CLOAK, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
+  - { id: belt, tier: max, group: equipment, kind: item, item: JADE_BELT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
+  - { id: gloves, group: equipment, kind: item, item: DWARVEN_HANDWARMERS, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
+  - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: 2/4 Titanium equipment, note: Blazing, Quantum V. }
+  - { id: scatha-budget, tier: budget, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: PET_ITEM_QUICK_CLAW }, note: "The guide's fortune pet (Autopet: Mining XP gain to it) and the last step of its pet path: Legendary Bal with a Bejeweled Collar, then Minos Relic, then Quick Claw, then an Epic Scatha with Quick Claw. Start with a Bejeweled Collar." }
+  - { id: scatha-max, tier: max, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: HEPHAESTUS_RELIC }, note: "Our correction, not in the guide: Hephaestus Relic adds 50% to the pet's base stats, and Scatha's 125 Mining Fortune is a base stat, so it beats Quick Claw on Scatha only (wiki; Mining Cult gear progression guide)." }
+  - { id: bal, group: pet, kind: pet, priority: optional, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "The guide swapped to Bal for its cooldown perk, which patch 0.27 (4 Aug 2026) removed; its 100 Mining Fortune is less than Scatha's 125. Our correction, not in the guide: skip Minos Relic, which now boosts combat stats only (wiki, patch 0.24.1)." }
   - { id: glossy-talisman, group: accessories, kind: accessory, item: GLOSSY_MINERAL_TALISMAN, note: Or the Mineral Talisman. }
   - { id: relic, group: accessories, kind: accessory, item: POWER_RELIC }
   - { id: grimoire, group: tools, kind: item, item: GLOOMLOCK_GRIMOIRE, priority: optional }
@@ -66,4 +66,9 @@ Use `/recipe enchanted flint` to compact straight from your sacks (Skytils can b
 - Since patch 0.27 (4 Aug 2026) neither Bal nor Crow lowers pickaxe ability cooldown: Bal's Chimney perk was removed and Crow's Quick Hands now covers weapon abilities only (wiki).
   Earlier advice to rod-swap to either pet before the ability no longer helps.
 - The Snail pet's speed penalty is fixed, so the workarounds for it are no longer needed.
+- Our corrections to the pets (not the author's advice): Bal is optional now that its cooldown perk is gone, Minos Relic
+  is left out because it now boosts combat stats only
+  ([Minos Relic](https://hypixelskyblock.minecraft.wiki/w/Minos_Relic), patch 0.24.1), and the max tier puts a Hephaestus
+  Relic on Scatha, which adds 50% to its 125 base Mining Fortune
+  ([Hephaestus Relic](https://hypixelskyblock.minecraft.wiki/w/Hephaestus_Relic), [Scatha](https://hypixelskyblock.minecraft.wiki/w/Scatha_Pet)).
 - Mining lanterns: Mithril Lantern (HOTM 2), Titanium Lantern (HOTM 5), Glacite Lantern (HOTM 8), Will-o'-wisp (HOTM 10).

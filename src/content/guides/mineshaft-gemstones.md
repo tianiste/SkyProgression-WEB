@@ -136,6 +136,7 @@ requirements:
       - { kind: drill_part, slot: module, item: GOBLIN_OMELETTE_SUNNY_SIDE }
   - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: Titanium Necklace, Cloak and Belt with Dwarven Handwarmers, note: All Blazing; the Handwarmers recombobulated. }
   - { id: pendant, tier: max, group: equipment, kind: item, item: DIVAN_PENDANT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: gem, gem: JADE, quality: PERFECT }, { kind: gem, gem: AMBER, quality: PERFECT }, { kind: applied, item: DIVAN_POWDER_COATING }] }
+  - { id: pendant, tier: max, group: equipment, kind: item, item: DIVAN_PENDANT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: gem, gem: JADE, quality: PERFECT }, { kind: gem, gem: AMBER, quality: PERFECT }, { kind: applied, item: DIVAN_POWDER_COATING }] }
   - { id: gemstone-equipment, tier: max, group: equipment, kind: manual, label: Gemstone equipment in place of Titanium, note: Recombobulated. }
   - { id: golem, group: pet, kind: pet, pet: { type: GLACITE_GOLEM, minTier: LEGENDARY, level: 100, item: PET_ITEM_QUICK_CLAW }, note: +1 Pristine per looted corpse in a shaft. Start with a Bejeweled Collar. }
   - { id: scatha, group: pet, kind: pet, pet: { type: SCATHA, minTier: EPIC, level: 100, item: PET_ITEM_QUICK_CLAW }, note: For shafts with no Lapis corpses. Legendary is better. Start with a Bejeweled Collar. }
