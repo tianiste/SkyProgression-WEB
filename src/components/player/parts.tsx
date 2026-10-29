@@ -55,7 +55,7 @@ export function costText(u: Upgrade): string {
 
 /** An upgrade: icon, name, what it replaces or changes, the gain and the cost; details open below. */
 export function UpgradeLine({ u, rank, unit, focus }: { u: Upgrade; rank?: number; unit?: string; focus?: string }) {
-  const icon = u.item.modification && u.current ? u.current.id : u.item.id;
+  const icon = u.item.icon || (u.item.modification && u.current ? u.current.id : u.item.id);
   const sub = u.blocked || (u.current ? `${u.item.modification ? "On" : "Replaces"} ${u.current.name}` : changes(u));
   return (
     <details class={u.blocked ? "upgrade blocked" : "upgrade"}>

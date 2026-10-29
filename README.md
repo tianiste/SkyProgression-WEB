@@ -100,11 +100,13 @@ pack from [Modrinth](https://modrinth.com/resourcepack/furfsky-reborn) and the H
 `https://api.hypixel.net/v2/resources/packs` lists, unzip both outside the repo together with the official Minecraft client jar (from Mojang's launcher metadata), and run:
 
 ```sh
-node scripts/import-icons.mjs <unzipped FurfSky pack> <unzipped Hypixel pack> <unzipped Minecraft client jar>
+node scripts/import-icons.mjs <unzipped FurfSky pack> <unzipped Hypixel pack> <unzipped Minecraft client jar> <mod>/src/main/resources/skyprogression-item-icons.json
 ```
 
 The script copies only the textures the site uses into `public/icons/` and lists the IDs that fall back to the site's
-own icons.
+own icons. The last argument is the mod's icon table: the player pages show any item from it (gear, pets, shards,
+essences) from API answers, so those textures are kept too, with NEU's heads for pets, shards and essences and
+Minecraft's own textures (dyed leather tinted) for plain items.
 
 ## License
 

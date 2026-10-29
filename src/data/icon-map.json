@@ -1,5 +1,5 @@
 {
-  "_note": "Which texture stands for each guide, category, gear group, reforge, powder and modifier. A value is a Hypixel item ID (FurfSky Reborn, then Hypixel textures), a minecraft:<path> Minecraft texture, or a #hex colour for a plain block. \"vanilla\" maps item IDs that SkyBlock shows with a Minecraft texture. Change icons here, never in guide data. After editing, run scripts/import-icons.mjs (see the README).",
+  "_note": "Which texture stands for each guide, category, gear group, reforge, powder and modifier. A value is a Hypixel item ID (FurfSky Reborn, then Hypixel textures), a minecraft:<path> Minecraft texture, or a #hex colour for a plain block. \"vanilla\" maps item IDs that SkyBlock shows with a Minecraft texture. Change icons here, never in guide data. After editing, run scripts/import-icons.mjs (see the README). \"player\" lists the mod icon IDs of entries with no item (HOTM perks by powder, Mining skill), which the player pages get from the API.",
   "guide": {
     "coal": "minecraft:block/coal_ore",
     "gold": "minecraft:block/gold_block",
@@ -55,6 +55,17 @@
   },
   "extra": [],
   "vanilla": {
-    "OBSIDIAN": "minecraft:block/obsidian"
-  }
+    "OBSIDIAN": "minecraft:block/obsidian",
+    "ENDER_STONE": "minecraft:block/end_stone",
+    "MYCEL": "minecraft:block/mycelium_side",
+    "WOOD": "minecraft:block/oak_log",
+    "ENCHANTED_LAPIS_LAZULI": "minecraft:item/lapis_lazuli"
+  },
+  "player": [
+    "minecraft:prismarine_crystals",
+    "minecraft:pink_dye",
+    "minecraft:packed_ice",
+    "minecraft:emerald",
+    "minecraft:stone_pickaxe"
+  ]
 }

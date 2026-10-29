@@ -92,7 +92,7 @@ function OtherLine({ e, right, rank, d }: { e: OtherEntry; right: string; rank?:
   return (
     <details class="upgrade">
       <summary>
-        <ItemIcon id={e.id} />
+        <ItemIcon id={d.otherIcons?.[e.id] || e.id} />
         <span class="upgrade-name">
           <span>{rank !== undefined && <span class="muted">{rank}. </span>}{e.name}</span>
           <span class="muted small">{e.effect}</span>

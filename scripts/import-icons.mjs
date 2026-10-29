@@ -1,23 +1,30 @@
 // Copies the item textures the site uses into public/icons and writes src/data/icons.generated.json.
 // Usage: node scripts/import-icons.mjs <FurfSky Reborn pack> [<Hypixel SkyBlock pack>] [<Minecraft client jar contents>]
-// (each unzipped). Sources, in order: FurfSky Reborn, the official Hypixel SkyBlock Resource Pack, the face of the item's
-// player head skin from Hypixel's public items resource, then Minecraft's own texture where icon-map.json names one;
-// anything else gets the site's own fallback icon. Files keep their
-// native size (animated textures keep their first frame). After copying, the script builds the site and removes every
-// texture the built pages do not use, so the repo holds only used files.
+//        [<the mod's src/main/resources/skyprogression-item-icons.json>]
+// (packs unzipped). Sources, in order: FurfSky Reborn, the official Hypixel SkyBlock Resource Pack, the face of the item's
+// player head skin from Hypixel's public items resource (or the mod's table: NEU heads for pets, shards and essences),
+// then Minecraft's own texture where icon-map.json names one or the item is a plain Minecraft item in game (dyed leather
+// is tinted like in game); anything else gets the site's own fallback icon. Files keep their native size (animated
+// textures keep their first frame). After copying, the script builds the site and removes every texture the built
+// pages do not use, except the items of the mod's table and icon-map.json "player": the player pages show those from
+// API answers, so they are not in the built HTML.
 import fs from "node:fs";
 import path from "node:path";
 import { execSync } from "node:child_process";
 import { PNG } from "pngjs";
 
-const [furfsky, hypixel, minecraft] = process.argv.slice(2);
+const [furfsky, hypixel, minecraft, modTable] = process.argv.slice(2);
 if (!furfsky || !fs.existsSync(path.join(furfsky, "assets"))) {
-  console.error("Usage: node scripts/import-icons.mjs <FurfSky Reborn pack> [<Hypixel SkyBlock pack>] [<Minecraft client jar contents>]");
+  console.error("Usage: node scripts/import-icons.mjs <FurfSky Reborn pack> [<Hypixel SkyBlock pack>] [<Minecraft client jar contents>] [<mod item icon table>]");
   process.exit(1);
 }
 const root = path.resolve(import.meta.dirname, "..");
 const outDir = path.join(root, "public", "icons");
 const map = JSON.parse(fs.readFileSync(path.join(root, "src/data/icon-map.json"), "utf8"));
+/** The mod's icon table: item ID -> { m: 1.8 material, d: damage, c: leather "r,g,b", t: head texture hash }. */
+const modItems = modTable ? JSON.parse(fs.readFileSync(modTable, "utf8")).items : {};
+/** Items the player pages can show; kept even though no built page uses them. */
+const playerItems = new Set([...Object.keys(modItems), ...(map.player ?? [])]);
 
 /** Item IDs the site can show: everything in guide data plus the icon map. */
 function wantedItems() {
@@ -31,6 +38,7 @@ function wantedItems() {
     if (k.startsWith("_")) continue;
     for (const id of Array.isArray(v) ? v : Object.values(v)) if (!id.startsWith("#")) ids.add(id);
   }
+  for (const id of playerItems) ids.add(id);
   return [...ids].sort();
 }
 
@@ -168,12 +176,56 @@ if (hypixel) {
   };
 }
 
-// Minecraft textures, named in icon-map.json as minecraft:<path> (for example minecraft:block/cobblestone).
+// Minecraft textures, named in icon-map.json as minecraft:<path> (for example minecraft:block/cobblestone), or as a
+// plain item minecraft:<item> (the mod's icon IDs, for example minecraft:pink_dye): its item texture, else its block's.
 const fromMinecraft = (ref) => {
   if (!minecraft || !ref?.startsWith("minecraft:")) return null;
-  const file = path.join(minecraft, "assets/minecraft/textures", `${ref.slice("minecraft:".length)}.png`);
-  return fs.existsSync(file) ? file : null;
+  const name = ref.slice("minecraft:".length);
+  const tries = name.includes("/") ? [name] : [`item/${name}`, `block/${name}`];
+  for (const t of tries) {
+    const file = path.join(minecraft, "assets/minecraft/textures", `${t}.png`);
+    if (fs.existsSync(file)) return file;
+  }
+  return null;
 };
+
+/** Minecraft 1.8 material names (the items resource) that differ from today's item names; "NAME:damage" wins. */
+const LEGACY = {
+  "SKULL_ITEM:0": "skeleton_skull", "SKULL_ITEM:2": "zombie_head", "SKULL_ITEM:4": "creeper_head", "CARPET:14": "red_carpet",
+  "STAINED_CLAY:14": "red_terracotta", "STAINED_GLASS:14": "red_stained_glass", "RED_ROSE:3": "azure_bluet", COOKED_FISH: "cooked_cod",
+  RAW_FISH: "cod", FIREWORK: "firework_rocket", GOLD_BARDING: "golden_horse_armor", IRON_BARDING: "iron_horse_armor", LEAVES: "oak_leaves",
+  WATER_LILY: "lily_pad", WOOD_PICKAXE: "wooden_pickaxe", YELLOW_FLOWER: "dandelion", MYCEL: "mycelium", GOLD_HELMET: "golden_helmet",
+  GOLD_CHESTPLATE: "golden_chestplate", GOLD_LEGGINGS: "golden_leggings", GOLD_BOOTS: "golden_boots", GOLD_PICKAXE: "golden_pickaxe",
+  GOLD_AXE: "golden_axe", GOLD_SWORD: "golden_sword", GOLD_HOE: "golden_hoe", GOLD_SPADE: "golden_shovel", WOOD_SWORD: "wooden_sword",
+};
+
+/**
+ * The Minecraft item an item of the mod's table is in game, as a texture written to dest: leather dyed with its colour
+ * (base layer tinted, overlay on top), anything else as is. Paper and textureless heads are left out: in game those are
+ * drawn by Hypixel's pack or a skin, so a sheet of paper or a Steve head would be the wrong picture.
+ */
+function vanillaTexture(id, dest) {
+  const e = modItems[id];
+  if (!e || e.m === "PAPER" || e.m === "SKULL_ITEM") return null;
+  const name = LEGACY[`${e.m}:${e.d ?? 0}`] ?? LEGACY[e.m] ?? e.m.toLowerCase();
+  const tex = fromMinecraft(`minecraft:${name}`);
+  if (!tex) return null;
+  if (!name.startsWith("leather_") || !e.c) return copyTexture(tex, dest);
+  const rgb = e.c.split(",").map((v) => Number(v.trim()));
+  const { png } = readPng(fs.readFileSync(tex));
+  const overlay = fromMinecraft(`minecraft:${name}_overlay`);
+  const top = overlay ? readPng(fs.readFileSync(overlay)).png : null;
+  for (let i = 0; i < png.data.length; i += 4) {
+    for (let k = 0; k < 3; k++) png.data[i + k] = Math.round((png.data[i + k] * rgb[k]) / 255);
+    if (top && top.data[i + 3]) {
+      const a = top.data[i + 3] / 255;
+      for (let k = 0; k < 3; k++) png.data[i + k] = Math.round(top.data[i + k] * a + png.data[i + k] * (1 - a));
+      png.data[i + 3] = Math.max(png.data[i + 3], top.data[i + 3]);
+    }
+  }
+  writePng(png, dest);
+  return png.width;
+}
 
 // Player head skins from Hypixel's public items resource (no API key needed).
 const skins = new Map();
@@ -215,7 +267,7 @@ for (const id of wantedItems()) {
       missing.push(id);
       continue;
     }
-    const file = `minecraft/${id.slice("minecraft:".length).replace("/", "_")}.png`;
+    const file = `minecraft/${id.slice("minecraft:".length).replaceAll("/", "_")}.png`;
     manifest.items[id] = { file, size: copyTexture(tex, path.join(outDir, file)), source: "minecraft" };
     continue;
   }
@@ -226,9 +278,9 @@ for (const id of wantedItems()) {
     const source = furf ? "furfsky" : "hypixel";
     const file = `${source === "furfsky" ? "items" : "hypixel"}/${name}`;
     manifest.items[id] = { file, size: copyTexture(furf ?? hyp, path.join(outDir, file)), source };
-  } else if (skins.has(id) || petHead(id)) {
+  } else if (skins.has(id) || petHead(id) || modItems[id]?.t) {
     const file = `heads/${name}`;
-    const res = await fetch(skins.get(id) ?? petHead(id));
+    const res = await fetch(skins.get(id) ?? petHead(id) ?? `https://textures.minecraft.net/texture/${modItems[id].t}`);
     if (!res.ok) {
       missing.push(id);
       continue;
@@ -237,7 +289,12 @@ for (const id of wantedItems()) {
   } else if (fromMinecraft(map.vanilla?.[id])) {
     const file = `minecraft/${map.vanilla[id].slice("minecraft:".length).replace("/", "_")}.png`;
     manifest.items[id] = { file, size: copyTexture(fromMinecraft(map.vanilla[id]), path.join(outDir, file)), source: "minecraft" };
-  } else missing.push(id);
+  } else {
+    const file = `vanilla/${name}`;
+    const size = vanillaTexture(id, path.join(outDir, file));
+    if (size) manifest.items[id] = { file, size, source: "minecraft" };
+    else missing.push(id);
+  }
 }
 
 // HOTM tiles: FurfSky draws abilities, Core of the Mountain and a few key perks as nodes (one per tree position, tier
@@ -260,6 +317,7 @@ const used = new Set();
 for (const f of fs.readdirSync(path.join(root, "dist"), { recursive: true }).filter((f) => f.endsWith(".html"))) {
   for (const m of fs.readFileSync(path.join(root, "dist", f), "utf8").matchAll(/\/icons\/([a-z0-9_/.-]+\.png)/g)) used.add(m[1]);
 }
+for (const [id, t] of Object.entries(manifest.items)) if (playerItems.has(id)) used.add(t.file);
 for (const [id, t] of Object.entries(manifest.items)) if (!used.has(t.file)) delete manifest.items[id];
 for (const [key, file] of Object.entries(manifest.hotm)) if (!used.has(file)) delete manifest.hotm[key];
 for (const f of fs.readdirSync(outDir, { recursive: true }).filter((f) => f.endsWith(".png"))) {

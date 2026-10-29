@@ -86,7 +86,8 @@ export interface MethodRow {
 }
 export interface Comparison { godPotion: boolean; rows: MethodRow[] }
 
-export interface UpgradeItem { id: string; name: string; group: string; category: string; modification: boolean; source: string; location: string }
+/** icon: the item the entry is about (a gem, book, part, shard, powder...), "" for the item's own icon; older relays omit it. */
+export interface UpgradeItem { id: string; name: string; group: string; category: string; modification: boolean; source: string; location: string; icon?: string }
 export interface Upgrade {
   item: UpgradeItem;
   current: UpgradeItem | null;
@@ -177,6 +178,8 @@ export interface Upgrades extends Common {
     rated: boolean;
     hidden: number;
   };
+  /** The item each Other entry is about, by entry id; older relays omit it. */
+  otherIcons?: Record<string, string>;
 }
 export interface Methods extends Common {
   comparison: Comparison;

@@ -222,8 +222,9 @@ browser -> api.skyprogression.dev (Worker: name to UUID, caching, rate limits)
    - The session tracker stays in the mod (it reads chat and the inventory live).
    - Results are cached 2 minutes per player, profile, page and options on the Worker; the profile copy is reused for 5
      minutes. Uncached pages share the checklist's limit of 20 per minute per IP.
-   - Item icons exist only for the items the guides use (the import script keeps those), so many gear rows show an empty
-     slot.
+   - Item icons cover the mod's icon table (the import script keeps those besides the guides' items); 19 items in no
+     texture source show an empty slot. Upgrade rows show the item an upgrade uses (gem, part, shard, pet, powder) from
+     the relay's `icon` / `otherIcons`; an older relay leaves the gear piece's icon.
    - HOTM compares with the community tree of the method's guide and shows the mod's HOTM planner (planned vs current
      tree, ability, rate before and after, respec gain, powder needed and missing) next to it. The API does not say which ability is selected or which Loadouts tree is
      active; each tree can be picked.

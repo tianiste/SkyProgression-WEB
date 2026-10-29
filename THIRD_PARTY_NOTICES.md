@@ -21,7 +21,10 @@ outside this site without their permission.
 
 Files: `public/icons/hypixel/*.png` (from the Hypixel SkyBlock Resource Pack, downloaded from the Hypixel API endpoint
 `/v2/resources/packs`) and `public/icons/heads/*.png` (item and pet player head skins drawn as small cubes; item skins
-from the Hypixel API items resource `/v2/resources/skyblock/items`, pet skins found through SkyCrypt's pet table).
+from the Hypixel API items resource `/v2/resources/skyblock/items`, pet skins found through SkyCrypt's pet table, and
+pet, shard and essence skins found through the SkyProgression mod's icon table, which takes their skin IDs from
+NotEnoughUpdates-REPO, <https://github.com/NotEnoughUpdates/NotEnoughUpdates-REPO>, MIT License, Copyright (c) 2020
+Moulberry).
 
 Copyright © 2026 Hypixel Inc. Used under the Hypixel SkyBlock Resource Pack License 1.0, which allows Hypixel-related
 websites to use the pack's assets as long as access is not sold or charged for. The head skins are Hypixel's art served
@@ -56,7 +59,8 @@ The pet skins themselves are Hypixel's art, served by Mojang's skin server; see 
 
 ## Minecraft textures
 
-Files: `public/icons/minecraft/*.png`, taken from the official Minecraft 26.3 client (`assets/minecraft/textures`).
+Files: `public/icons/minecraft/*.png` and `public/icons/vanilla/*.png` (items SkyBlock shows as a plain Minecraft item;
+dyed leather tinted with the item's colour), taken from the official Minecraft 26.3 client (`assets/minecraft/textures`).
 
 © Mojang Studios. Used for a few block and material icons on this free, non-commercial fan site, following the
 Minecraft Usage Guidelines. SkyProgression is not an official Minecraft product and is not approved by or associated
