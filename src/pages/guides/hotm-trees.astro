@@ -60,7 +60,7 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
                   </ul>
                 )}
                 <p class="muted small">
-                  Picture by {t.data.author && <Credit id={t.data.author.id} />}. {t.data.note}
+                  <span class="credit-line">Picture by {t.data.author && <Credit id={t.data.author.id} />}.</span> {t.data.note}
                 </p>
                 <HotmTree id={t.id} label={`${t.data.title} HOTM tree`} perks={t.data.perks} ability={t.data.ability} disabled={t.data.disabled} unlocked={t.data.unlocked} />
               </article>

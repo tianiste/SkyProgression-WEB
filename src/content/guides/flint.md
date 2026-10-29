@@ -8,12 +8,7 @@ contributors:
   - { id: the-ultimate-non, role: HOTM tree picture }
   - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord }
-updated: 2026-10-27
-notices:
-  - status: stale
-    date: 2026-10-28
-    text: "The rod-swap to Bal or Crow before Maniac Miner predates patch 0.27 (4 Aug 2026): Bal's Chimney perk was removed and Crow's Quick Hands now lowers weapon ability cooldowns only."
-    source: { label: "Bal Pet, Hypixel SkyBlock Wiki", url: "https://hypixelskyblock.minecraft.wiki/w/Bal_Pet" }
+updated: 2026-10-29
 where: The Gravel Cave in the Spider's Den. Mine around the entrance, where the gravel chunks are bigger.
 blocks:
   - "Gravel. Mining Speed has no effect; Haste and Efficiency do, and otherwise only the server TPS"
@@ -40,7 +35,7 @@ requirements:
     group: pet
     kind: pet
     pet: { type: BAL, minTier: LEGENDARY, level: 100, item: BEJEWELED_COLLAR }
-    note: "Swap to Bal and use Maniac Miner whenever it is ready. Best to worst: Legendary Bal with Bejeweled Collar, with Minos Relic, with Quick Claw, then an Epic Scatha with Quick Claw. The guide swapped to Bal for its cooldown perk, which patch 0.27 (4 Aug 2026) removed; Bal still gives Mining Fortune."
+    note: "Use Maniac Miner whenever it is ready. Best to worst: Legendary Bal with Bejeweled Collar, with Minos Relic, with Quick Claw, then an Epic Scatha with Quick Claw. The guide swapped to Bal for its cooldown perk, which patch 0.27 (4 Aug 2026) removed; Bal still gives Mining Fortune."
   - { id: scatha, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: PET_ITEM_QUICK_CLAW }, note: "Start with a Bejeweled Collar. The guide's Autopet rod swap to Bal was for its cooldown perk, removed in patch 0.27." }
   - { id: glossy-talisman, group: accessories, kind: accessory, item: GLOSSY_MINERAL_TALISMAN, note: Or the Mineral Talisman. }
   - { id: relic, group: accessories, kind: accessory, item: POWER_RELIC }
@@ -61,8 +56,8 @@ requirements:
 
 ## How to mine
 
-Mine the gravel around the cave entrance with the Flint Shovel. When Maniac Miner is ready, swap to Bal, hold the
-ability drill and use it, then go back to the shovel.
+Mine the gravel around the cave entrance with the Flint Shovel. When Maniac Miner is ready, hold the ability drill
+and use it, then go back to the shovel.
 
 Use `/recipe enchanted flint` to compact straight from your sacks (Skytils can bind it to a key).
 

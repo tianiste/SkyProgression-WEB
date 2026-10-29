@@ -8,12 +8,7 @@ contributors:
   - { id: the-ultimate-non, role: HOTM tree picture }
   - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord }
-updated: 2026-10-27
-notices:
-  - status: stale
-    date: 2026-10-28
-    text: "The Bal rod-swap before the pickaxe ability predates patch 0.27 (4 Aug 2026), which removed Bal's Chimney perk: Bal no longer lowers pickaxe ability cooldown."
-    source: { label: "Bal Pet, Hypixel SkyBlock Wiki", url: "https://hypixelskyblock.minecraft.wiki/w/Bal_Pet" }
+updated: 2026-10-29
 where: Crimson Isle around X -460, Y 180, Z -505.
 blocks:
   - "Netherrack. Turn off Jump Boost and Rabbit effects in the Booster Cookie menu first"
@@ -40,7 +35,7 @@ requirements:
   - { id: armor-budget, tier: budget, group: armor, kind: item, item: MINERAL_CHESTPLATE, label: 4/4 Mineral, modifiers: [{ kind: reforge, id: jaded }, { kind: enchant, id: ultimate_wisdom, level: 5 }] }
   - { id: armor-max, tier: max, group: armor, kind: item, item: GLOSSY_MINERAL_CHESTPLATE, label: 4/4 Glossy Mineral, modifiers: [{ kind: reforge, id: jaded }, { kind: enchant, id: ultimate_wisdom, level: 5 }] }
   - { id: equipment, group: equipment, kind: manual, label: Equipment as in the Flint guide }
-  - { id: bal, group: pet, kind: pet, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "Autopet: rod cast to Bal, Mining XP gain to the fortune pet." }
+  - { id: bal, group: pet, kind: pet, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "Autopet: Mining XP gain to the fortune pet." }
   - { id: black-cat, group: pet, kind: pet, pet: { type: BLACK_CAT, minTier: LEGENDARY, level: 100, item: PET_ITEM_QUICK_CLAW }, note: Start with a Bejeweled Collar. }
   - { id: kuudra, group: pet, kind: pet, pet: { type: KUUDRA, minTier: EPIC, level: 100 }, note: +100 Mining Fortune; its perks work even when it is not summoned. }
   - { id: glossy-talisman, group: accessories, kind: accessory, item: GLOSSY_MINERAL_TALISMAN, note: Or the Mineral Talisman. }
@@ -60,5 +55,9 @@ requirements:
 ## How to mine
 
 Gear barely matters at this scale: the goal is the 1M collection for the Kuudra Follower Artifact. Go to the spot,
-turn off Jump Boost and Rabbit effects in the Booster Cookie menu, and mine. Use Maniac Miner with Bal whenever it is
-ready.
+turn off Jump Boost and Rabbit effects in the Booster Cookie menu, and mine. Use Maniac Miner whenever it is ready.
+
+## Updates since the guide
+
+- Since patch 0.27 (4 Aug 2026) Bal no longer lowers pickaxe ability cooldown (its Chimney perk was removed, wiki), so
+  the guide's rod-swap to Bal before the ability is left out here; Bal still gives Mining Fortune.

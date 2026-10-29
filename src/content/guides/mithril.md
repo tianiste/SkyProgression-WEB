@@ -8,12 +8,7 @@ contributors:
   - { id: the-ultimate-non, role: HOTM tree picture }
   - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord }
-updated: 2026-10-27
-notices:
-  - status: stale
-    date: 2026-10-28
-    text: "The Bal rod-swap before the pickaxe ability predates patch 0.27 (4 Aug 2026), which removed Bal's Chimney perk: Bal no longer lowers pickaxe ability cooldown."
-    source: { label: "Bal Pet, Hypixel SkyBlock Wiki", url: "https://hypixelskyblock.minecraft.wiki/w/Bal_Pet" }
+updated: 2026-10-29
 where: Abandoned Quarry in the Dwarven Mines (Rail Master), around X -175, Y 138, Z -35.
 blocks:
   - "Blue Mithril: strength 1,500, 5 Mithril, 5 powder"
@@ -39,7 +34,7 @@ requirements:
   - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: 4/4 Titanium equipment, note: Blazing, Quantum V. }
   - { id: equipment-max, tier: max, group: equipment, kind: manual, label: 2/4 Titanium, Dwarven Handwarmers and Pendant of Divan, note: Blazing, Quantum V. }
   - { id: bal, group: pet, kind: pet, pet: { type: BAL, minTier: LEGENDARY, level: 100 } }
-  - { id: scatha, group: pet, kind: pet, priority: optional, pet: { type: SCATHA, minTier: RARE, level: 100 }, note: "Autopet: rod cast to Bal, Mining XP gain to Scatha." }
+  - { id: scatha, group: pet, kind: pet, priority: optional, pet: { type: SCATHA, minTier: RARE, level: 100 }, note: "Autopet: Mining XP gain to Scatha." }
   - { id: share-pet, group: pet, kind: manual, label: An XP-share pet (Golden Dragon or Black Cat) }
   - { id: glossy-talisman, group: accessories, kind: accessory, item: GLOSSY_MINERAL_TALISMAN, note: Or the Mineral Talisman. }
   - { id: relic, group: accessories, kind: accessory, item: POWER_RELIC }
@@ -66,3 +61,8 @@ Mithril in the Dwarven Mines and Glacite Tunnels has a 0.5% chance to respawn as
 Insanium. The Sky Mall buff that multiplies Titanium drops by 5 brings the chance to 4.55%.
 
 Ironman players can skip the gear list and use their best gear.
+
+## Updates since the guide
+
+- Since patch 0.27 (4 Aug 2026) Bal no longer lowers pickaxe ability cooldown (its Chimney perk was removed, wiki), so
+  the guide's rod-swap to Bal before the ability is left out here; Bal still gives Mining Fortune.

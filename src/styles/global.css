@@ -17,6 +17,8 @@
   --line: #3a3e4c;
   --text: #e6e8ef;
   --muted: #a4a9b8;
+  /* Author credits: deliberately faint. */
+  --faint: #4d5263;
   --accent: #4fe3ec;
   --accent-ink: #1c1e26;
   --accent-deep: #1c9aa6;
@@ -69,6 +71,7 @@
     --line: #c5cbd6;
     --text: #1c1e26;
     --muted: #4e5464;
+    --faint: #b3b8c4;
     --accent: #0b6f78;
     --accent-ink: #ffffff;
     --accent-deep: #06464c;
@@ -102,6 +105,7 @@
   --line: #c5cbd6;
   --text: #1c1e26;
   --muted: #4e5464;
+  --faint: #b3b8c4;
   --accent: #0b6f78;
   --accent-ink: #ffffff;
   --accent-deep: #06464c;
@@ -210,6 +214,24 @@ a {
 }
 a:hover {
   text-decoration-thickness: 2px;
+}
+
+/* Author names and "by" lines: small and faint, so they credit without drawing the eye. */
+.credit,
+.credit-line,
+.credit-line a {
+  color: var(--faint);
+}
+.credit-line {
+  font-size: 0.75rem;
+}
+a.credit,
+.credit-line a {
+  text-decoration: none;
+}
+a.credit:hover,
+.credit-line a:hover {
+  text-decoration: underline;
 }
 
 :focus-visible {

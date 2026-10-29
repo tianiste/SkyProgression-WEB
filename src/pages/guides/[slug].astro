@@ -72,7 +72,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
           <h1 class="title">{g.title}</h1>
           <p class="lead">{g.summary}</p>
         </div>
-        <p class="byline">
+        <p class="byline credit-line">
           {
             g.authors.some((a) => a.id !== "mining-cult") ? (
               <>Guide by {g.authors.map((a, i) => <>{i > 0 && " and "}<Credit id={a.id} /></>)}, posted in the <Credit id="mining-cult" /></>
@@ -165,7 +165,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
                 <div class="tree">
                   <h3>{t.data.title}</h3>
                   <p class="muted small">
-                    Picture by {t.data.author && <Credit id={t.data.author.id} />}{t.data.collector && <>, from the Heart of the Mountain tree guide by <Credit id={t.data.collector.id} /></>}. {t.data.note}
+                    <span class="credit-line">Picture by {t.data.author && <Credit id={t.data.author.id} />}{t.data.collector && <>, from the Heart of the Mountain tree guide by <Credit id={t.data.collector.id} /></>}.</span> {t.data.note}
                   </p>
                   <HotmTree id={t.id} label={`${t.data.title} HOTM tree`} perks={t.data.perks} ability={t.data.ability} disabled={t.data.disabled} unlocked={t.data.unlocked} />
                 </div>
@@ -290,8 +290,8 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
       <section id="credits" aria-labelledby="credits-title">
         <h2 id="credits-title">Credits and sources</h2>
         <ul>
-          {g.authors.map((a) => <li>{a.role ?? "Guide"}: <Credit id={a.id} all /></li>)}
-          {g.contributors.map((a) => <li>{a.role ?? "Contributor"}: <Credit id={a.id} all /></li>)}
+          {g.authors.map((a) => <li class="credit-line">{a.role ?? "Guide"}: <Credit id={a.id} all /></li>)}
+          {g.contributors.map((a) => <li class="credit-line">{a.role ?? "Contributor"}: <Credit id={a.id} all /></li>)}
           <li>
             Source: {g.source.name}{g.source.posted && <>, posted {formatDate(g.source.posted)}</>}. Last checked {formatDate(g.updated)}.
           </li>

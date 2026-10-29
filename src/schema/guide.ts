@@ -123,7 +123,8 @@ export const guideSchema = z.object({
   ratesMeasured: z.string().optional(),
   /**
    * Dated notices shown at the top: "outdated" when the author marked the source thread outdated, "stale" when a later
-   * game change makes part of the advice wrong. The guide's own text stays as the author wrote it.
+   * game change makes part of the advice wrong and the text has not been corrected yet. Corrected advice drops the
+   * notice and is listed under the guide's "Updates since the guide" section instead.
    */
   notices: z.array(z.object({
     status: z.enum(["outdated", "stale"]),

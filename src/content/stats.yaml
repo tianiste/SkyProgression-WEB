@@ -19,9 +19,9 @@
     - { group: "Equipment", source: "Sapphire Cloak (Blazing, recombobulated)", value: "17 / 30" }
     - { group: "Equipment", source: "Jade Belt (Blazing, recombobulated)", value: "17 / 30" }
     - { group: "Equipment", source: "Pendant of Divan (Blazing, recombobulated, Perfect Jade + Amber, coating)", value: "93 / 200", note: "Royal gives more Speed and less Fortune than Blazing." }
-    - { group: "Pets", source: "Scatha, any rarity, level 100 (Hephaestus Relic or Quick Claw)", value: "187.5 / 150" }
+    - { group: "Pets", source: "Scatha, any rarity, level 100 (Hephaestus Relic)", value: "187.5 / 150", note: "175 / 150 with Quick Claw instead" }
     - { group: "Pets", source: "Bal, any rarity, level 100 (Quick Claw)", value: "150 / 50" }
-    - { group: "Pets", source: "Legendary Glacite Golem, level 100 (Quick Claw)", value: "150 / 175", note: "Speed is 50 outside a Mineshaft." }
+    - { group: "Pets", source: "Legendary Glacite Golem, level 100 (Quick Claw)", value: "150 / 175", note: "Fortune is 50 outside a Mineshaft (its 100 Fortune perk works only in one)." }
     - { group: "HOTM", source: "Mining Speed (tier 1)", value: "1000 Speed", note: "+20 with Blue Cheese" }
     - { group: "HOTM", source: "Speedy Mineman (tier 7)", value: "2000 Speed", note: "+40 with Blue Cheese" }
     - { group: "HOTM", source: "Eager Adventurer (tier 9)", value: "400 Speed", note: "+4 with Blue Cheese; Mineshafts only" }

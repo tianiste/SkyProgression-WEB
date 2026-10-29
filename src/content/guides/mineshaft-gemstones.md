@@ -14,15 +14,11 @@ contributors:
   - { id: the-ultimate-non, role: Shafting trees }
   - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord, posted: 2025-03-04 }
-updated: 2026-10-27
+updated: 2026-10-29
 notices:
   - status: outdated
     date: 2026-10-28
     text: "Marked outdated by its author: the Mining Cult thread is now titled \"(Outdated) Mineshaft Mining Guide\" and a new Shafting guide is announced. Its setups and HOTM trees may no longer be the best."
-  - status: stale
-    date: 2026-10-28
-    text: "The Bal rod-swap before the pickaxe ability predates patch 0.27 (4 Aug 2026), which removed Bal's Chimney perk: Bal no longer lowers pickaxe ability cooldown."
-    source: { label: "Bal Pet, Hypixel SkyBlock Wiki", url: "https://hypixelskyblock.minecraft.wiki/w/Bal_Pet" }
 where: The Glacite Tunnels to spawn shafts (Tungsten or Mithril routes, Pickobulus on Glacite clusters), then the Glacite Mineshafts themselves.
 blocks:
   - "Jasper shafts: always mine them, even with poor buffs"
@@ -37,12 +33,12 @@ hotm:
     hotm: 10
     cotm: 10
     powder: { mithril: 8611585, gemstone: 13476732, glacite: 13460756 }
-    note: Minimum to start, including Peak of the Mountain. 26.3m Glacite maxes every perk; 14.7m Gemstone adds Seasoned Mineman and 18.4m also Powder Buff.
+    note: Minimum to start, including Core of the Mountain. 26.3m Glacite maxes every perk; 14.7m Gemstone adds Seasoned Mineman and 18.4m also Powder Buff.
   - label: Mithril spawning tree
     hotm: 10
     cotm: 10
     powder: { mithril: 11211843, gemstone: 13476732, glacite: 11649848 }
-    note: Minimum to start, including Peak of the Mountain. 27.2m Glacite maxes every perk. Gemstone powder as for the Tungsten tree.
+    note: Minimum to start, including Core of the Mountain. 27.2m Glacite maxes every perk. Gemstone powder as for the Tungsten tree.
   - label: "Shafting 1: Gemstone Mineshaft tree"
     hotm: 10
     tokens: 25

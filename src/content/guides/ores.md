@@ -1,18 +1,13 @@
 ---
 title: Ores
 category: ores
-summary: Pure ores in the Dwarven Mines and Crystal Hollows with Maniac Miner, mostly Glossy Mineral armor and a rod-swap to Bal for the ability.
+summary: Pure ores in the Dwarven Mines and Crystal Hollows with Maniac Miner, mostly Glossy Mineral armor and a Bal.
 authors:
   - { id: the-ultimate-non, role: Guide }
 contributors:
   - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord }
-updated: 2026-10-27
-notices:
-  - status: stale
-    date: 2026-10-28
-    text: "The Bal rod-swap before the pickaxe ability predates patch 0.27 (4 Aug 2026), which removed Bal's Chimney perk: Bal no longer lowers pickaxe ability cooldown."
-    source: { label: "Bal Pet, Hypixel SkyBlock Wiki", url: "https://hypixelskyblock.minecraft.wiki/w/Bal_Pet" }
+updated: 2026-10-29
 where: Dwarven Mines and Crystal Hollows. Pure Diamond, Emerald, Iron, Lapis, Redstone, Gold and Coal in the Royal Mines and the Mines of Divan; Pure Quartz only in the Abandoned Quarry.
 blocks:
   - "Pure ores: 4 ticks at 4,001 Mining Speed, instamine at 36,001 with Mining Speed Boost"
@@ -96,8 +91,8 @@ requirements:
 
 ## How to mine
 
-Ores work best with Maniac Miner: mine the pure ore veins on a route, rod-swap to Bal before you use the ability, and
-Etherwarp between veins. Routes need Skytils or Skyblocker and are shared in the Mining Cult Discord.
+Ores work best with Maniac Miner: mine the pure ore veins on a route, use the ability whenever it is ready
+and Etherwarp between veins. Routes need Skytils or Skyblocker and are shared in the Mining Cult Discord.
 
 Use `/recipe enchanted <material>` to compact straight from your sacks.
 

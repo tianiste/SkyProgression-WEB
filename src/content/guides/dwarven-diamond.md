@@ -8,12 +8,7 @@ contributors:
   - { id: the-ultimate-non, role: HOTM tree picture }
   - { id: koenigboohoo, role: HOTM tree guide }
 source: { name: Mining Cult Discord, posted: 2025-04-15 }
-updated: 2026-10-27
-notices:
-  - status: stale
-    date: 2026-10-28
-    text: "The Bal rod-swap before the pickaxe ability predates patch 0.27 (4 Aug 2026), which removed Bal's Chimney perk: Bal no longer lowers pickaxe ability cooldown."
-    source: { label: "Bal Pet, Hypixel SkyBlock Wiki", url: "https://hypixelskyblock.minecraft.wiki/w/Bal_Pet" }
+updated: 2026-10-29
 where: Pure Diamond veins in the Dwarven Mines, on a route with Etherwarp.
 blocks:
   - "Pure Diamond: 4 ticks at 4,001 Mining Speed"
@@ -61,7 +56,7 @@ requirements:
   - { id: cloak, tier: max, group: equipment, kind: item, item: SAPPHIRE_CLOAK, modifiers: [{ kind: reforge, id: blazing }] }
   - { id: gloves, tier: max, group: equipment, kind: item, item: DWARVEN_HANDWARMERS, modifiers: [{ kind: reforge, id: blazing }] }
   - { id: pendant, tier: max, group: equipment, kind: item, item: DIVAN_PENDANT, modifiers: [{ kind: reforge, id: blazing }, { kind: applied, item: DIVAN_POWDER_COATING }] }
-  - { id: bal, group: pet, kind: pet, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "Rod-swap to it when you use Maniac Miner. Pet items in order: Bejeweled Collar, Minos Relic, Quick Claw." }
+  - { id: bal, group: pet, kind: pet, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "Pet items in order: Bejeweled Collar, Minos Relic, Quick Claw." }
   - { id: scatha, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100 }, note: Rare to Legendary. }
   - { id: aotv, group: tools, kind: item, item: ASPECT_OF_THE_VOID, note: With Etherwarp. A must; without it, farm or mine Gold instead. }
   - { id: sacks, group: tools, kind: manual, label: 1 Large Mining Sack and 1 to 3 Large Enchanted Mining Sacks }
@@ -77,8 +72,7 @@ requirements:
 
 ## How to mine
 
-Follow a Diamond route, Etherwarp between veins and use Maniac Miner whenever it is ready, rod-swapping to Bal first
-(its 10% cooldown reduction applies when you use the ability).
+Follow a Diamond route, Etherwarp between veins and use Maniac Miner whenever it is ready.
 
 Max Mining Fortune is 1,878 (with 110 Ore Fortune, without temporary buffs), or 1,953 with a Filet O' Fortune, a
 Cacao Truffle and the Magic 8 Ball.
@@ -101,3 +95,8 @@ For steady teleports, put Ultimate Wise V on the drill, use an Overflux mid-rout
 The Mining Cult post lists five routes: ShatteredAlloy's 3-vein edit (3 veins, 2 teleports), ShatteredAlloy's 4-vein
 route (4 teleports), iCop's route (3 veins, 2 teleports, with video), OoLucentoO's route (5 veins, 5 teleports) and a
 no-Etherwarp route by Ghostz made for 4/4 refined Mineral armor.
+
+## Updates since the guide
+
+- Since patch 0.27 (4 Aug 2026) Bal no longer lowers pickaxe ability cooldown (its Chimney perk was removed, wiki), so
+  the guide's rod-swap to Bal before the ability is left out here; Bal still gives Mining Fortune.

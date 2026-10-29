@@ -16,7 +16,7 @@ const first = links[0];
 
 {
   all ? (
-    <span>
+    <span class="credit">
       {p.name}
       {links.length > 0 && (
         <span>
@@ -24,7 +24,7 @@ const first = links[0];
           {links.map((l, i) => (
             <>
               {i > 0 && ", "}
-              <a href={l.url}>{l.label}</a>
+              <a class="credit" href={l.url}>{l.label}</a>
             </>
           ))}
           {")"}
@@ -32,8 +32,8 @@ const first = links[0];
       )}
     </span>
   ) : first ? (
-    <a href={first.url}>{p.name}</a>
+    <a class="credit" href={first.url}>{p.name}</a>
   ) : (
-    <span>{p.name}</span>
+    <span class="credit">{p.name}</span>
   )
 }
