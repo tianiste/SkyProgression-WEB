@@ -114,13 +114,14 @@ export function Shell<T extends Common>({ view, state, prices = false, cost = fa
             {costIgnored && <> Buy-order costs are not available yet, so costs are instant-buy.</>}
           </p>
         )}
-        <nav class="player-tabs" aria-label="Player pages">
+        {/* No tabs for a player that does not exist or has no profiles. */}
+        {(data || !error || error.retry) && <nav class="player-tabs" aria-label="Player pages">
           <ul>
             {VIEWS.map((v) => (
               <li key={v.id}><a href={tab(v.id)} aria-current={v.id === view ? "page" : undefined}>{v.label}</a></li>
             ))}
           </ul>
-        </nav>
+        </nav>}
       </header>
 
       <div aria-live="polite">
