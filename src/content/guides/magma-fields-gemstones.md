@@ -79,7 +79,7 @@ requirements:
   - { id: cloak, tier: max, group: equipment, kind: item, item: SAPPHIRE_CLOAK, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }] }
   - { id: gloves, tier: max, group: equipment, kind: item, item: DWARVEN_HANDWARMERS, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }] }
   - { id: amethyst-gauntlet, tier: max, group: equipment, kind: item, item: AMETHYST_GAUNTLET, priority: optional, note: Replaces the Handwarmers when you mine Amethyst. Same upgrades., modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }] }
-  - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: Titanium Necklace, Cloak and Belt with Dwarven Handwarmers, note: Blazing reforge. }
+  - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: "Titanium Necklace, Cloak and Belt with Dwarven Handwarmers", note: Blazing reforge. }
   - { id: pet, group: pet, kind: pet, pet: { type: BAL, minTier: LEGENDARY, level: 100, item: PET_ITEM_QUICK_CLAW } }
   - id: drill-max
     tier: max
@@ -105,7 +105,7 @@ requirements:
       - { kind: enchant, id: experience, level: 5 }
       - { kind: enchant, id: fortune, level: 4 }
       - { kind: enchant, id: prismatic, level: 5 }
-  - { id: swap-drill, tier: max, group: drill, kind: manual, label: Any drill with Flowstate III, a Perfectly-Cut Fuel Tank and a Blue Cheese omelette, priority: optional, note: Only if you drill swap with Maniac Miner. }
+  - { id: swap-drill, tier: max, group: drill, kind: manual, label: "Any drill with Flowstate III, a Perfectly-Cut Fuel Tank and a Blue Cheese omelette", priority: optional, note: Only if you drill swap with Maniac Miner. }
   - id: drill-budget
     tier: budget
     group: drill

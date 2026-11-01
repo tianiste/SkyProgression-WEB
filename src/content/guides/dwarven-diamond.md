@@ -59,12 +59,12 @@ requirements:
   - { id: scatha-budget, tier: budget, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: PET_ITEM_QUICK_CLAW }, note: "The guide's fortune pet, Rare to Legendary (Autopet: Mining XP to Scatha). Start with a Bejeweled Collar. Our correction, not in the guide: Minos Relic is left out because it now boosts combat stats only (wiki, patch 0.24.1)." }
   - { id: scatha-max, tier: max, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: HEPHAESTUS_RELIC }, note: "Our correction, not in the guide: Hephaestus Relic adds 50% to the pet's base stats, and Scatha's 125 Mining Fortune is a base stat, so it beats Quick Claw on Scatha only (wiki; Mining Cult gear progression guide)." }
   - { id: bal, group: pet, kind: pet, priority: optional, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "The guide rod-swapped to it for 10% less ability cooldown; patch 0.27 (4 Aug 2026) removed that perk, and its 100 Mining Fortune is less than Scatha's 125." }
-  - { id: aotv, group: tools, kind: item, item: ASPECT_OF_THE_VOID, note: With Etherwarp. A must; without it, farm or mine Gold instead. }
+  - { id: aotv, group: tools, kind: item, item: ASPECT_OF_THE_VOID, note: "With Etherwarp. A must; without it, farm or mine Gold instead." }
   - { id: sacks, group: tools, kind: manual, label: 1 Large Mining Sack and 1 to 3 Large Enchanted Mining Sacks }
   - { id: glossy-talisman, group: accessories, kind: accessory, item: GLOSSY_MINERAL_TALISMAN, note: Or the Mineral Talisman. }
   - { id: relic, group: accessories, kind: accessory, item: POWER_RELIC, modifiers: [{ kind: recomb }, { kind: note, text: Perfect gemstones }] }
   - { id: eight-ball, group: accessories, kind: accessory, item: MAGIC_8_BALL, priority: optional }
-  - { id: magical-power, group: accessories, kind: manual, label: 450+ Magical Power, Sighted or Bizarre power stone, Intelligence tunings, note: "Maniac Miner: 2,000 Intelligence for its full Fortune (1,333 with Blue Cheese; 1,000 and 667 with Ultimate Wise), plus more for flux and teleports." }
+  - { id: magical-power, group: accessories, kind: manual, label: "450+ Magical Power, Sighted or Bizarre power stone, Intelligence tunings", note: "Maniac Miner: 2,000 Intelligence for its full Fortune (1,333 with Blue Cheese; 1,000 and 667 with Ultimate Wise), plus more for flux and teleports." }
   - { id: ore-oats, group: consumables, kind: consumable, item: DWARVEN_OS_ORE_OATS, count: 5 }
   - { id: filet, group: consumables, kind: consumable, item: FILET_O_FORTUNE }
   - { id: truffle, group: consumables, kind: manual, label: Refined Dark Cacao Truffle }
