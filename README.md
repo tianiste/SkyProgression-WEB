@@ -90,7 +90,9 @@ Create `src/content/trees/<tree-id>.yaml` with `status: published`, the `author`
 ## Deploy
 
 The site is static and hosted on Cloudflare Pages: build command `npm run build`, output directory `dist`.
-`public/_redirects` holds the redirects. CI builds every push and runs Lighthouse on a guide page.
+`public/_redirects` holds the redirects. CI builds every push and runs Lighthouse on a guide page. Preview builds of a
+branch use `npx wrangler preview --config wrangler.preview.jsonc`; do not rename that file to `wrangler.jsonc`, because
+production would then deploy from it.
 
 ## Icons
 
