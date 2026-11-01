@@ -57,7 +57,7 @@ requirements:
     kind: manual
     label: 3/4 Glossy Mineral and 1/4 Armor of Divan
     note: All Jaded and recombobulated. Perfect Jade in the Divan's piece; coating optional.
-  - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: 4/4 Titanium equipment, note: Blazing, Quantum V. }
+  - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: 4/4 Titanium equipment, note: "Blazing, Quantum V." }
   - { id: pendant, tier: max, group: equipment, kind: item, item: DIVAN_PENDANT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
   - { id: cloak, tier: max, group: equipment, kind: item, item: ANCIENT_CLOAK, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
   - { id: belt, tier: max, group: equipment, kind: item, item: JADE_BELT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
@@ -68,7 +68,7 @@ requirements:
   - { id: mineral-talisman, tier: budget, group: accessories, kind: accessory, item: MINERAL_TALISMAN }
   - { id: glossy-talisman, tier: max, group: accessories, kind: accessory, item: GLOSSY_MINERAL_TALISMAN }
   - { id: relic, group: accessories, kind: accessory, item: POWER_RELIC, modifiers: [{ kind: recomb }, { kind: gem, gem: JADE, quality: PERFECT }] }
-  - { id: magical-power, group: accessories, kind: manual, label: 450+ Magical Power, Sighted or Bizarre power stone, Intelligence tunings, note: Maniac Miner needs 2,000 Intelligence for its full Fortune (1,333 with Blue Cheese, halved with Ultimate Wise V). }
+  - { id: magical-power, group: accessories, kind: manual, label: "450+ Magical Power, Sighted or Bizarre power stone, Intelligence tunings", note: "Maniac Miner needs 2,000 Intelligence for its full Fortune (1,333 with Blue Cheese, halved with Ultimate Wise V)." }
   - { id: aotv, group: tools, kind: item, item: ASPECT_OF_THE_VOID, note: With Etherwarp. An Aspect of the End works too. }
   - { id: flare, group: tools, kind: manual, label: Alert or SOS Flare }
   - { id: grimoire, group: tools, kind: item, item: GLOOMLOCK_GRIMOIRE }

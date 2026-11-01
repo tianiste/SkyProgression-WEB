@@ -14,7 +14,7 @@ where: Obsidian waypoints shared in the Mining Cult post, imported into SkyHanni
 blocks:
   - "Obsidian floor and walls, alternating floor then wall, clockwise"
 rates:
-  - { label: Obsidian collection, value: about 3.5M per hour, note: About 21,875 Enchanted Obsidian. }
+  - { label: Obsidian collection, value: about 3.5M per hour, note: "About 21,875 Enchanted Obsidian." }
 ratesMeasured: With max Magical Power and decent skill. Crafting Obsidian into Null Ovoids can add profit.
 hotm:
   - label: Recommended
@@ -30,7 +30,6 @@ requirements:
     label: 4/4 Glossy Mineral
     note: Sugar Rush III on the boots.
     modifiers: [{ kind: recomb }, { kind: reforge, id: jaded }]
-  - { id: pendant, group: equipment, kind: item, item: DIVAN_PENDANT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: gem, gem: AMBER, quality: PERFECT }, { kind: gem, gem: JADE, quality: PERFECT }, { kind: applied, item: DIVAN_POWDER_COATING }] }
   - { id: pendant, group: equipment, kind: item, item: DIVAN_PENDANT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: gem, gem: AMBER, quality: PERFECT }, { kind: gem, gem: JADE, quality: PERFECT }, { kind: applied, item: DIVAN_POWDER_COATING }] }
   - { id: cloak, group: equipment, kind: item, item: DRAGONFADE_CLOAK, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }] }
   - { id: belt, group: equipment, kind: item, item: JADE_BELT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }] }
@@ -57,7 +56,6 @@ requirements:
   - { id: drill-ability, group: drill, kind: item, item: DIVAN_DRILL, label: Second Divan's Drill with Blue Cheese, note: Same as the main drill with a Blue Cheese omelette. Hold it for the ability., modifiers: [{ kind: drill_part, slot: module, item: GOBLIN_OMELETTE_BLUE_CHEESE }] }
   - { id: wisp, group: tools, kind: item, item: WILL_O_WISP, note: With 10 Mana Disintegrators. Replace it whenever it runs out. }
   - { id: rogue-sword, group: tools, kind: item, item: ROGUE_SWORD, modifiers: [{ kind: reforge, id: heroic }, { kind: enchant, id: ultimate_wise, level: 5 }], note: Use it every 30 seconds. }
-  - { id: rogue-sword, group: tools, kind: item, item: ROGUE_SWORD, modifiers: [{ kind: reforge, id: heroic }, { kind: enchant, id: ultimate_wise, level: 5 }] }
   - { id: tuba, group: tools, kind: item, item: WEIRDER_TUBA, note: Use it every 30 seconds. }
   - { id: rod, group: tools, kind: manual, label: Any fishing rod, note: "Autopet: rod throw to Scatha unless equipped, rod throw to Snail unless equipped." }
   - { id: scatha, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: UNALLOYED_SPEED } }
@@ -68,8 +66,8 @@ requirements:
   - { id: speed-relic, group: accessories, kind: accessory, item: SPEED_RELIC }
   - { id: relic, group: accessories, kind: accessory, item: POWER_RELIC, label: Mythic Relic of Power }
   - { id: eight-ball, group: accessories, kind: accessory, item: MAGIC_8_BALL, priority: optional }
-  - { id: speed-power, group: accessories, kind: manual, label: Speed from Magical Power, note: Sunflower Butter reforge stone, as much Magical Power as you can, all tuning points and enrichments on Speed. }
-  - { id: beacon, group: other, kind: manual, label: Tier 5 Beacon, note: Scorched Power Crystal, Speed effect and Speed profile stat. }
+  - { id: speed-power, group: accessories, kind: manual, label: Speed from Magical Power, note: "Sunflower Butter reforge stone, as much Magical Power as you can, all tuning points and enrichments on Speed." }
+  - { id: beacon, group: other, kind: manual, label: Tier 5 Beacon, note: "Scorched Power Crystal, Speed effect and Speed profile stat." }
   - { id: forbidden-speed, group: progress, kind: essence, essence: WITHER, perk: forbidden_speed, level: 2 }
   - { id: eager-miner, group: progress, kind: essence, essence: GOLD, perk: eager_miner, level: 10 }
   - { id: glacite-collection, group: progress, kind: collection, collection: GLACITE, level: 8 }

@@ -44,8 +44,8 @@ requirements:
     label: Drill upgrades for either drill
     note: Perfectly-Cut Fuel Tank, Amber-Polished Drill Engine, Blue Cheese Goblin Omelette, Divan's Powder Coating, Efficiency X, Fortune IV, Perfect gemstones, Amber Power Scroll, Compact X, 5 Polarvoid Books.
   - { id: armor, group: armor, kind: item, item: DIVAN_CHESTPLATE, label: 4/4 Armor of Divan, note: 4 or 5 Perfect gemstones per piece; coating optional., modifiers: [{ kind: reforge, id: jaded }] }
-  - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: 4/4 Titanium equipment, note: Blazing, Quantum V. }
-  - { id: titanium-equipment-max, tier: max, group: equipment, kind: manual, label: 2/4 Titanium equipment, note: Blazing, Quantum V. }
+  - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: 4/4 Titanium equipment, note: "Blazing, Quantum V." }
+  - { id: titanium-equipment-max, tier: max, group: equipment, kind: manual, label: 2/4 Titanium equipment, note: "Blazing, Quantum V." }
   - { id: gloves, tier: max, group: equipment, kind: item, item: DWARVEN_HANDWARMERS, modifiers: [{ kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
   - { id: pendant, tier: max, group: equipment, kind: item, item: DIVAN_PENDANT, modifiers: [{ kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
   - { id: scatha-budget, tier: budget, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: PET_ITEM_QUICK_CLAW }, note: "The guide's mining pet (Autopet: Mining XP gain to Scatha). Our correction, not in the guide: the guide names no pet item; start with a Bejeweled Collar, then Quick Claw (wiki)." }

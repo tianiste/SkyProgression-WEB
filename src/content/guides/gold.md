@@ -96,7 +96,7 @@ requirements:
   - { id: century-cakes, group: consumables, kind: manual, label: Century Cakes }
   - { id: filet, group: consumables, kind: consumable, item: FILET_O_FORTUNE }
   - { id: eager-miner, group: progress, kind: essence, essence: GOLD, perk: eager_miner, level: 10, note: For instamining. }
-  - { id: metal-collections, group: progress, kind: manual, label: Tungsten, Umber and Glacite collections }
+  - { id: metal-collections, group: progress, kind: manual, label: "Tungsten, Umber and Glacite collections" }
   - { id: rotten-pickaxe, group: attributes, kind: attribute, attribute: rotten_pickaxe, priority: recommended, note: For instamining. }
   - { id: royal-riches, group: attributes, kind: attribute, attribute: royal_riches, priority: recommended, note: For instamining. }
   - { id: greedy-goblin, group: attributes, kind: attribute, attribute: greedy_goblin, priority: recommended }

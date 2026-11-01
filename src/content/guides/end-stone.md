@@ -72,7 +72,7 @@ requirements:
   - { id: glossy-talisman, tier: max, group: accessories, kind: accessory, item: GLOSSY_MINERAL_TALISMAN }
   - { id: mineral-talisman, tier: budget, group: accessories, kind: accessory, item: MINERAL_TALISMAN }
   - { id: eight-ball, group: accessories, kind: accessory, item: MAGIC_8_BALL, priority: optional, note: Random and not needed. }
-  - { id: power-stone, group: accessories, kind: manual, label: 450+ Magical Power with Intelligence tunings, note: Bizarre power stone at max, Sighted on a budget. }
+  - { id: power-stone, group: accessories, kind: manual, label: 450+ Magical Power with Intelligence tunings, note: "Bizarre power stone at max, Sighted on a budget." }
   - { id: wisp, tier: max, group: tools, kind: item, item: WILL_O_WISP }
   - { id: lantern, tier: budget, group: tools, kind: item, item: GLACITE_LANTERN }
   - { id: abiphone, group: tools, kind: manual, label: Any Abiphone, note: Jotraeline Greatforge refuels your drill. }

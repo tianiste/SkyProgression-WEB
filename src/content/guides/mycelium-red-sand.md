@@ -14,8 +14,8 @@ where: Crimson Isle. Place the Will-o'-wisp at -164.5 146 -901.5 for Mycelium or
 blocks:
   - "Mycelium or Red Sand. Max Fortune is 1,522 including Block Fortune (usually 25 less, from the Magic 8 Ball)"
 rates:
-  - { label: Mycelium, value: about 4.6M per hour, note: About 29,000 Enchanted Mycelium, or 29,667 holding W and A or D. }
-  - { label: Red Sand, value: about 4.8M per hour, note: About 30,000 Enchanted Red Sand, or 30,690 holding W and A or D. }
+  - { label: Mycelium, value: about 4.6M per hour, note: "About 29,000 Enchanted Mycelium, or 29,667 holding W and A or D." }
+  - { label: Red Sand, value: about 4.8M per hour, note: "About 30,000 Enchanted Red Sand, or 30,690 holding W and A or D." }
 hotm:
   - label: Recommended
     hotm: 7
@@ -42,7 +42,7 @@ requirements:
   - { id: shovel, group: tools, kind: item, item: PROMISING_SPADE, modifiers: [{ kind: enchant, id: ultimate_wise, level: 5 }] }
   - { id: wisp, group: tools, kind: item, item: WILL_O_WISP, note: With 10 Mana Disintegrators. }
   - { id: ability-drill, group: drill, kind: manual, label: Any drill for the ability, note: Blue Cheese omelette and a Perfectly-Cut Fuel Tank. }
-  - { id: grimoire, group: tools, kind: item, item: GLOOMLOCK_GRIMOIRE, priority: optional, note: If the Wisp runs out during Maniac Miner, its left-click ability buys time for 600 mana (you need 900 to 1,500 mana). }
+  - { id: grimoire, group: tools, kind: item, item: GLOOMLOCK_GRIMOIRE, priority: optional, note: "If the Wisp runs out during Maniac Miner, its left-click ability buys time for 600 mana (you need 900 to 1,500 mana)." }
   - { id: scatha, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: UNALLOYED_SPEED } }
   - { id: kuudra, group: pet, kind: pet, pet: { type: KUUDRA, minTier: EPIC, level: 100 } }
   - { id: glossy-talisman, group: accessories, kind: accessory, item: GLOSSY_MINERAL_TALISMAN }

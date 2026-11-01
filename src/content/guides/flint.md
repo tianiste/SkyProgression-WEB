@@ -33,7 +33,7 @@ requirements:
   - { id: cloak, group: equipment, kind: item, item: ANCIENT_CLOAK, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
   - { id: belt, tier: max, group: equipment, kind: item, item: JADE_BELT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
   - { id: gloves, group: equipment, kind: item, item: DWARVEN_HANDWARMERS, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }, { kind: enchant, id: quantum, level: 5 }] }
-  - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: 2/4 Titanium equipment, note: Blazing, Quantum V. }
+  - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: 2/4 Titanium equipment, note: "Blazing, Quantum V." }
   - { id: scatha-budget, tier: budget, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: PET_ITEM_QUICK_CLAW }, note: "The guide's fortune pet (Autopet: Mining XP gain to it) and the last step of its pet path: Legendary Bal with a Bejeweled Collar, then Minos Relic, then Quick Claw, then an Epic Scatha with Quick Claw. Start with a Bejeweled Collar." }
   - { id: scatha-max, tier: max, group: pet, kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100, item: HEPHAESTUS_RELIC }, note: "Our correction, not in the guide: Hephaestus Relic adds 50% to the pet's base stats, and Scatha's 125 Mining Fortune is a base stat, so it beats Quick Claw on Scatha only (wiki; Mining Cult gear progression guide)." }
   - { id: bal, group: pet, kind: pet, priority: optional, pet: { type: BAL, minTier: LEGENDARY, level: 100 }, note: "The guide swapped to Bal for its cooldown perk, which patch 0.27 (4 Aug 2026) removed; its 100 Mining Fortune is less than Scatha's 125. Our correction, not in the guide: skip Minos Relic, which now boosts combat stats only (wiki, patch 0.24.1)." }
@@ -41,7 +41,7 @@ requirements:
   - { id: relic, group: accessories, kind: accessory, item: POWER_RELIC }
   - { id: grimoire, group: tools, kind: item, item: GLOOMLOCK_GRIMOIRE, priority: optional }
   - { id: rogue-sword, group: tools, kind: item, item: ROGUE_SWORD, note: For speed. }
-  - { id: magical-power, group: accessories, kind: manual, label: 450+ Magical Power, Sighted or Bizarre power stone, Intelligence tunings, note: Maniac Miner needs 2,000 Intelligence (1,333 with Blue Cheese), halved with Ultimate Wise V. }
+  - { id: magical-power, group: accessories, kind: manual, label: "450+ Magical Power, Sighted or Bizarre power stone, Intelligence tunings", note: "Maniac Miner needs 2,000 Intelligence (1,333 with Blue Cheese), halved with Ultimate Wise V." }
   - { id: block-bran, group: consumables, kind: consumable, item: DWARVEN_OS_BLOCK_BRAN, count: 5 }
   - { id: filet, group: consumables, kind: consumable, item: FILET_O_FORTUNE }
   - { id: truffle, group: consumables, kind: manual, label: Refined Dark Cacao Truffle }

@@ -60,7 +60,7 @@ requirements:
   - { id: belt, tier: max, group: equipment, kind: item, item: JADE_BELT, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }] }
   - { id: cloak, tier: max, group: equipment, kind: item, item: SAPPHIRE_CLOAK, modifiers: [{ kind: recomb }, { kind: reforge, id: blazing }] }
   - { id: gloves, group: equipment, kind: item, item: DWARVEN_HANDWARMERS, modifiers: [{ kind: reforge, id: blazing }], note: Recombobulated on the max tier. }
-  - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: Titanium Necklace, Cloak and Belt, note: Blazing reforge. }
+  - { id: titanium-equipment, tier: budget, group: equipment, kind: manual, label: "Titanium Necklace, Cloak and Belt", note: Blazing reforge. }
   - { id: scatha-max, tier: max, group: pet, kind: pet, pet: { type: SCATHA, minTier: LEGENDARY, level: 100, item: HEPHAESTUS_RELIC } }
   - { id: bal-max, tier: max, group: pet, kind: pet, pet: { type: BAL, minTier: LEGENDARY, level: 100, item: PET_ITEM_QUICK_CLAW }, note: Only if you mine inside the Magma Fields. }
   - { id: scatha-budget, tier: budget, group: pet, kind: pet, pet: { type: SCATHA, minTier: EPIC, level: 100, item: PET_ITEM_QUICK_CLAW }, note: Cheapest is the same pet with a Bejeweled Collar. }
@@ -117,7 +117,7 @@ requirements:
   - { id: titanium-relic, group: accessories, kind: accessory, item: TITANIUM_RELIC }
   - { id: haste-artifact, group: accessories, kind: accessory, item: HASTE_ARTIFACT }
   - { id: eight-ball, group: accessories, kind: accessory, item: MAGIC_8_BALL, priority: optional, note: Random and not needed. }
-  - { id: wisp, tier: max, group: tools, kind: item, item: WILL_O_WISP, note: With 10 Mana Disintegrators. Grottos are small, so one deployable covers a lot of mining. }
+  - { id: wisp, tier: max, group: tools, kind: item, item: WILL_O_WISP, note: "With 10 Mana Disintegrators. Grottos are small, so one deployable covers a lot of mining." }
   - { id: lantern, tier: budget, group: tools, kind: item, item: GLACITE_LANTERN, note: With 10 Mana Disintegrators. }
   - { id: abiphone, group: tools, kind: manual, label: Any Abiphone, note: Jotraeline Greatforge refuels your drill; the Alchemist sells Water Bottles to lower Heat. }
   - { id: filet, group: consumables, kind: consumable, item: FILET_O_FORTUNE }
