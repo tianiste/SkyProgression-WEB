@@ -45,4 +45,4 @@ best advice is to keep upgrading your gear and go as fast as you physically can.
 ## Updates since the guide
 
 The guide's author says Fig is better in every metric, and points to the [Fig guide](/guides/fig/). The
-[FAQ](/guides/foraging-faq/) ranks Mangrove above Fig for money. We kept both as written.
+[FAQ](/guides/foraging-faq/) ranks Mangrove above Fig for money. We kept both as written. For context, 0.27 (4 Aug 2026) raised Mangrove's NPC price from 8 to 15, with Fig unchanged at 7, so the Mangrove guide's comparison may be older.

@@ -44,6 +44,9 @@
     - { group: "Temporary", source: "Celestial Mason Jar", value: "15 Fortune" }
     - { group: "Temporary", source: "Century Cake of Hype", value: "5 Fortune" }
     - { group: "Temporary", source: "Filet O' Fortune", value: "20 Fortune" }
+    - { group: "Temporary", source: "Mining Fiesta", value: "+25% Fortune", note: "All of Cole's term since 0.27.2 (6 Oct 2026). Up to 5 Fiesta Flasks add to it. Not from the guide." }
+    - { group: "Temporary", source: "Weather: Breeze", value: "25 Fortune / 100 Speed", note: "Dwarven Mines, Crystal Hollows, Glacite Tunnels. Since 0.27.2; not from the guide." }
+    - { group: "Temporary", source: "Weather: Mist, Rockfall, Snowstorm", value: "50 Fortune / 250 Speed", note: "Dwarven Mines, Crystal Hollows and Glacite Tunnels in that order, each with +10% of that island's Powder. Since 0.27.2; not from the guide." }
     - { group: "Other", source: "Eager Miner 10 (Gold Essence shop)", value: "100 Speed" }
     - { group: "Other", source: "Flowstate III", value: "0 to 600 Speed", note: "Grows while you keep mining" }
     - { group: "Other", source: "Heated reforge", value: "0 to 100 Fortune, 0 to 400 Speed", note: "Scales with 0 to 100 Heat" }
@@ -133,7 +136,7 @@
     - { group: "Temporary", source: "Dwarven Training 3 (Gold Essence shop)", value: "10" }
     - { group: "Temporary", source: "Quantum 5", value: "2" }
     - { group: "Temporary", source: "Mayor Cole, Mining XP perk", value: "60" }
-    - { group: "Temporary", source: "Mining Fiesta", value: "75" }
+    - { group: "Temporary", source: "Mining Fiesta", value: "25", note: "75 before the change in 2026; wiki" }
 - id: pristine
   name: "Pristine"
   order: 6

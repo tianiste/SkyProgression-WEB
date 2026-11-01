@@ -173,4 +173,6 @@ Checked against the [Hypixel SkyBlock Wiki](https://hypixelskyblock.minecraft.wi
 - **Backwater Bayou (May 2026):** the Fishing Speed cap dropped from 300 to 200, and only Bayou and Hotspot Sea Creatures can be caught there.
 - **Hotspot accessories (Oct 2026):** the Hotspot Talisman line and Hotspot Tonic Mixin are new.
 - **Fishing XP (Oct 2026, Minister Update):** Sea Creature XP now follows mob level. A Flaming Worm gives 1,150 XP from Fishing 19, a Stridersurfer 775, and Lava Blaze and Lava Pigman 500. That makes [Worm Fishing](/guides/worm-fishing/) a real option from Fishing 19, which the XP order above does not show yet.
+- **Salty (Oct 2026):** Salt Cube's base Sea Creature Chance was lowered, and its Salty Bonus doubles its stats on Jerry Island. The Ironman tip above is from before this.
+- **Rod Parts (Sep 2026):** they can no longer be Recombobulated, and removing one now costs 10,000 to 1,000,000 coins by rarity.
 - **Weather (Oct 2026):** Fishing Speed, Sea Creature Chance and Trophy Chance bonuses by island. The [changelog](https://hypixelskyblock.minecraft.wiki/w/Changelog/2026/October_6) has the table.

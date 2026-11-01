@@ -64,3 +64,8 @@ perk on the HotF tree.
   for Torrhus Canyon. It is vibe coded and has minor errors, but it helps find that last bit of fortune or Sweep.
 - [waypointermod.com/converter](https://waypointermod.com/converter/) converts route waypoints that don't work with your
   mods.
+
+## Updates since the guide
+
+- Double jump comes from Frog's Spirit (5,000 Forest Essence), an Ability Scroll for Fig and Helix Boots added in 0.27.2 (6 Oct 2026). The Frog pet's Hop perk also gives permanent Jump Boost IV now.
+- Half Empty and Half Full count players on your whole island since 0.27 (4 Aug 2026), not within 16 blocks.

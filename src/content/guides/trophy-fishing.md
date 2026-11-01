@@ -103,5 +103,6 @@ The number is each fish's base chance. Higher means more likely.
 Checked against the [Hypixel SkyBlock Wiki](https://hypixelskyblock.minecraft.wiki/w/Trophy_Fish). Corrected in the text above.
 
 - **Spinosaurus (May 2026):** reworked for Trophy Fishing, with +5 Trophy Chance, +50 Fishing Speed and a higher chance of Gold and Diamond tiers at level 100. The guide doesn't cover it. You forge it with HOTM 7, and it is worth comparing with Flying Fish.
+- **Spinosaurus (Oct 2026):** Primordial Fisher is now Adaptive Fisher and boosts during Weather instead of rain.
 - **Weather (Oct 2026):** Ashfall adds +25 Fishing Speed and +2.5 Trophy Chance on the Crimson Isle, and Hellstorm +50, +5 and 5% more Gold and Diamond.
 - **Gusher:** the wiki lists both 10 to 15 and 7 to 16 minutes after an eruption.

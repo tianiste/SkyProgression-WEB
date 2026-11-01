@@ -54,7 +54,7 @@ requirements:
   - { id: wood-singularity, stage: start, group: axe, kind: manual, label: Wood Singularity on your axe }
   - { id: lumberjack-axed, stage: start, group: progress, kind: manual, label: Lumberjack and Axed perks maxed in the Forest Essence shop }
   - { id: flawless-citrine, stage: start, group: armor, kind: manual, label: Flawless Citrine gems in your armor and axe }
-  - { id: absorb, stage: start, group: axe, kind: manual, label: Absorb on your axe }
+  - { id: absorb, stage: start, group: axe, kind: manual, label: Absorb on your axe, note: "Holds up to 25,000,000 logs since 1 Sep 2026, down from 50,000,000." }
   - { id: belt, stage: start, group: equipment, kind: any_of, label: Moonglade Belt or better, options: [{ id: belt-item, group: equipment, kind: item, item: MANGROVE_VINE }, { id: safari-owned, group: equipment, kind: item, item: SAFARI_BELT }] }
   - { id: belt-boosters, stage: start, group: equipment, kind: manual, label: Common Sweep and Foraging Fortune Boosters on the belt }
   - { id: grippers, stage: start, group: equipment, kind: any_of, label: Mangrove Grippers or better, options: [{ id: grippers-item, group: equipment, kind: item, item: MANGROVE_GRIPPERS }, { id: bracelet-owned, group: equipment, kind: item, item: VEILSHROOM_BRACELET }] }
