@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import "../../styles/player.css";
 ---
 
-<Base title="Players" description="Look up a Hypixel SkyBlock player's mining stats, rates, upgrades and HOTM tree, and their foraging upgrade path.">
+<Base title="Players" description="Look up a Hypixel SkyBlock player's mining stats, rates, upgrades and HOTM tree, and their foraging and fishing upgrade paths.">
   <h1>Look up a player</h1>
   <p class="lead">Enter a Minecraft name. The player's page has a tab for each skill.</p>
   <dl class="player-skills">
@@ -14,6 +14,10 @@ import "../../styles/player.css";
     <div>
       <dt>Foraging</dt>
       <dd>The community's upgrade path, ticked off with what they already have.</dd>
+    </div>
+    <div>
+      <dt>Fishing</dt>
+      <dd>The community's upgrade path, ticked off the same way.</dd>
     </div>
   </dl>
   <form class="lookup-form player-search" method="get" action="/player/">

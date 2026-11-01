@@ -11,25 +11,27 @@ const guides = (await getCollection("guides")).sort((a, b) => a.data.title.local
 const trees = (await getCollection("trees")).filter((t) => t.data.status === "published");
 const hotfTrees = await getCollection("hotf");
 
+const COMMUNITIES = new Set<PersonId>(["mining-cult", "foraging-community", "casters"]);
+
 /** What each person made, collected from the guide and tree data. */
 const credits = new Map<PersonId, string[]>();
 const add = (id: PersonId, what: string) => credits.set(id, [...(credits.get(id) ?? []), what]);
 for (const g of guides) {
   for (const a of g.data.authors) add(a.id, `${a.role ?? "Guide"}: ${g.data.title}`);
-  for (const c of g.data.contributors) if (c.id !== "mining-cult" && c.id !== "foraging-community") add(c.id, `${c.role ?? "Contributor"}: ${g.data.title}`);
+  for (const c of g.data.contributors) if (!COMMUNITIES.has(c.id)) add(c.id, `${c.role ?? "Contributor"}: ${g.data.title}`);
 }
 for (const t of trees) if (t.data.author) add(t.data.author.id, `HOTM tree: ${t.data.title}`);
 for (const t of hotfTrees) add(t.data.author.id, `HotF tree: ${t.data.title}`);
 for (const t of trees) if (t.data.collector) add(t.data.collector.id, "Heart of the Mountain tree guide (the HOTM tree numbers)");
 const people = [...credits.entries()]
-  .filter(([id]) => id !== "mining-cult" && id !== "foraging-community")
+  .filter(([id]) => !COMMUNITIES.has(id))
   .sort(([a], [b]) => PEOPLE[a].name.localeCompare(PEOPLE[b].name));
 ---
 
 <Base title="About" description="Who wrote the guides, where the data comes from, the license and privacy.">
   <h1>About</h1>
   <p class="lead">
-    SkyProgression helps Hypixel SkyBlock players get better at mining and foraging. It started as a mining mod for
+    SkyProgression helps Hypixel SkyBlock players get better at mining, foraging and fishing. It started as a mining mod for
     Fabric; this site carries the communities' guides and the mod's features for any player.
   </p>
   <div class="seam" aria-hidden="true"></div>
@@ -37,7 +39,7 @@ const people = [...credits.entries()]
   <h2>The guides and their authors</h2>
   <p>
     Every mining guide was written by a miner from the <Credit id="mining-cult" /> and is published here with the
-    author's permission. Foraging guides come from the <Credit id="foraging-community" />. The content is theirs; this site only puts it in a form that a player lookup can check.
+    author's permission. Foraging guides come from the <Credit id="foraging-community" /> and fishing guides from the <Credit id="casters" />. The content is theirs; this site only puts it in a form that a player lookup can check.
     {SITE.miningCultInvite && <> <a href={SITE.miningCultInvite}>Join the Mining Cult Discord</a> to ask the authors questions.</>}
   </p>
   <ul class="people">
@@ -52,8 +54,8 @@ const people = [...credits.entries()]
   </ul>
   <p>
     The <a href="/reference/attributes/">attribute</a> and <a href="/reference/stats/">stat source</a> references come from
-    guides posted in the Mining Cult Discord without a named author. Foraging attribute effects come from the Hypixel
-    SkyBlock Wiki.
+    guides posted in the Mining Cult Discord without a named author. Foraging and fishing attribute effects come from the
+    Hypixel SkyBlock Wiki.
   </p>
 
   <h2>Data and accuracy</h2>

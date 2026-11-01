@@ -7,6 +7,8 @@ export const CATEGORIES = [
   { id: "ores", label: "Ores", swatch: "#4fe3ec", skill: "mining" },
   { id: "blocks", label: "Blocks", swatch: "#8c8f99", skill: "mining" },
   { id: "foraging", label: "Foraging", swatch: "#6f8f3a", skill: "foraging" },
+  { id: "fishing-basics", label: "Progression and setup", swatch: "#3f7fbf", skill: "fishing" },
+  { id: "fishing-methods", label: "Ways to fish", swatch: "#d9622b", skill: "fishing" },
   { id: "other", label: "Other", swatch: "#8ef04a", skill: "mining" },
 ] as const;
 
