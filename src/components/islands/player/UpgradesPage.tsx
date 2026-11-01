@@ -17,7 +17,6 @@ export default function UpgradesPage() {
   const last = d.plan.at(-1);
   return (
     <Shell view="upgrades" state={state} prices cost god>
-      {d.player && <p class="small">Foraging has no rate model yet: <a href={`/guides/foraging-progression/?player=${encodeURIComponent(d.player)}`}>check {d.player}'s foraging upgrades</a> against the upgrade path.</p>}
       <div class="chips" role="group" aria-label="Upgrades to show">
         <button type="button" aria-pressed={part === "buy"} onClick={() => setPart("buy")}>Purchases</button>
         <button type="button" aria-pressed={part === "other"} onClick={() => setPart("other")}>Other and progress</button>

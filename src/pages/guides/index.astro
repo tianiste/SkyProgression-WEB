@@ -1,22 +1,14 @@
 ---
-import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import GuideList from "../../components/GuideList.astro";
-import CategoryFilter from "../../components/islands/CategoryFilter";
-import { CATEGORIES } from "../../lib/categories";
-
-const guides = await getCollection("guides");
-const used = CATEGORIES.filter((c) => guides.some((g) => g.data.category === c.id)).map(({ id, label }) => ({ id, label }));
 ---
 
 <Base title="Guides" description="Every mining and foraging guide on SkyProgression.">
   <h1>Guides</h1>
-  <p class="lead">Pick what you want to mine or forage. Mining guides list gear for a budget and a max setup, the HOTM tree, attributes and how to mine. Foraging has an upgrade path you can check a player against, Heart of the Forest trees and a guide for each wood.</p>
+  <p class="lead">Pick a skill, then what you want to mine or forage.</p>
   <p class="picking" id="picking" hidden></p>
   <div class="seam" aria-hidden="true"></div>
-  <CategoryFilter client:idle categories={used} />
-  <GuideList />
-  <p class="more-trees">HOTM trees for powder mining, Glacite Tunnels commissions and Scatha: <a href="/guides/hotm-trees/">More HOTM trees</a>.</p>
+  <GuideList filter />
   <script>
     // From the home page lookup: open each guide checked for that player.
     const player = new URLSearchParams(location.search).get("player")?.trim() ?? "";
@@ -36,9 +28,6 @@ const used = CATEGORIES.filter((c) => guides.some((g) => g.data.category === c.i
 </Base>
 
 <style>
-  .more-trees {
-    margin-top: 2rem;
-  }
   .picking {
     font-weight: 600;
     color: var(--xp);

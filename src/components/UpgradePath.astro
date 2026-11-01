@@ -1,0 +1,39 @@
+---
+/** A guide's ordered upgrade stages as to-do lists. Used on the guide page and on the skill's player page. */
+import { getCollection } from "astro:content";
+import type { Requirement as RequirementT } from "../schema/guide";
+import Requirement from "./Requirement.astro";
+
+interface Props {
+  stages: { id: string; title: string; summary: string }[];
+  requirements: RequirementT[];
+}
+
+const { stages, requirements } = Astro.props;
+const attributes = await getCollection("attributes");
+const attributeNames = new Map(attributes.map((a) => [a.id, a.data.name]));
+const rarities = new Map(attributes.map((a) => [a.id, a.data.rarity]));
+const rarityOf = (id: string) => rarities.get(id);
+const list = stages.map((s) => ({ ...s, list: requirements.filter((r) => r.stage === s.id) }));
+const itemCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
+---
+
+<section id="upgrades" aria-labelledby="upgrades-title">
+  <h2 id="upgrades-title">Upgrade path</h2>
+  <p class="muted">In the order to buy them. Items, pets and attributes tick off with player lookup; steps the API can't show are marked to check yourself.</p>
+  {
+    list.map((s, i) => (
+      <details class="gear-group stage" open data-progress-scope>
+        <summary>
+          <h3 id={`stage-${s.id}`} class="with-icon">
+            {i + 1}. {s.title}
+            <span class="count">{itemCount(s.list.length)}</span>
+            <span class="section-progress" data-progress hidden />
+          </h3>
+        </summary>
+        <p class="muted stage-summary">{s.summary}</p>
+        <ol class="reqs">{s.list.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ol>
+      </details>
+    ))
+  }
+</section>

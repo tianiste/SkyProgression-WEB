@@ -1,0 +1,34 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import PlayerLayout from "../../layouts/PlayerLayout.astro";
+import UpgradePath from "../../components/UpgradePath.astro";
+import Icon from "../../components/Icon.astro";
+import Page from "../../components/islands/player/SkillPage";
+import { guideIcon } from "../../lib/icons";
+import { skillOf } from "../../lib/categories";
+import { SKILLS } from "../../lib/skills";
+
+// One shell per skill with its own player page; the to-do list is static and the island ticks it off.
+export function getStaticPaths() {
+  return SKILLS.filter((s) => s.path).map((s) => ({ params: { skill: s.id }, props: { skill: s } }));
+}
+
+const { skill } = Astro.props;
+const path = skill.path!;
+const guide = (await getEntry("guides", path.guide))!;
+const guides = (await getCollection("guides")).filter((g) => skillOf(g.data.category).id === skill.id).sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<PlayerLayout title={skill.label}>
+  <Page client:load skill={skill.id} />
+  <div class="player-body skill-body" data-skill-body>
+    <aside class="panel skill-links" aria-labelledby="skill-links-title">
+      <h2 id="skill-links-title">{skill.label} guides</h2>
+      <ul>
+        {path.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        {guides.map((g) => <li><span class="slot"><Icon icon={guideIcon(g.id)} size={16} /></span><a href={`/guides/${g.id}/`}>{g.data.title}</a></li>)}
+      </ul>
+    </aside>
+    <UpgradePath stages={guide.data.stages} requirements={guide.data.requirements} />
+  </div>
+</PlayerLayout>
