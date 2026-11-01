@@ -93,6 +93,9 @@ foraging setup.
 
 ## Updates since the guide
 
+- Trees can be saved in Loadouts (0.27.2, 6 Oct 2026), so you can swap between the Whispers and Money trees below.
+- Fog on Galatea adds +25 Foraging Fortune and +10% Forest Whispers (0.27.2), so it is a good time to grind whispers.
+
 - The guide's HotF 8 (Whispers) line says "37.8 desert whispers"; we read that as 37.8 million, which fits the perk costs.
 - Tree colours: in the guide's pictures some perks show a log on a grey background instead of green. We count them as
   maxed, because the guide's whisper totals only add up that way (checked against the wiki's perk costs).

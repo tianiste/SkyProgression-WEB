@@ -188,18 +188,21 @@
   rarity: Rare
   family: misc
   effect: "+10% Refined Mineral chance during Mining Fiestas"
+  note: "Doubled with a Fiesta Flask active."
 - id: glossy_fortune
   name: "Glossy Fortune"
   shard: "Scatha"
   rarity: Epic
   family: misc
   effect: "+10% Glossy Gemstone chance during Mining Fiestas"
+  note: "Doubled with a Fiesta Flask active."
 - id: fiesta_fortune
   name: "Fiesta Fortune"
   shard: "Packrat"
   rarity: Uncommon
   family: misc
   effect: "+50 Gemstone Fortune during Mayor Cole's Mining Fiesta"
+  note: "The Fiesta lasts Cole's whole term since 0.27.2."
 - id: royal_riches
   name: "Royal Riches"
   shard: "Nilbog"

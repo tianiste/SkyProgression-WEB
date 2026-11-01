@@ -8,7 +8,7 @@ source: { name: Foraging community Discord }
 updated: 2026-11-01
 where: Galatea. Fig is the first tree you break in the tutorial.
 blocks:
-  - "Toughness 7: instabroken with Sweep as low as 300"
+  - "Toughness 10, up from 7 in the guide. It says logs instabreak from about 300 Sweep at 7, so expect to need a little more"
   - "Cut bottom to top: trunk first, then the branches"
 rates:
   - { label: Top foragers, value: "up to 100m per hour", note: "roughly 3.5m Fig collection per hour" }
@@ -43,3 +43,10 @@ enough big and small trees take a similar time to break.
 
 The trees that come after Fig are in the [Mangrove](/guides/mangrove/) and [Helix](/guides/helix/) guides. For what to
 buy, follow the [upgrade path](/guides/foraging-progression/).
+
+## Updates since the guide
+
+Our corrections from the [patch notes](https://hypixelskyblock.minecraft.wiki/w/Changelog/2026/August_4), not the guide's advice.
+
+- Fig's toughness went from 7 to 10 in 0.27 (4 Aug 2026). The guide says 7, and its Sweep advice may be from before the change.
+- Weather on Galatea (6 Oct 2026): Moonfall adds +10 Foraging Fortune, and Fog adds +25 Foraging Fortune and +10% Forest Whispers.
