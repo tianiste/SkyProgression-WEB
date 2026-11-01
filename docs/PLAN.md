@@ -44,21 +44,22 @@ Design: **minimalist and responsive.** Mobile first, readable on a phone at 360 
 
 | Path | Content | Phase |
 | --- | --- | --- |
-| `/` | What SkyProgression is, download buttons, guide categories, a "look up a player" box (disabled until phase 2) | 1 |
-| `/guides` | All methods grouped (Gemstones, Dwarven Metals, Ores, Blocks, Other) with filters | 1 |
+| `/` | What SkyProgression is, download buttons, guides by skill, a "look up a player" box (disabled until phase 2) | 1 |
+| `/guides` | One tab per skill (`#mining`, `#foraging`), then categories with filters; `#gemstones` opens the skill holding that category | 1 |
 | `/guides/<method>` | One guide (layout below) | 1 |
 | `/reference/attributes` | Every mining attribute and its effect | 1 |
 | `/reference/stats` | Every mining stat source (from `general-stats.txt`, checked against our engine) | 1 |
 | `/about` | Credits, sources, license, privacy | 1 |
 | `/guides/<method>?player=<name>` | The guide as the player's to-do list | 2 |
-| `/player/<name>` | Overview (the mod's Home tab): stats for the chosen method, current rate, best next upgrade, coins/hour per method | 3 |
+| `/player/<name>` | Mining tab, Overview (the mod's Home tab): stats for the chosen method, current rate, best next upgrade, coins/hour per method | 3 |
 | `/player/<name>/gear` | Stat breakdown by source, current vs attainable (the mod's Gear tab) | 3 |
 | `/player/<name>/upgrades` | Ranked upgrades, step-by-step plan, buy vs craft, Other & progress (Upgrades tab) | 3 |
 | `/player/<name>/methods` | Coins/hour comparison and rate details (Methods tab) | 3 |
 | `/player/<name>/start` | Best owned loadout and where each piece is stored (Start with tab) | 3 |
 | `/player/<name>/hotm` | Their tree vs the recommended tree for the method | 3 |
+| `/player/<name>/foraging` | Foraging tab: the upgrade path ticked off with `POST /checklist`, links to the HotF trees and guides; no stats or rates | 3 |
 
-Player pages share a header: name, profile selector, method selector, data age, and "turn on API settings" help when data
+Player pages share a header: name, skill tabs, profile selector, method selector, data age, and "turn on API settings" help when data
 is missing. Method and profile live in the URL query so links can be shared. Mod-only features stay in the mod: the
 session tracker (it reads chat and the inventory live) and anything that needs the game client.
 
@@ -250,7 +251,7 @@ Foraging guides, from the foraging community Discord: Foraging Progression (the 
 Big Fig Trees (miroOP), Mangrove, Helix, Foraging Attributes and the FAQ.
 
 - **Upgrades:** the mod's engine has no foraging data (no Sweep, no rate model), so Overview, Gear, Upgrades, Methods and
-  Start with stay mining only and the Upgrades page links to the path. The upgrade path is `stages` in the guide data: an
+  Start with stay mining only and the player's Foraging tab shows the path. The upgrade path is `stages` in the guide data: an
   ordered to-do list checked by `POST /checklist`, not a ranked plan with prices.
 - **What ticks off:** items, pets, accessories and attributes use the existing evaluator with no engine change. The `hotf`
   kind and every `manual` step show as "check this yourself".
@@ -261,4 +262,23 @@ Big Fig Trees (miroOP), Mangrove, Helix, Foraging Attributes and the FAQ.
   derived from those tokens, the connected path and the whisper totals; the guide says so.
 - **IDs:** checked against `api.hypixel.net/v2/resources/skyblock/items`, NEU `attribute_shards.json` and the mod's fixture.
 - **Icons:** foraging items outside the mod's icon table show a fallback until `scripts/import-icons.mjs` is run.
+- **Skill tabs:** see "Skill tabs (2026-11-01)" below.
 - **Permission:** the mining guides' permission note does not cover these. Get the authors' permission before publishing.
+
+## Skill tabs (2026-11-01)
+
+Each skill has its own tab on the guide list, the home page and the player pages.
+
+- **A skill is data.** `src/lib/skills.ts` lists the skills in tab order; each category in `src/lib/categories.ts` names
+  its skill. A new skill is one entry in each, plus its categories in the guide schema. A player page for it is one more thing in `skills.ts` plus two lines in
+  `public/_redirects`; the shell (`src/pages/player-page/[skill].astro`) and the dev rewrite follow from the data.
+- **Guides:** the tabs are links to `#<skill>`, one small inline script switches them, and without JavaScript every skill
+  stays on the page. Guide URLs did not change.
+- **Player pages:** Mining keeps its URLs and six views. The links between tabs keep the profile and the mining options.
+- **Foraging on the player page:** a skill the engine does not cover gets a static to-do list that the `SkillPage` island
+  ticks off with `POST /checklist`, using the same code as a guide page (`src/lib/checklist.ts`). It never calls
+  `GET /player`, so it says plainly that foraging has no stats or rate model. The limits are those under "Foraging".
+- **Verified:** in `astro dev` against a local mock of the API, at 360 px and desktop, in both themes, including an
+  unknown player, a server error and API settings off. The six mining views were checked against a mock with empty data,
+  so the header and tabs are covered, not their numbers. Not checked with a live profile, and `public/_redirects` was not
+  run on Cloudflare (the new lines match the existing pattern).

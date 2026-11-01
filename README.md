@@ -30,7 +30,9 @@ npm run preview   # serve dist/
 | `src/content/attributes.yaml`, `src/content/stats.yaml` | The attribute and stat source references |
 | `src/schema/guide.ts` | The guide data model (zod); also served as JSON Schema at `/schema/guide.json` |
 | `src/data/` | Perk layout, item names, credited people |
-| `src/pages/` | Routes: `/`, `/guides`, `/guides/<guide>` (with its HOTM trees), `/reference/*`, `/about` |
+| `src/lib/skills.ts`, `src/lib/categories.ts` | The skills, in tab order, and the guide categories under each |
+| `src/pages/` | Routes: `/`, `/guides` (a tab per skill: `#mining`, `#foraging`), `/guides/<guide>` (with its HOTM trees), `/player`, `/reference/*`, `/about` |
+| `src/pages/player-page/` | Static shells for `/player/<name>/` (Mining: Overview, `gear/`, `upgrades/`, `methods/`, `start/`, `hotm/`) and `/player/<name>/foraging/` (the upgrade path) |
 | `src/config.ts` | Site settings, including the Mining Cult Discord invite |
 
 ## Add a guide
@@ -80,6 +82,15 @@ Item modifiers: `recomb`, `reforge` (`id`, optional `stone`), `gem` (`gem`, `qua
 
 Use the IDs the Hypixel API uses. If an item has no display name yet, add it to `src/data/items.ts`. Each guide's
 requirements are also published as JSON at `/guides/<guide-id>.json`.
+
+### Add a skill
+
+1. Add the skill to `src/lib/skills.ts`, with the item ID for its icon and a one-sentence `blurb`.
+2. Add its categories to `src/lib/categories.ts` with `skill: <id>`, and to `category` in `src/schema/guide.ts`. The guide
+   list and the home page pick up the new tab.
+3. For a player page, give the skill `page: <id>` and a `path` naming the guide with `stages` to check, and add
+   `/player/:name/<id>/` and the redirect without the slash to `public/_redirects`, as for `foraging`. Say in `path.note`
+   what the page can't show.
 
 ### Add a HOTM tree
 

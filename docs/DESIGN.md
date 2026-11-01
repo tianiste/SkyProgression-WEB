@@ -47,6 +47,13 @@ The HOTM column sits beside the gear from 1100 px up and above it below that. Be
 becomes a collapsed "On this page" menu under the XP bar, and each gear group can be collapsed. Below 640 px tables turn into stacked
 rows, the gear columns stack, and the navigation moves under the logo.
 
+## Skill tabs
+
+The top level of the guide list and the player pages: one tab per skill, an item icon in a slot and the name in the pixel
+font, at least 48 px tall and sharing the row equally on a phone. The current tab sits on a surface with an XP-green
+underline, and also has `aria-current`. They are larger than the text tabs for the pages inside a skill, so the two levels
+read as parent and child. Each is a real link, so a skill can be shared and works without a script.
+
 ## Principles
 
 - **The to-do list is the point.** Every requirement starts with an empty square and each guide opens with an empty XP
@@ -64,7 +71,7 @@ rows, the gear columns stack, and the navigation moves under the logo.
   sunken inventory slots (`.slot`), and an ore seam (`.seam`, a CSS-only strip of stone with a diamond and a gold
   pixel) runs under each page header. Panels group what belongs together: glance facts, guide categories, the phone
   contents menu.
-- **Fast and accessible.** Static HTML, one font file, JavaScript only for the theme button, the guide filter and the
+- **Fast and accessible.** Static HTML, one font file, JavaScript only for the theme button, the skill tabs, the guide filter and the
   player lookup island (loaded when the browser is idle; it fetches the guide's requirements only on lookup).
   Visible focus, AA contrast in both themes, no information only on hover.
 - **Icons carry meaning, text stays.** Item icons (FurfSky Reborn first, then Hypixel's own art, Minecraft blocks, then our pixel glyphs) sit
