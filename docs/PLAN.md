@@ -45,7 +45,7 @@ Design: **minimalist and responsive.** Mobile first, readable on a phone at 360 
 | Path | Content | Phase |
 | --- | --- | --- |
 | `/` | What SkyProgression is, download buttons, guides by skill, a "look up a player" box (disabled until phase 2) | 1 |
-| `/guides` | One tab per skill (`#mining`, `#foraging`), then categories with filters; `#gemstones` opens the skill holding that category | 1 |
+| `/guides` | One tab per skill (`#mining`, `#foraging`, `#fishing`), then categories with filters; `#gemstones` opens the skill holding that category | 1 |
 | `/guides/<method>` | One guide (layout below) | 1 |
 | `/reference/attributes` | Every mining attribute and its effect | 1 |
 | `/reference/stats` | Every mining stat source (from `general-stats.txt`, checked against our engine) | 1 |
@@ -58,6 +58,7 @@ Design: **minimalist and responsive.** Mobile first, readable on a phone at 360 
 | `/player/<name>/start` | Best owned loadout and where each piece is stored (Start with tab) | 3 |
 | `/player/<name>/hotm` | Their tree vs the recommended tree for the method | 3 |
 | `/player/<name>/foraging` | Foraging tab: the upgrade path ticked off with `POST /checklist`, links to the HotF trees and guides; no stats or rates | 3 |
+| `/player/<name>/fishing` | Fishing tab: the same page for the fishing upgrade path | 3 |
 
 Player pages share a header: name, skill tabs, profile selector, method selector, data age, and "turn on API settings" help when data
 is missing. Method and profile live in the URL query so links can be shared. Mod-only features stay in the mod: the
@@ -283,9 +284,26 @@ Each skill has its own tab on the guide list, the home page and the player pages
   so the header and tabs are covered, not their numbers. Not checked with a live profile, and `public/_redirects` was not
   run on Cloudflare (the new lines match the existing pattern).
 
+## Fishing (2026-11-01)
+
+Ten guides from the Casters Fishing Community. Progression and setup: Fishing Progression (the upgrade path), Stats and
+Formulas, Attributes, Magic Find, Parties and Loot Share. Ways to fish: Stridersurfer, Magma Fields, Worm, Squid and Trophy.
+
+- **Same model as foraging:** an ordered checklist through `POST /checklist`, with no stats, rates or ranked upgrades. A
+  fishing level or Trophy Fish count has no check in the evaluator, so those steps are `manual` or go by the item they unlock.
+- **Corrected:** the source guides date from January 2024 to May 2026. Each guide lists what changed under "Updates since
+  the guide", checked against the Hypixel SkyBlock Wiki changelogs up to 2026-10-29: the personal cap of 10, the Magma Lord
+  Necklace, Night Squid becoming the Inkling, renamed attributes and Minister Update XP.
+- **Not covered:** Lotus Atoll, Hotspot, Crimson Isle lava, treasure and event fishing. Casters has no guide for them yet.
+- **Evaluator:** `ATTRIBUTE_RARITY` in the mod's `Checklist.java` needs the fishing attributes, or a maxed one shows as
+  partly done. The change is in the mod's working tree and goes out with the relay redeploy.
+- **Icons:** rods use the Minecraft fishing rod. Fishing pets and other items outside the mod's icon table show a fallback
+  until `scripts/import-icons.mjs` is run.
+- **Permission:** get the authors' permission before publishing. The worm and squid guides have no named author in the paste.
+
 ## To do
 
-- **Redeploy the relay** with the mod's `7842b64` (foraging attribute rarities), so maxed foraging attributes stop showing
+- **Redeploy the relay** with the mod's `7842b64` (foraging attribute rarities) and the fishing attribute rarities, so maxed attributes stop showing
   as partly done. Blocked on SSH: the server only accepts the key on the owner's other PC, so add this PC's public key to
   `~/.ssh/authorized_keys` from there. Then follow "Updating the relay" in the mod's `deploy/relay/README.md` and check a
   maxed foraging attribute on the foraging upgrade path.

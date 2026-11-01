@@ -9,11 +9,13 @@
 /player/:name/start/ /player-page/start/ 200
 /player/:name/hotm/ /player-page/hotm/ 200
 /player/:name/foraging/ /player-page/foraging/ 200
+/player/:name/fishing/ /player-page/fishing/ 200
 /player/:name/gear /player/:name/gear/ 301
 /player/:name/upgrades /player/:name/upgrades/ 301
 /player/:name/methods /player/:name/methods/ 301
 /player/:name/start /player/:name/start/ 301
 /player/:name/hotm /player/:name/hotm/ 301
 /player/:name/foraging /player/:name/foraging/ 301
+/player/:name/fishing /player/:name/fishing/ 301
 /player/:name/ /player-page/overview/ 200
 /player/:name /player/:name/ 301

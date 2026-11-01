@@ -4,7 +4,7 @@ Thanks for helping. Corrections to guides, new guides and fixes to the site are 
 
 ## Guide content
 
-- Guide text belongs to its authors. To change what a guide recommends, ask its author in the Mining Cult Discord (or the foraging community Discord)
+- Guide text belongs to its authors. To change what a guide recommends, ask its author in the Mining Cult Discord (or the foraging community Discord or Casters Fishing Community)
   first, or open an issue and we will check with them.
 - New guides need the author's permission to be published here. Say in the pull request that you have it.
 - Keep numbers as the author wrote them and set `updated:` to the day you checked the guide.

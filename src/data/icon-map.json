@@ -23,7 +23,17 @@
     "mangrove": "#7a4a2e",
     "helix": "HELIX_ARMOR_HELMET",
     "foraging-attributes": "#a06be0",
-    "foraging-faq": "#c9b458"
+    "foraging-faq": "#c9b458",
+    "fishing-progression": "HELLFIRE_ROD",
+    "fishing-stats": "#3f7fbf",
+    "fishing-attributes": "#a06be0",
+    "fishing-magic-find": "#e08a3c",
+    "fishing-parties": "#c9b458",
+    "stridersurfer-fishing": "#c9522b",
+    "magma-fields-fishing": "MAGMA_LORD_CHESTPLATE",
+    "worm-fishing": "#d9622b",
+    "squid-fishing": "ROD_OF_THE_SEA",
+    "trophy-fishing": "minecraft:item/tropical_fish"
   },
   "category": {
     "gemstones": "PERFECT_RUBY_GEM",
@@ -31,11 +41,14 @@
     "ores": "minecraft:block/gold_ore",
     "blocks": "minecraft:block/cobblestone",
     "foraging": "WOOD",
+    "fishing-basics": "FISHING_ROD",
+    "fishing-methods": "minecraft:item/tropical_fish",
     "other": "MITHRIL_ORE"
   },
   "group": {
     "drill": "DIVAN_DRILL",
     "axe": "WOOD",
+    "rod": "FISHING_ROD",
     "tools": "ASPECT_OF_THE_VOID",
     "armor": "DIVAN_CHESTPLATE",
     "equipment": "DIVAN_PENDANT",
@@ -69,7 +82,18 @@
     "ENDER_STONE": "minecraft:block/end_stone",
     "MYCEL": "minecraft:block/mycelium_side",
     "WOOD": "minecraft:block/oak_log",
-    "ENCHANTED_LAPIS_LAZULI": "minecraft:item/lapis_lazuli"
+    "ENCHANTED_LAPIS_LAZULI": "minecraft:item/lapis_lazuli",
+    "FISHING_ROD": "minecraft:item/fishing_rod",
+    "CHALLENGE_ROD": "minecraft:item/fishing_rod",
+    "CHAMP_ROD": "minecraft:item/fishing_rod",
+    "LEGEND_ROD": "minecraft:item/fishing_rod",
+    "ROD_OF_THE_SEA": "minecraft:item/fishing_rod",
+    "GIANT_FISHING_ROD": "minecraft:item/fishing_rod",
+    "STARTER_LAVA_ROD": "minecraft:item/fishing_rod",
+    "POLISHED_TOPAZ_ROD": "minecraft:item/fishing_rod",
+    "MAGMA_ROD": "minecraft:item/fishing_rod",
+    "INFERNO_ROD": "minecraft:item/fishing_rod",
+    "HELLFIRE_ROD": "minecraft:item/fishing_rod"
   },
   "player": [
     "minecraft:prismarine_crystals",

@@ -2,7 +2,7 @@
 export const SITE = {
   name: "SkyProgression",
   url: "https://skyprogression.dev",
-  description: "Mining and foraging guides for Hypixel SkyBlock: gear, Heart of the Mountain and Heart of the Forest trees, attributes and rates, from the community.",
+  description: "Mining, foraging and fishing guides for Hypixel SkyBlock: gear, Heart of the Mountain and Heart of the Forest trees, attributes and rates, from the community.",
   modrinth: "https://modrinth.com/mod/GUp2Satn",
   /** The SkyProgression API (player lookup). PUBLIC_API_URL overrides it, e.g. a local `wrangler dev` on :8787. */
   api: (import.meta.env.PUBLIC_API_URL as string | undefined) ?? "https://api.skyprogression.dev",

@@ -405,3 +405,34 @@
   rarity: Legendary
   family: foraging
   effect: "Reduces a tree's Toughness by 1 when cut down"
+# Fishing attributes. Source: Attributes page of the Hypixel SkyBlock Wiki, rarities from NEU attribute_shards.json.
+- { id: cheapstake, name: "Cheapstake", shard: "Cod", rarity: Common, family: fishing, effect: "+10% Coins from fishing treasures" }
+- { id: fisherman, name: "Fisherman", shard: "Inkling", rarity: Common, family: fishing, effect: "+10% chance not to consume bait" }
+- { id: forest_fishing, name: "Forest Fishing", shard: "Verdant", rarity: Common, family: fishing, effect: "+30 Fishing Speed on Foraging Islands" }
+- { id: lake_fishing, name: "Lake Fishing", shard: "Tepid", rarity: Common, family: fishing, effect: "+30 Fishing Speed on Fishing Islands" }
+- { id: cave_fishing, name: "Cave Fishing", shard: "Cavernfish", rarity: Common, family: fishing, effect: "+30 Fishing Speed on Mining Islands" }
+- { id: hunter, name: "Creature Fisher", shard: "Bogged", rarity: Common, family: fishing, effect: "+5 Sea Creature Chance" }
+- { id: bucket_lover, name: "Bucket Lover", shard: "Coralot", rarity: Common, family: fishing, effect: "+50% chance for extra Chums" }
+- { id: lotus_trophy, name: "Lotus Trophy", shard: "Lotusfish", rarity: Common, family: fishing, effect: "+10 Trophy Chance in Lotus Atoll" }
+- { id: gold_bait, name: "Gold Bait", shard: "Goldfin", rarity: Uncommon, family: fishing, effect: "Golden Fish cooldown reduced by up to 5 minutes" }
+- { id: lost_and_found, name: "Lost and Found", shard: "Salmon", rarity: Uncommon, family: fishing, effect: "+1% chance to find a Wet Book when fishing a treasure" }
+- { id: bayou_treasure, name: "Bayou Treasure", shard: "Cheeky Tiki", rarity: Uncommon, family: fishing, effect: "+1 Treasure Chance in the Backwater Bayou" }
+- { id: magmatic_ruler, name: "Magmatic Ruler", shard: "Stridersurfer", rarity: Uncommon, family: fishing, effect: "+30% more damage against Magmatic mobs" }
+- { id: spirit_axe, name: "Woodland Ruler", shard: "Ent", rarity: Uncommon, family: fishing, effect: "+30% more damage against Woodland mobs" }
+- { id: blazing_fortune, name: "Blazing Fortune", shard: "Lava Flame", rarity: Rare, family: fishing, effect: "+10 Magic Find on Magmatic mobs" }
+- { id: great_treasure, name: "Great Treasure", shard: "Mantis Shrimp", rarity: Rare, family: fishing, effect: "Treasure catches up to 10% more likely to be Great" }
+- { id: blazing, name: "Infernal Ruler", shard: "Flare", rarity: Epic, family: fishing, effect: "+30% more damage against Infernal mobs" }
+- { id: lucky_rod, name: "Lucky Rod", shard: "Moray Eel", rarity: Epic, family: fishing, effect: "Fish Treasure Shards up to 10% easier to find" }
+- { id: trophy_hunter, name: "Trophy Hunter", shard: "Fire Eel", rarity: Epic, family: fishing, effect: "+20 Trophy Chance" }
+- { id: fishing_speed, name: "Fishing Speed", shard: "Water Hydra", rarity: Epic, family: fishing, effect: "+30 Fishing Speed" }
+- { id: fishing_experience, name: "Sea Wisdom", shard: "Loch Emperor", rarity: Epic, family: fishing, effect: "+5 Fishing Wisdom" }
+- { id: outstanding_fisher, name: "Outstanding Fisher", shard: "Blue Crab", rarity: Epic, family: fishing, effect: "Treasure catches up to 10% more likely to be Outstanding" }
+- { id: fishers_fortune, name: "Fisher's Fortune", shard: "Giant Isopod", rarity: Epic, family: fishing, effect: "+5 Magic Find on Fishing Islands" }
+- { id: dominance, name: "Dominance", shard: "Thorn", rarity: Epic, family: fishing, effect: "+15% more damage at full health" }
+- { id: warrior, name: "Warrior", shard: "Barbarian Duke X", rarity: Epic, family: fishing, effect: "+25% melee damage" }
+- { id: double_hook, name: "Crimson Hook", shard: "Lord Jawbus", rarity: Legendary, family: fishing, effect: "+5 Double Hook Chance on Combat Islands" }
+- { id: bayou_biter, name: "Bayou Hook", shard: "Titanoboa", rarity: Legendary, family: fishing, effect: "+5 Double Hook Chance on Fishing Islands" }
+- { id: loch_hook, name: "Loch Hook", shard: "Nessie", rarity: Legendary, family: fishing, effect: "+5 Double Hook Chance on Foraging Islands" }
+- { id: treasure_fisher, name: "Treasure Fisher", shard: "Ghost Crab", rarity: Legendary, family: fishing, effect: "+1 Treasure Chance" }
+- { id: magic_find, name: "Magic Find", shard: "Cinderbat", rarity: Legendary, family: fishing, effect: "+5 Magic Find" }
+- { id: miracle_chance, name: "Miracle Chance", shard: "Rainbug", rarity: Legendary, family: fishing, effect: "+1% chance of finding Dyes" }

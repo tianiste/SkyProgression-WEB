@@ -4,7 +4,7 @@ The website for [SkyProgression](https://github.com/tianiste/SkyProgression), a 
 mod. It lives at [skyprogression.dev](https://skyprogression.dev).
 
 It carries the Mining Cult community's mining guides (gear for a budget and a max setup, Heart of the Mountain
-trees drawn from data, attributes, rates and how to mine) and the foraging community's guides (an ordered upgrade path, Heart of the Forest trees and a guide for each wood). Guides are stored as structured requirements, so player
+trees drawn from data, attributes, rates and how to mine) and the foraging community's guides (an ordered upgrade path, Heart of the Forest trees and a guide for each wood) and the Casters Fishing Community's guides (an ordered upgrade path and a guide for each way of fishing). Guides are stored as structured requirements, so player
 lookup shows each guide as that player's to-do list (checked by the mod's engine through the SkyProgression API). See [docs/PLAN.md](docs/PLAN.md) for the roadmap and
 [docs/DESIGN.md](docs/DESIGN.md) for the visual design. Every known limitation of the site, the API and the mod is listed in
 [the mod repository's docs/LIMITATIONS.md](https://github.com/tianiste/SkyProgression/blob/main/docs/LIMITATIONS.md).
@@ -31,8 +31,8 @@ npm run preview   # serve dist/
 | `src/schema/guide.ts` | The guide data model (zod); also served as JSON Schema at `/schema/guide.json` |
 | `src/data/` | Perk layout, item names, credited people |
 | `src/lib/skills.ts`, `src/lib/categories.ts` | The skills, in tab order, and the guide categories under each |
-| `src/pages/` | Routes: `/`, `/guides` (a tab per skill: `#mining`, `#foraging`), `/guides/<guide>` (with its HOTM trees), `/player`, `/reference/*`, `/about` |
-| `src/pages/player-page/` | Static shells for `/player/<name>/` (Mining: Overview, `gear/`, `upgrades/`, `methods/`, `start/`, `hotm/`) and `/player/<name>/foraging/` (the upgrade path) |
+| `src/pages/` | Routes: `/`, `/guides` (a tab per skill: `#mining`, `#foraging`, `#fishing`), `/guides/<guide>` (with its HOTM trees), `/player`, `/reference/*`, `/about` |
+| `src/pages/player-page/` | Static shells for `/player/<name>/` (Mining: Overview, `gear/`, `upgrades/`, `methods/`, `start/`, `hotm/`) and `/player/<name>/foraging/` and `/player/<name>/fishing/` (the upgrade paths) |
 | `src/config.ts` | Site settings, including the Mining Cult Discord invite |
 
 ## Add a guide
@@ -41,7 +41,7 @@ npm run preview   # serve dist/
 2. Create `src/content/guides/<guide-id>.md`. The file name becomes the URL: `/guides/<guide-id>`. Copy an existing
    guide such as `dwarven-metals.md` as a starting point.
 3. Fill in the front matter:
-   - `title`, `category` (`gemstones`, `dwarven-metals`, `ores`, `blocks`, `foraging` or `other`), a one-sentence `summary`, and
+   - `title`, `category` (`gemstones`, `dwarven-metals`, `ores`, `blocks`, `foraging`, `fishing-basics`, `fishing-methods` or `other`), a one-sentence `summary`, and
      `method` with the mod's method names when the mod covers the method.
    - `authors` and `contributors` by their key in `people.ts`, `source`, and `updated` (the date you checked it).
    - `where`, `blocks`, `rates` and `ratesMeasured` for the summary at the top of the page.
@@ -56,7 +56,7 @@ npm run preview   # serve dist/
 
 ### Requirements
 
-Every requirement has an `id` (unique in the guide), a `group` (`drill`, `axe`, `tools`, `armor`, `equipment`, `pet`,
+Every requirement has an `id` (unique in the guide), a `group` (`drill`, `axe`, `rod`, `tools`, `armor`, `equipment`, `pet`,
 `accessories`, `consumables`, `progress`, `attributes`, `hotm` or `other`) and a `kind`. Add `tier: budget` or
 `tier: max` when it belongs to one setup only; leave it out when it applies to both. `priority`, `note` and
 `prerequisites` are optional.

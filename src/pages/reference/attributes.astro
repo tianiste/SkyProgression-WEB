@@ -12,6 +12,7 @@ const FAMILIES = [
   { id: "misc", title: "Other mining attributes", intro: "Loot, XP, events and pets." },
   { id: "intelligence", title: "Intelligence attributes", intro: "For Maniac Miner, which needs Intelligence for its full Fortune bonus." },
   { id: "foraging", title: "Foraging attributes", intro: "The attributes the foraging upgrade path maxes." },
+  { id: "fishing", title: "Fishing attributes", intro: "Attributes for fishing, Sea Creatures, treasure and Trophy Fish, and the damage ones fishing uses." },
 ] as const;
 const RARITY = ["Common", "Uncommon", "Rare", "Epic", "Legendary"];
 const SHARDS: Record<string, number> = { Common: 96, Uncommon: 64, Rare: 48, Epic: 32, Legendary: 24 };
@@ -19,10 +20,10 @@ const guides = await getCollection("guides");
 const usedBy = (id: string) => guides.filter((g) => g.data.requirements.some((r) => r.kind === "attribute" && r.attribute === id));
 ---
 
-<Base title="Attributes" description="Every mining and foraging attribute in Hypixel SkyBlock, its shard and its effect at level 10.">
+<Base title="Attributes" description="Every mining, foraging and fishing attribute in Hypixel SkyBlock, its shard and its effect at level 10.">
   <ReferenceNav />
   <h1>Attributes</h1>
-  <p class="lead">Every mining and foraging attribute, the shard it comes from and its effect at level 10.</p>
+  <p class="lead">Every mining, foraging and fishing attribute, the shard it comes from and its effect at level 10.</p>
   <div class="seam" aria-hidden="true"></div>
   <p class="muted">
     Shards needed to reach level 10: {RARITY.map((r, i) => <>{i > 0 && ", "}{r} {SHARDS[r]}</>)}. Echo attributes make
@@ -68,7 +69,7 @@ const usedBy = (id: string) => guides.filter((g) => g.data.requirements.some((r)
       );
     })
   }
-  <p class="muted small">Shard icons are coloured by rarity. Mining source: the Mining Attribute Guide in the <Credit id="mining-cult" />. Foraging effects: the Hypixel SkyBlock Wiki.</p>
+  <p class="muted small">Shard icons are coloured by rarity. Mining source: the Mining Attribute Guide in the <Credit id="mining-cult" />. Foraging and fishing effects: the Hypixel SkyBlock Wiki.</p>
 </Base>
 
 <style>

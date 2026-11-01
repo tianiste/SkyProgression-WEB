@@ -9460,6 +9460,66 @@
    "file": "minecraft/stone_pickaxe.png",
    "size": 16,
    "source": "minecraft"
+  },
+  "FISHING_ROD": {
+   "file": "minecraft/item_fishing_rod.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "CHALLENGE_ROD": {
+   "file": "minecraft/item_fishing_rod.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "CHAMP_ROD": {
+   "file": "minecraft/item_fishing_rod.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "LEGEND_ROD": {
+   "file": "minecraft/item_fishing_rod.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "ROD_OF_THE_SEA": {
+   "file": "minecraft/item_fishing_rod.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "GIANT_FISHING_ROD": {
+   "file": "minecraft/item_fishing_rod.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "STARTER_LAVA_ROD": {
+   "file": "minecraft/item_fishing_rod.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "POLISHED_TOPAZ_ROD": {
+   "file": "minecraft/item_fishing_rod.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "MAGMA_ROD": {
+   "file": "minecraft/item_fishing_rod.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "INFERNO_ROD": {
+   "file": "minecraft/item_fishing_rod.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "HELLFIRE_ROD": {
+   "file": "minecraft/item_fishing_rod.png",
+   "size": 16,
+   "source": "minecraft"
+  },
+  "minecraft:item/tropical_fish": {
+   "file": "minecraft/item_tropical_fish.png",
+   "size": 16,
+   "source": "minecraft"
   }
  },
  "hotm": {

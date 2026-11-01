@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { title, description = SITE.description, noindex = false } = Astro.props;
-const pageTitle = title ? `${title} | ${SITE.name}` : `${SITE.name}: mining and foraging guides for Hypixel SkyBlock`;
+const pageTitle = title ? `${title} | ${SITE.name}` : `${SITE.name}: mining, foraging and fishing guides for Hypixel SkyBlock`;
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const canonical = new URL(path === "/" ? "/" : `${path}/`, SITE.url).href;
 const nav = [
@@ -91,7 +91,7 @@ const current = (href: string, match?: string) => {
     <footer class="site-footer">
       <div class="inner">
         <p>
-          Guides by the mining and foraging communities, credited on each guide. <a href="/about/#credits">Credits and licenses</a>.
+          Guides by the mining, foraging and fishing communities, credited on each guide. <a href="/about/#credits">Credits and licenses</a>.
         </p>
         <p>
           Item textures by the <a href={SITE.furfsky}>FurfSky Reborn team</a>, used with permission. Other textures © Hypixel

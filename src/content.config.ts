@@ -61,7 +61,7 @@ const attributes = defineCollection({
     name: z.string(),
     shard: z.string(),
     rarity: z.enum(["Common", "Uncommon", "Rare", "Epic", "Legendary"]),
-    family: z.enum(["stat", "misc", "intelligence", "foraging"]),
+    family: z.enum(["stat", "misc", "intelligence", "foraging", "fishing"]),
     effect: z.string(),
     note: z.string().optional(),
   }),

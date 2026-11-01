@@ -32,9 +32,10 @@ const attrById = new Map(attributes.map((a) => [a.id, a.data]));
 const attributeNames = new Map(attributes.map((a) => [a.id, a.data.name]));
 const rarityOf = (id: string) => attrById.get(id)?.rarity;
 
-const foraging = g.category === "foraging";
-const community = foraging ? "foraging-community" : "mining-cult";
-const tierNames = foraging ? ["Starting out", "Money setup"] : ["Budget setup", "Max setup"];
+const mining = skill.id === "mining";
+const community = skill.community;
+const tierNames = mining ? ["Budget setup", "Max setup"] : ["Starting out", "Money setup"];
+const gearIcon = { mining: "drill", foraging: "axe", fishing: "rod" }[skill.id] ?? "tools";
 
 const reqs = g.requirements;
 const gear = GEAR_GROUPS.map((id) => {
@@ -63,7 +64,7 @@ const toc: { id: string; label: string; icon: IconT }[] = [
   { id: "glance", label: "At a glance", icon: pin },
   g.stages.length ? { id: "upgrades", label: "Upgrade path", icon: groupIcon("axe") } : null,
   hasHotm ? { id: "hotm", label: "Heart of the Mountain", icon: powderIcon("mithril") } : null,
-  gear.length ? { id: "gear", label: "Gear", icon: groupIcon(foraging ? "axe" : "drill") } : null,
+  gear.length ? { id: "gear", label: "Gear", icon: groupIcon(gearIcon) } : null,
   attributeReqs.length ? { id: "attributes", label: "Attributes", icon: shardIcon("Epic") } : null,
   ...headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, label: h.text, icon: note })),
   hotfTrees.length ? { id: "hotf-trees", label: "HotF trees", icon: note } : null,
@@ -117,7 +118,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
           {
             g.blocks.length > 0 && (
               <div class="blocks">
-                <dt><Icon icon={categoryIcon(g.category)} size={16} />{foraging ? "Key facts" : "Key blocks"}</dt>
+                <dt><Icon icon={categoryIcon(g.category)} size={16} />{mining ? "Key blocks" : "Key facts"}</dt>
                 <dd>
                   <ul>{g.blocks.map((b) => <li>{b}</li>)}</ul>
                 </dd>
@@ -196,8 +197,8 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
         {gear.length > 0 && <section id="gear" aria-labelledby="gear-title">
           <h2 id="gear-title">Gear</h2>
           <p class="muted">
-            <span class="tier-key budget">{foraging ? "Starting out" : "Budget"}</span> is the {foraging ? "minimum the guide says to start with" : "cheapest setup the guide recommends"} and
-            <span class="tier-key max">{foraging ? "money setup" : "max"}</span> {foraging ? "what it takes to make good money" : "the best one"}. Items not marked apply to both.
+            <span class="tier-key budget">{mining ? "Budget" : "Starting out"}</span> is the {mining ? "cheapest setup the guide recommends" : "minimum the guide says to start with"} and
+            <span class="tier-key max">{mining ? "max" : "money setup"}</span> {mining ? "the best one" : "what it takes to make good money"}. Items not marked apply to both.
           </p>
           {
             gear.map((s) => (
@@ -247,7 +248,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
           <section id="attributes" aria-labelledby="attributes-title" data-progress-scope>
             <h2 id="attributes-title">Attributes <span class="section-progress" data-progress hidden /></h2>
             <p class="muted">
-              Level 10 values. See the <a href="/reference/attributes/">attribute reference</a> for every {foraging ? "foraging" : "mining"} attribute.
+              Level 10 values. See the <a href="/reference/attributes/">attribute reference</a> for every {skill.label.toLowerCase()} attribute.
             </p>
             <table class="table">
               <thead>
@@ -334,7 +335,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
         <p class="muted small">Found a mistake? Tell the author in the <Credit id={community} />, or open an issue on <a href="https://github.com/tianiste/SkyProgression-WEB/issues">GitHub</a>.</p>
       </section>
 
-      {!foraging && <section class="get-mod" aria-labelledby="get-mod-title">
+      {mining && <section class="get-mod" aria-labelledby="get-mod-title">
         <span class="slot lg"><img class="pixelated" src="/brand/mark.svg" width="64" height="64" alt="" loading="lazy" /></span>
         <div>
           <h2 id="get-mod-title">Get the mod</h2>

@@ -24,6 +24,7 @@ export const priority = z.enum(["required", "recommended", "optional"]);
 export const group = z.enum([
   "drill",
   "axe",
+  "rod",
   "tools",
   "armor",
   "equipment",
@@ -116,7 +117,7 @@ export const guideSchema = z.object({
   title: z.string(),
   /** Matches the mod's MiningMethod names when the mod covers the method. */
   method: z.array(z.enum(["COAL", "GOLD", "GROTTO", "UMBER", "SHAFTING", "OBSIDIAN", "TUNGSTEN", "MF_GEMS", "MF_RUBY", "MF_TOPAZ", "RED_SAND", "MYCELIUM", "END_STONE", "COBBLESTONE"])).default([]),
-  category: z.enum(["gemstones", "dwarven-metals", "ores", "blocks", "foraging", "other"]),
+  category: z.enum(["gemstones", "dwarven-metals", "ores", "blocks", "foraging", "fishing-basics", "fishing-methods", "other"]),
   summary: z.string(),
   authors: z.array(person).min(1),
   contributors: z.array(person).default([]),
