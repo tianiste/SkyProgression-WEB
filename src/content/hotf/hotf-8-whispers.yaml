@@ -1,0 +1,30 @@
+title: HotF 8 (Whispers)
+order: 8
+author:
+  id: zimbrell222
+  role: HotF tree picture
+hotf: 8
+tokens: 17
+center: 5
+whispers: { forest: 8500000, desert: 37800000 }
+blocked: [half_full]
+note: Tiers 1 to 3 are below the guide's picture. They are worked out from the 17 tokens, the connected path and the whisper total, so Hunters Luck's level is our reading.
+perks:
+  sweep: max
+  foraging_fortune: max
+  luck_of_the_forest: max
+  hunters_luck: max
+  lottery: max
+  foraging_madness: max
+  iron_lungs: max
+  250_gifts: max
+  tree_whisperer: max
+  starlyn_supreme: max
+  half_empty: max
+  ricochet: max
+  forest_speed: max
+  essence_fortune: max
+  timber: max
+  two_for_one: max
+  forest_strength: max
+  center_of_the_forest: max

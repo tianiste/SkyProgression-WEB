@@ -243,3 +243,22 @@ browser -> api.skyprogression.dev (Worker: name to UUID, caching, rate limits)
      returns the worn pieces' render data (item ID, dye colour, skull texture URL). Lazy-loaded, with a static fallback
      for no WebGL and for reduced motion. Done when a looked-up player shows their skin and worn armor. (Built; see the
      status above.)
+
+## Foraging (2026-11-01)
+
+Foraging guides, from the foraging community Discord: Foraging Progression (the upgrade path), Heart of the Forest, Fig,
+Big Fig Trees (miroOP), Mangrove, Helix, Foraging Attributes and the FAQ.
+
+- **Upgrades:** the mod's engine has no foraging data (no Sweep, no rate model), so Overview, Gear, Upgrades, Methods and
+  Start with stay mining only and the Upgrades page links to the path. The upgrade path is `stages` in the guide data: an
+  ordered to-do list checked by `POST /checklist`, not a ranked plan with prices.
+- **What ticks off:** items, pets, accessories and attributes use the existing evaluator with no engine change. The `hotf`
+  kind and every `manual` step show as "check this yourself".
+- **Known limit:** the evaluator's attribute rarity table does not list the foraging attributes, so a maxed one shows as
+  partly done until `ATTRIBUTE_RARITY` in the mod's `Checklist.java` gains them (rarities in `src/content/attributes.yaml`).
+- **HotF trees:** 10 trees transcribed from Zimbrell222's pictures. Layout, IDs and maxima from NEU `hotflayout.json`. Token
+  counts match the wiki (17 at HotF 8 with Center 5). Tiers 1 to 3 of the HotF 8 trees are not in the pictures and are
+  derived from those tokens, the connected path and the whisper totals; the guide says so.
+- **IDs:** checked against `api.hypixel.net/v2/resources/skyblock/items`, NEU `attribute_shards.json` and the mod's fixture.
+- **Icons:** foraging items outside the mod's icon table show a fallback until `scripts/import-icons.mjs` is run.
+- **Permission:** the mining guides' permission note does not cover these. Get the authors' permission before publishing.

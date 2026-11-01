@@ -47,9 +47,13 @@ const NOT_AVAILABLE = "Player lookup is not available yet.";
 interface Props {
   guide: string;
   total: number;
+  /** The guide's names for its two setups. */
+  tiers?: string[];
+  /** Link to the player's stats and upgrades; off for guides the engine does not cover. */
+  stats?: boolean;
 }
 
-export default function PlayerLookup({ guide, total }: Props) {
+export default function PlayerLookup({ guide, total, tiers = ["Budget setup", "Max setup"], stats = true }: Props) {
   const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -116,7 +120,7 @@ export default function PlayerLookup({ guide, total }: Props) {
     }
   }, []);
 
-  const counts = answer ? count(answer.results) : null;
+  const counts = answer ? count(answer.results, tiers) : null;
   const off = answer ? Object.entries(API_NAMES).filter(([k]) => !answer.api[k as keyof Answer["api"]]).map(([, v]) => v) : [];
   const vaultOff = answer !== null && answer.api.inventory && !answer.api.vault;
   const unknown = counts?.unknown ?? 0;
@@ -174,7 +178,7 @@ export default function PlayerLookup({ guide, total }: Props) {
               ) : (
                 <> on {profileLabel(answer.profile)}</>
               )}
-              <a href={`/player/${encodeURIComponent(answer.player ?? name)}/`}>Stats and upgrades</a>
+              {stats && <a href={`/player/${encodeURIComponent(answer.player ?? name)}/`}>Stats and upgrades</a>}
               <button type="button" class="link-button" onClick={clear}>Clear</button>
             </p>
             <p class="lookup-counts">
@@ -254,7 +258,7 @@ interface Counts {
   tiers: { label: string; done: number; total: number }[];
 }
 
-function count(results: Result[]): Counts {
+function count(results: Result[], names = ["Budget setup", "Max setup"]): Counts {
   const c: Counts = { owned: 0, partial: 0, missing: 0, unknown: 0, manual: 0, tiers: [] };
   for (const r of results) c[r.state]++;
   // Untiered entries belong to both setups.
@@ -264,7 +268,7 @@ function count(results: Result[]): Counts {
     for (const [k, t] of tiers) if (!tier || tier === k) { t.total++; if (r.state === "owned") t.done++; }
   }
   const hasTiers = results.some((r) => document.querySelector<HTMLElement>(`[data-requirement="${CSS.escape(r.id)}"]`)?.dataset.tier);
-  if (hasTiers) c.tiers = [{ label: "Budget setup", ...tiers.get("budget")! }, { label: "Max setup", ...tiers.get("max")! }];
+  if (hasTiers) c.tiers = [{ label: names[0]!, ...tiers.get("budget")! }, { label: names[1]!, ...tiers.get("max")! }];
   return c;
 }
 

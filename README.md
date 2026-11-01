@@ -1,10 +1,10 @@
 # SkyProgression website
 
-The website for [SkyProgression](https://github.com/tianiste/SkyProgression), a Hypixel SkyBlock mining progression
+The website for [SkyProgression](https://github.com/tianiste/SkyProgression), a Hypixel SkyBlock progression
 mod. It lives at [skyprogression.dev](https://skyprogression.dev).
 
-It starts with the Mining Cult community's mining guides: gear for a budget and a max setup, Heart of the Mountain
-trees drawn from data, attributes, rates and how to mine. Guides are stored as structured requirements, so player
+It carries the Mining Cult community's mining guides (gear for a budget and a max setup, Heart of the Mountain
+trees drawn from data, attributes, rates and how to mine) and the foraging community's guides (an ordered upgrade path, Heart of the Forest trees and a guide for each wood). Guides are stored as structured requirements, so player
 lookup shows each guide as that player's to-do list (checked by the mod's engine through the SkyProgression API). See [docs/PLAN.md](docs/PLAN.md) for the roadmap and
 [docs/DESIGN.md](docs/DESIGN.md) for the visual design. Every known limitation of the site, the API and the mod is listed in
 [the mod repository's docs/LIMITATIONS.md](https://github.com/tianiste/SkyProgression/blob/main/docs/LIMITATIONS.md).
@@ -26,6 +26,7 @@ npm run preview   # serve dist/
 | --- | --- |
 | `src/content/guides/*.md` | One guide per file: YAML front matter with the data, Markdown below it for the free text |
 | `src/content/trees/*.yaml` | HOTM trees, perk ID to level |
+| `src/content/hotf/*.yaml` | Heart of the Forest trees, perk ID to level |
 | `src/content/attributes.yaml`, `src/content/stats.yaml` | The attribute and stat source references |
 | `src/schema/guide.ts` | The guide data model (zod); also served as JSON Schema at `/schema/guide.json` |
 | `src/data/` | Perk layout, item names, credited people |
@@ -38,12 +39,14 @@ npm run preview   # serve dist/
 2. Create `src/content/guides/<guide-id>.md`. The file name becomes the URL: `/guides/<guide-id>`. Copy an existing
    guide such as `dwarven-metals.md` as a starting point.
 3. Fill in the front matter:
-   - `title`, `category` (`gemstones`, `dwarven-metals`, `ores`, `blocks` or `other`), a one-sentence `summary`, and
+   - `title`, `category` (`gemstones`, `dwarven-metals`, `ores`, `blocks`, `foraging` or `other`), a one-sentence `summary`, and
      `method` with the mod's method names when the mod covers the method.
    - `authors` and `contributors` by their key in `people.ts`, `source`, and `updated` (the date you checked it).
    - `where`, `blocks`, `rates` and `ratesMeasured` for the summary at the top of the page.
    - `hotm`: one entry per preset with the HOTM tier, tokens, Core of the Mountain level and powder. Set `tree` to a
      file in `src/content/trees/` once the tree is drawn.
+   - `hotf`: Heart of the Forest tree IDs from `src/content/hotf/`, for foraging guides.
+   - `stages`: optional ordered upgrade stages (`id`, `title`, `summary`). A requirement with `stage: <id>` shows in order under that stage instead of under Gear.
    - `requirements`: the gear and progress list (see below).
 4. Write the free text (how to mine, routes, tips) as Markdown below the front matter, using `##` headings. Each `##`
    heading appears in the page's table of contents.
@@ -51,7 +54,7 @@ npm run preview   # serve dist/
 
 ### Requirements
 
-Every requirement has an `id` (unique in the guide), a `group` (`drill`, `tools`, `armor`, `equipment`, `pet`,
+Every requirement has an `id` (unique in the guide), a `group` (`drill`, `axe`, `tools`, `armor`, `equipment`, `pet`,
 `accessories`, `consumables`, `progress`, `attributes`, `hotm` or `other`) and a `kind`. Add `tier: budget` or
 `tier: max` when it belongs to one setup only; leave it out when it applies to both. `priority`, `note` and
 `prerequisites` are optional.
@@ -61,6 +64,7 @@ Every requirement has an `id` (unique in the guide), a `group` (`drill`, `tools`
 | `item` | `item` (Hypixel item ID), `count`, `modifiers` | `{ kind: item, item: DIVAN_DRILL, modifiers: [{ kind: recomb }] }` |
 | `pet` | `pet: { type, minTier, level, item }` | `{ kind: pet, pet: { type: SCATHA, minTier: RARE, level: 100 } }` |
 | `hotm` | `perk` (perk ID), `level` (number or `max`) | `{ kind: hotm, perk: strong_arm, level: max }` |
+| `hotf` | `perk` (perk ID from `src/data/hotf.ts`), `level` (number or `max`). The engine has no HotF check yet, so it shows as "check this yourself". | `{ kind: hotf, perk: sweep, level: max }` |
 | `powder` | `powder` (`mithril`, `gemstone`, `glacite`), `amount` | `{ kind: powder, powder: glacite, amount: 10000000 }` |
 | `attribute` | `attribute` (ID from `attributes.yaml`), `level` | `{ kind: attribute, attribute: rotten_pickaxe }` |
 | `essence` | `essence` (shop), `perk`, `level` | `{ kind: essence, essence: GOLD, perk: eager_miner, level: 10 }` |

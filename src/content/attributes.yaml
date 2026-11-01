@@ -266,3 +266,142 @@
   rarity: Epic
   family: intelligence
   effect: "+10% mana regeneration"
+# Foraging attributes. IDs and rarities from NEU attribute_shards.json, effects at level 10 from the wiki's Attributes page.
+- id: nocturnal_animal
+  name: "Nocturnal Animal"
+  shard: "Phanpyre"
+  rarity: Common
+  family: foraging
+  effect: "+10 Sweep during the night"
+- id: diurnal_animal
+  name: "Diurnal Animal"
+  shard: "Groundhog"
+  rarity: Common
+  family: foraging
+  effect: "+10 Sweep during the day"
+- id: moonglade_mastery
+  name: "Moonglade Mastery"
+  shard: "Phanflare"
+  rarity: Common
+  family: foraging
+  effect: "+100 Fig Fortune and +100 Mangrove Fortune"
+- id: fig_sharpening
+  name: "Fig Sharpening"
+  shard: "Crow"
+  rarity: Common
+  family: foraging
+  effect: "+50 Sweep towards Fig Trees"
+- id: unity_is_strength
+  name: "Unity is Strength"
+  shard: "Tadgang"
+  rarity: Common
+  family: foraging
+  effect: "+0.2 Sweep per unique Common attribute you own"
+- id: torrhus_mastery
+  name: "Torrhus Mastery"
+  shard: "Firefox"
+  rarity: Common
+  family: foraging
+  effect: "+100 Helix Fortune"
+- id: strong_legs
+  name: "Strong Legs"
+  shard: "Mochibear"
+  rarity: Uncommon
+  family: foraging
+  effect: "+30 Sweep on melee"
+- id: strong_arms
+  name: "Strong Arms"
+  shard: "Bambuleaf"
+  rarity: Uncommon
+  family: foraging
+  effect: "+30 Sweep on throws"
+- id: galatea_training
+  name: "Galatea Training"
+  shard: "Ember"
+  rarity: Uncommon
+  family: foraging
+  effect: "+10% Heart of the Forest XP"
+- id: fig_collector
+  name: "Fig Collector"
+  shard: "Sparrow"
+  rarity: Uncommon
+  family: foraging
+  effect: "+10 Fig Fortune per digit in your Fig Log collection"
+- id: forest_felling
+  name: "Helix Timber"
+  shard: "Woodpecker"
+  rarity: Uncommon
+  family: foraging
+  effect: "+1 Timber on Helix Trees"
+- id: starlyn_training
+  name: "Starlyn Training"
+  shard: "Solar"
+  rarity: Uncommon
+  family: foraging
+  effect: "+5% points in Starlyn Contests"
+- id: forest_essence
+  name: "Essence of the Forest"
+  shard: "Dreadwing"
+  rarity: Rare
+  family: foraging
+  effect: "+10% Forest Essence"
+- id: animal_expertise
+  name: "Animal Expertise"
+  shard: "Bambloom"
+  rarity: Rare
+  family: foraging
+  effect: "+100 Foraging Fortune"
+- id: chop
+  name: "Chop"
+  shard: "Hummingbird"
+  rarity: Rare
+  family: foraging
+  effect: "+100% chance to chop an extra log"
+- id: atomized_whispers
+  name: "Atomized Whispers"
+  shard: "Pangolin"
+  rarity: Rare
+  family: foraging
+  effect: "+10% Whispers"
+- id: moonglade_serendipity
+  name: "Moonglade Serendipity"
+  shard: "Piranha"
+  rarity: Rare
+  family: foraging
+  effect: "+20% rare items in Tree Gifts at Moonglade Marsh"
+- id: beacon_zealot
+  name: "Beacon Zealot"
+  shard: "Beaconmite"
+  rarity: Rare
+  family: foraging
+  effect: "Galatea's beacon effects 100% stronger on you, +1% chance of Signal Enhancers in Tree Gifts"
+- id: forest_serendipity
+  name: "Forest Serendipity"
+  shard: "Puck"
+  rarity: Rare
+  family: foraging
+  effect: "+1% chance for Tree Gifts to contain double loot"
+- id: helix_sharpening
+  name: "Helix Sharpening"
+  shard: "Vulture"
+  rarity: Rare
+  family: foraging
+  effect: "+150 Sweep towards Helix Trees"
+- id: first_sweep
+  name: "First Sweep"
+  shard: "Torrid"
+  rarity: Rare
+  family: foraging
+  effect: "The first Sweep on each tree is 10% more effective"
+- id: pure_reptile
+  name: "Pure Reptile"
+  shard: "Crocodile"
+  rarity: Rare
+  family: foraging
+  effect: "+20% chance to double shards from a Reptile Fusion"
+- id: tough_claws
+  name: "Tough Claws"
+  shard: "Grizzly Bear"
+  rarity: Legendary
+  family: foraging
+  effect: "Reduces a tree's Toughness by 1 when cut down"

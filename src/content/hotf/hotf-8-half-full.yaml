@@ -1,0 +1,30 @@
+title: HotF 8 (Money) + Half Full
+order: 9
+author:
+  id: zimbrell222
+  role: HotF tree picture
+hotf: 8
+tokens: 17
+center: 5
+whispers: { forest: 4900000, desert: 36700000 }
+blocked: [half_empty]
+note: Tiers 1 to 3 are below the guide's picture. They are worked out from the 17 tokens and the connected path.
+perks:
+  sweep: max
+  foraging_fortune: max
+  luck_of_the_forest: max
+  hunters_luck: 1
+  lottery: max
+  foraging_madness: max
+  iron_lungs: 1
+  250_gifts: 1
+  starlyn_supreme: max
+  efficient_forager: max
+  ricochet: 1
+  half_full: max
+  forest_speed: max
+  essence_fortune: max
+  timber: max
+  two_for_one: 1
+  forest_strength: max
+  center_of_the_forest: max

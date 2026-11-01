@@ -9,9 +9,9 @@ const guides = await getCollection("guides");
 const used = CATEGORIES.filter((c) => guides.some((g) => g.data.category === c.id)).map(({ id, label }) => ({ id, label }));
 ---
 
-<Base title="Guides" description="Every mining guide on SkyProgression, grouped by what you mine.">
+<Base title="Guides" description="Every mining and foraging guide on SkyProgression.">
   <h1>Guides</h1>
-  <p class="lead">Pick what you want to mine. Each guide lists gear for a budget and a max setup, the HOTM tree, attributes and how to mine.</p>
+  <p class="lead">Pick what you want to mine or forage. Mining guides list gear for a budget and a max setup, the HOTM tree, attributes and how to mine. Foraging has an upgrade path you can check a player against, Heart of the Forest trees and a guide for each wood.</p>
   <p class="picking" id="picking" hidden></p>
   <div class="seam" aria-hidden="true"></div>
   <CategoryFilter client:idle categories={used} />

@@ -103,6 +103,7 @@ export function requirementIcon(r: Requirement | LeafRequirement, rarityOf?: (at
       return itemIcon(r.collection);
     case "powder":
       return powderIcon(r.powder);
+    case "hotf":
     case "essence":
     case "skill":
       return { kind: "glyph", glyph: "skill" };

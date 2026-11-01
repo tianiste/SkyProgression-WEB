@@ -31,6 +31,9 @@ export const PEOPLE = {
   lfalloy: { name: "lfAlloy", links: [] },
   koenigboohoo: { name: "KoenigBooHoo", links: [] },
   "mining-cult": { name: "Mining Cult Discord", links: [] },
+  zimbrell222: { name: "Zimbrell222", links: [] },
+  miroop: { name: "miroOP", links: [] },
+  "foraging-community": { name: "Foraging community Discord", links: [] },
 } satisfies Record<string, Person>;
 
 export type PersonId = keyof typeof PEOPLE;

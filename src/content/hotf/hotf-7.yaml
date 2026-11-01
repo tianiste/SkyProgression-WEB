@@ -1,0 +1,26 @@
+title: HotF 7
+order: 7
+author:
+  id: zimbrell222
+  role: HotF tree picture
+hotf: 7
+tokens: 15
+center: 5
+blocked: [half_empty]
+perks:
+  sweep: max
+  foraging_fortune: max
+  luck_of_the_forest: max
+  damage_boost: 1
+  deep_waters: 1
+  lottery: max
+  foraging_madness: max
+  hunters_luck: 1
+  250_gifts: max
+  tree_whisperer: max
+  starlyn_supreme: max
+  speed_boost: max
+  efficient_forager: max
+  ricochet: 1
+  half_full: max
+  center_of_the_forest: max

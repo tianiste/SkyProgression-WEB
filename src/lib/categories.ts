@@ -4,5 +4,6 @@ export const CATEGORIES = [
   { id: "dwarven-metals", label: "Dwarven Metals", swatch: "#b5794a" },
   { id: "ores", label: "Ores", swatch: "#4fe3ec" },
   { id: "blocks", label: "Blocks", swatch: "#8c8f99" },
+  { id: "foraging", label: "Foraging", swatch: "#6f8f3a" },
   { id: "other", label: "Other", swatch: "#8ef04a" },
 ] as const;

@@ -15,17 +15,27 @@
     "cobblestone": "minecraft:block/cobblestone",
     "end-stone": "minecraft:block/end_stone",
     "obsidian": "minecraft:block/obsidian",
-    "mycelium-red-sand": "ENCHANTED_MYCELIUM_CUBE"
+    "mycelium-red-sand": "ENCHANTED_MYCELIUM_CUBE",
+    "foraging-progression": "HELIX_ARMOR_CHESTPLATE",
+    "heart-of-the-forest": "#3f8f3a",
+    "fig": "FIG_CHESTPLATE",
+    "big-fig-trees": "WOOD",
+    "mangrove": "#7a4a2e",
+    "helix": "HELIX_ARMOR_HELMET",
+    "foraging-attributes": "#a06be0",
+    "foraging-faq": "#c9b458"
   },
   "category": {
     "gemstones": "PERFECT_RUBY_GEM",
     "dwarven-metals": "ENCHANTED_TUNGSTEN",
     "ores": "minecraft:block/gold_ore",
     "blocks": "minecraft:block/cobblestone",
+    "foraging": "WOOD",
     "other": "MITHRIL_ORE"
   },
   "group": {
     "drill": "DIVAN_DRILL",
+    "axe": "WOOD",
     "tools": "ASPECT_OF_THE_VOID",
     "armor": "DIVAN_CHESTPLATE",
     "equipment": "DIVAN_PENDANT",
