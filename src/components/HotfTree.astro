@@ -1,0 +1,257 @@
+---
+/**
+ * A Heart of the Forest tree drawn from data: 7 columns x 8 tiers, tier 8 at the top. Colour and shape both show a
+ * perk's state. Each perk is a button that opens a popover with its name, level and effect (mouse, keyboard and touch,
+ * no script); the same information is listed as text below.
+ */
+import { HOTF_PERKS, hotfTierOf, type HotfPerk } from "../data/hotf";
+
+interface Props {
+  id: string;
+  perks: Partial<Record<string, "max" | number>>;
+  /** Perks the tree's choices rule out, such as Half Empty next to Half Full. */
+  blocked?: string[];
+  label: string;
+}
+
+const { id, perks, blocked = [], label } = Astro.props;
+
+type State = "max" | "bridge" | "level" | "none" | "blocked";
+
+function stateOf(p: HotfPerk): State {
+  if (blocked.includes(p.id)) return "blocked";
+  const v = perks[p.id];
+  if (v === undefined) return "none";
+  if (v === "max" || v >= p.max) return "max";
+  return v === 1 && p.kind !== "center" ? "bridge" : "level";
+}
+
+const STATE_TEXT: Record<State, string> = {
+  max: "Maxed",
+  bridge: "Bridging perk: unlocked only to reach other perks",
+  level: "Partly levelled",
+  none: "Not taken",
+  blocked: "Blocked by the other choice in this tree",
+};
+
+function levelText(p: HotfPerk, s: State): string {
+  const v = perks[p.id];
+  if (s === "max") return p.max > 1 ? `${p.max} / ${p.max}` : "";
+  if (s === "level" && typeof v === "number") return `${v} / ${p.max}`;
+  if (s === "none" || s === "blocked") return `max ${p.max}`;
+  return "";
+}
+
+const cells = HOTF_PERKS.map((p) => ({ perk: p, state: stateOf(p) }));
+const groups: State[] = ["max", "level", "bridge", "blocked"];
+const used = new Set(cells.map((c) => c.state));
+const legend: { state: State; text: string }[] = [
+  { state: "max", text: "Maxed" },
+  { state: "bridge", text: "Bridging perk" },
+  { state: "none", text: "Not taken" },
+  ...(used.has("level") ? [{ state: "level" as State, text: "Partly levelled" }] : []),
+  ...(used.has("blocked") ? [{ state: "blocked" as State, text: "Blocked" }] : []),
+];
+---
+
+<figure class="hotf" aria-label={label}>
+  <div class="grid" role="group" aria-label={`${label}, perk grid`}>
+    {
+      cells.map(({ perk, state }) => {
+        const pid = `${id}-${perk.id}`;
+        const level = levelText(perk, state);
+        const text = `${STATE_TEXT[state]}${level ? `, ${level}` : ""}`;
+        return (
+          <>
+            <button
+              class:list={["cell", state, perk.kind]}
+              style={`grid-column:${perk.x + 1};grid-row:${perk.y + 1}`}
+              popovertarget={pid}
+              aria-label={`${perk.name}: ${text}`}
+              title={perk.name}
+            >
+              <span class="glyph" aria-hidden="true" />
+            </button>
+            <div id={pid} popover class="tip">
+              <strong>{perk.name}</strong>
+              <span>{`Tier ${hotfTierOf(perk)}, ${perk.whispers} whispers. ${text}.`}</span>
+              <span class="effect">{perk.effect}</span>
+            </div>
+          </>
+        );
+      })
+    }
+  </div>
+  <figcaption>
+    <ul class="legend">
+      {
+        legend.map((l) => (
+          <li>
+            <span class={`cell ${l.state}`} aria-hidden="true"><span class="glyph" /></span>
+            {l.text}
+          </li>
+        ))
+      }
+    </ul>
+    <details class="perk-list">
+      <summary>Perks as a list</summary>
+      <dl>
+        {
+          groups.map((g) => {
+            const list = cells.filter((c) => c.state === g);
+            return list.length ? (
+              <>
+                <dt>{STATE_TEXT[g]}</dt>
+                <dd>{list.map((c) => c.perk.name).join(", ")}</dd>
+              </>
+            ) : null;
+          })
+        }
+      </dl>
+    </details>
+  </figcaption>
+</figure>
+
+<style>
+  .hotf {
+    margin: 0.75rem 0 1rem;
+    max-width: 24rem;
+  }
+  /* A dark panel in both themes, like the HOTM tree. */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(7, 32px);
+    grid-template-rows: repeat(8, 32px);
+    width: max-content;
+    padding: 12px;
+    background: #1c1e26;
+    border: 2px solid #3a3e4c;
+    border-radius: var(--radius);
+  }
+  .cell {
+    margin: 4px;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    border: 2px solid #3a3e4c;
+    background: #2b2f3c;
+    cursor: pointer;
+  }
+  button.cell:hover {
+    outline: 2px solid rgb(255 255 255 / 0.25);
+  }
+  button.cell:focus-visible {
+    outline: 2px solid #4fe3ec;
+  }
+  .glyph {
+    display: block;
+    width: 50%;
+    height: 50%;
+  }
+  .cell.max {
+    background: #8ef04a;
+    border-color: #8ef04a;
+  }
+  .cell.max .glyph {
+    background: #1c1e26;
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  }
+  .cell.bridge {
+    border-color: #b5476a;
+    background: #5a2436;
+  }
+  .cell.bridge .glyph {
+    width: 30%;
+    height: 30%;
+    background: #f08aa8;
+  }
+  .cell.level {
+    border-color: #8ef04a;
+  }
+  .cell.level .glyph {
+    width: 60%;
+    height: 60%;
+    background: #8ef04a;
+  }
+  .cell.none {
+    border-style: dashed;
+    background: transparent;
+  }
+  .cell.blocked {
+    border-color: #d4524a;
+    background: transparent;
+  }
+  .cell.blocked .glyph {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 42%, #d4524a 42% 58%, transparent 58%);
+  }
+  /* Abilities are round, Center of the Forest is the large square in the middle. */
+  .cell.ability {
+    border-radius: 50%;
+  }
+  .cell.center {
+    margin: 1px;
+    width: 30px;
+    height: 30px;
+  }
+  .tip {
+    margin: auto;
+    max-width: min(20rem, calc(100vw - 32px));
+    padding: 0.75rem 1rem;
+    background: var(--surface);
+    color: var(--text);
+    border: 2px solid var(--accent);
+    border-radius: var(--radius);
+    font-size: var(--step--1);
+  }
+  .tip strong,
+  .tip span {
+    display: block;
+  }
+  .tip strong {
+    font-size: var(--step-0);
+  }
+  .tip .effect {
+    margin-top: 0.35rem;
+    color: var(--muted);
+  }
+  .tip::backdrop {
+    background: rgb(0 0 0 / 0.35);
+  }
+  figcaption {
+    margin-top: 0.75rem;
+    font-size: var(--step--1);
+  }
+  .legend {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: 0.25rem 1rem;
+  }
+  .legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .legend .cell {
+    flex: none;
+    cursor: default;
+  }
+  .perk-list summary {
+    cursor: pointer;
+    color: var(--accent);
+  }
+  .perk-list dt {
+    font-weight: 650;
+    margin-top: 0.5rem;
+  }
+  .perk-list dd {
+    margin: 0;
+    color: var(--muted);
+  }
+</style>

@@ -2,7 +2,9 @@
 import { getCollection, getEntry, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Requirement from "../../components/Requirement.astro";
+import UpgradePath from "../../components/UpgradePath.astro";
 import HotmTree from "../../components/HotmTree.astro";
+import HotfTree from "../../components/HotfTree.astro";
 import Notice from "../../components/Notice.astro";
 import Credit from "../../components/Credit.astro";
 import Icon from "../../components/Icon.astro";
@@ -10,7 +12,7 @@ import ModrinthButton from "../../components/ModrinthButton.astro";
 import PlayerLookup from "../../components/islands/PlayerLookup.tsx";
 import { SITE } from "../../config";
 import { categoryIcon, groupIcon, guideIcon, powderIcon, shardIcon, type Icon as IconT } from "../../lib/icons";
-import { CATEGORIES } from "../../lib/categories";
+import { CATEGORIES, skillOf } from "../../lib/categories";
 import { GEAR_GROUPS, GROUP_LABELS } from "../../lib/requirements";
 import { formatDate, formatPowder } from "../../lib/format";
 
@@ -23,15 +25,20 @@ const { guide } = Astro.props;
 const g = guide.data;
 const { Content, headings } = await render(guide);
 const category = CATEGORIES.find((c) => c.id === g.category)!;
+const skill = skillOf(g.category);
 
 const attributes = await getCollection("attributes");
 const attrById = new Map(attributes.map((a) => [a.id, a.data]));
 const attributeNames = new Map(attributes.map((a) => [a.id, a.data.name]));
 const rarityOf = (id: string) => attrById.get(id)?.rarity;
 
+const foraging = g.category === "foraging";
+const community = foraging ? "foraging-community" : "mining-cult";
+const tierNames = foraging ? ["Starting out", "Money setup"] : ["Budget setup", "Max setup"];
+
 const reqs = g.requirements;
 const gear = GEAR_GROUPS.map((id) => {
-  const list = reqs.filter((r) => r.group === id);
+  const list = reqs.filter((r) => r.group === id && !r.stage);
   return {
     id,
     label: GROUP_LABELS[id],
@@ -40,22 +47,26 @@ const gear = GEAR_GROUPS.map((id) => {
     both: list.filter((r) => !r.tier),
   };
 }).filter((s) => s.budget.length + s.max.length + s.both.length > 0);
-const attributeReqs = reqs.filter((r) => r.kind === "attribute");
+const attributeReqs = reqs.filter((r) => r.kind === "attribute" && !r.stage);
 const hotmReqs = reqs.filter((r) => r.group === "hotm");
 const PRIORITY = { required: "Required", recommended: "Recommended", optional: "Useful" } as const;
 
 const treeIds = [...new Set(g.hotm.map((h) => h.tree).filter(Boolean))] as string[];
 const trees = (await Promise.all(treeIds.map((id) => getEntry("trees", id)))).filter((t) => t !== undefined);
+const hotfTrees = (await Promise.all(g.hotf.map((id) => getEntry("hotf", id)))).filter((t) => t !== undefined).sort((a, b) => a.data.order - b.data.order);
+const hasHotm = g.hotm.length > 0 || hotmReqs.length > 0;
 
 const note: IconT = { kind: "glyph", glyph: "note" };
 const pin: IconT = { kind: "glyph", glyph: "pin", color: "var(--accent)" };
 const book: IconT = { kind: "glyph", glyph: "book", color: "var(--stat-purple)" };
 const toc: { id: string; label: string; icon: IconT }[] = [
   { id: "glance", label: "At a glance", icon: pin },
-  g.hotm.length || hotmReqs.length ? { id: "hotm", label: "Heart of the Mountain", icon: powderIcon("mithril") } : null,
-  { id: "gear", label: "Gear", icon: groupIcon("drill") },
+  g.stages.length ? { id: "upgrades", label: "Upgrade path", icon: groupIcon("axe") } : null,
+  hasHotm ? { id: "hotm", label: "Heart of the Mountain", icon: powderIcon("mithril") } : null,
+  gear.length ? { id: "gear", label: "Gear", icon: groupIcon(foraging ? "axe" : "drill") } : null,
   attributeReqs.length ? { id: "attributes", label: "Attributes", icon: shardIcon("Epic") } : null,
   ...headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, label: h.text, icon: note })),
+  hotfTrees.length ? { id: "hotf-trees", label: "HotF trees", icon: note } : null,
   g.videos.length ? { id: "videos", label: "Videos", icon: note } : null,
   { id: "credits", label: "Credits and sources", icon: book },
 ].filter((t) => t !== null);
@@ -66,7 +77,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
   <div class="layout">
     <article>
       <header class="guide-head">
-        <p class="crumbs"><a href="/guides/">Guides</a> / <a href={`/guides/#${category.id}`}>{category.label}</a></p>
+        <p class="crumbs"><a href="/guides/">Guides</a> / <a href={`/guides/#${skill.id}`}>{skill.label}</a>{category.id !== skill.id && <> / <a href={`/guides/#${category.id}`}>{category.label}</a></>}</p>
         <div class="head-row">
           <span class="slot lg"><Icon icon={guideIcon(guide.id)} size={64} /></span>
           <h1 class="title">{g.title}</h1>
@@ -74,10 +85,10 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
         </div>
         <p class="byline credit-line">
           {
-            g.authors.some((a) => a.id !== "mining-cult") ? (
-              <>Guide by {g.authors.map((a, i) => <>{i > 0 && " and "}<Credit id={a.id} /></>)}, posted in the <Credit id="mining-cult" /></>
+            g.authors.some((a) => a.id !== community) ? (
+              <>Guide by {g.authors.map((a, i) => <>{i > 0 && " and "}<Credit id={a.id} /></>)}, posted in the <Credit id={community} /></>
             ) : (
-              <>Posted in the <Credit id="mining-cult" /> without a named author</>
+              <>Posted in the <Credit id={community} /> without a named author</>
             )
           }{g.source.posted && <> on {formatDate(g.source.posted)}</>}. Checked {formatDate(g.updated)}.
         </p>
@@ -85,11 +96,11 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
       </header>
       <div class="seam" aria-hidden="true"></div>
 
-      <section class="progress" aria-labelledby="progress-title">
+      {reqs.length > 0 && <section class="progress" aria-labelledby="progress-title">
         <h2 id="progress-title" class="visually-hidden">Check a player</h2>
         <div class="xp" aria-hidden="true"><span></span></div>
-        <PlayerLookup client:idle guide={guide.id} total={reqs.length} />
-      </section>
+        <PlayerLookup client:idle guide={guide.id} total={reqs.length} tiers={tierNames} playerLink={skill.path ? { path: `${skill.page}/`, label: `${skill.label} page` } : { path: "", label: "Stats and upgrades" }} />
+      </section>}
 
       <details class="toc-mobile">
         <summary>On this page</summary>
@@ -106,7 +117,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
           {
             g.blocks.length > 0 && (
               <div class="blocks">
-                <dt><Icon icon={categoryIcon(g.category)} size={16} />Key blocks</dt>
+                <dt><Icon icon={categoryIcon(g.category)} size={16} />{foraging ? "Key facts" : "Key blocks"}</dt>
                 <dd>
                   <ul>{g.blocks.map((b) => <li>{b}</li>)}</ul>
                 </dd>
@@ -134,10 +145,11 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
         </dl>
       </section>
 
-      <div class="gear-hotm">
+      {g.stages.length > 0 && <UpgradePath stages={g.stages} requirements={reqs} />}
+
+      <div class:list={["gear-hotm", { solo: !hasHotm }]}>
         {
-          (g.hotm.length > 0 || hotmReqs.length > 0) && (
-            <section id="hotm" class="hotm-col" aria-labelledby="hotm-title" data-progress-scope>
+          hasHotm && (            <section id="hotm" class="hotm-col" aria-labelledby="hotm-title" data-progress-scope>
               <h2 id="hotm-title">Heart of the Mountain <span class="section-progress" data-progress hidden /></h2>
               {g.hotm.map((h) => (
                 <div class="preset">
@@ -181,11 +193,11 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
           )
         }
 
-        <section id="gear" aria-labelledby="gear-title">
+        {gear.length > 0 && <section id="gear" aria-labelledby="gear-title">
           <h2 id="gear-title">Gear</h2>
           <p class="muted">
-            <span class="tier-key budget">Budget</span> is the cheapest setup the guide recommends and
-            <span class="tier-key max">max</span> the best one. Items not marked apply to both.
+            <span class="tier-key budget">{foraging ? "Starting out" : "Budget"}</span> is the {foraging ? "minimum the guide says to start with" : "cheapest setup the guide recommends"} and
+            <span class="tier-key max">{foraging ? "money setup" : "max"}</span> {foraging ? "what it takes to make good money" : "the best one"}. Items not marked apply to both.
           </p>
           {
             gear.map((s) => (
@@ -201,7 +213,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
                 {(s.budget.length > 0 || s.max.length > 0) && (
                   <div class="tiers">
                     <div class="tier" data-progress-scope>
-                      <h4 class="tier-title budget">Budget setup <span class="section-progress" data-progress hidden /></h4>
+                      <h4 class="tier-title budget">{tierNames[0]} <span class="section-progress" data-progress hidden /></h4>
                       {s.budget.length ? (
                         <ul class="reqs">{s.budget.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>
                       ) : (
@@ -209,7 +221,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
                       )}
                     </div>
                     <div class="tier" data-progress-scope>
-                      <h4 class="tier-title max">Max setup <span class="section-progress" data-progress hidden /></h4>
+                      <h4 class="tier-title max">{tierNames[1]} <span class="section-progress" data-progress hidden /></h4>
                       {s.max.length ? (
                         <ul class="reqs">{s.max.map((r) => <Requirement r={r} attributeNames={attributeNames} rarityOf={rarityOf} />)}</ul>
                       ) : (
@@ -227,7 +239,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
               </details>
             ))
           }
-        </section>
+        </section>}
       </div>
 
       {
@@ -235,7 +247,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
           <section id="attributes" aria-labelledby="attributes-title" data-progress-scope>
             <h2 id="attributes-title">Attributes <span class="section-progress" data-progress hidden /></h2>
             <p class="muted">
-              Level 10 values. See the <a href="/reference/attributes/">attribute reference</a> for every mining attribute.
+              Level 10 values. See the <a href="/reference/attributes/">attribute reference</a> for every {foraging ? "foraging" : "mining"} attribute.
             </p>
             <table class="table">
               <thead>
@@ -272,6 +284,26 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
       </div>
 
       {
+        hotfTrees.length > 0 && (
+          <section id="hotf-trees" aria-labelledby="hotf-trees-title">
+            <h2 id="hotf-trees-title">HotF trees</h2>
+            <p class="muted">The best tree for each HotF level, excluding trees for other paths such as hunting or fishing. Tap a perk for its name, level and effect.</p>
+            <div class="hotf-trees">
+              {hotfTrees.map((t) => (
+                <article class="tree" aria-labelledby={`${t.id}-title`}>
+                  <h3 id={`${t.id}-title`}>{t.data.title}</h3>
+                  <p class="muted small">
+                    {[`HotF ${t.data.hotf}`, `${t.data.tokens} ${t.data.tokens === 1 ? "token" : "tokens"}`, t.data.center && `Center ${t.data.center}`].filter(Boolean).join(", ")}{t.data.whispers && <>. To max: {formatPowder(t.data.whispers.forest)} Forest and {formatPowder(t.data.whispers.desert)} Desert Whispers</>}.
+                  </p>
+                  <p class="muted small"><span class="credit-line">Picture by <Credit id={t.data.author.id} />.</span> {t.data.note}</p>
+                  <HotfTree id={t.id} label={`${t.data.title} tree`} perks={t.data.perks} blocked={t.data.blocked} />
+                </article>
+              ))}
+            </div>
+          </section>
+        )
+      }
+      {
         g.videos.length > 0 && (
           <section id="videos" aria-labelledby="videos-title">
             <h2 id="videos-title">Videos</h2>
@@ -299,10 +331,10 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
             Requirements as data: <a href={`/guides/${guide.id}.json`}>{guide.id}.json</a> (format: <a href="/schema/guide.json">guide schema</a>).
           </li>
         </ul>
-        <p class="muted small">Found a mistake? Tell the author in the Mining Cult Discord, or open an issue on <a href="https://github.com/tianiste/SkyProgression-WEB/issues">GitHub</a>.</p>
+        <p class="muted small">Found a mistake? Tell the author in the <Credit id={community} />, or open an issue on <a href="https://github.com/tianiste/SkyProgression-WEB/issues">GitHub</a>.</p>
       </section>
 
-      <section class="get-mod" aria-labelledby="get-mod-title">
+      {!foraging && <section class="get-mod" aria-labelledby="get-mod-title">
         <span class="slot lg"><img class="pixelated" src="/brand/mark.svg" width="64" height="64" alt="" loading="lazy" /></span>
         <div>
           <h2 id="get-mod-title">Get the mod</h2>
@@ -315,7 +347,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
             <a href={SITE.github}>Source on GitHub</a>
           </p>
         </div>
-      </section>
+      </section>}
     </article>
 
     <aside class="toc" aria-label="On this page">
@@ -438,8 +470,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
     margin: 1.25rem 0 0;
   }
   section[id],
-  .prose :global(h2),
-  .gear-group h3 {
+  .prose :global(h2) {
     scroll-margin-top: 1rem;
   }
   .with-icon {
@@ -477,19 +508,6 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
   .progress p {
     margin: 0;
     font-size: var(--step--1);
-  }
-  /* The XP bar from the logo: a deep green track that fills with bright green. */
-  .xp {
-    height: 12px;
-    background: var(--surface-2);
-    border: 2px solid var(--line);
-  }
-  .xp span {
-    display: block;
-    height: 100%;
-    width: 0;
-    background: var(--xp);
-    box-shadow: inset 0 -3px 0 var(--xp-deep);
   }
   /* Where and rates side by side, key blocks across the full width under them. */
   .glance {
@@ -569,8 +587,25 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
       font-size: var(--step-2);
     }
   }
-  .preset {
-    padding: 0.6rem 0;
+  @media (min-width: 1100px) {
+    .gear-hotm.solo {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  .hotf-trees {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+    gap: 1rem 2rem;
+  }
+  .hotf-trees .tree {
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line);
+    min-width: 0;
+  }
+  .hotf-trees p {
+    margin: 0.25rem 0;
+  }
+  .preset {    padding: 0.6rem 0;
     border-top: 1px solid var(--line);
   }
   .preset-name {
@@ -637,50 +672,6 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
     gap: 0 2rem;
   }
 
-  .reqs {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 0.5rem;
-  }
-  .gear-group + .gear-group {
-    border-top: 1px solid var(--line);
-  }
-  .gear-group summary {
-    list-style: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-  }
-  .gear-group summary::-webkit-details-marker {
-    display: none;
-  }
-  /* A pixel caret after the heading, pointing down when open. */
-  .gear-group summary::after {
-    content: "";
-    margin-left: auto;
-    width: 10px;
-    height: 6px;
-    background: var(--muted);
-    clip-path: polygon(0 0, 100% 0, 100% 34%, 80% 34%, 80% 67%, 60% 67%, 60% 100%, 40% 100%, 40% 67%, 20% 67%, 20% 34%, 0 34%);
-  }
-  .gear-group:not([open]) summary::after {
-    transform: rotate(-90deg);
-  }
-  .gear-group summary:hover h3 {
-    color: var(--accent);
-  }
-  .gear-group h3 {
-    margin: 1.25rem 0 0.75rem;
-  }
-  .gear-group:not([open]) h3 {
-    margin-bottom: 1.25rem;
-  }
-  .count {
-    font-family: var(--font-text);
-    font-size: var(--step--1);
-    font-weight: 400;
-    color: var(--muted);
-  }
   .tier-title {
     margin: 0.75rem 0 0.25rem;
     padding-left: 0.6rem;

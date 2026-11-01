@@ -251,13 +251,13 @@ export interface Hotm extends Common {
   planner: HotmPlan | null;
 }
 
-/** What the page asks for, from its URL. */
-export interface Query { name: string; view: View; profile: string; method: string; price: string; cost: string; god: boolean; gear: string }
+/** What the page asks for, from its URL. The view is an engine view or a skill's own page. */
+export interface Query { name: string; view: string; profile: string; method: string; price: string; cost: string; god: boolean; gear: string }
 
 export const NOT_AVAILABLE = "Player pages are not available yet.";
 export const NAME = /^[A-Za-z0-9_]{1,16}$/;
 
-export function readQuery(view: View): Query {
+export function readQuery(view: string): Query {
   const parts = location.pathname.split("/").filter(Boolean);
   // /player/<name>/<view>/; the dev shells are also reachable as /player-page/<view>/?name=.
   const q = new URLSearchParams(location.search);

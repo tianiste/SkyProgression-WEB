@@ -1,5 +1,6 @@
 import { z } from "astro/zod";
 import { PERK_IDS } from "../data/perks";
+import { HOTF_PERK_IDS } from "../data/hotf";
 import { PEOPLE_IDS } from "../data/people";
 
 /**
@@ -22,6 +23,7 @@ export const tier = z.enum(["budget", "max"]).describe("Missing means the entry 
 export const priority = z.enum(["required", "recommended", "optional"]);
 export const group = z.enum([
   "drill",
+  "axe",
   "tools",
   "armor",
   "equipment",
@@ -58,6 +60,8 @@ const base = {
   note: z.string().optional(),
   /** IDs of entries in this guide that should be done first. */
   prerequisites: z.array(slug).optional(),
+  /** The entry in the guide's stages this belongs to; staged entries show in order under that stage. */
+  stage: slug.optional(),
 };
 
 const leaf = [
@@ -73,6 +77,7 @@ const leaf = [
     }),
   }),
   z.object({ ...base, kind: z.literal("hotm"), perk: z.enum(PERK_IDS), level: z.union([z.number().int().min(1), z.literal("max")]) }),
+  z.object({ ...base, kind: z.literal("hotf"), perk: z.enum(HOTF_PERK_IDS), level: z.union([z.number().int().min(1), z.literal("max")]) }),
   z.object({ ...base, kind: z.literal("powder"), powder: powderType, amount: z.number().int().min(0) }),
   z.object({ ...base, kind: z.literal("attribute"), attribute: snake, level: z.number().int().min(1).max(10).default(10) }),
   z.object({ ...base, kind: z.literal("essence"), essence: z.enum(["GOLD", "DIAMOND", "FOSSIL", "ICE", "CRIMSON", "WITHER"]), perk: snake, level: z.number().int().min(1) }),
@@ -111,7 +116,7 @@ export const guideSchema = z.object({
   title: z.string(),
   /** Matches the mod's MiningMethod names when the mod covers the method. */
   method: z.array(z.enum(["COAL", "GOLD", "GROTTO", "UMBER", "SHAFTING", "OBSIDIAN", "TUNGSTEN", "MF_GEMS", "MF_RUBY", "MF_TOPAZ", "RED_SAND", "MYCELIUM", "END_STONE", "COBBLESTONE"])).default([]),
-  category: z.enum(["gemstones", "dwarven-metals", "ores", "blocks", "other"]),
+  category: z.enum(["gemstones", "dwarven-metals", "ores", "blocks", "foraging", "other"]),
   summary: z.string(),
   authors: z.array(person).min(1),
   contributors: z.array(person).default([]),
@@ -133,6 +138,10 @@ export const guideSchema = z.object({
     source: z.object({ label: z.string(), url: z.url() }).optional(),
   })).default([]),
   hotm: z.array(hotmPreset).default([]),
+  /** Trees in the HotF collection shown on this guide. */
+  hotf: z.array(slug).default([]),
+  /** Ordered upgrade stages. Requirements point at one with `stage`; the page lists them in this order. */
+  stages: z.array(z.object({ id: slug, title: z.string(), summary: z.string() })).default([]),
   videos: z.array(z.object({ title: z.string(), url: z.url(), by: z.string().optional() })).default([]),
   requirements: z.array(requirement),
 });

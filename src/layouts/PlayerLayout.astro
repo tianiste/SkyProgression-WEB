@@ -8,7 +8,7 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<Base title={title} description="A Hypixel SkyBlock player's mining progress, worked out by the SkyProgression engine." noindex>
+<Base title={title} description="A Hypixel SkyBlock player's mining and foraging progress on SkyProgression." noindex>
   <slot />
   <noscript><p>The player pages need JavaScript: they ask the SkyProgression API for the player's profile.</p></noscript>
 </Base>

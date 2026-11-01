@@ -3,6 +3,7 @@ import { glob, file } from "astro/loaders";
 import { z } from "astro/zod";
 import { guideSchema, person } from "./schema/guide";
 import { PERK_IDS } from "./data/perks";
+import { HOTF_PERK_IDS } from "./data/hotf";
 
 const guides = defineCollection({
   loader: glob({ pattern: "*.md", base: "./src/content/guides" }),
@@ -35,13 +36,32 @@ const trees = defineCollection({
   }),
 });
 
+/** Heart of the Forest trees: perk ID to level, as for HOTM trees. */
+const hotf = defineCollection({
+  loader: glob({ pattern: "*.yaml", base: "./src/content/hotf" }),
+  schema: z.object({
+    title: z.string(),
+    order: z.number(),
+    author: person,
+    hotf: z.number().int().min(1).max(8),
+    tokens: z.number().int().min(1),
+    /** Center of the Forest level the tree assumes. */
+    center: z.number().int().min(1).max(5).optional(),
+    /** The guide's whispers to max the tree. */
+    whispers: z.object({ forest: z.number().int(), desert: z.number().int() }).optional(),
+    perks: z.partialRecord(z.enum(HOTF_PERK_IDS), z.union([z.literal("max"), z.number().int().min(1)])).default({}),
+    blocked: z.array(z.enum(HOTF_PERK_IDS)).default([]),
+    note: z.string().optional(),
+  }),
+});
+
 const attributes = defineCollection({
   loader: file("./src/content/attributes.yaml"),
   schema: z.object({
     name: z.string(),
     shard: z.string(),
     rarity: z.enum(["Common", "Uncommon", "Rare", "Epic", "Legendary"]),
-    family: z.enum(["stat", "misc", "intelligence"]),
+    family: z.enum(["stat", "misc", "intelligence", "foraging"]),
     effect: z.string(),
     note: z.string().optional(),
   }),
@@ -65,4 +85,4 @@ const stats = defineCollection({
   }),
 });
 
-export const collections = { guides, trees, attributes, stats };
+export const collections = { guides, trees, hotf, attributes, stats };

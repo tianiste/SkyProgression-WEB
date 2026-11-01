@@ -635,3 +635,109 @@ img {
   flex-wrap: wrap;
   row-gap: 0.25rem;
 }
+
+/* The XP bar from the logo: a deep green track that fills with bright green. */
+.xp {
+  height: 12px;
+  background: var(--surface-2);
+  border: 2px solid var(--line);
+}
+.xp span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--xp);
+  box-shadow: inset 0 -3px 0 var(--xp-deep);
+}
+
+/* To-do lists in collapsible groups: a guide's gear and upgrade stages, a skill's player page. */
+.reqs {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5rem;
+}
+.gear-group + .gear-group {
+  border-top: 1px solid var(--line);
+}
+.gear-group summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.gear-group summary::-webkit-details-marker {
+  display: none;
+}
+/* A pixel caret after the heading, pointing down when open. */
+.gear-group summary::after {
+  content: "";
+  margin-left: auto;
+  width: 10px;
+  height: 6px;
+  background: var(--muted);
+  clip-path: polygon(0 0, 100% 0, 100% 34%, 80% 34%, 80% 67%, 60% 67%, 60% 100%, 40% 100%, 40% 67%, 20% 67%, 20% 34%, 0 34%);
+}
+.gear-group:not([open]) summary::after {
+  transform: rotate(-90deg);
+}
+.gear-group summary:hover h3 {
+  color: var(--accent);
+}
+.gear-group h3 {
+  margin: 1.25rem 0 0.75rem;
+  scroll-margin-top: 1rem;
+}
+.gear-group:not([open]) h3 {
+  margin-bottom: 1.25rem;
+}
+.gear-group .count {
+  font-family: var(--font-text);
+  font-size: var(--step--1);
+  font-weight: 400;
+  color: var(--muted);
+}
+.stage-summary {
+  margin: 0 0 0.5rem;
+}
+
+/* Skill tabs: the top level of the guide list and the player pages, larger than the pages inside a skill. */
+.skill-tabs {
+  margin: 1.5rem 0 1rem;
+}
+.skill-tabs ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 2px solid var(--line);
+}
+.skill-tabs li {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 13rem;
+}
+.skill-tabs a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.25rem 0.5rem;
+  font-family: var(--font-pixel);
+  font-weight: 600;
+  font-size: var(--step-1);
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.skill-tabs a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.skill-tabs a[aria-current] {
+  background: var(--surface);
+  box-shadow: inset 0 -3px 0 var(--xp);
+}

@@ -1,0 +1,8 @@
+// Only for Cloudflare preview builds of pull requests: `npx wrangler preview --config wrangler.preview.jsonc`.
+// Production stays on `npx wrangler deploy`, which sets itself up because the repo has no default wrangler.jsonc.
+{
+  "name": "skyprogression-web",
+  "compatibility_date": "2026-10-23",
+  "assets": { "directory": "./dist" },
+  "previews": {}
+}

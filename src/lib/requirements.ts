@@ -1,6 +1,7 @@
 import type { LeafRequirement, Modifier, Requirement } from "../schema/guide";
 import { itemName, reforgeStone, titleCase } from "../data/items";
 import { perkById } from "../data/perks";
+import { hotfPerkById } from "../data/hotf";
 
 const ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 const rarity = (r: string) => r[0] + r.slice(1).toLowerCase();
@@ -8,6 +9,7 @@ const quality = (q: string) => q[0] + q.slice(1).toLowerCase();
 
 export const GROUP_LABELS: Record<string, string> = {
   drill: "Drill",
+  axe: "Axe",
   tools: "Tools",
   armor: "Armor",
   equipment: "Equipment",
@@ -21,7 +23,7 @@ export const GROUP_LABELS: Record<string, string> = {
 };
 
 /** Order of the gear groups on a guide page. Attributes and HOTM have their own sections. */
-export const GEAR_GROUPS = ["drill", "tools", "armor", "equipment", "pet", "accessories", "consumables", "progress", "other"];
+export const GEAR_GROUPS = ["drill", "axe", "tools", "armor", "equipment", "pet", "accessories", "consumables", "progress", "other"];
 
 export function attributeName(id: string, names: Map<string, string>): string {
   return names.get(id) ?? titleCase(id);
@@ -41,6 +43,10 @@ export function title(r: Requirement | LeafRequirement, attributeNames = new Map
       return `${rarity(r.pet.minTier)} ${itemName(r.pet.type)}, level ${r.pet.level}`;
     case "hotm": {
       const perk = perkById.get(r.perk);
+      return `${perk?.name ?? titleCase(r.perk)} ${r.level === "max" ? "maxed" : `level ${r.level}`}`;
+    }
+    case "hotf": {
+      const perk = hotfPerkById.get(r.perk);
       return `${perk?.name ?? titleCase(r.perk)} ${r.level === "max" ? "maxed" : `level ${r.level}`}`;
     }
     case "powder":

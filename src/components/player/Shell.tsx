@@ -1,6 +1,8 @@
 import type { ComponentChildren } from "preact";
 import { useEffect, useState } from "preact/hooks";
+import { ItemIcon } from "./ItemIcon";
 import { VIEWS, age, load, pageUrl, profileLabel, readQuery, LookupError, NAME, type Common, type Query, type View } from "../../lib/player";
+import { SKILLS } from "../../lib/skills";
 
 /** The page's query, its answer, and a setter that updates the URL and loads again. */
 export function usePlayer<T extends Common>(view: View) {
@@ -57,11 +59,14 @@ export function Shell<T extends Common>({ view, state, prices = false, cost = fa
   const costModes = cost && data?.costModes?.length ? data.costModes : null;
   const costIgnored = costModes !== null && !!q?.cost && q.cost !== data!.costMode;
   const tab = (id: View) => (q ? pageUrl({ ...q, view: id }) : "#");
+  // No tabs for a player that does not exist or has no profiles.
+  const known = data || !error || error.retry;
 
   return (
     <div class="player" aria-busy={busy}>
       <header class="player-head">
         <h1 class="player-name">{name || "Player"}</h1>
+        {known && <SkillTabs q={q} current="mining" />}
         {data && (
           <div class="player-controls">
             {data.profiles.length > 1 && (
@@ -114,8 +119,7 @@ export function Shell<T extends Common>({ view, state, prices = false, cost = fa
             {costIgnored && <> Buy-order costs are not available yet, so costs are instant-buy.</>}
           </p>
         )}
-        {/* No tabs for a player that does not exist or has no profiles. */}
-        {(data || !error || error.retry) && <nav class="player-tabs" aria-label="Player pages">
+        {known && <nav class="player-tabs" aria-label="Mining pages">
           <ul>
             {VIEWS.map((v) => (
               <li key={v.id}><a href={tab(v.id)} aria-current={v.id === view ? "page" : undefined}>{v.label}</a></li>
@@ -154,6 +158,24 @@ export function Shell<T extends Common>({ view, state, prices = false, cost = fa
 
       {data && <div class={busy ? "player-body stale" : "player-body"}>{children}</div>}
     </div>
+  );
+}
+
+/** One tab per skill with a player page, keeping the profile and the mining options in the link. */
+export function SkillTabs({ q, current }: { q: Query | null; current: string }) {
+  return (
+    <nav class="skill-tabs" aria-label="Skills">
+      <ul>
+        {SKILLS.filter((s) => s.page).map((s) => (
+          <li key={s.id}>
+            <a href={q ? pageUrl({ ...q, view: s.page! }) : "#"} aria-current={s.id === current ? "true" : undefined}>
+              <ItemIcon id={s.icon} />
+              {s.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 

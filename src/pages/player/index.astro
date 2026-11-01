@@ -3,12 +3,19 @@ import Base from "../../layouts/Base.astro";
 import "../../styles/player.css";
 ---
 
-<Base title="Players" description="Look up a Hypixel SkyBlock player's mining stats, rates, upgrades, best method and HOTM tree.">
+<Base title="Players" description="Look up a Hypixel SkyBlock player's mining stats, rates, upgrades and HOTM tree, and their foraging upgrade path.">
   <h1>Look up a player</h1>
-  <p class="lead">
-    Enter a Minecraft name to see that player's mining the way the SkyProgression mod works it out: stats for each method,
-    the rate and coins per hour, the next upgrades, the best gear they already own and their HOTM tree.
-  </p>
+  <p class="lead">Enter a Minecraft name. The player's page has a tab for each skill.</p>
+  <dl class="player-skills">
+    <div>
+      <dt>Mining</dt>
+      <dd>Stats for each method, the rate and coins per hour, the next upgrades, the best gear they already own and their HOTM tree, the way the SkyProgression mod works it out.</dd>
+    </div>
+    <div>
+      <dt>Foraging</dt>
+      <dd>The community's upgrade path, ticked off with what they already have.</dd>
+    </div>
+  </dl>
   <form class="lookup-form player-search" method="get" action="/player/">
     <label for="player-name">Minecraft name</label>
     <div class="lookup-row">
@@ -36,6 +43,20 @@ import "../../styles/player.css";
 </Base>
 
 <style>
+  .player-skills {
+    max-width: 44rem;
+    margin: 1rem 0 0;
+  }
+  .player-skills div {
+    margin-top: 0.5rem;
+  }
+  .player-skills dt {
+    font-weight: 650;
+  }
+  .player-skills dd {
+    margin: 0;
+    color: var(--muted);
+  }
   .player-search {
     max-width: 32rem;
     margin: 1.5rem 0 1rem;

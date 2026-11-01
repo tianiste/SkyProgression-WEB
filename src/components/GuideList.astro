@@ -1,53 +1,155 @@
 ---
-/** Guides grouped by category, each category marked with the colour of its material. */
+/**
+ * Guides under one tab per skill, then by category, each category marked with the colour of its material. The tabs are
+ * links to the skill's section, so without JavaScript every skill stays on the page and they jump to it. The address
+ * keeps the tab: #foraging opens that skill, #gemstones the skill that holds that category.
+ */
 import { getCollection } from "astro:content";
 import { CATEGORIES } from "../lib/categories";
-import { categoryIcon, guideIcon } from "../lib/icons";
+import { categoryIcon, guideIcon, itemIcon } from "../lib/icons";
+import { SKILLS } from "../lib/skills";
+import CategoryFilter from "./islands/CategoryFilter";
 import Icon from "./Icon.astro";
 
 interface Props {
+  /** The level of a skill's heading; categories sit one below it. */
   headingLevel?: 2 | 3;
   showSummary?: boolean;
+  /** Category chips, for skills with more than one category. */
+  filter?: boolean;
 }
 
-const { headingLevel = 2, showSummary = true } = Astro.props;
+const { headingLevel = 2, showSummary = true, filter = false } = Astro.props;
 const H = `h${headingLevel}` as "h2" | "h3";
+const Sub = `h${headingLevel + 1}` as "h3" | "h4";
 const guides = (await getCollection("guides")).sort((a, b) => a.data.title.localeCompare(b.data.title));
-const groups = CATEGORIES.map((c) => ({ ...c, guides: guides.filter((g) => g.data.category === c.id) })).filter((c) => c.guides.length);
+const skills = SKILLS.map((s) => {
+  const groups = CATEGORIES.filter((c) => c.skill === s.id)
+    .map((c) => ({ ...c, guides: guides.filter((g) => g.data.category === c.id) }))
+    .filter((c) => c.guides.length);
+  return { ...s, groups, total: groups.reduce((n, c) => n + c.guides.length, 0) };
+}).filter((s) => s.total);
 ---
 
-<div class="categories">
-  {
-    groups.map((c) => (
-      <section class="category" id={c.id} data-category={c.id} aria-labelledby={`cat-${c.id}`}>
-        <H id={`cat-${c.id}`} class="cat-title">
-          <span class="slot"><Icon icon={categoryIcon(c.id)} size={32} /></span>
-          {c.label}
-          <span class="count">{c.guides.length} {c.guides.length === 1 ? "guide" : "guides"}</span>
-        </H>
-        <ul>
-          {c.guides.map((g) => (
-            <li>
-              <span class="slot"><Icon icon={guideIcon(g.id)} size={32} /></span>
-              <div>
-                <a href={`/guides/${g.id}/`}>{g.data.title}</a>
-                {showSummary && <span class="summary">{g.data.summary}</span>}
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))
-  }
-</div>
+<nav class="skill-tabs" aria-label="Guides by skill">
+  <ul>
+    {
+      skills.map((s, i) => (
+        <li>
+          <a href={`#${s.id}`} data-skill-tab={s.id} aria-current={i === 0 ? "true" : undefined}>
+            <span class="slot"><Icon icon={itemIcon(s.icon)} size={16} /></span>
+            {s.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+{
+  skills.map((s) => (
+    <section class="skill" id={s.id} data-skill-panel={s.id} aria-labelledby={`skill-${s.id}`}>
+      <H id={`skill-${s.id}`} class="skill-title">
+        {s.label}
+        <span class="count">{s.total} {s.total === 1 ? "guide" : "guides"}</span>
+      </H>
+      <p class="blurb">{s.blurb}</p>
+      {filter && s.groups.length > 1 && <CategoryFilter client:idle skill={s.id} categories={s.groups.map(({ id, label }) => ({ id, label }))} />}
+      <div class="categories">
+        {s.groups.map((c) => (
+          <section class="category" id={c.id === s.id ? undefined : c.id} data-category={c.id} aria-labelledby={s.groups.length > 1 ? `cat-${c.id}` : `skill-${s.id}`}>
+            {s.groups.length > 1 && (
+              <Sub id={`cat-${c.id}`} class="cat-title">
+                <span class="slot"><Icon icon={categoryIcon(c.id)} size={32} /></span>
+                {c.label}
+                <span class="count">{c.guides.length} {c.guides.length === 1 ? "guide" : "guides"}</span>
+              </Sub>
+            )}
+            <ul>
+              {c.guides.map((g) => (
+                <li>
+                  <span class="slot"><Icon icon={guideIcon(g.id)} size={32} /></span>
+                  <div>
+                    <a href={`/guides/${g.id}/`}>{g.data.title}</a>
+                    {showSummary && <span class="summary">{g.data.summary}</span>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+      {s.more && <p class="more">{s.more.text} <a href={s.more.href}>{s.more.label}</a>.</p>}
+    </section>
+  ))
+}
+
+<!-- Inline and right after the panels, so the other skills never flash on load. -->
+<script is:inline>
+  (() => {
+    const tabs = [...document.querySelectorAll("[data-skill-tab]")];
+    const panels = [...document.querySelectorAll("[data-skill-panel]")];
+    const show = (skill) => {
+      panels.forEach((p) => (p.hidden = p.dataset.skillPanel !== skill));
+      tabs.forEach((t) => (t.dataset.skillTab === skill ? t.setAttribute("aria-current", "true") : t.removeAttribute("aria-current")));
+    };
+    const fromAddress = () => {
+      const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      return target?.closest("[data-skill-panel]")?.dataset.skillPanel ?? tabs[0]?.dataset.skillTab;
+    };
+    show(fromAddress());
+    tabs.forEach((t) =>
+      t.addEventListener("click", (e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+        // Switch in place: following the link would scroll the tabs out of view.
+        e.preventDefault();
+        history.pushState(null, "", t.hash);
+        show(t.dataset.skillTab);
+      }),
+    );
+    addEventListener("hashchange", () => show(fromAddress()));
+  })();
+</script>
 
 <style>
+  /* A link to a skill lands with its tabs still on screen. */
+  .skill {
+    scroll-margin-top: 5.5rem;
+  }
+  .skill-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin: 1.25rem 0 0.25rem;
+    font-size: var(--step-2);
+  }
+  .blurb {
+    margin: 0;
+    color: var(--muted);
+  }
+  .more {
+    margin: 1.25rem 0 0;
+  }
   .categories {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
     align-items: start;
     gap: 1rem;
     margin-top: 1rem;
+  }
+  /* A skill with one category: one wide panel, its guides in columns. */
+  .categories:has(> .category:only-child) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .category:only-child {
+    padding-top: 0;
+    overflow: hidden;
+  }
+  .category:only-child ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    column-gap: 2rem;
+    margin-top: -1px;
   }
   /* Each category is a panel; its rows are the guides, each with its icon in a slot. */
   .category {
@@ -73,12 +175,12 @@ const groups = CATEGORIES.map((c) => ({ ...c, guides: guides.filter((g) => g.dat
     font-weight: 400;
     color: var(--muted);
   }
-  ul {
+  .category ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  li {
+  .category li {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -86,13 +188,13 @@ const groups = CATEGORIES.map((c) => ({ ...c, guides: guides.filter((g) => g.dat
     border-top: 1px solid var(--line);
     max-width: none;
   }
-  li:has(.summary) {
+  .category li:has(.summary) {
     align-items: flex-start;
   }
-  li:has(.summary) > div {
+  .category li:has(.summary) > div {
     padding-top: 0.1rem;
   }
-  li a {
+  .category li a {
     font-weight: 600;
   }
   .summary {
