@@ -307,3 +307,35 @@ Formulas, Attributes, Magic Find, Parties and Loot Share. Ways to fish: Striders
   as partly done. Blocked on SSH: the server only accepts the key on the owner's other PC, so add this PC's public key to
   `~/.ssh/authorized_keys` from there. Then follow "Updating the relay" in the mod's `deploy/relay/README.md` and check a
   maxed foraging attribute on the foraging upgrade path.
+
+### Live player checks for foraging and fishing
+
+Next up. Mining guides can tell a player what they are missing; foraging and fishing mostly cannot yet.
+
+Gaps today:
+
+- **Heart of the Forest:** `Checklist.java` has no `hotf` case, so every HotF perk in a guide falls through to "Not in the API;
+  check it yourself."
+- **Skill levels:** the guide schema only accepts `MINING` and `HOTM`, so a guide cannot require a Foraging or Fishing level as
+  a checkable entry.
+- **Manual entries:** a lot of foraging and fishing progress is still written as manual or perk-only entries.
+  `foraging-progression` alone has 30 entries of the manual, `skill` or `hotf` kinds (count not split by kind).
+
+Work:
+
+1. Add a `hotf` check to the engine, modelled on the `hotm` one. Confirm first that the Hypixel API returns HotF perks; if it
+   does not, those entries stay manual.
+2. Add `FORAGING` and `FISHING` to the `skill` kind.
+3. Go through the foraging and fishing guides and turn manual entries into real item, pet, attribute or skill requirements
+   wherever the API can confirm them.
+4. Make sure the Foraging and Fishing tabs on player pages show progress for each stage, so a player sees "you're at stage 3,
+   these two things are next".
+
+The engine change only reaches players after a relay redeploy, so it fits with the redeploy above. The site changes can ship
+first, because unsupported entries show as manual until then.
+
+### After that
+
+- **"What should I do next" on the player page:** a single ranked list across all guides for that player.
+- **Search across guides:** more useful as the guide count grows.
+- **Staleness check:** flag guides not reviewed since a major patch, so accuracy passes are not a manual hunt.
