@@ -282,3 +282,10 @@ Each skill has its own tab on the guide list, the home page and the player pages
   unknown player, a server error and API settings off. The six mining views were checked against a mock with empty data,
   so the header and tabs are covered, not their numbers. Not checked with a live profile, and `public/_redirects` was not
   run on Cloudflare (the new lines match the existing pattern).
+
+## To do
+
+- **Redeploy the relay** with the mod's `7842b64` (foraging attribute rarities), so maxed foraging attributes stop showing
+  as partly done. Blocked on SSH: the server only accepts the key on the owner's other PC, so add this PC's public key to
+  `~/.ssh/authorized_keys` from there. Then follow "Updating the relay" in the mod's `deploy/relay/README.md` and check a
+  maxed foraging attribute on the foraging upgrade path.
