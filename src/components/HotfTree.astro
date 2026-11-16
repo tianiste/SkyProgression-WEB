@@ -28,10 +28,10 @@ function stateOf(p: HotfPerk): State {
 
 const STATE_TEXT: Record<State, string> = {
   max: "Maxed",
-  bridge: "Bridging perk: unlocked only to reach other perks",
+  bridge: "Bridge",
   level: "Partly levelled",
   none: "Not taken",
-  blocked: "Blocked by the other choice in this tree",
+  blocked: "Blocked by other choice",
 };
 
 function levelText(p: HotfPerk, s: State): string {

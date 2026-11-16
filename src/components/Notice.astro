@@ -12,9 +12,9 @@ const { status, date, text, source } = Astro.props;
 ---
 
 <p class="notice" role="note">
-  <strong>{status === "outdated" ? "Outdated." : "Partly out of date."}</strong> {text}
+  <strong>{status === "outdated" ? "Outdated." : "Partly outdated."}</strong> {text}
   <span class="when">
-    Noted {formatDate(date)}{source && <>; source: <a href={source.url} rel="noopener">{source.label}</a></>}.
+    {formatDate(date)}{source && <> · <a href={source.url} rel="noopener">{source.label}</a></>}
   </span>
 </p>
 

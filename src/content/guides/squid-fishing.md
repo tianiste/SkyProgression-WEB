@@ -9,7 +9,7 @@ updated: 2026-11-01
 notices:
   - status: stale
     date: 2026-05-26
-    text: "This method relied on Night Squids at The Park. Night Squid was removed in May 2026 and replaced by the Inkling, which only comes from Fishing Hotspots. Hotspots were added to The Park in the same update, so the setup below still applies, but the rates may have changed. Other changes are listed at the bottom of this guide."
+    text: "Night Squid was removed in May 2026; its replacement, the Inkling, comes from Fishing Hotspots, now also at The Park. The setup still applies; rates may differ. More changes at the bottom."
     source: { label: Changelog, url: "https://hypixelskyblock.minecraft.wiki/w/Changelog/2026/May_26" }
 where: The Park, at the pond to your right. Vanessa starts the rain.
 blocks:

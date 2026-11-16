@@ -17,12 +17,8 @@ const stats = (await getCollection("stats")).sort((a, b) => a.data.order - b.dat
 <Base title="Mining stat sources" description="Where every mining stat comes from in Hypixel SkyBlock: gear, pets, HOTM, accessories, attributes and more.">
   <ReferenceNav />
   <h1>Mining stat sources</h1>
-  <p class="lead">Where each mining stat comes from, with the best totals you can reach.</p>
   <div class="seam" aria-hidden="true"></div>
-  <p class="muted">
-    "With Blue Cheese" is the extra from a Blue Cheese Goblin Omelette on your drill, which adds one level to every HOTM
-    perk. Sources that are random or only work in one place are marked.
-  </p>
+  <p class="muted small">"With Blue Cheese": Blue Cheese Goblin Omelette on the drill, +1 level to every HOTM perk.</p>
   <nav aria-label="Stats on this page">
     <ul class="jump">
       {stats.map((s) => <li><Icon icon={{ kind: "glyph", glyph: (STAT_GLYPHS[s.id] ?? ["fortune"])[0]! }} size={16} /><a href={`#${s.id}`}>{s.data.name}</a></li>)}
@@ -67,8 +63,8 @@ const stats = (await getCollection("stats")).sort((a, b) => a.data.order - b.dat
       </section>
     ))
   }
-  <Notice status="outdated" date={new Date("2026-10-12")} text="Its author marked the General Mining Stats Guide as no longer updated. Values match it except the Mining Fiesta and Weather rows, which we updated from the wiki and patch notes on 1 Nov 2026. Other game changes will not reach this page through the guide." />
-  <p class="muted small">Source: the General Mining Stats Guide in the <Credit id="mining-cult" />.</p>
+  <Notice status="outdated" date={new Date("2026-10-12")} text="The General Mining Stats Guide is no longer updated. Mining Fiesta and Weather rows updated from the wiki and patch notes, 1 Nov 2026." />
+  <p class="muted small">Source: General Mining Stats Guide, <Credit id="mining-cult" />.</p>
 </Base>
 
 <style>

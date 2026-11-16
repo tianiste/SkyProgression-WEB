@@ -10,7 +10,7 @@ updated: 2026-11-01
 notices:
   - status: outdated
     date: 2025-12-01
-    text: "Marked slightly outdated in the source thread: use it at your own discretion. Loot Share itself has not changed in the 2026 changelogs."
+    text: "Marked slightly outdated in the source thread. Loot Share is unchanged in the 2026 changelogs."
 where: Anywhere you fish with other players.
 blocks:
   - "To Loot Share: deal 1% of the mob's health, be within 30 blocks of its death and place in the top 5 for damage"

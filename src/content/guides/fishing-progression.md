@@ -13,7 +13,7 @@ updated: 2026-11-01
 notices:
   - status: stale
     date: 2026-10-29
-    text: "On the Alpha Network, not live yet: the Accessory Bag Revamp removes the Sea Creature Chance Enrichment and raises the Sea Creature Chance on rods to make up for it, and the Magic Find rework changes God Potions. The steps below match the live game."
+    text: "Alpha Network, not live: the Accessory Bag Revamp swaps the Sea Creature Chance Enrichment for more Sea Creature Chance on rods, and the Magic Find rework changes God Potions. Steps below match the live game."
     source: { label: Changelog, url: "https://hypixelskyblock.minecraft.wiki/w/Changelog/2026/October_29" }
 where: Water at the Backwater Bayou and The Park, then lava in Galatea, the Crystal Hollows and the Crimson Isle.
 blocks:

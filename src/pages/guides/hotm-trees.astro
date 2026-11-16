@@ -20,14 +20,10 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 <Base title="More HOTM trees" description="Heart of the Mountain trees for powder mining, commissions and Scatha from the Mining Cult HOTM tree guide.">
   <h1>More HOTM trees</h1>
-  <p class="lead">
-    Trees for methods without a guide here yet, from the Heart of the Mountain tree guide by <Credit id="koenigboohoo" /> in
-    the <Credit id="mining-cult" />. The other trees are on each method's <a href="/guides/">guide</a>.
+  <p class="lead credit-line">
+    From the HOTM tree guide by <Credit id="koenigboohoo" />, <Credit id="mining-cult" /> · updated 22 October 2026
   </p>
-  <p class="muted small">
-    The pictures show which perks are maxed or unlocked, not their levels. Powder is the guide's maximum for the perks,
-    rounded up as the guide gives it, without Core of the Mountain. Last updated by the guide on 22 October 2026.
-  </p>
+  <p class="muted small">Pictures show maxed or unlocked, not levels. Powder: guide maximum, without Core.</p>
   <nav aria-label="Groups" class="jump">
     {groups.map((g) => <a href={`#${slug(g)}`}>{g}</a>)}
   </nav>

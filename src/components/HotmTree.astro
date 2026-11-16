@@ -33,13 +33,13 @@ function stateOf(p: Perk): State {
 
 const STATE_TEXT: Record<State, string> = {
   max: "Maxed",
-  bridge: "Unlocked only to reach other perks",
+  bridge: "Bridge",
   level: "Partly levelled",
   none: "Not taken",
   selected: "Selected ability",
-  standby: "Ability unlocked, not selected",
-  ability: "Ability, not selected",
-  disabled: "Unlocked but turned off",
+  standby: "Ability, unlocked",
+  ability: "Ability",
+  disabled: "Turned off",
   core: "Core of the Mountain",
 };
 
@@ -74,12 +74,12 @@ const groups: State[] = ["selected", "standby", "max", "level", "bridge", "disab
 const used = new Set(cells.map((c) => c.state));
 const legend: { state: State; perk: string; text: string }[] = [
   { state: "max", perk: "strong_arm", text: "Maxed" },
-  { state: "bridge", perk: "strong_arm", text: "Unlocked to reach others" },
+  { state: "bridge", perk: "strong_arm", text: "Bridge" },
   { state: "none", perk: "strong_arm", text: "Not taken" },
-  ...(used.has("disabled") ? [{ state: "disabled" as State, perk: "strong_arm", text: "Unlocked, turned off" }] : []),
-  { state: "selected", perk: "mining_speed_boost", text: "Selected ability (lit)" },
-  ...(used.has("standby") ? [{ state: "standby" as State, perk: "mining_speed_boost", text: "Ability unlocked, not selected (green ring)" }] : []),
-  { state: "ability", perk: "mining_speed_boost", text: "Other ability (dark)" },
+  ...(used.has("disabled") ? [{ state: "disabled" as State, perk: "strong_arm", text: "Turned off" }] : []),
+  { state: "selected", perk: "mining_speed_boost", text: "Selected ability" },
+  ...(used.has("standby") ? [{ state: "standby" as State, perk: "mining_speed_boost", text: "Unlocked ability" }] : []),
+  { state: "ability", perk: "mining_speed_boost", text: "Other ability" },
 ];
 ---
 
@@ -126,7 +126,6 @@ const legend: { state: State; perk: string; text: string }[] = [
         ))
       }
     </ul>
-    <p class="muted">Round tiles are the FurfSky Reborn HOTM icons for abilities, Core of the Mountain and key perks.</p>
     <details class="perk-list">
       <summary>Perks as a list</summary>
       <dl>
@@ -142,7 +141,7 @@ const legend: { state: State; perk: string; text: string }[] = [
           })
         }
         <dt>Core of the Mountain</dt>
-        <dd>{coreLevel > 1 ? `Level ${coreLevel}` : "Level not shown in the picture"}</dd>
+        <dd>{coreLevel > 1 ? `Level ${coreLevel}` : "Level not shown"}</dd>
       </dl>
     </details>
   </figcaption>

@@ -18,7 +18,7 @@ updated: 2026-10-29
 notices:
   - status: outdated
     date: 2026-10-28
-    text: "Marked outdated by its author: the Mining Cult thread is now titled \"(Outdated) Mineshaft Mining Guide\" and a new Shafting guide is announced. Its setups and HOTM trees may no longer be the best."
+    text: "Marked outdated by its author; a new Shafting guide is announced. Setups and HOTM trees may no longer be best."
 where: The Glacite Tunnels to spawn shafts (Tungsten or Mithril routes, Pickobulus on Glacite clusters), then the Glacite Mineshafts themselves.
 blocks:
   - "Jasper shafts: always mine them, even with poor buffs"

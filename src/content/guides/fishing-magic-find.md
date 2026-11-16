@@ -12,10 +12,10 @@ updated: 2026-11-01
 notices:
   - status: outdated
     date: 2025-10-25
-    text: "Marked slightly outdated in the source thread: use it at your own discretion."
+    text: "Marked slightly outdated in the source thread."
   - status: stale
     date: 2026-10-27
-    text: "A Magic Find rework is being tested on the Alpha Network, not live yet. It cuts the Magic Find Potion in God Potions, and the Accessory Bag Revamp removes Magic Find Enrichments. Hypixel also says Magma Lord should not stay best for water fishing. Expect this guide to change."
+    text: "Alpha Network, not live: a Magic Find rework cuts the God Potion's Magic Find Potion, the Accessory Bag Revamp removes Magic Find Enrichments, and Magma Lord should stop being best for water fishing."
     source: { label: Changelog, url: "https://hypixelskyblock.minecraft.wiki/w/Changelog/2026/October_27/0" }
 where: Swap to this setup to kill rare Sea Creatures. Worm and Stridersurfer drops don't need it.
 blocks:
