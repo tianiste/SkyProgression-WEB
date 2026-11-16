@@ -358,7 +358,7 @@ export function age(at: string): string {
 
 export function profileLabel(p: ProfileInfo): string {
   const mode = p.mode === "ironman" ? " (Ironman)" : p.mode === "island" ? " (Stranded)" : p.mode === "bingo" ? " (Bingo)" : "";
-  return p.name + mode + (p.selected ? ", selected in game" : "");
+  return p.name + mode + (p.selected ? " (active)" : "");
 }
 
 export function abilityText(a: Ability | null): string {

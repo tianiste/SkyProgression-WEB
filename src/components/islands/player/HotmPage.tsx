@@ -1,5 +1,6 @@
 import { useState } from "preact/hooks";
 import { Shell, usePlayer } from "../../player/Shell";
+import { Head } from "../../player/parts";
 import generated from "../../../data/icons.generated.json";
 import { PERKS, perkById, tierOf, type Perk } from "../../../data/perks";
 import { formatPowder } from "../../../lib/format";
@@ -98,11 +99,11 @@ export default function HotmPage({ trees }: { trees: GuideTree[] }) {
   return (
     <Shell view="hotm" state={state}>
       {d.trees.length === 0 ? (
-        <p class="muted">No HOTM tree in the API response for this profile.</p>
+        <p class="muted">No HOTM tree in the API.</p>
       ) : (
         <div class="grid-2">
           <section class="panel" aria-labelledby="tree-title">
-            <h2 id="tree-title">Their tree{guide ? ` against ${guide.label}` : ""}</h2>
+            <h2 id="tree-title">Tree{guide ? ` vs. ${guide.label}` : ""}</h2>
             {d.trees.length > 1 && (
               <div class="chips" role="group" aria-label="Loadouts tree">
                 {d.trees.map((t, i) => <button type="button" key={t.label} aria-pressed={i === mine} onClick={() => setMine(i)}>{t.label}</button>)}
@@ -126,9 +127,9 @@ export default function HotmPage({ trees }: { trees: GuideTree[] }) {
               />
               <figcaption>
                 <ul class="legend small">
-                  <li><span class="ring done" aria-hidden="true" />Matches the guide</li>
-                  <li><span class="ring short" aria-hidden="true" />Below the guide</li>
-                  <li><span class="ring extra" aria-hidden="true" />Not in the guide's tree</li>
+                  <li><span class="ring done" aria-hidden="true" />Matches</li>
+                  <li><span class="ring short" aria-hidden="true" />Below</li>
+                  <li><span class="ring extra" aria-hidden="true" />Not in guide</li>
                 </ul>
               </figcaption>
             </figure>
@@ -137,12 +138,12 @@ export default function HotmPage({ trees }: { trees: GuideTree[] }) {
           <section class="panel" aria-labelledby="todo-title">
             <h2 id="todo-title">What's left</h2>
             {!guide ? (
-              <p class="muted">No confirmed HOTM tree for {label} yet. The guides publish a tree once the picture's perk mapping is confirmed.</p>
+              <p class="muted">No guide tree for {label} yet.</p>
             ) : (
               <>
-                <p><strong>{done} of {wanted}</strong> perks at the guide's level. From <a href={`/guides/${guide.slug}/`}>{guide.guide}</a>, {guide.label}.</p>
+                <p><strong>{done} of {wanted}</strong> perks · <a href={`/guides/${guide.slug}/`}>{guide.guide}</a>, {guide.label}</p>
                 <span class="xp" aria-hidden="true"><span style={{ width: `${(100 * done) / Math.max(1, wanted)}%` }} /></span>
-                {short.length === 0 ? <p class="gain">Every perk the guide uses is at its level.</p> : (
+                {short.length === 0 ? <p class="gain">All perks done.</p> : (
                   <ul class="sources">
                     {short.map((p) => {
                       const want = p.kind === "core" ? guide.cotm ?? 0 : guide.levels[p.id] ?? 0;
@@ -150,13 +151,13 @@ export default function HotmPage({ trees }: { trees: GuideTree[] }) {
                     })}
                   </ul>
                 )}
-                {guide.ability && <p class="small">Ability: {perkById.get(guide.ability)?.name}{have(guide.ability) > 0 ? ` (unlocked, level ${have(guide.ability)})` : " (not unlocked)"}. The API does not say which ability is selected.</p>}
-                {extra.length > 0 && <p class="muted small">Also taken, not in this tree: {extra.map((p) => p.name).join(", ")}.</p>}
+                {guide.ability && <p class="small">Ability: {perkById.get(guide.ability)?.name}{have(guide.ability) > 0 ? ` (level ${have(guide.ability)})` : " (locked)"}</p>}
+                {extra.length > 0 && <p class="muted small">Extra: {extra.map((p) => p.name).join(", ")}</p>}
               </>
             )}
-            <h3>Powder</h3>
+            <div class="panel-head"><h3>Powder</h3><details class="info"><summary aria-label="About this">i</summary><p>Earned = spent + unspent: what a tree costs in total.</p></details></div>
             <table class="table compact">
-              <thead><tr><th>Powder</th><th class="num">Earned</th><th class="num">Unspent</th>{guide && <th class="num">Guide total</th>}</tr></thead>
+              <thead><tr><th>Powder</th><th class="num">Earned</th><th class="num">Unspent</th>{guide && <th class="num">Guide</th>}</tr></thead>
               <tbody>
                 {(["mithril", "gemstone", "glacite"] as const).map((k) => {
                   const p = d.powder[k];
@@ -168,13 +169,13 @@ export default function HotmPage({ trees }: { trees: GuideTree[] }) {
                       <td>{k[0]!.toUpperCase() + k.slice(1)}</td>
                       <td class="num" data-label="Earned">{earned === null ? "?" : formatPowder(earned)}</td>
                       <td class="num" data-label="Unspent">{p ? formatPowder(p.unspent) : "?"}</td>
-                      {guide && <td class={`num${need && earned !== null && earned >= need ? " gain" : ""}`} data-label="Guide total">{need ? formatPowder(need) : "–"}</td>}
+                      {guide && <td class={`num${need && earned !== null && earned >= need ? " gain" : ""}`} data-label="Guide">{need ? formatPowder(need) : "–"}</td>}
                     </tr>
                   );
                 })}
               </tbody>
             </table>
-            <p class="muted small">HOTM tier {d.tier}{guide ? ` (the guide's tree needs ${guide.tier})` : ""}{d.tokensSpent >= 0 ? `, ${num(d.tokensSpent, 0)} tokens spent` : ""}. Earned is spent plus unspent, which is what a tree costs in total.</p>
+            <p class="muted small">HOTM {d.tier}{guide ? ` (guide ${guide.tier})` : ""}{d.tokensSpent >= 0 ? ` · ${num(d.tokensSpent, 0)} tokens spent` : ""}</p>
           </section>
 
           <Planner plan={d.planner} label={label} method={method} have={have} trees={trees} />
@@ -191,7 +192,7 @@ function Planner({ plan, label, method, have, trees }: { plan: HotmPlan | null; 
     return (
       <section class="panel span-2" aria-labelledby="plan-title">
         <h2 id="plan-title">Best tree for {label}</h2>
-        <p class="muted">No plan for {label}: the planner needs the HOTM tree and HOTM XP in the API and a rate model for the method.</p>
+        <p class="muted">No plan: needs HOTM tree, HOTM XP and a rate model.</p>
       </section>
     );
   }
@@ -206,20 +207,19 @@ function Planner({ plan, label, method, have, trees }: { plan: HotmPlan | null; 
     .map((c) => ({ c, drawn: trees.find((t) => t.tree === c.id && t.methods.includes(method)) ?? trees.find((t) => t.tree === c.id) }))
     .sort((a, b) => (b.c.rate ?? -1) - (a.c.rate ?? -1));
   const ref = community.find((x) => x.c.id === pick) ?? community[0];
-  const missingTarget = POWDER.some((k) => (plan.missing[k] ?? 0) > 0);
   const unknown = POWDER.some((k) => k in plan.missing && plan.missing[k] === null);
   const otherGain = plan.other && shown.rate !== null ? pct(plan.other.rate, shown.rate) : null;
   const refGain = ref ? pct(ref.c.rate, shown.rate) : null;
   const rows = POWDER.filter((k) => k in plan.need || k in plan.missing);
   return (
     <section class="panel span-2" aria-labelledby="plan-title">
-      <h2 id="plan-title">Best tree for {label}</h2>
+      <Head id="plan-title" info="The tree with the best rate within your HOTM tier, tokens and powder, rated like Upgrades. Only perks the rate model knows count; others are bridges.">Best tree for {label}</Head>
       <p>
         <strong>{rate(plan.before)} → {rate(shown.rate)}</strong> {plan.unit}
         {gain !== null && <span class={gain > 0.005 ? "gain" : "muted"}> ({signed(gain, true)})</span>}
       </p>
       {plan.now && plan.target.rate !== null && shown.rate !== null && plan.target.rate > shown.rate * (1 + 1e-6) && (
-        <p class="muted small">With the powder for the whole tree: {rate(plan.target.rate)} ({targetGain === null ? "?" : signed(targetGain, true)}).</p>
+        <p class="muted small">Full tree: {rate(plan.target.rate)} ({targetGain === null ? "?" : signed(targetGain, true)}).</p>
       )}
       <dl class="facts">
         <dt>Ability</dt>
@@ -228,14 +228,14 @@ function Planner({ plan, label, method, have, trees }: { plan: HotmPlan | null; 
           {plan.other && otherGain !== null && <span class="muted"> ({plan.other.ability} rates {signed(otherGain, true)})</span>}
         </dd>
         <dt>Respec</dt>
-        <dd>{plan.reset ? "Reset the tree and rebuild it. A reset is free and returns all powder and tokens; Core of the Mountain keeps its level." : "Not needed: the plan only adds levels from unspent powder."}</dd>
+        <dd>{plan.reset ? "Reset and rebuild (free; Core keeps its level)" : "Not needed"}</dd>
         <dt>Tokens</dt>
         <dd>{shown.tokens} of {plan.tokens}</dd>
       </dl>
 
       <div class="plan-trees">
         <figure class="hotm-compare">
-          <figcaption class="small"><strong>Planned tree</strong></figcaption>
+          <figcaption class="small"><strong>Plan</strong></figcaption>
           <TreeGrid
             label="Planned tree"
             levels={planned}
@@ -244,14 +244,14 @@ function Planner({ plan, label, method, have, trees }: { plan: HotmPlan | null; 
           />
           <figcaption>
             <ul class="legend small">
-              <li><span class="ring raise" aria-hidden="true" />Raised or added</li>
-              <li><span class="ring lower" aria-hidden="true" />Lowered or removed</li>
+              <li><span class="ring raise" aria-hidden="true" />Raised</li>
+              <li><span class="ring lower" aria-hidden="true" />Lowered</li>
             </ul>
           </figcaption>
         </figure>
         {ref && (
           <figure class="hotm-compare">
-            <figcaption class="small"><strong>Community tree: {ref.c.title}</strong></figcaption>
+            <figcaption class="small"><strong>Community: {ref.c.title}</strong></figcaption>
             {community.length > 1 && (
               <div class="chips" role="group" aria-label="Community tree">
                 {community.map((x) => <button type="button" key={x.c.id} aria-pressed={x === ref} onClick={() => setPick(x.c.id)}>{x.c.title}</button>)}
@@ -267,13 +267,13 @@ function Planner({ plan, label, method, have, trees }: { plan: HotmPlan | null; 
               />
             )}
             <p class="small">
-              {ref.c.rate === null ? "Not rated (its ability has no rate model). " : <>{rate(ref.c.rate)} {plan.unit}{refGain !== null && <> ({signed(refGain, true)} against the plan)</>}. </>}
-              {ref.c.ability || "No ability"}{ref.c.ability && !shown.ability && " (rated without it: no ability on your tool)"}, {ref.c.tokens} tokens, HOTM {ref.c.tier}{!ref.c.fits && ", more than your tier or tokens allow"}.
-              {POWDER.some((k) => (ref.c.missing[k] ?? 0) > 0) && <> Needs {powderText(ref.c.missing)} more powder than you have.</>}
+              {ref.c.rate === null ? "Not rated. " : <>{rate(ref.c.rate)} {plan.unit}{refGain !== null && <> ({signed(refGain, true)} vs. plan)</>}. </>}
+              {ref.c.ability || "No ability"}{ref.c.ability && !shown.ability && " (not on your tool)"} · {ref.c.tokens} tokens · HOTM {ref.c.tier}{!ref.c.fits && " · over your tier or tokens"}
+              {POWDER.some((k) => (ref.c.missing[k] ?? 0) > 0) && <> · needs {powderText(ref.c.missing)} more powder</>}
             </p>
             <p class="muted small">
-              Rated with your stats: maxed perks at their maximum, unlocked ones at level 1 (the picture shows no levels).
-              {ref.drawn && <> From the <a href={`/guides/${ref.drawn.slug}/`}>{ref.drawn.guide}</a> guide.</>}
+              Unlocked perks rated at level 1.
+              {ref.drawn && <> <a href={`/guides/${ref.drawn.slug}/`}>{ref.drawn.guide}</a></>}
             </p>
           </figure>
         )}
@@ -299,7 +299,7 @@ function Planner({ plan, label, method, have, trees }: { plan: HotmPlan | null; 
       {rows.length > 0 && <>
       <h3>Powder</h3>
       <table class="table compact">
-        <thead><tr><th>Powder</th><th class="num">Plan uses</th><th class="num">{plan.reset ? "After a reset" : "Unspent"}</th><th class="num">Missing for the whole tree</th></tr></thead>
+        <thead><tr><th>Powder</th><th class="num">Plan uses</th><th class="num">{plan.reset ? "After a reset" : "Unspent"}</th><th class="num">Missing (full tree)</th></tr></thead>
         <tbody>
           {rows.map((k) => {
             const h = plan.have[k];
@@ -316,12 +316,9 @@ function Planner({ plan, label, method, have, trees }: { plan: HotmPlan | null; 
         </tbody>
       </table>
       </>}
-      {(missingTarget || unknown) && <p class="muted small">{unknown ? "A powder type is not in the API, so what is missing is unknown." : "The planned tree is what your powder covers; the rest is needed for the whole tree."}</p>}
+      {unknown && <p class="muted small">A powder type is missing from the API.</p>}
       {plan.notes.length > 0 && <ul class="muted small plan-notes">{plan.notes.map((n) => <li key={n}>{n}</li>)}</ul>}
-      <p class="muted small">
-        The mod's HOTM planner: the tree with the best rate within your HOTM tier, tokens and powder, rated like the
-        Upgrades page. It counts only perks the rate model knows; the others are bridges.
-      </p>
+
     </section>
   );
 }

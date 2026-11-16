@@ -25,7 +25,7 @@ export default function SkillPage({ skill: id }: Props) {
   useEffect(() => setQ(readQuery(skill.id)), []);
   useEffect(() => {
     if (!q) return;
-    if (!NAME.test(q.name)) { setError(new LookupError("Enter a Minecraft name: 1 to 16 letters, digits or underscores.", false)); return; }
+    if (!NAME.test(q.name)) { setError(new LookupError("Not a Minecraft name.", false)); return; }
     const controller = new AbortController();
     setBusy(true);
     setError(null);
@@ -88,8 +88,8 @@ export default function SkillPage({ skill: id }: Props) {
         )}
         {answer && (
           <p class="player-age">
-            {answer.profiles.length === 1 && <>{profileLabel(answer.profile)}. </>}
-            Profile data from {age(answer.fetchedAt)}. Hypixel shows changes a few minutes after you make them.
+            {answer.profiles.length === 1 && <>{profileLabel(answer.profile)} · </>}
+            Profile {age(answer.fetchedAt)}
           </p>
         )}
       </header>
@@ -99,7 +99,7 @@ export default function SkillPage({ skill: id }: Props) {
           <div class="player-error" role="alert">
             <p><strong>{error.message}</strong></p>
             {error.retry && <p><button type="button" class="link-button" onClick={() => setAttempt(attempt + 1)}>Try again</button></p>}
-            <p><a href="/player/">Look up another player</a></p>
+            <p><a href="/player/">Other player</a></p>
           </div>
         )}
         {!error && !answer && <p class="player-loading">Loading {q?.name ?? "the player"}…</p>}
@@ -110,13 +110,10 @@ export default function SkillPage({ skill: id }: Props) {
       {(off.length > 0 || vaultOff) && (
         <div class="api-help">
           <p>
-            <strong>Some API settings are off.</strong>{" "}
-            {off.length > 0 && <>The {joinList(off)} {off.length > 1 ? "are" : "is"} off for this profile, so those rows show as unknown, not missing. </>}
-            {vaultOff && <>The Personal Vault API is off, so items kept in the vault are not counted.</>}
+            <strong>API off:</strong> {joinList([...off, ...(vaultOff ? ["Personal Vault API"] : [])])}. Those rows show as unknown.
           </p>
           <p>
-            In game, open the <strong>SkyBlock Menu</strong>, then <strong>Settings</strong>, then <strong>API Settings</strong>, and switch each one on.
-            Look again here after a few minutes.
+            Turn on: <strong>SkyBlock Menu → Settings → API Settings</strong>.
           </p>
         </div>
       )}
@@ -126,15 +123,17 @@ export default function SkillPage({ skill: id }: Props) {
           <h2 id="skill-progress-title">{counts.owned} of {total} done</h2>
           <div class="xp" aria-hidden="true"><span style={{ width: `${progressPercent(counts, total)}%` }} /></div>
           <p class="small">
-            {counts.partial > 0 && <>{counts.partial} partly done. </>}
-            {counts.missing > 0 && <>{counts.missing} missing. </>}
-            {counts.manual > 0 && <>{counts.manual} to check yourself. </>}
-            {counts.unknown > 0 && <>{counts.unknown} unknown, not counted as missing.</>}
+            {[
+              counts.partial > 0 && `${counts.partial} partly done`,
+              counts.missing > 0 && `${counts.missing} missing`,
+              counts.manual > 0 && `${counts.manual} to check yourself`,
+              counts.unknown > 0 && `${counts.unknown} unknown`,
+            ].filter(Boolean).join(" · ")}
           </p>
           {next.length > 0 && (
             <>
               <h3>Next up</h3>
-              <ol class="small">{next.map((n) => <li key={n.id}>{n.name}{n.state === "partial" && " (partly done)"}</li>)}</ol>
+              <ol class="small">{next.map((n) => <li key={n.id}>{n.name}{n.state === "partial" && " (partly)"}</li>)}</ol>
             </>
           )}
         </section>

@@ -1,5 +1,6 @@
 import { Shell, usePlayer } from "../../player/Shell";
 import { ItemIcon } from "../../player/ItemIcon";
+import { Head } from "../../player/parts";
 import { abilityText, coins, num, signed, type Start } from "../../../lib/player";
 
 const SLOTS = ["Helmet", "Chestplate", "Leggings", "Boots", "Necklace", "Cloak", "Belt", "Gloves", "Bracelet"];
@@ -16,30 +17,29 @@ export default function StartPage() {
   const { data: d } = state;
   if (!d) return <Shell view="start" state={state} prices god />;
   const before = d.current?.rate ?? null, after = d.bestOwned?.rate ?? null;
-  const rate = (r: number | null) => r === null ? "rate unavailable" : `${d.lowerBound ? "at least " : ""}${num(r)} ${d.unit} per hour${d.coinsEach === null ? "" : `, ${coins(r * d.coinsEach)} coins`}`;
+  const rate = (r: number | null) => r === null ? "rate unavailable" : `${d.lowerBound ? "≥ " : ""}${num(r)} ${d.unit}/h${d.coinsEach === null ? "" : `, ${coins(r * d.coinsEach)} coins`}`;
   const pieces = [...d.best].sort((a, b) => order(a.slot) - order(b.slot));
   return (
     <Shell view="start" state={state} prices god>
       <div class="grid-2">
         <section class="panel" aria-labelledby="best-title">
-          <h2 id="best-title">Use this for {d.methodLabel}</h2>
+          <h2 id="best-title">Best for {d.methodLabel}</h2>
           {d.swaps.length === 0
-            ? <p class="gain"><strong>{d.inventoryKnown ? "You already wear the best you own." : "No swaps found in the readable data."}</strong></p>
-            : <p><strong>{d.swaps.length} swap{d.swaps.length === 1 ? "" : "s"}</strong> from what you wear: <strong class="gain">{percent(before, after)}</strong> rate.</p>}
+            ? <p class="gain"><strong>{d.inventoryKnown ? "Already wearing the best." : "No swaps found."}</strong></p>
+            : <p><strong>{d.swaps.length} swap{d.swaps.length === 1 ? "" : "s"}</strong>: <strong class="gain">{percent(before, after)}</strong> rate</p>}
           <dl class="facts">
             <dt>Now</dt><dd>{rate(before)}</dd>
             <dt>Best owned</dt><dd>{rate(after)}</dd>
           </dl>
-          {!d.inventoryKnown && <p class="warn small">Inventory API off: only the pet can be compared.</p>}
-          {!d.petsKnown && <p class="warn small">No pet data in the API response.</p>}
-          {(d.current && !d.current.complete) || (d.bestOwned && !d.bestOwned.complete) ? <p class="muted small">Some stat sources are unknown, so these rates are lower bounds.</p> : null}
+          {!d.inventoryKnown && <p class="warn small">Inventory API off: pet only.</p>}
+          {!d.petsKnown && <p class="warn small">No pet data.</p>}
           <ul class="pieces">
             {pieces.map((p) => (
               <li key={p.key} class={p.worn ? "worn" : "fetch"}>
                 <ItemIcon id={p.id} />
                 <span>
                   <span>{p.name}</span>
-                  <span class="muted small">{p.slot}{p.detail ? `, ${p.detail}` : ""}. {p.worn ? "Wearing it." : `Stored: ${p.location}.`}</span>
+                  <span class="muted small">{p.slot}{p.detail ? `, ${p.detail}` : ""} · {p.worn ? "worn" : p.location}</span>
                 </span>
               </li>
             ))}
@@ -53,8 +53,7 @@ export default function StartPage() {
         </section>
 
         <section class="panel" aria-labelledby="swaps-title">
-          <h2 id="swaps-title">Swaps, biggest gain first</h2>
-          <p class="muted small">Each swap is rated alone on what you wear now; together they give the total above, which can differ from the sum.</p>
+          <Head id="swaps-title" info="Each swap is rated alone on what you wear now; together they give the total above, which can differ from the sum.">Swaps</Head>
           {d.swaps.length === 0 && <p class="muted">Nothing to swap.</p>}
           {d.swaps.map((s, i) => (
             <details class="upgrade" key={i}>
@@ -62,7 +61,7 @@ export default function StartPage() {
                 <ItemIcon id={s.to.id} />
                 <span class="upgrade-name">
                   <span>{s.slot}: {s.to.name}</span>
-                  <span class="muted small">{s.slot === "HOTM tree" ? "Switch to it in Loadouts" : `From ${s.to.location}`}</span>
+                  <span class="muted small">{s.slot === "HOTM tree" ? "Switch in Loadouts" : `From ${s.to.location}`}</span>
                 </span>
                 <span class="upgrade-gain">{percent(before, s.rate)}</span>
                 <span class="upgrade-cost muted">{s.from ? `was ${s.from.name}` : "empty slot"}</span>
@@ -75,8 +74,8 @@ export default function StartPage() {
               </dl>
             </details>
           ))}
-          <h3>Best method with what you wear</h3>
-          <p>{d.wornBest ? <>{d.wornBest.label}, about <strong class="coins">{coins(d.wornBest.coinsPerHour)}</strong> coins per hour.</> : <span class="muted">No method has a known price.</span>}</p>
+          <h3>Best method as worn</h3>
+          <p>{d.wornBest ? <>{d.wornBest.label}, <strong class="coins">{coins(d.wornBest.coinsPerHour)}</strong> coins/h</> : <span class="muted">No priced method.</span>}</p>
           {d.notes.length > 0 && (
             <details class="hidden-sources">
               <summary class="small">Notes ({d.notes.length})</summary>

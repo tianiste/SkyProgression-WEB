@@ -198,8 +198,12 @@
   gap: 0.5rem;
   margin: 0 0 0.5rem;
 }
-.panel-head h2 {
+.panel-head h2,
+.panel .panel-head h3 {
   margin: 0;
+}
+.panel-head:has(h3) {
+  margin-top: 1rem;
 }
 .panel-head .count {
   font: 400 var(--step--1) / 1 system-ui, sans-serif;
