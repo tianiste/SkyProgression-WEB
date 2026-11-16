@@ -30,16 +30,13 @@ const people = [...credits.entries()]
 
 <Base title="About" description="Who wrote the guides, where the data comes from, the license and privacy.">
   <h1>About</h1>
-  <p class="lead">
-    SkyProgression helps Hypixel SkyBlock players get better at mining, foraging and fishing. It started as a mining mod for
-    Fabric; this site carries the communities' guides and the mod's features for any player.
-  </p>
+  <p class="lead">Community guides and the SkyProgression mod's numbers, for any player.</p>
   <div class="seam" aria-hidden="true"></div>
 
-  <h2>The guides and their authors</h2>
+  <h2>Authors</h2>
   <p>
-    Every mining guide was written by a miner from the <Credit id="mining-cult" /> and is published here with the
-    author's permission. Foraging guides come from the <Credit id="foraging-community" /> and fishing guides from the <Credit id="casters" />. The content is theirs; this site only puts it in a form that a player lookup can check.
+    Mining guides: <Credit id="mining-cult" />. Foraging: <Credit id="foraging-community" />. Fishing: <Credit id="casters" />.
+    Published with the authors' permission; the content is theirs.
     {SITE.miningCultInvite && <> <a href={SITE.miningCultInvite}>Join the Mining Cult Discord</a> to ask the authors questions.</>}
   </p>
   <ul class="people">
@@ -53,67 +50,55 @@ const people = [...credits.entries()]
     }
   </ul>
   <p>
-    The <a href="/reference/attributes/">attribute</a> and <a href="/reference/stats/">stat source</a> references come from
-    guides posted in the Mining Cult Discord without a named author. Foraging and fishing attribute effects come from the
-    Hypixel SkyBlock Wiki.
+    <a href="/reference/attributes/">Attributes</a> and <a href="/reference/stats/">stat sources</a>: unsigned Mining Cult
+    guides; foraging and fishing attributes: Hypixel SkyBlock Wiki.
   </p>
 
-  <h2>Data and accuracy</h2>
+  <h2>Data</h2>
   <p>
-    Guide numbers are the authors' own measurements and estimates, dated on each guide. Game updates change them, so
-    check the date before you spend coins. Requirements are stored with Hypixel item, pet, perk and attribute IDs so the
-    mod's calculation engine can check them against a profile later. Each guide's data is available as JSON, in the
-    format described by the <a href="/schema/guide.json">guide schema</a>.
+    Guide numbers are the authors' measurements, dated on each guide; check the date before spending coins. Each guide is
+    also JSON (<a href="/schema/guide.json">schema</a>).
   </p>
 
   <h2 id="credits">Credits and licenses</h2>
   <p>
-    The site's code is under the MIT License; the source is on <a href={SITE.webGithub}>GitHub</a>. Guide text belongs to
-    its authors. The SkyProgression logo, the stat symbols and the fallback icons are the project's own pixel art. None
-    of the textures below are covered by the MIT License.
+    Code: MIT, on <a href={SITE.webGithub}>GitHub</a>. Guide text: its authors. Logo, stat symbols and fallback icons: our
+    own. The textures below are not MIT.
   </p>
   <dl class="sources">
     <div>
       <dt><span class="slot"><Icon icon={itemIcon("DIVAN_DRILL")} size={32} /></span>Item and armor textures</dt>
       <dd>
-        By the <a href={SITE.furfsky}>FurfSky Reborn team</a>, used with permission. From the
-        <a href={SITE.furfskyModrinth}>FurfSky Reborn resource pack</a>, version 1.9.2. The player pages' 3D model
-        wears the pack's armor textures.
+        <a href={SITE.furfsky}>FurfSky Reborn team</a>, with permission
+        (<a href={SITE.furfskyModrinth}>pack</a> 1.9.2), including the 3D model's armor.
       </dd>
     </div>
     <div>
       <dt><span class="slot"><Icon icon={itemIcon("BAL")} size={32} /></span>Hypixel's own art</dt>
       <dd>
-        Items FurfSky Reborn does not retexture use textures from the official
+        The official
         <a href="https://hypixel.net/threads/hypixel-skyblock-0-26-skyblock-resource-pack-loadouts-security-quest-and-more.6117801/">Hypixel SkyBlock Resource Pack</a>
-        and item and pet heads from Hypixel's API. © Hypixel Inc., used under the pack's license. Heads are drawn as small
-        cubes the way <a href="https://github.com/SkyCryptWebsite/SkyCrypt">SkyCrypt</a> draws them, with pet skins found
-        through SkyCrypt's MIT-licensed pet table.
+        and heads from Hypixel's API, © Hypixel Inc., under the pack's license. Heads drawn as in
+        <a href="https://github.com/SkyCryptWebsite/SkyCrypt">SkyCrypt</a>, pet skins via its MIT pet table.
       </dd>
     </div>
     <div>
       <dt><span class="slot"><Icon icon={guideIcon("cobblestone")} size={32} /></span>Block textures</dt>
       <dd>
-        Plain blocks and materials (Coal, Cobblestone, End Stone, Obsidian and similar) use Minecraft's own textures,
-        © Mojang Studios, following Minecraft's usage guidelines.
+        Minecraft's own, © Mojang Studios, per Minecraft's usage guidelines.
       </dd>
     </div>
     <div>
       <dt><span class="slot"><Icon icon={{ kind: "glyph", glyph: "book", color: "var(--stat-purple)" }} size={32} /></span>Font</dt>
-      <dd>Headings use Pixelify Sans under the SIL Open Font License.</dd>
+      <dd>Pixelify Sans, SIL Open Font License.</dd>
     </div>
   </dl>
-  <p>
-    SkyProgression is a free fan project. It is not affiliated with or endorsed by Hypixel. It is not an official
-    Minecraft product and is not approved by or associated with Mojang or Microsoft.
-  </p>
+  <p>Free fan project. Not an official Minecraft product; not endorsed by Hypixel, Mojang or Microsoft.</p>
 
   <h2>Privacy</h2>
   <p>
-    The site has no accounts, no analytics and no tracking cookies. Your theme choice is saved in your browser only.
-    Player lookup sends the name you enter and the guide's requirements to the SkyProgression API, which fetches that
-    player's public SkyBlock profile from Hypixel and checks it; results are cached for a few minutes and not used for
-    anything else. The name is kept in the page address so you can share the checked guide.
+    No accounts, analytics or tracking cookies; the theme is saved in your browser. A lookup sends the name to the
+    SkyProgression API, which reads the public profile from Hypixel and caches it for a few minutes.
   </p>
 </Base>
 

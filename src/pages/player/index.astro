@@ -5,20 +5,10 @@ import "../../styles/player.css";
 
 <Base title="Players" description="Look up a Hypixel SkyBlock player's mining stats, rates, upgrades and HOTM tree, and their foraging and fishing upgrade paths.">
   <h1>Look up a player</h1>
-  <p class="lead">Enter a Minecraft name. The player's page has a tab for each skill.</p>
   <dl class="player-skills">
-    <div>
-      <dt>Mining</dt>
-      <dd>Stats for each method, the rate and coins per hour, the next upgrades, the best gear they already own and their HOTM tree, the way the SkyProgression mod works it out.</dd>
-    </div>
-    <div>
-      <dt>Foraging</dt>
-      <dd>The community's upgrade path, ticked off with what they already have.</dd>
-    </div>
-    <div>
-      <dt>Fishing</dt>
-      <dd>The community's upgrade path, ticked off the same way.</dd>
-    </div>
+    <div><dt>Mining</dt><dd>stats, rates, coins/h, upgrades, HOTM</dd></div>
+    <div><dt>Foraging</dt><dd>upgrade path</dd></div>
+    <div><dt>Fishing</dt><dd>upgrade path</dd></div>
   </dl>
   <form class="lookup-form player-search" method="get" action="/player/">
     <label for="player-name">Minecraft name</label>
@@ -27,10 +17,7 @@ import "../../styles/player.css";
       <button type="submit">Look up</button>
     </div>
   </form>
-  <p class="muted">
-    The numbers need the player's SkyBlock API settings on (Inventory, Collections and Skills). Profiles are read through
-    the Hypixel API, so changes show after a few minutes.
-  </p>
+  <p class="muted small">Needs SkyBlock API on (Inventory, Collections, Skills). Updates after a few minutes.</p>
   <div class="seam" aria-hidden="true"></div>
   <script>
     // /player/?name=X (the form, or a link) opens /player/X/.
@@ -52,7 +39,9 @@ import "../../styles/player.css";
     margin: 1rem 0 0;
   }
   .player-skills div {
-    margin-top: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
   }
   .player-skills dt {
     font-weight: 650;

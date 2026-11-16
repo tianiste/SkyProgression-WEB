@@ -5,10 +5,9 @@ import GuideList from "../../components/GuideList.astro";
 
 <Base title="Guides" description="Every mining, foraging and fishing guide on SkyProgression.">
   <h1>Guides</h1>
-  <p class="lead">Pick a skill, then what you want to mine, forage or fish.</p>
   <p class="picking" id="picking" hidden></p>
   <div class="seam" aria-hidden="true"></div>
-  <GuideList filter />
+  <GuideList filter showSummary={false} />
   <script>
     // From the home page lookup: open each guide checked for that player.
     const player = new URLSearchParams(location.search).get("player")?.trim() ?? "";
@@ -21,7 +20,7 @@ import GuideList from "../../components/GuideList.astro";
         }
       });
       const note = document.getElementById("picking")!;
-      note.textContent = `Pick a guide to see what ${player} already has.`;
+      note.textContent = `Checking ${player}: pick a guide.`;
       note.hidden = false;
     }
   </script>

@@ -11,8 +11,6 @@ export interface Skill {
   community: PersonId;
   /** Item ID of the tab's icon. */
   icon: string;
-  /** One sentence above the skill's guides. */
-  blurb: string;
   /** A link under the skill's guides. */
   more?: { text: string; href: string; label: string };
   /** The first player page of the skill: an engine view, or the skill's own page at /player/<name>/<id>/. */
@@ -32,8 +30,7 @@ export const SKILLS: Skill[] = [
     label: "Mining",
     community: "mining-cult",
     icon: "DIAMOND_PICKAXE",
-    blurb: "Gear for a budget and a max setup, the HOTM tree, attributes and how to mine, for each method.",
-    more: { text: "HOTM trees for powder mining, Glacite Tunnels commissions and Scatha:", href: "/guides/hotm-trees/", label: "More HOTM trees" },
+    more: { text: "Powder, Glacite and Scatha:", href: "/guides/hotm-trees/", label: "HOTM trees" },
     page: "overview",
   },
   {
@@ -41,11 +38,10 @@ export const SKILLS: Skill[] = [
     label: "Foraging",
     community: "foraging-community",
     icon: "WOOD",
-    blurb: "An upgrade path you can check a player against, Heart of the Forest trees and a guide for each wood.",
     page: "foraging",
     path: {
       guide: "foraging-progression",
-      note: "Foraging has no stats or rate model yet: the SkyProgression engine only works out mining, so there are no rates, coins per hour or ranked upgrades here. This is the community's upgrade path, ticked off against the profile.",
+      note: "Community upgrade path. No rates yet.",
       links: [{ href: "/guides/heart-of-the-forest/#hotf-trees", label: "Heart of the Forest trees" }],
     },
   },
@@ -54,11 +50,10 @@ export const SKILLS: Skill[] = [
     label: "Fishing",
     community: "casters",
     icon: "FISHING_ROD",
-    blurb: "An upgrade path you can check a player against, the stats and attributes that matter and a guide for each way of fishing.",
     page: "fishing",
     path: {
       guide: "fishing-progression",
-      note: "Fishing has no stats or rate model yet: the SkyProgression engine only works out mining, so there are no rates, coins per hour or ranked upgrades here. This is the community's upgrade path, ticked off against the profile.",
+      note: "Community upgrade path. No rates yet.",
       links: [{ href: "/reference/attributes/#fam-fishing", label: "Fishing attributes" }],
     },
   },

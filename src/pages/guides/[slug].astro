@@ -87,11 +87,11 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
         <p class="byline credit-line">
           {
             g.authors.some((a) => a.id !== community) ? (
-              <>Guide by {g.authors.map((a, i) => <>{i > 0 && " and "}<Credit id={a.id} /></>)}, posted in the <Credit id={community} /></>
+              <>By {g.authors.map((a, i) => <>{i > 0 && " and "}<Credit id={a.id} /></>)}, <Credit id={community} /></>
             ) : (
-              <>Posted in the <Credit id={community} /> without a named author</>
+              <><Credit id={community} /></>
             )
-          }{g.source.posted && <> on {formatDate(g.source.posted)}</>}. Checked {formatDate(g.updated)}.
+          }{g.source.posted && <> · {formatDate(g.source.posted)}</>} · checked {formatDate(g.updated)}
         </p>
         {g.notices.map((n) => <Notice {...n} />)}
       </header>
@@ -183,7 +183,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
                   <HotmTree id={t.id} label={`${t.data.title} HOTM tree`} perks={t.data.perks} ability={t.data.ability} disabled={t.data.disabled} unlocked={t.data.unlocked} />
                 </div>
               ))}
-              {trees.length === 0 && <p class="muted small">No community tree picture for this method yet.</p>}
+              {trees.length === 0 && <p class="muted small">No tree yet.</p>}
               {hotmReqs.length > 0 && (
                 <>
                   <h3>Key perks</h3>
@@ -196,10 +196,6 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
 
         {gear.length > 0 && <section id="gear" aria-labelledby="gear-title">
           <h2 id="gear-title">Gear</h2>
-          <p class="muted">
-            <span class="tier-key budget">{mining ? "Budget" : "Starting out"}</span> is the {mining ? "cheapest setup the guide recommends" : "minimum the guide says to start with"} and
-            <span class="tier-key max">{mining ? "max" : "money setup"}</span> {mining ? "the best one" : "what it takes to make good money"}. Items not marked apply to both.
-          </p>
           {
             gear.map((s) => (
               <details class="gear-group" open data-progress-scope>
@@ -247,9 +243,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
         attributeReqs.length > 0 && (
           <section id="attributes" aria-labelledby="attributes-title" data-progress-scope>
             <h2 id="attributes-title">Attributes <span class="section-progress" data-progress hidden /></h2>
-            <p class="muted">
-              Level 10 values. See the <a href="/reference/attributes/">attribute reference</a> for every {skill.label.toLowerCase()} attribute.
-            </p>
+            <p class="muted small">Level 10 · <a href="/reference/attributes/">all attributes</a></p>
             <table class="table">
               <thead>
                 <tr>
@@ -288,7 +282,7 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
         hotfTrees.length > 0 && (
           <section id="hotf-trees" aria-labelledby="hotf-trees-title">
             <h2 id="hotf-trees-title">HotF trees</h2>
-            <p class="muted">The best tree for each HotF level, excluding trees for other paths such as hunting or fishing. Tap a perk for its name, level and effect.</p>
+
             <div class="hotf-trees">
               {hotfTrees.map((t) => (
                 <article class="tree" aria-labelledby={`${t.id}-title`}>
@@ -326,26 +320,23 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
           {g.authors.map((a) => <li class="credit-line">{a.role ?? "Guide"}: <Credit id={a.id} all /></li>)}
           {g.contributors.map((a) => <li class="credit-line">{a.role ?? "Contributor"}: <Credit id={a.id} all /></li>)}
           <li>
-            Source: {g.source.name}{g.source.posted && <>, posted {formatDate(g.source.posted)}</>}. Last checked {formatDate(g.updated)}.
+            Source: {g.source.name}{g.source.posted && <>, {formatDate(g.source.posted)}</>}. Checked {formatDate(g.updated)}.
           </li>
           <li>
-            Requirements as data: <a href={`/guides/${guide.id}.json`}>{guide.id}.json</a> (format: <a href="/schema/guide.json">guide schema</a>).
+            Data: <a href={`/guides/${guide.id}.json`}>{guide.id}.json</a>
           </li>
         </ul>
-        <p class="muted small">Found a mistake? Tell the author in the <Credit id={community} />, or open an issue on <a href="https://github.com/tianiste/SkyProgression-WEB/issues">GitHub</a>.</p>
+        <p class="muted small">Mistake? <Credit id={community} /> or <a href="https://github.com/tianiste/SkyProgression-WEB/issues">GitHub issue</a>.</p>
       </section>
 
       {mining && <section class="get-mod" aria-labelledby="get-mod-title">
         <span class="slot lg"><img class="pixelated" src="/brand/mark.svg" width="64" height="64" alt="" loading="lazy" /></span>
         <div>
           <h2 id="get-mod-title">Get the mod</h2>
-          <p>
-            SkyProgression for Fabric shows where every mining stat comes from, your rate for each method and the upgrade
-            that helps most for the coins, right in the game.
-          </p>
+          <p>Stat sources, rates and the best next upgrade, in game.</p>
           <p class="cta">
             <ModrinthButton />
-            <a href={SITE.github}>Source on GitHub</a>
+            <a href={SITE.github}>GitHub</a>
           </p>
         </div>
       </section>}
@@ -686,15 +677,6 @@ const tierCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
   }
   .tier-title.max {
     border-color: var(--gold);
-    color: var(--gold);
-  }
-  .tier-key {
-    font-weight: 650;
-  }
-  .tier-key.budget {
-    color: var(--accent);
-  }
-  .tier-key.max {
     color: var(--gold);
   }
   .prose :global(ul) {

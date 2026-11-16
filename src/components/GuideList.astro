@@ -53,7 +53,6 @@ const skills = SKILLS.map((s) => {
         {s.label}
         <span class="count">{s.total} {s.total === 1 ? "guide" : "guides"}</span>
       </H>
-      <p class="blurb">{s.blurb}</p>
       {filter && s.groups.length > 1 && <CategoryFilter client:idle skill={s.id} categories={s.groups.map(({ id, label }) => ({ id, label }))} />}
       <div class="categories">
         {s.groups.map((c) => (
@@ -122,10 +121,6 @@ const skills = SKILLS.map((s) => {
     gap: 0.75rem;
     margin: 1.25rem 0 0.25rem;
     font-size: var(--step-2);
-  }
-  .blurb {
-    margin: 0;
-    color: var(--muted);
   }
   .more {
     margin: 1.25rem 0 0;

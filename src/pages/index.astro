@@ -10,16 +10,12 @@ import ModrinthButton from "../components/ModrinthButton.astro";
   <section class="hero">
     <img class="mark pixelated" src="/brand/mark.svg" width="96" height="96" alt="" />
     <div>
-      <h1>Mining, foraging and fishing guides for Hypixel SkyBlock</h1>
-      <p class="lead">
-        Gear, Heart of the Mountain and Heart of the Forest trees, attributes and rates, written by players from the
-        mining, foraging and fishing communities.
-      </p>
+      <h1>SkyBlock mining, foraging and fishing guides</h1>
+      <p class="lead">Community guides, checked against your profile.</p>
       <p class="cta">
         <ModrinthButton />
-        <a href={SITE.github}>Source on GitHub</a>
+        <a href={SITE.github}>GitHub</a>
       </p>
-      <p class="cta-note muted small">The free Fabric mod shows your mining stats, rates and best next upgrade in game.</p>
     </div>
   </section>
   <div class="seam" aria-hidden="true"></div>
@@ -28,19 +24,11 @@ import ModrinthButton from "../components/ModrinthButton.astro";
 
   <h2>Guides</h2>
   <GuideList headingLevel={3} showSummary={false} />
-  <p class="more"><a href="/guides/">All guides with summaries</a></p>
+  <p class="more"><a href="/guides/">All guides</a></p>
 
   <section class="mod" aria-labelledby="mod-title">
     <h2 id="mod-title">The mod</h2>
-    <p>
-      SkyProgression is also a Fabric mod for Minecraft. In the game it shows where every mining stat comes from, your
-      rate for each method and the upgrade that helps most for the coins. The same numbers are on the website under
-      <a href="/player/">Players</a>.
-    </p>
-    <p class="cta">
-      <ModrinthButton />
-      <a href={SITE.github}>Source on GitHub</a>
-    </p>
+    <p>Fabric mod: stat sources, rates per method and the best next upgrade, in game. Same numbers under <a href="/player/">Players</a>.</p>
   </section>
 </Base>
 
@@ -64,9 +52,6 @@ import ModrinthButton from "../components/ModrinthButton.astro";
     align-items: center;
     gap: 1rem 1.5rem;
     margin: 1.5rem 0 0;
-  }
-  .cta-note {
-    margin: 0.85rem 0 0;
   }
   @media (max-width: 560px) {
     .hero {

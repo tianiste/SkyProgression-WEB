@@ -26,7 +26,7 @@ export default function PlayerLookup({ guide, total, tiers = ["Budget setup", "M
   async function check(player: string, profile = "") {
     player = player.trim();
     if (!/^[A-Za-z0-9_]{1,16}$/.test(player)) {
-      setError("Enter a Minecraft name: 1 to 16 letters, digits or underscores.");
+      setError("Not a Minecraft name.");
       return;
     }
     setBusy(true);
@@ -81,7 +81,7 @@ export default function PlayerLookup({ guide, total, tiers = ["Budget setup", "M
           void check(name);
         }}
       >
-        <label for="lookup-player">Check a player's progress</label>
+        <label for="lookup-player">Check your progress</label>
         <div class="lookup-row">
           <input
             id="lookup-player"
@@ -95,7 +95,7 @@ export default function PlayerLookup({ guide, total, tiers = ["Budget setup", "M
             onInput={(e) => setName((e.target as HTMLInputElement).value)}
             required
           />
-          <button type="submit" disabled={busy}>{busy ? "Checking…" : "Check profile"}</button>
+          <button type="submit" disabled={busy}>{busy ? "Checking…" : "Check"}</button>
         </div>
       </form>
 
@@ -103,7 +103,7 @@ export default function PlayerLookup({ guide, total, tiers = ["Budget setup", "M
         {error && <p class="lookup-error" role="alert">{error}</p>}
         {!answer && !error && (
           <p class="lookup-hint">
-            <strong>0 of {total} checked.</strong> Enter a name to tick off what that player already has.
+            <strong>0 of {total}</strong>
           </p>
         )}
         {answer && counts && (
@@ -144,19 +144,20 @@ export default function PlayerLookup({ guide, total, tiers = ["Budget setup", "M
                 ))}
               </p>
             )}
-            <p class="lookup-age">{age(answer.fetchedAt)} Hypixel shows changes a few minutes after you make them.</p>
+            <p class="lookup-age">{age(answer.fetchedAt)}</p>
             {(off.length > 0 || unknown > 0 || vaultOff) && (
               <div class="api-help">
                 <p>
-                  <strong>{off.length > 0 || vaultOff ? "Some API settings are off." : "Some data is missing from the API."}</strong>{" "}
-                  {off.length > 0 && <>The {joinList(off)} {off.length > 1 ? "are" : "is"} off for this profile, so those rows show as unknown, not missing. </>}
-                  {vaultOff && <>The Personal Vault API is off, so items kept in the vault are not counted. </>}
-                  {off.length === 0 && unknown > 0 && <>Rows marked unknown are not counted as missing.</>}
+                  <strong>{off.length > 0 || vaultOff ? "API off:" : "Some data missing."}</strong>{" "}
+                  {off.length > 0 && <>{joinList(off)}. </>}
+                  {vaultOff && <>Personal Vault not counted. </>}
+                  Unknown rows don't count as missing.
                 </p>
-                <p>
-                  To turn them on, open the <strong>SkyBlock Menu</strong> in game, then <strong>Settings</strong>, then{" "}
-                  <strong>API Settings</strong>, and switch each one on. Check again here after a few minutes.
-                </p>
+                {(off.length > 0 || vaultOff) && (
+                  <p>
+                    Turn on: <strong>SkyBlock Menu → Settings → API Settings</strong>.
+                  </p>
+                )}
               </div>
             )}
           </div>
@@ -169,10 +170,10 @@ export default function PlayerLookup({ guide, total, tiers = ["Budget setup", "M
 function age(at: string): string {
   const minutes = Math.round((Date.now() - Date.parse(at)) / 60_000);
   if (!Number.isFinite(minutes)) return "";
-  if (minutes < 1) return "Data from just now.";
-  if (minutes < 60) return `Data from ${minutes} minute${minutes === 1 ? "" : "s"} ago.`;
+  if (minutes < 1) return "Updated just now";
+  if (minutes < 60) return `Updated ${minutes} min ago`;
   const hours = Math.round(minutes / 60);
-  return `Data from ${hours} hour${hours === 1 ? "" : "s"} ago.`;
+  return `Updated ${hours} h ago`;
 }
 
 function joinList(items: string[]): string {

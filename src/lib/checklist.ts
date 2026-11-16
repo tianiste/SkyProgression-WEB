@@ -39,7 +39,7 @@ const LABEL: Record<State, string> = {
   manual: "Check this yourself.",
 };
 export const API_NAMES: Record<string, string> = { inventory: "Inventory API", collections: "Collections API", skills: "Skills API" };
-const NOT_AVAILABLE = "Player lookup is not available yet.";
+const NOT_AVAILABLE = "Lookup unavailable.";
 
 const requirements = new Map<string, unknown[]>();
 
@@ -70,12 +70,12 @@ export async function requestChecklist(guide: string, player: string, profile = 
 function message(status: number, code: string | undefined, error: string | undefined, player: string): string {
   if (status === 404 && code === "unknown_endpoint") return NOT_AVAILABLE;
   if (code === "unavailable") return NOT_AVAILABLE;
-  if (status === 404) return error && !/^Minecraft player not found/.test(error) ? `${error}.`.replace(/\.\.$/, ".") : `No Minecraft player is called ${player}.`;
-  if (status === 429) return "Too many lookups right now. Try again in a minute.";
-  if (code === "bad_key") return "The server can't read Hypixel profiles right now. Try again later.";
+  if (status === 404) return error && !/^Minecraft player not found/.test(error) ? `${error}.`.replace(/\.\.$/, ".") : `No player named ${player}.`;
+  if (status === 429) return "Too many lookups. Try again in a minute.";
+  if (code === "bad_key") return "Can't reach Hypixel. Try again later.";
   if (status === 400) return error ?? "That request was not valid.";
   if (status === 403) return NOT_AVAILABLE;
-  return "The profile server is down. Try again later.";
+  return "Server down. Try again later.";
 }
 
 export interface Counts {
@@ -155,9 +155,9 @@ function detail(r: Result, row: HTMLElement): string {
   const where = r.where?.length ? ` In: ${r.where.join(", ")}.` : "";
   if (r.state === "unknown") {
     const setting = r.api ? API_NAMES[r.api] : undefined;
-    return setting ? `Turn on the ${setting} to check this.` : "Hypixel did not send the data for this.";
+    return setting ? `${setting} off.` : "No data from Hypixel.";
   }
-  if (r.state === "manual") return r.options ? "None of the options can be read from the API." : "This can't be read from the API.";
+  if (r.state === "manual") return "Not in the API.";
   if (r.options && r.chosen !== undefined) {
     const option = r.options[r.chosen]!;
     const name = row.querySelector(`[data-option="${r.chosen}"]`)?.textContent?.trim();
@@ -169,9 +169,9 @@ function detail(r: Result, row: HTMLElement): string {
       const text = p.modifier !== undefined ? row.querySelector(`[data-mod="${p.modifier}"]`)?.textContent?.trim() || p.text : p.text;
       return p.have ? `${text}, now ${p.have}` : text;
     });
-    return `Still needed: ${parts.join("; ")}.${where}`;
+    return `Needs: ${parts.join("; ")}.${where}`;
   }
-  if (r.state === "missing" && r.text && r.need === undefined) return "Not found in the profile.";
+  if (r.state === "missing" && r.text && r.need === undefined) return "Not found.";
   const unchecked = r.unchecked?.length ? ` Not checked: ${r.unchecked.map((p) => row.querySelector(`[data-mod="${p.modifier}"]`)?.textContent?.trim() || p.text).join(", ")}.` : "";
   return `${r.need !== undefined ? (r.text ?? "") : ""}${where}${unchecked}`.trim();
 }
