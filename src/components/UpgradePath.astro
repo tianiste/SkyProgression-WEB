@@ -20,7 +20,7 @@ const itemCount = (n: number) => `${n} ${n === 1 ? "item" : "items"}`;
 
 <section id="upgrades" aria-labelledby="upgrades-title">
   <h2 id="upgrades-title">Upgrade path</h2>
-  <p class="muted">In the order to buy them. Items, pets and attributes tick off with player lookup; steps the API can't show are marked to check yourself.</p>
+  <p class="muted small">In buying order.</p>
   {
     list.map((s, i) => (
       <details class="gear-group stage" open data-progress-scope>

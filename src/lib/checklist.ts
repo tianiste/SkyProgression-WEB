@@ -36,7 +36,7 @@ const LABEL: Record<State, string> = {
   partial: "Partly done.",
   missing: "Missing.",
   unknown: "Unknown.",
-  manual: "Check this yourself.",
+  manual: "Check yourself.",
 };
 export const API_NAMES: Record<string, string> = { inventory: "Inventory API", collections: "Collections API", skills: "Skills API" };
 const NOT_AVAILABLE = "Lookup unavailable.";
@@ -152,16 +152,16 @@ export function reset() {
 
 /** The status line after the state word: what is still needed, and where the counted copy is. */
 function detail(r: Result, row: HTMLElement): string {
-  const where = r.where?.length ? ` In: ${r.where.join(", ")}.` : "";
+  const where = r.where?.length ? ` In ${r.where.join(", ")}.` : "";
   if (r.state === "unknown") {
     const setting = r.api ? API_NAMES[r.api] : undefined;
     return setting ? `${setting} off.` : "No data from Hypixel.";
   }
-  if (r.state === "manual") return "Not in the API.";
+  if (r.state === "manual") return "";
   if (r.options && r.chosen !== undefined) {
     const option = r.options[r.chosen]!;
     const name = row.querySelector(`[data-option="${r.chosen}"]`)?.textContent?.trim();
-    return `${name ? `${name}: ` : ""}${detail(option, row)}`;
+    return `${name ? `${name}. ` : ""}${detail(option, row)}`.trim();
   }
   if (r.coveredBy) return `${r.text ?? ""}${where}`;
   if (r.missing?.length) {

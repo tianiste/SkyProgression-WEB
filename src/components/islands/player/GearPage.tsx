@@ -35,7 +35,7 @@ export default function GearPage() {
     <Shell view="gear" state={state} god>
       <div class="grid-2">
         <section class="panel" aria-labelledby="loadout-title">
-          <h2 id="loadout-title">{d.bestGear ? "Best owned" : "Worn now"}</h2>
+          <h2 id="loadout-title">Gear</h2>
           <div class="chips" role="group" aria-label="Gear to count">
             <button type="button" aria-pressed={d.bestGear} onClick={() => update({ gear: "" })}>Best owned</button>
             <button type="button" aria-pressed={!d.bestGear} onClick={() => update({ gear: "equipped" })}>Worn now</button>
