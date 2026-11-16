@@ -1,7 +1,7 @@
 import { useState } from "preact/hooks";
 import { Shell, usePlayer } from "../../player/Shell";
 import { ItemIcon } from "../../player/ItemIcon";
-import { maxOf, sourceValue } from "../../player/parts";
+import { Head, maxOf, sourceValue } from "../../player/parts";
 import { abilityText, amount, num, type Gear, type Ledger, type Source } from "../../../lib/player";
 
 /** Where a source's category goes in the stat bar (the mod's buckets). */
@@ -35,7 +35,7 @@ export default function GearPage() {
     <Shell view="gear" state={state} god>
       <div class="grid-2">
         <section class="panel" aria-labelledby="loadout-title">
-          <h2 id="loadout-title">{d.bestGear ? "Best gear you own" : "Gear worn now"}</h2>
+          <h2 id="loadout-title">{d.bestGear ? "Best owned" : "Worn now"}</h2>
           <div class="chips" role="group" aria-label="Gear to count">
             <button type="button" aria-pressed={d.bestGear} onClick={() => update({ gear: "" })}>Best owned</button>
             <button type="button" aria-pressed={!d.bestGear} onClick={() => update({ gear: "equipped" })}>Worn now</button>
@@ -45,16 +45,14 @@ export default function GearPage() {
               <li key={p.key}><ItemIcon id={p.id} /><span>{p.name}<span class="muted small"> {p.location}</span></span></li>
             ))}
           </ul>
-          <p class="muted small">
-            {d.accessories} accessories from the accessory bag, one per family. {d.hotmTree}{d.hotmTrees > 1 ? ` of ${d.hotmTrees} (Loadouts), the best for ${d.methodLabel}; the API does not say which is active` : ""}.
-            Pickaxe ability: {abilityText(d.ability)}.
-            {d.bestGear && " Picked from all readable storage: equip these to reach the totals."}
-          </p>
+          <ul class="facts-line muted small">
+            <li>{d.accessories} accessories</li>
+            <li>{d.hotmTree}{d.hotmTrees > 1 ? ` (best of ${d.hotmTrees} loadouts)` : ""}</li>
+            <li>Ability: {abilityText(d.ability)}</li>
+          </ul>
         </section>
         <section class="panel" aria-labelledby="how-title">
-          <h2 id="how-title">How to read this</h2>
-          <p class="small">Each stat shows the total now and the most this gear, tool, pet and HOTM tree can reach, with every source at its own maximum plus missing attributes, essence perks, collections and consumables. It is not a maxed account.</p>
-          <p class="small">Sources that do not count right now (another zone, a temporary buff, something not unlocked, or data the API never sends) are listed under each stat but left out of the total.</p>
+          <Head id="how-title" info="Max = every source of this gear, tool, pet and HOTM tree at its own maximum, plus missing attributes, essence perks, collections and consumables; not a maxed account. Sources that don't count now (other zone, buff, locked, not in API) are listed but left out. ≥ means some values are unknown.">Sources</Head>
           <ul class="legend small">
             {BUCKETS.map((b) => <li key={b}><span class={`swatch b-${b.toLowerCase()}`} aria-hidden="true" />{b}</li>)}
           </ul>
@@ -68,7 +66,7 @@ export default function GearPage() {
       </div>
       <div class="ledgers">
         {shown.map((l) => <StatCard key={l.stat} l={l} d={d} />)}
-        {shown.length === 0 && <p class="muted">No stats in this group.</p>}
+        {shown.length === 0 && <p class="muted">None.</p>}
       </div>
     </Shell>
   );
@@ -94,7 +92,7 @@ function StatCard({ l, d }: { l: Ledger; d: Gear }) {
       <header class="stat-head">
         <h3 id={`stat-${l.stat}`}>{l.label}</h3>
         <p class="meter-value">
-          {l.complete ? "" : "at least "}<strong>{amount(l.total, l.percent)}</strong>
+          {l.complete ? "" : "≥ "}<strong>{amount(l.total, l.percent)}</strong>
           <span class="muted"> of {l.attainable === null ? "≥ " : ""}{amount(max, l.percent)}</span>
           {maxed && <span class="tick"> ✔</span>}
         </p>
@@ -106,13 +104,12 @@ function StatCard({ l, d }: { l: Ledger; d: Gear }) {
         })}
       </div>
       <p class="muted small">
-        {l.stat === "PICKAXE_ABILITY_COOLDOWN" ? <>Reductions multiply. Sum of the parts: {amount(l.flat, true)}.</> : <>Flat {amount(l.flat, l.percent)}{l.multiplier !== 1 && <>, ×{num(l.multiplier, 3)} from additive % sources</>}.</>}
-        {d.bestGear && l.equipped !== null && <> Wearing now: {amount(l.equipped, l.percent)}.</>}
-        {!d.bestGear && l.bestOwned !== null && <> With the best owned gear: {amount(l.bestOwned, l.percent)}.</>}
-        {l.attainable === null && l.unknownMaxima > 0 && <> {l.unknownMaxima} counted source{l.unknownMaxima === 1 ? " has" : "s have"} no known maximum.</>}
+        {l.stat === "PICKAXE_ABILITY_COOLDOWN" ? <>Multiplies; parts sum {amount(l.flat, true)}</> : <>Flat {amount(l.flat, l.percent)}{l.multiplier !== 1 && <> ×{num(l.multiplier, 3)}</>}</>}
+        {d.bestGear && l.equipped !== null && <> · worn {amount(l.equipped, l.percent)}</>}
+        {!d.bestGear && l.bestOwned !== null && <> · best owned {amount(l.bestOwned, l.percent)}</>}
+        {l.attainable === null && l.unknownMaxima > 0 && <> · {l.unknownMaxima} unknown max</>}
       </p>
-      {!l.complete && <p class="warn small">A lower bound: some counted sources have unknown values.</p>}
-      {l.stat === "BREAKING_POWER" && d.breakingPower !== null && l.total < d.breakingPower && <p class="warn small">{d.methodLabel} needs Breaking Power {d.breakingPower}: not met with this tool.</p>}
+      {l.stat === "BREAKING_POWER" && d.breakingPower !== null && l.total < d.breakingPower && <p class="warn small">Needs {d.breakingPower} for {d.methodLabel}</p>}
       <ul class="sources">
         {counted.map((s, i) => <SourceRow key={i} l={l} s={s} />)}
         {unknown.map((s, i) => (
@@ -121,7 +118,7 @@ function StatCard({ l, d }: { l: Ledger; d: Gear }) {
       </ul>
       {hidden.length > 0 && (
         <details class="hidden-sources">
-          <summary class="small">{[...hiddenCounts].map(([k, n]) => `${n} ${k}`).join(", ")}, not in the total</summary>
+          <summary class="small">{[...hiddenCounts].map(([k, n]) => `${n} ${k}`).join(", ")} (not counted)</summary>
           <ul class="sources">
             {hidden.map((s, i) => (
               <li key={i} class={`state-${s.state.toLowerCase()}`}>

@@ -351,9 +351,9 @@ export function age(at: string): string {
   const minutes = Math.round((Date.now() - Date.parse(at)) / 60_000);
   if (!Number.isFinite(minutes)) return "unknown";
   if (minutes < 1) return "just now";
-  if (minutes < 60) return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+  if (minutes < 60) return `${minutes} min ago`;
   const hours = Math.round(minutes / 60);
-  return `${hours} hour${hours === 1 ? "" : "s"} ago`;
+  return `${hours} h ago`;
 }
 
 export function profileLabel(p: ProfileInfo): string {

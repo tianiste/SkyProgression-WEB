@@ -132,7 +132,7 @@ export function PlayerModel({ data }: { data: Common }) {
             {spin ? "Stop turning" : "Turn"}
           </button>
         )}
-        <p class="muted small">{mode === "3d" ? "Drag to turn. " : ""}Armor textures by the FurfSky Reborn team; pieces without one are drawn in their material or dye colour.</p>
+        <p class="muted small">{mode === "3d" ? "Drag to turn. " : ""}Armor: FurfSky Reborn.</p>
       </figcaption>
     </figure>
   );

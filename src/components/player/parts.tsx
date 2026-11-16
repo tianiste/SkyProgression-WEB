@@ -1,5 +1,21 @@
+import type { ComponentChildren } from "preact";
 import { ItemIcon } from "./ItemIcon";
 import { amount, coins, num, signed, type LedgerHead, type MethodRow, type Source, type Upgrade } from "../../lib/player";
+
+/** A panel heading with an optional "i" that opens a short explanation on tap. */
+export function Head({ id, info, children }: { id: string; info?: ComponentChildren; children: ComponentChildren }) {
+  return (
+    <div class="panel-head">
+      <h2 id={id}>{children}</h2>
+      {info && (
+        <details class="info">
+          <summary aria-label="About this">i</summary>
+          <p>{info}</p>
+        </details>
+      )}
+    </div>
+  );
+}
 
 /** What a counted source adds to the total, as the mod shows it: additive % sources as their percentage. */
 export function sourceValue(l: { percent: boolean }, s: Source): string {
@@ -24,7 +40,7 @@ export function Meter({ ledger: l, sources, more }: { ledger: LedgerHead; source
       <summary>
         <span class="meter-label">{l.label}</span>
         <span class="meter-value">
-          {l.complete ? "" : "at least "}<strong>{amount(l.total, l.percent)}</strong>
+          {l.complete ? "" : "≥ "}<strong>{amount(l.total, l.percent)}</strong>
           <span class="muted"> of {l.attainable === null ? "≥ " : ""}{amount(max, l.percent)}</span>
           {maxed && <span class="tick" aria-label="maxed"> ✔</span>}
         </span>
@@ -36,7 +52,7 @@ export function Meter({ ledger: l, sources, more }: { ledger: LedgerHead; source
         ))}
         {sources.length === 0 && <li class="muted">No counted sources.</li>}
       </ul>
-      {more && <p class="small"><a href={more}>Every source on Gear</a></p>}
+      {more && <p class="small"><a href={more}>All sources</a></p>}
     </details>
   );
 }
@@ -48,7 +64,7 @@ export function changes(u: Upgrade): string {
 }
 
 export function costText(u: Upgrade): string {
-  if (u.owned) return u.item.group === "HOTM" ? "Covered by your powder" : "Owned";
+  if (u.owned) return u.item.group === "HOTM" ? "Powder ready" : "Owned";
   if (u.cost === null) return u.grind ? "Grinding" : "Price unknown";
   return u.cost === 0 ? "Free" : `${coins(u.cost)} coins`;
 }
@@ -72,7 +88,7 @@ export function UpgradeLine({ u, rank, unit, focus }: { u: Upgrade; rank?: numbe
         {changes(u) && <><dt>Changes</dt><dd>{changes(u)}</dd></>}
         {u.rateBefore !== null && u.rateAfter !== null && <><dt>Rate</dt><dd>{num(u.rateBefore)} to {num(u.rateAfter)} {unit ?? "per hour"}</dd></>}
         {u.cost !== null && u.costPerUnit !== null && u.gain > 0 && <><dt>Cost per 1%</dt><dd>{coins(u.costPerUnit)} coins</dd></>}
-        {u.bestGain !== undefined && u.bestGain !== null && <><dt>In your best method</dt><dd>{u.bestGain > 0 ? `+${num(u.bestGain * 100)}%` : "no rate change"}</dd></>}
+        {u.bestGain !== undefined && u.bestGain !== null && <><dt>Best method</dt><dd>{u.bestGain > 0 ? `+${num(u.bestGain * 100)}%` : "no rate change"}</dd></>}
         {u.blocked && <><dt>Blocked</dt><dd>{u.blocked}</dd></>}
         <dt>Price</dt><dd>{u.priceSource || u.item.source}</dd>
       </dl>
@@ -98,8 +114,7 @@ export function MethodChart({ rows, selected, onPick }: { rows: MethodRow[]; sel
               <span class="chart-value">{v === null ? "?" : coins(v)}</span>
             </button>
             <p class="chart-note muted small">
-              {r.error ? `Rate unavailable: ${r.error}` : `${r.lowerBound ? "At least " : ""}${num(r.itemsPerHour, (r.itemsPerHour ?? 0) >= 100 ? 0 : 1)} ${r.item} per hour`}
-              {r.method === best ? ", the best now" : ""}{r.statsComplete ? "" : "; some stat sources unknown, so a lower bound"}.
+              {r.error ? `Rate unavailable: ${r.error}` : `${r.lowerBound || !r.statsComplete ? "≥ " : ""}${num(r.itemsPerHour, (r.itemsPerHour ?? 0) >= 100 ? 0 : 1)} ${r.item}/h`}
             </p>
           </li>
         );

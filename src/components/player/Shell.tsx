@@ -14,7 +14,7 @@ export function usePlayer<T extends Common>(view: View) {
   useEffect(() => setQ(readQuery(view)), []);
   useEffect(() => {
     if (!q) return;
-    if (!NAME.test(q.name)) { setError(new LookupError("Enter a Minecraft name: 1 to 16 letters, digits or underscores.", false)); return; }
+    if (!NAME.test(q.name)) { setError(new LookupError("Not a Minecraft name.", false)); return; }
     const controller = new AbortController();
     setBusy(true);
     setError(null);
@@ -114,9 +114,9 @@ export function Shell<T extends Common>({ view, state, prices = false, cost = fa
         )}
         {data && (
           <p class="player-age">
-            {data.profiles.length === 1 && <>{profileLabel(data.profile)}. </>}
-            Profile data from {age(data.fetchedAt)}{data.pricesAt ? <>, prices from {age(data.pricesAt)}</> : null}. Hypixel shows changes a few minutes after you make them.
-            {costIgnored && <> Buy-order costs are not available yet, so costs are instant-buy.</>}
+            {data.profiles.length === 1 && <>{profileLabel(data.profile)} · </>}
+            Profile {age(data.fetchedAt)}{data.pricesAt ? <> · prices {age(data.pricesAt)}</> : null}
+            {costIgnored && <> · costs at instant-buy</>}
           </p>
         )}
         {known && <nav class="player-tabs" aria-label="Mining pages">
@@ -133,25 +133,22 @@ export function Shell<T extends Common>({ view, state, prices = false, cost = fa
           <div class="player-error" role="alert">
             <p><strong>{error.message}</strong></p>
             {error.retry && <p><button type="button" class="link-button" onClick={() => q && update({})}>Try again</button></p>}
-            <p><a href="/player/">Look up another player</a></p>
+            <p><a href="/player/">Other player</a></p>
           </div>
         )}
         {!error && !data && <p class="player-loading">Loading {q?.name ?? "the player"}…</p>}
       </div>
 
       {data && off.length === 0 && vaultOff && (
-        <p class="muted small">The Personal Vault API is off, so items kept in the vault are not counted.</p>
+        <p class="muted small">Personal Vault API off: vault not counted.</p>
       )}
       {data && off.length > 0 && (
         <div class="api-help">
           <p>
-            <strong>Some API settings are off.</strong>{" "}
-            The {joinList(off.map((k) => API_NAMES[k]!))} {off.length > 1 ? "are" : "is"} off for this profile, so what depends on it shows as unknown.
-            {vaultOff && <> The Personal Vault API is off too, so items in the vault are not counted.</>}
+            <strong>API off:</strong> {joinList([...off.map((k) => API_NAMES[k]!), ...(vaultOff ? ["Personal Vault API"] : [])])}. Those values show as unknown.
           </p>
           <p>
-            In game, open the <strong>SkyBlock Menu</strong>, then <strong>Settings</strong>, then <strong>API Settings</strong>, and switch each one on.
-            Look again here after a few minutes.
+            Turn on: <strong>SkyBlock Menu → Settings → API Settings</strong>.
           </p>
         </div>
       )}
