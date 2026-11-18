@@ -1,0 +1,135 @@
+{
+  "_note": "Icons the site pack lacks, copied from the Luckledger repository (Hypixel head skins and Minecraft textures). Files in public/magic-find/icons/.",
+  "items": {
+    "minecraft:enchanted_book": {
+      "file": "minecraft/enchanted_book.png",
+      "size": 16,
+      "source": "minecraft"
+    },
+    "SHARD_CINDER_BAT": {
+      "file": "heads/shard_cinder_bat.png",
+      "size": 32,
+      "source": "head"
+    },
+    "minecraft:suspicious_stew": {
+      "file": "minecraft/suspicious_stew.png",
+      "size": 16,
+      "source": "minecraft"
+    },
+    "SHARD_DROWNED": {
+      "file": "heads/shard_drowned.png",
+      "size": 32,
+      "source": "head"
+    },
+    "DIANAS_BOOKSHELF": {
+      "file": "minecraft/bookshelf.png",
+      "size": 16,
+      "source": "minecraft"
+    },
+    "EPOCH_CAKE_BLACK": {
+      "file": "heads/epoch_cake_black.png",
+      "size": 32,
+      "source": "head"
+    },
+    "minecraft:beacon": {
+      "file": "minecraft/beacon.png",
+      "size": 16,
+      "source": "minecraft"
+    },
+    "NECRONS_LADDER": {
+      "file": "minecraft/ladder.png",
+      "size": 16,
+      "source": "minecraft"
+    },
+    "CELESTIAL_MASON_JAR": {
+      "file": "heads/celestial_mason_jar.png",
+      "size": 32,
+      "source": "head"
+    },
+    "WOLF_FUR_MIXIN": {
+      "file": "heads/wolf_fur_mixin.png",
+      "size": 32,
+      "source": "head"
+    },
+    "SHARD_MINOTAUR": {
+      "file": "heads/shard_minotaur.png",
+      "size": 32,
+      "source": "head"
+    },
+    "SHARD_LAVA_FLAME": {
+      "file": "heads/shard_lava_flame.png",
+      "size": 32,
+      "source": "head"
+    },
+    "SHARD_BLACK_WIDOW": {
+      "file": "heads/shard_black_widow.png",
+      "size": 32,
+      "source": "head"
+    },
+    "SHARD_WILD_HOG": {
+      "file": "heads/shard_wild_hog.png",
+      "size": 32,
+      "source": "head"
+    },
+    "SHARD_HIDEYHO": {
+      "file": "heads/shard_hideyho.png",
+      "size": 32,
+      "source": "head"
+    },
+    "SHARD_PARAKEET": {
+      "file": "heads/shard_parakeet.png",
+      "size": 32,
+      "source": "head"
+    },
+    "SHARD_BILLYGOAT": {
+      "file": "heads/shard_billygoat.png",
+      "size": 32,
+      "source": "head"
+    },
+    "SHARD_CHUCKWALLA": {
+      "file": "heads/shard_chuckwalla.png",
+      "size": 32,
+      "source": "head"
+    },
+    "SHARD_HIVETHIEF": {
+      "file": "heads/shard_hivethief.png",
+      "size": 32,
+      "source": "head"
+    },
+    "SHARD_WIKI_TIKI": {
+      "file": "heads/shard_wiki_tiki.png",
+      "size": 32,
+      "source": "head"
+    },
+    "SHARD_GIANT_WATER_BUG": {
+      "file": "heads/shard_giant_water_bug.png",
+      "size": 32,
+      "source": "head"
+    },
+    "SHARD_HEWVER": {
+      "file": "heads/shard_hewver.png",
+      "size": 32,
+      "source": "head"
+    },
+    "SHARD_HIDEONFLOOR": {
+      "file": "heads/shard_hideonfloor.png",
+      "size": 32,
+      "source": "head"
+    },
+    "SHARD_HIDEONWALL": {
+      "file": "heads/shard_hideonwall.png",
+      "size": 32,
+      "source": "head"
+    },
+    "BOOSTER_COOKIE": {
+      "file": "minecraft/cookie.png",
+      "size": 16,
+      "source": "minecraft"
+    },
+    "GOD_POTION_2": {
+      "file": "heads/god_potion_2.png",
+      "size": 32,
+      "source": "head"
+    }
+  }
+}

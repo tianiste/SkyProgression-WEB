@@ -1,0 +1,287 @@
+{
+ "_source": "NotEnoughUpdates-REPO constants/bestiary.json at commit 10f61150886e2c4a7151aeed0c2172bc0e4d2eca (MIT, Copyright (c) 2020 Moulberry), trimmed to the families Luckledger uses.",
+ "brackets": {
+  "2": [
+   5,
+   10,
+   15,
+   25,
+   50,
+   100,
+   200,
+   350,
+   500,
+   750,
+   1500,
+   3000,
+   5000,
+   7500,
+   10000,
+   12500,
+   15000,
+   18000,
+   21500,
+   25000,
+   50000,
+   100000,
+   150000,
+   200000,
+   250000
+  ],
+  "5": [
+   1,
+   2,
+   3,
+   5,
+   7,
+   10,
+   15,
+   20,
+   25,
+   30,
+   60,
+   120,
+   200,
+   300,
+   400,
+   500,
+   600,
+   720,
+   860,
+   1000,
+   2000,
+   4000,
+   6000,
+   8000,
+   10000
+  ],
+  "6": [
+   1,
+   2,
+   3,
+   5,
+   7,
+   9,
+   12,
+   16,
+   20,
+   25,
+   50,
+   80,
+   125,
+   175,
+   250,
+   325,
+   425,
+   525,
+   625,
+   750,
+   1500,
+   3000,
+   4500,
+   6000,
+   7500
+  ],
+  "7": [
+   1,
+   2,
+   3,
+   5,
+   7,
+   9,
+   11,
+   14,
+   17,
+   20,
+   30,
+   40,
+   55,
+   75,
+   100,
+   150,
+   200,
+   275,
+   375,
+   500,
+   1000,
+   1500,
+   2000,
+   2500,
+   3000
+  ],
+  "8": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   8,
+   11,
+   14,
+   17,
+   20,
+   25,
+   30,
+   35,
+   40,
+   50,
+   60,
+   70,
+   80,
+   90,
+   100,
+   120,
+   140,
+   160,
+   180,
+   200
+  ]
+ },
+ "families": {
+  "Ghost": {
+   "cap": 25000,
+   "bracket": 2,
+   "keys": [
+    "caverns_ghost_250"
+   ]
+  },
+  "Minos Inquisitor": {
+   "cap": 500,
+   "bracket": 7,
+   "keys": [
+    "minos_inquisitor_750",
+    "minos_inquisitor_1250"
+   ]
+  },
+  "Minos Champion": {
+   "cap": 500,
+   "bracket": 7,
+   "keys": [
+    "minos_champion_175",
+    "minos_champion_310",
+    "minos_champion_550"
+   ]
+  },
+  "Minotaur": {
+   "cap": 500,
+   "bracket": 7,
+   "keys": [
+    "minotaur_45",
+    "minotaur_120",
+    "minotaur_210"
+   ]
+  },
+  "Gaia Construct": {
+   "cap": 750,
+   "bracket": 6,
+   "keys": [
+    "gaia_construct_85",
+    "gaia_construct_140",
+    "gaia_construct_260",
+    "gaia_construct_325"
+   ]
+  },
+  "Minos Hunter": {
+   "cap": 1000,
+   "bracket": 5,
+   "keys": [
+    "minos_hunter_15",
+    "minos_hunter_25",
+    "minos_hunter_60",
+    "minos_hunter_125",
+    "minos_hunter_200"
+   ]
+  },
+  "Sphinx": {
+   "cap": 500,
+   "bracket": 7,
+   "keys": [
+    "sphinx_750",
+    "sphinx_1250"
+   ]
+  },
+  "Manticore": {
+   "cap": 50,
+   "bracket": 8,
+   "keys": [
+    "manticore_1750"
+   ]
+  },
+  "King Minos": {
+   "cap": 50,
+   "bracket": 8,
+   "keys": [
+    "king_minos_1750"
+   ]
+  },
+  "Harpy": {
+   "cap": 750,
+   "bracket": 6,
+   "keys": [
+    "harpy_85",
+    "harpy_110",
+    "harpy_175",
+    "harpy_325"
+   ]
+  },
+  "Stranded Nymph": {
+   "cap": 1000,
+   "bracket": 5,
+   "keys": [
+    "stranded_nymph_40",
+    "stranded_nymph_70",
+    "stranded_nymph_150",
+    "stranded_nymph_250"
+   ]
+  },
+  "Thunder": {
+   "cap": 250,
+   "bracket": 6,
+   "keys": [
+    "thunder_400"
+   ]
+  },
+  "Lord Jawbus": {
+   "cap": 50,
+   "bracket": 8,
+   "keys": [
+    "lord_jawbus_600"
+   ]
+  },
+  "Plhlegblast": {
+   "cap": 7,
+   "bracket": 7,
+   "keys": [
+    "pond_squid_300"
+   ]
+  },
+  "Fiery Scuttler": {
+   "cap": 250,
+   "bracket": 6,
+   "keys": [
+    "fiery_scuttler_475"
+   ]
+  },
+  "Ragnarok": {
+   "cap": 50,
+   "bracket": 8,
+   "keys": [
+    "ragnarok_666"
+   ]
+  },
+  "Great White Shark": {
+   "cap": 250,
+   "bracket": 6,
+   "keys": [
+    "great_white_shark_180"
+   ]
+  },
+  "Tiger Shark": {
+   "cap": 500,
+   "bracket": 7,
+   "keys": [
+    "tiger_shark_50"
+   ]
+  }
+ }
+}
