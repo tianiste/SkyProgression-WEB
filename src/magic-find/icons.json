@@ -1,5 +1,5 @@
 {
-  "_note": "Icons the site pack lacks, copied from the Luckledger repository (Hypixel head skins and Minecraft textures). Files in public/magic-find/icons/.",
+  "_note": "Icons the site pack lacks, copied from the Luckledger repository (Hypixel pack textures, Hypixel head skins and Minecraft textures). Files in public/magic-find/icons/.",
   "items": {
     "minecraft:enchanted_book": {
       "file": "minecraft/enchanted_book.png",
@@ -130,6 +130,11 @@
       "file": "heads/god_potion_2.png",
       "size": 32,
       "source": "head"
+    },
+    "DIVINE_GIFT": {
+      "file": "hypixel/divine_gift.png",
+      "size": 16,
+      "source": "hypixel"
     }
   }
 }

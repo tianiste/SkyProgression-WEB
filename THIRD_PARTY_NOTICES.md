@@ -33,10 +33,11 @@ and is not affiliated with or endorsed by Hypixel. These textures are not covere
 
 ## Magic Find planner icons and data
 
-Files: `public/magic-find/icons/heads/*.png` and `public/magic-find/icons/minecraft/*.png`, the planner's icons the
-site's own set lacks, copied from the Luckledger repository (<https://github.com/tianiste/mf-progression>). The heads are
-Hypixel item and attribute shard head skins drawn as cubes (see "Hypixel SkyBlock textures"); the others are Minecraft
-26.3 textures (see "Minecraft textures"). Their terms are the same as those sections'.
+Files: `public/magic-find/icons/hypixel/*.png`, `public/magic-find/icons/heads/*.png` and
+`public/magic-find/icons/minecraft/*.png`, the planner's icons the site's own set lacks, copied from the Luckledger
+repository (<https://github.com/tianiste/mf-progression>). The `hypixel` ones come from the official Hypixel SkyBlock
+Resource Pack and the heads are Hypixel item and attribute shard head skins drawn as cubes (see "Hypixel SkyBlock
+textures"); the others are Minecraft 26.3 textures (see "Minecraft textures"). Their terms are the same as those sections'.
 
 `src/magic-find/bestiary.json` (Bestiary brackets and caps, trimmed), `src/magic-find/pet-levels.json` (pet levelling
 tables, trimmed) and the attribute shard counts per level in `src/magic-find/price-spec.ts` come from

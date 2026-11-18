@@ -36,10 +36,10 @@ export const PRICE_SPECS: Record<string, PriceSpec> = {
   loot7: { parts: [bz("ENCHANTMENT_LOOTING_7")], label: "Looting VII book" },
   // Legendary shards need 1+1+1+2+2+2+3+3+4+5 = 24 to reach level 10.
   cinder: { parts: [bz("SHARD_CINDER_BAT", 24)], label: "24 Cinderbat Shards" },
-  dgift: { parts: [bz("ENCHANTMENT_DIVINE_GIFT_1", 5)], label: "5 × the old Divine Gift I book" },
+  dgift: { parts: [bz("DIVINE_GIFT", 5)], label: "5 Divine Gifts" },
   pulseR: { parts: [ah("PULSE_RING", 1, "RARE")], label: "Rare Pulse Ring" },
-  pulseE: { parts: [ah("THUNDER_IN_A_BOTTLE", 17)], label: "17 Thunder in a Bottle" },
-  pulseL: { parts: [ah("THUNDER_IN_A_BOTTLE", 80)], label: "80 Thunder in a Bottle" },
+  pulseE: { parts: [ah("THUNDER_IN_A_BOTTLE", 17)], label: "17 Filled Thunder in a Bottle" },
+  pulseL: { parts: [ah("THUNDER_IN_A_BOTTLE", 80)], label: "80 Filled Thunder in a Bottle" },
   anguish: { parts: [ah("ANGUISH_ARTIFACT")], label: "Anguish Artifact" },
   cake: { parts: [ah("EPOCH_CAKE_BLACK")], label: "Century Cake" },
   ladder: { parts: [ah("NECRONS_LADDER")], label: "Necron's Ladder" },

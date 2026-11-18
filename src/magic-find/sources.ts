@@ -18,14 +18,14 @@ export const ACTIVITIES: Activity[] = [
   { id: "ghost", name: "Ghosts", note: "" },
 ];
 
-export type ChipKind = "seasonal" | "event" | "no market yet" | "verify price" | "old estimate";
+export type ChipKind = "seasonal" | "event" | "no listings";
 
 export interface Source {
   id: string;
   act: ActivityId;
   name: string;
   mf: number;
-  /** Cost in coins. null = no known price, the user fills it in. */
+  /** Fallback cost in coins when there is no live price (market snapshot 18 Nov 2026). null = unknown. */
   cost: number | null;
   note: string;
   /** id of the tier this one upgrades; it can never be bought before that tier. */
@@ -79,8 +79,8 @@ export const SOURCES: Source[] = [
     goesOn: LOOTING_ON,
     note: "25 North Stars from Einary.",
   },
-  { id: "loot7", act: "all", need: "loot6", name: "Looting VII", mf: 5, cost: null, chip: "no market yet", goesOn: LOOTING_ON, note: "Sphinx drop, 0.5%." },
-  { id: "cinder", act: "all", name: "Cinderbat Shard 10", mf: 5, cost: 864_000, note: "24 shards." },
+  { id: "loot7", act: "all", need: "loot6", name: "Looting VII", mf: 5, cost: null, chip: "no listings", goesOn: LOOTING_ON, note: "Sphinx drop, 0.5%." },
+  { id: "cinder", act: "all", name: "Cinderbat Shard 10", mf: 5, cost: 807_000, note: "24 shards." },
   {
     id: "stew",
     act: "all",
@@ -92,19 +92,10 @@ export const SOURCES: Source[] = [
     note: "Year of the Witch only.",
   },
   { id: "typeshard", act: "all", onlyWithoutMob: true, name: "Mob-type shard", mf: 5, cost: null, note: "Pick a mob to see which one." },
-  { id: "dgift", act: "all", name: "Divine Gift ×5", mf: 5, cost: 125_000_000, chip: "verify price", note: "Max 5. Old book price, may change." },
-  { id: "pulseR", act: "all", name: "Pulse Ring (Rare)", mf: 1, cost: 7_500_000, chip: "old estimate", note: "" },
-  { id: "pulseE", act: "all", need: "pulseR", name: "Pulse Ring to Epic", mf: 0.5, cost: 36_500_000, chip: "old estimate", note: "17 Thunder in a Bottle." },
-  {
-    id: "pulseL",
-    act: "all",
-    need: "pulseE",
-    name: "Pulse Ring to Legendary",
-    mf: 0.5,
-    cost: 156_000_000,
-    chip: "old estimate",
-    note: "80 Thunder in a Bottle.",
-  },
+  { id: "dgift", act: "all", name: "Divine Gift ×5", mf: 5, cost: 119_000_000, note: "Max 5." },
+  { id: "pulseR", act: "all", name: "Pulse Ring (Rare)", mf: 1, cost: 10_000_000, note: "" },
+  { id: "pulseE", act: "all", need: "pulseR", name: "Pulse Ring to Epic", mf: 0.5, cost: 11_000_000, note: "17 Filled Thunder in a Bottle." },
+  { id: "pulseL", act: "all", need: "pulseE", name: "Pulse Ring to Legendary", mf: 0.5, cost: 52_000_000, note: "80 Filled Thunder in a Bottle." },
   { id: "anguish", act: "all", name: "Anguish Artifact", mf: 1.5, cost: null, note: "" },
   { id: "shelf", act: "all", name: "Diana's Bookshelf", mf: 1, cost: 75_000_000, note: "Regalia Room, plus 6 Chimera I." },
   { id: "cake", act: "all", name: "Century Cake of the Next Dungeon Floor", mf: 1, cost: null, note: "Temporary." },
