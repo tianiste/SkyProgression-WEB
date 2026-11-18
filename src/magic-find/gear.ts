@@ -1,6 +1,6 @@
 // Reads the Magic Find gear a player owns from their profile inventories.
-// The inventory field names follow the Hypixel API v2 profile member layout; they have not been checked against a
-// live response yet, so every step tolerates missing fields.
+// The inventory field names follow the Hypixel API v2 profile member layout (member.inventory.*), checked against a
+// live profile on 2026-11-18; wardrobe_contents was absent there, so every step tolerates missing fields.
 import type { Nbt } from "./nbt";
 import { decodeNbt } from "./nbt";
 
@@ -84,6 +84,19 @@ export async function scanGear(member: any): Promise<GearScan> {
       items.push(...readItems(await decodeNbt(data), where));
     } catch {
       // one unreadable inventory should not hide the others
+    }
+  }
+  // Backpacks: one entry per backpack slot, each with its own NBT.
+  const packs = inv?.backpack_contents;
+  if (packs && typeof packs === "object") {
+    for (const [slot, pack] of Object.entries(packs as Record<string, { data?: unknown }>)) {
+      if (typeof pack?.data !== "string" || !pack.data) continue;
+      any = true;
+      try {
+        items.push(...readItems(await decodeNbt(pack.data), `backpack ${Number(slot) + 1}`));
+      } catch {
+        // as above
+      }
     }
   }
 

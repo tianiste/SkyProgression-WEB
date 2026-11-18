@@ -304,13 +304,14 @@ export async function load<T extends Common>(q: Query, signal?: AbortSignal): Pr
     throw new LookupError(NOT_AVAILABLE);
   }
   const body = (await response.json().catch(() => ({}))) as Partial<T> & { error?: string; code?: string };
-  if (!response.ok) throw new LookupError(message(response.status, body.code, body.error, q.name), response.status !== 404 && response.status !== 400);
+  if (!response.ok) throw new LookupError(lookupMessage(response.status, body.code, body.error, q.name), response.status !== 404 && response.status !== 400);
   if (cache.size > 24) cache.clear();
   cache.set(url, body as T);
   return body as T;
 }
 
-function message(status: number, code: string | undefined, error: string | undefined, player: string): string {
+/** A friendly line for an API error answer (also used by the Magic Find planner). */
+export function lookupMessage(status: number, code: string | undefined, error: string | undefined, player: string): string {
   if (code === "unavailable" || code === "unknown_endpoint" || status === 403) return NOT_AVAILABLE;
   if (status === 404) return error && !/^Minecraft player not found/.test(error) ? `${error}.`.replace(/\.\.$/, ".") : `No Minecraft player is called ${player}.`;
   if (status === 429) return "Too many lookups right now. Try again in a minute.";

@@ -1,48 +1,38 @@
+import { SITE } from "../config";
+import { LookupError, NOT_AVAILABLE, lookupMessage } from "../lib/player";
 import type { BossId } from "./sources";
 import { BOSSES } from "./sources";
 
-/** Thrown when the browser blocks the request (offline, CORS, sandboxed preview). */
-export class NetworkBlockedError extends Error {}
-
-async function getJSON<T>(url: string, init?: RequestInit): Promise<T> {
-  let r: Response;
-  try {
-    r = await fetch(url, init);
-  } catch {
-    throw new NetworkBlockedError("blocked");
-  }
-  const j = (await r.json().catch(() => null)) as (T & { cause?: string; message?: string }) | null;
-  if (!r.ok) throw new Error(j?.cause || j?.message || "HTTP " + r.status);
-  if (j === null) throw new Error("Empty response from " + new URL(url).host);
-  return j;
+/** A player's profiles through the SkyProgression API (its server key; nothing to type in). */
+export interface ProfilesAnswer {
+  player: string;
+  uuid: string;
+  fetchedAt: string;
+  profiles: Profile[];
 }
 
-/** Minecraft name (or UUID) to a dashless lowercase UUID. Tries several CORS-friendly services. */
-export async function uuidOf(name: string): Promise<string> {
-  const bare = name.replace(/-/g, "");
-  if (/^[0-9a-f]{32}$/i.test(bare)) return bare.toLowerCase();
-  const n = encodeURIComponent(name);
-  const tries: [string, (j: any) => unknown][] = [
-    ["https://playerdb.co/api/player/minecraft/" + n, (j) => j?.data?.player?.raw_id],
-    ["https://mc-api.io/uuid/" + n, (j) => j?.uuid],
-    ["https://api.ashcon.app/mojang/v2/user/" + n, (j) => j?.uuid],
-  ];
-  let blocked = 0;
-  for (const [url, pick] of tries) {
-    try {
-      const id = pick(await getJSON(url));
-      if (typeof id === "string" && id) return id.replace(/-/g, "").toLowerCase();
-    } catch (e) {
-      if (e instanceof NetworkBlockedError) blocked++;
-    }
+const UNAVAILABLE = "Profile lookup is not available yet.";
+
+export async function loadProfiles(name: string): Promise<ProfilesAnswer> {
+  let response: Response;
+  try {
+    response = await fetch(`${SITE.api}/magic-find/profile?ign=${encodeURIComponent(name)}`);
+  } catch {
+    // An API without the route refuses the page's origin, which the browser reports as a network error.
+    throw new LookupError(UNAVAILABLE);
   }
-  if (blocked === tries.length) throw new NetworkBlockedError("blocked");
-  throw new Error(`No Minecraft account found for "${name}". You can paste the UUID instead.`);
+  const body = (await response.json().catch(() => ({}))) as { player?: string; uuid?: string; fetchedAt?: string; data?: { profiles?: Profile[] | null }; error?: string; code?: string };
+  if (!response.ok) {
+    const text = lookupMessage(response.status, body.code, body.error, name);
+    throw new LookupError(text === NOT_AVAILABLE ? UNAVAILABLE : text);
+  }
+  return { player: body.player ?? name, uuid: body.uuid ?? "", fetchedAt: body.fetchedAt ?? "", profiles: body.data?.profiles ?? [] };
 }
 
 export interface Profile {
   profile_id: string;
   cute_name?: string;
+  game_mode?: string;
   selected?: boolean;
   members?: Record<string, Member>;
 }
@@ -54,14 +44,6 @@ export interface Member {
   pets_data?: { pets?: { type: string; tier: string }[] };
   slayer?: { slayer_bosses?: Partial<Record<BossId, { claimed_levels?: Record<string, boolean> }>> };
   profile?: { cookie_buff_active?: boolean };
-}
-
-/** SkyBlock profiles for a player. The key is only ever sent in the API-Key header. */
-export async function getProfiles(uuid: string, key: string): Promise<Profile[]> {
-  const j = await getJSON<{ profiles?: Profile[] | null }>("https://api.hypixel.net/v2/skyblock/profiles?uuid=" + uuid, {
-    headers: { "API-Key": key },
-  });
-  return j.profiles ?? [];
 }
 
 const XP_PER_LEVEL = [

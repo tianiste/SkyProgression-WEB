@@ -92,8 +92,6 @@
   font-size: var(--step--1);
   font-weight: 600;
 }
-.mf input[type="text"],
-.mf input[type="password"],
 .mf input[type="number"],
 .mf select {
   font: inherit;
@@ -113,25 +111,6 @@
   height: 1.15rem;
   flex: none;
   accent-color: var(--xp);
-}
-.mf-button {
-  font: inherit;
-  font-weight: 600;
-  align-self: flex-start;
-  padding: 0.5rem 1.1rem;
-  color: var(--accent-ink);
-  background: var(--accent);
-  border: 0;
-  border-radius: var(--radius);
-  cursor: pointer;
-}
-.mf-button:hover {
-  background: var(--accent-hover);
-}
-.mf-button:disabled {
-  background: var(--surface-2);
-  color: var(--muted);
-  cursor: progress;
 }
 .mf-gear ul {
   margin: 0.25rem 0 0;
@@ -358,28 +337,20 @@
 .mf-name {
   font-weight: 650;
 }
-.mf-chip {
-  display: inline-block;
+/* Market and status chips: the site's .tag. */
+.mf-name .tag {
   margin-left: 0.4rem;
-  padding: 0 0.4em;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.4;
-  border: 1px solid var(--line);
-  border-radius: 2px;
-  color: var(--muted);
   vertical-align: 2px;
-  white-space: nowrap;
 }
-.mf-chip.live {
+.mf .tag.live {
   color: var(--xp);
   border-color: currentColor;
 }
-.mf-chip.warn {
+.mf .tag.warn {
   color: var(--gold);
   border-color: currentColor;
 }
-.mf-chip.time {
+.mf .tag.time {
   color: var(--accent);
   border-color: currentColor;
 }
@@ -542,4 +513,7 @@
 }
 .mf-foot {
   margin-top: 2rem;
+}
+.mf .lookup-who {
+  font-weight: 600;
 }

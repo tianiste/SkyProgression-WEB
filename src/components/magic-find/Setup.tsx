@@ -1,6 +1,7 @@
 import { useState } from "preact/hooks";
-import type { Profile } from "../../magic-find/hypixel";
-import { NetworkBlockedError, getProfiles, readMember, uuidOf } from "../../magic-find/hypixel";
+import type { ProfilesAnswer } from "../../magic-find/profile";
+import { loadProfiles, readMember } from "../../magic-find/profile";
+import { LookupError, NAME, age, coins, num, profileLabel } from "../../lib/player";
 import type { GearScan } from "../../magic-find/gear";
 import { scanGear } from "../../magic-find/gear";
 import type { BossId, ProgressStat } from "../../magic-find/sources";
@@ -9,12 +10,14 @@ import { MOBS } from "../../magic-find/mobs";
 import { BESTIARY_MF_PER_TIER, FAMILY_NAMES, bestPetLevel, bestiaryTier } from "../../magic-find/progress";
 import type { MobValue } from "../../magic-find/payback";
 import { appliesTo } from "../../magic-find/planner";
-import { coins, r1 } from "../../magic-find/format";
 import type { State } from "../../magic-find/state";
 import { pickActivity, pickMob, setOwned } from "../../magic-find/state";
 import { MfIcon } from "./MfIcon";
 
 export type Update = (change: (s: State) => void) => void;
+
+/** Magic Find to one decimal. */
+export const r1 = (x: number) => num(x, 1);
 
 const ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 const sourceName = (id: string) => SOURCES.find((s) => s.id === id)?.name ?? id;
@@ -22,15 +25,16 @@ const inputValue = (e: Event) => (e.currentTarget as HTMLInputElement).value;
 
 export function ProfilePanel({ s, update }: { s: State; update: Update }) {
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("Optional. Key from developer.hypixel.net, kept in your browser.");
-  const [uuid, setUuid] = useState("");
-  const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [answer, setAnswer] = useState<ProfilesAnswer | null>(null);
   const [profileId, setProfileId] = useState("");
   const [gear, setGear] = useState<GearScan | null>(null);
 
-  async function applyProfile(list: Profile[], id: string, playerUuid: string) {
-    const p = list.find((x) => x.profile_id === id);
+  async function applyProfile(a: ProfilesAnswer, id: string) {
+    const p = a.profiles.find((x) => x.profile_id === id);
     if (!p) return;
+    const playerUuid = a.uuid;
     const member = p.members?.[playerUuid];
     const r = readMember(member);
     const got: string[] = [];
@@ -94,29 +98,29 @@ export function ProfilePanel({ s, update }: { s: State; update: Update }) {
     } catch {
       miss.push("inventory");
     }
-    setMessage(`${p.cute_name || "Profile"}: ${got.join(", ") || "nothing"}.` + (miss.length ? ` Missing: ${miss.join(", ")}.` : ""));
+    setMessage(`${got.join(", ") || "Nothing read"}.` + (miss.length ? ` Not loaded: ${miss.join(", ")}.` : ""));
   }
 
-  async function load() {
+  async function load(e: Event) {
+    e.preventDefault();
     const name = s.name.trim();
-    const key = s.key.trim();
-    if (!name || !key) {
-      setMessage("Need a name and a key.");
+    if (!NAME.test(name)) {
+      setError("Enter a Minecraft name.");
       return;
     }
     setLoading(true);
+    setError("");
     setMessage("");
     try {
-      const id = await uuidOf(name);
-      const list = await getProfiles(id, key);
-      const first = list.find((p) => p.selected) ?? list[0];
-      if (!first) throw new Error("That player has no SkyBlock profiles.");
-      setUuid(id);
-      setProfiles(list);
+      const a = await loadProfiles(name);
+      const first = a.profiles.find((p) => p.selected) ?? a.profiles[0];
+      if (!first) throw new LookupError(`${a.player} has no SkyBlock profiles.`);
+      setAnswer(a);
       setProfileId(first.profile_id);
-      await applyProfile(list, first.profile_id, id);
-    } catch (e) {
-      setMessage(e instanceof NetworkBlockedError ? "Couldn't reach the internet." : `Failed: ${e instanceof Error ? e.message : String(e)}`);
+      await applyProfile(a, first.profile_id);
+    } catch (err) {
+      setAnswer(null);
+      setError(err instanceof LookupError ? err.message : "The profile server is down. Try again later.");
     } finally {
       setLoading(false);
     }
@@ -125,45 +129,48 @@ export function ProfilePanel({ s, update }: { s: State; update: Update }) {
   return (
     <section class="mf-block" aria-labelledby="mf-profile">
       <h3 id="mf-profile">Profile</h3>
-      <label class="mf-field">
-        <span>Name</span>
-        <input
-          type="text"
-          autocomplete="off"
-          spellcheck={false}
-          maxLength={16}
-          value={s.name}
-          onInput={(e) => update((st) => (st.name = inputValue(e).trim()))}
-        />
-      </label>
-      <label class="mf-field">
-        <span>API key</span>
-        <input type="password" autocomplete="off" value={s.key} onInput={(e) => update((st) => (st.key = inputValue(e).trim()))} />
-      </label>
-      {profiles.length > 0 && (
-        <label class="mf-field">
+      <form class="lookup-form" onSubmit={(e) => void load(e)}>
+        <label for="mf-name" class="visually-hidden">
+          Minecraft name
+        </label>
+        <div class="lookup-row">
+          <input
+            id="mf-name"
+            type="text"
+            autocomplete="off"
+            spellcheck={false}
+            maxLength={16}
+            placeholder="Minecraft name"
+            value={s.name}
+            onInput={(e) => update((st) => (st.name = inputValue(e).trim()))}
+          />
+          <button type="submit" disabled={loading}>
+            {loading ? "Loading…" : "Load"}
+          </button>
+        </div>
+      </form>
+      {error && <p class="lookup-error small">{error}</p>}
+      {answer && answer.profiles.length > 1 && (
+        <label class="lookup-who small">
           <span>Profile</span>
           <select
             value={profileId}
             onChange={(e) => {
               const id = inputValue(e);
               setProfileId(id);
-              void applyProfile(profiles, id, uuid);
+              void applyProfile(answer, id);
             }}
           >
-            {profiles.map((p) => (
+            {answer.profiles.map((p) => (
               <option key={p.profile_id} value={p.profile_id}>
-                {p.cute_name || p.profile_id}
+                {profileLabel({ id: p.profile_id, name: p.cute_name ?? p.profile_id, mode: p.game_mode ?? "", selected: !!p.selected })}
               </option>
             ))}
           </select>
         </label>
       )}
-      <button type="button" class="mf-button" disabled={loading} onClick={() => void load()}>
-        {loading ? "Loading…" : "Load"}
-      </button>
       <p class="mf-note" aria-live="polite">
-        {message}
+        {answer ? `${answer.player}, ${age(answer.fetchedAt)}. ${message}` : "Optional. Fills in your stats and owned gear. Gear needs SkyBlock API Inventory on."}
       </p>
       {gear?.inventoryApi && (
         <div class="mf-gear">

@@ -4,7 +4,7 @@ import type { Live, State } from "../../magic-find/state";
 import { plan } from "../../magic-find/planner";
 import { loadPrices } from "../../magic-find/prices";
 import { mobById, mobValue } from "../../magic-find/payback";
-import { ago } from "../../magic-find/format";
+import { age } from "../../lib/player";
 import { FarmingPanel, ProfilePanel, StatsPanel } from "../magic-find/Setup";
 import { BuyList, MaxPanel, NextBuy } from "../magic-find/Plan";
 import { Icons } from "../magic-find/MfIcon";
@@ -39,8 +39,8 @@ export default function MagicFindPlanner({ icons }: { icons: IconTable }) {
     : !live.origin
       ? "Loading prices…"
       : live.origin === "bazaar"
-        ? `Bazaar prices ${ago(live.updatedAt)}. No Auction House prices right now.`
-        : `Prices ${ago(live.updatedAt)}.`;
+        ? `Bazaar prices ${age(live.updatedAt)}. No Auction House prices right now.`
+        : `Prices ${age(live.updatedAt)}.`;
 
   return (
     <Icons.Provider value={icons}>

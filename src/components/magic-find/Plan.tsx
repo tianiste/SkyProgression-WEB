@@ -4,11 +4,11 @@ import type { Plan, PlanRow } from "../../magic-find/planner";
 import { appliesTo, breakdown } from "../../magic-find/planner";
 import type { MobValue } from "../../magic-find/payback";
 import { formatHours, paybackHours } from "../../magic-find/payback";
-import { coins, r1 } from "../../magic-find/format";
+import { coins } from "../../lib/player";
 import type { Live, State } from "../../magic-find/state";
 import { setOwned } from "../../magic-find/state";
 import { MfIcon } from "./MfIcon";
-import type { Update } from "./Setup";
+import { r1, type Update } from "./Setup";
 
 const cap = (x: number) => Math.min(MF_CAP, x);
 const mult = (x: number) => `×${(1 + cap(x) / 100).toFixed(2)}`;
@@ -171,7 +171,7 @@ export function BuyList({ s, live, plan, value, update }: { s: State; live: Live
                 <div>
                   <p class="mf-name">
                     {r.source.name}
-                    {chip && <span class={`mf-chip ${chip.kind}`}>{chip.text}</span>}
+                    {chip && <span class={`tag ${chip.kind}`}>{chip.text}</span>}
                   </p>
                   {line && <p class="mf-note">{line}</p>}
                   {pay !== null && value && (

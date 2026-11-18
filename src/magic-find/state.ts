@@ -17,7 +17,6 @@ export interface State {
   boss: BossId;
   slayers: Partial<Record<BossId, number>>;
   name: string;
-  key: string;
   /** Picked mob id from mobs.ts, "" for none. */
   mob: string;
   /** Kills per hour per mob id, set by the player. */
@@ -39,7 +38,6 @@ function defaults(): State {
     boss: "zombie",
     slayers: {},
     name: "",
-    key: "",
     mob: "",
     kph: {},
     bestiary: {},
@@ -88,7 +86,6 @@ export function load(): State {
   if (raw.tog && typeof raw.tog === "object") s.tog = boolMap(raw.tog);
   s.budget = num(raw.budget) ?? s.budget;
   if (typeof raw.name === "string") s.name = raw.name;
-  if (typeof raw.key === "string") s.key = raw.key;
   if (typeof raw.mob === "string" && MOBS.some((m) => m.id === raw.mob)) s.mob = raw.mob;
   s.kph = numberMap(raw.kph) as Record<string, number>;
   s.bestiary = numberMap(raw.bestiary) as Record<string, number>;

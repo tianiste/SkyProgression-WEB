@@ -104,14 +104,15 @@ Create `src/content/trees/<tree-id>.yaml` with `status: published`, the `author`
 `/magic-find/` ranks Magic Find upgrades after the 0.27.3 rework by coins per point gained, slot-aware (one helmet, one
 pet item), with payback time per upgrade for a picked mob. It is the planner from
 [Luckledger](https://github.com/tianiste/mf-progression): the logic in `src/magic-find/` is copied from there
-(`sources.ts`, `mobs.ts`, `price-spec.ts`, `planner.ts`, `payback.ts`, `progress.ts`, `gear.ts`, `nbt.ts`,
-`hypixel.ts`) and only the UI is the site's own. Change values there first and copy them over; that repository's
+(`sources.ts`, `mobs.ts`, `price-spec.ts`, `planner.ts`, `payback.ts`, `progress.ts`, `gear.ts`, `nbt.ts`; `profile.ts`
+keeps its member reader) and only the UI, the API calls and number formatting (`src/lib/player.ts`) are the site's own. Change values there first and copy them over; that repository's
 `docs/MECHANICS.md` has the sources and dates.
 
 - Prices: the SkyProgression API's `/magic-find/prices` (its `src/magic-find-ids.json` must list every id in
   `price-spec.ts` and the drops in `mobs.ts`), with Hypixel's Bazaar read directly for any Bazaar id it lacks.
-- Profile: optional, with the visitor's own Hypixel API key, kept in their browser and sent only to `api.hypixel.net`
-  in the `API-Key` header. Settings are saved in `localStorage` under `mf-planner`.
+- Profile: optional, by Minecraft name through the API's `/magic-find/profile` (the server's key, so visitors type
+  none); the page reads stats, gear (every inventory, backpacks included), Bestiary and pets from it. Settings are
+  saved in `localStorage` under `mf-planner`.
 - Icons: `src/magic-find/icon-map.json` names an item per source; the site's own icon wins, then
   `src/magic-find/icons.json` (files in `public/magic-find/icons/`). The page resolves them at build time.
 
