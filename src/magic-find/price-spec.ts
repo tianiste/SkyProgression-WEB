@@ -32,8 +32,9 @@ const ah = (id: string, qty = 1, rarity?: string): Part => ({ id, qty, market: "
 
 /** Sources without an entry (event shops, Carnival tickets, island upgrades, NPC prices) keep their fixed price. */
 export const PRICE_SPECS: Record<string, PriceSpec> = {
-  loot6: { parts: [bz("ENCHANTMENT_LOOTING_6")], label: "Looting VI book" },
-  loot7: { parts: [bz("ENCHANTMENT_LOOTING_7")], label: "Looting VII book" },
+  // The merged post-rework Looting books trade under new ids; ENCHANTMENT_LOOTING_6/7 are the old, empty products.
+  loot6: { parts: [bz("ENCHANTMENT_LOOTING_NEW_6")], label: "Looting VI book" },
+  loot7: { parts: [bz("ENCHANTMENT_LOOTING_NEW_7")], label: "Looting VII book" },
   // Legendary shards need 1+1+1+2+2+2+3+3+4+5 = 24 to reach level 10.
   cinder: { parts: [bz("SHARD_CINDER_BAT", 24)], label: "24 Cinderbat Shards" },
   dgift: { parts: [bz("DIVINE_GIFT", 5)], label: "5 Divine Gifts" },

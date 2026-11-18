@@ -113,9 +113,11 @@ export async function scanGear(member: any): Promise<GearScan> {
   if (ringRank >= 3) owned.add("pulseE");
   if (ringRank >= 4) owned.add("pulseL");
 
+  // The merged post-rework enchant may be stored as looting_new (its book is ENCHANTMENT_LOOTING_NEW_*).
+  const lootLevel = (i: GearItem) => Math.max(i.enchants.looting ?? 0, i.enchants.looting_new ?? 0);
   const looting = items
-    .filter((i) => (i.enchants.looting ?? 0) > 0)
-    .map((i) => ({ name: i.name, level: i.enchants.looting!, where: i.where }))
+    .filter((i) => lootLevel(i) > 0)
+    .map((i) => ({ name: i.name, level: lootLevel(i), where: i.where }))
     .sort((a, b) => b.level - a.level);
   const best = looting[0]?.level ?? 0;
   if (best >= 5) owned.add("loot5");

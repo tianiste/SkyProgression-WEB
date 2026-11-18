@@ -68,18 +68,8 @@ export function goesOn(s: Source, act: ActivityId): string | undefined {
 
 export const SOURCES: Source[] = [
   { id: "loot5", act: "all", name: "Looting V", mf: 15, cost: 0, goesOn: LOOTING_ON, note: "Enchanting table." },
-  {
-    id: "loot6",
-    act: "all",
-    need: "loot5",
-    name: "Looting VI",
-    mf: 5,
-    cost: 245_000,
-    chip: "seasonal",
-    goesOn: LOOTING_ON,
-    note: "25 North Stars from Einary.",
-  },
-  { id: "loot7", act: "all", need: "loot6", name: "Looting VII", mf: 5, cost: null, chip: "no listings", goesOn: LOOTING_ON, note: "Sphinx drop, 0.5%." },
+  { id: "loot6", act: "all", need: "loot5", name: "Looting VI", mf: 5, cost: 42_000, goesOn: LOOTING_ON, note: "Bazaar book, or 25 North Stars from Einary." },
+  { id: "loot7", act: "all", need: "loot6", name: "Looting VII", mf: 5, cost: 41_500_000, goesOn: LOOTING_ON, note: "Bazaar book." },
   { id: "cinder", act: "all", name: "Cinderbat Shard 10", mf: 5, cost: 807_000, note: "24 shards." },
   {
     id: "stew",
