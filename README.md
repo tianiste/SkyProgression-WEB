@@ -31,8 +31,9 @@ npm run preview   # serve dist/
 | `src/schema/guide.ts` | The guide data model (zod); also served as JSON Schema at `/schema/guide.json` |
 | `src/data/` | Perk layout, item names, credited people |
 | `src/lib/skills.ts`, `src/lib/categories.ts` | The skills, in tab order, and the guide categories under each |
-| `src/pages/` | Routes: `/`, `/guides` (a tab per skill: `#mining`, `#foraging`, `#fishing`), `/guides/<guide>` (with its HOTM trees), `/player`, `/reference/*`, `/about` |
+| `src/pages/` | Routes: `/`, `/guides` (a tab per skill: `#mining`, `#foraging`, `#fishing`), `/guides/<guide>` (with its HOTM trees), `/player`, `/magic-find`, `/reference/*`, `/about` |
 | `src/pages/player-page/` | Static shells for `/player/<name>/` (Mining: Overview, `gear/`, `upgrades/`, `methods/`, `start/`, `hotm/`) and `/player/<name>/foraging/` and `/player/<name>/fishing/` (the upgrade paths) |
+| `src/magic-find/`, `src/components/magic-find/`, `src/components/islands/MagicFindPlanner.tsx` | The Magic Find planner at `/magic-find/` (see below) |
 | `src/config.ts` | Site settings, including the Mining Cult Discord invite |
 
 ## Add a guide
@@ -97,6 +98,22 @@ requirements are also published as JSON at `/guides/<guide-id>.json`.
 Create `src/content/trees/<tree-id>.yaml` with `status: published`, the `author`, `hotm`, the selected `ability` and
 `perks` (perk ID to `max` or a level; `1` means unlocked only to reach other perks). Perk IDs and positions are in
 `src/data/perks.ts`. Reference it from a guide's `hotm` preset with `tree: <tree-id>`.
+
+## Magic Find planner
+
+`/magic-find/` ranks Magic Find upgrades after the 0.27.3 rework by coins per point gained, slot-aware (one helmet, one
+pet item), with payback time per upgrade for a picked mob. It is the planner from
+[Luckledger](https://github.com/tianiste/mf-progression): the logic in `src/magic-find/` is copied from there
+(`sources.ts`, `mobs.ts`, `price-spec.ts`, `planner.ts`, `payback.ts`, `progress.ts`, `gear.ts`, `nbt.ts`,
+`hypixel.ts`) and only the UI is the site's own. Change values there first and copy them over; that repository's
+`docs/MECHANICS.md` has the sources and dates.
+
+- Prices: the SkyProgression API's `/magic-find/prices` (its `src/magic-find-ids.json` must list every id in
+  `price-spec.ts` and the drops in `mobs.ts`), with Hypixel's Bazaar read directly for any Bazaar id it lacks.
+- Profile: optional, with the visitor's own Hypixel API key, kept in their browser and sent only to `api.hypixel.net`
+  in the `API-Key` header. Settings are saved in `localStorage` under `mf-planner`.
+- Icons: `src/magic-find/icon-map.json` names an item per source; the site's own icon wins, then
+  `src/magic-find/icons.json` (files in `public/magic-find/icons/`). The page resolves them at build time.
 
 ## Deploy
 

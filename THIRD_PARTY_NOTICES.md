@@ -31,6 +31,24 @@ websites to use the pack's assets as long as access is not sold or charged for. 
 through its public API rather than files in the pack. SkyProgression does not claim these textures as its own, is free,
 and is not affiliated with or endorsed by Hypixel. These textures are not covered by the MIT License.
 
+## Magic Find planner icons and data
+
+Files: `public/magic-find/icons/heads/*.png` and `public/magic-find/icons/minecraft/*.png`, the planner's icons the
+site's own set lacks, copied from the Luckledger repository (<https://github.com/tianiste/mf-progression>). The heads are
+Hypixel item and attribute shard head skins drawn as cubes (see "Hypixel SkyBlock textures"); the others are Minecraft
+26.3 textures (see "Minecraft textures"). Their terms are the same as those sections'.
+
+`src/magic-find/bestiary.json` (Bestiary brackets and caps, trimmed), `src/magic-find/pet-levels.json` (pet levelling
+tables, trimmed) and the attribute shard counts per level in `src/magic-find/price-spec.ts` come from
+NotEnoughUpdates-REPO (<https://github.com/NotEnoughUpdates/NotEnoughUpdates-REPO>, MIT License, Copyright (c) 2020
+Moulberry) at commit `10f61150886e2c4a7151aeed0c2172bc0e4d2eca` (`constants/bestiary.json`, `constants/pets.json`,
+`constants/attribute_shards.json`).
+
+## Market data
+
+The Magic Find planner's Auction House prices come from SkyCofl (<https://sky.coflnet.com>) through the SkyProgression
+API and are credited on the page wherever they appear. Bazaar prices come from the Hypixel API.
+
 ## SkyCrypt
 
 The pet head icons use the head skin IDs from SkyCrypt's pet table (`src/constants/pets.js` at commit
